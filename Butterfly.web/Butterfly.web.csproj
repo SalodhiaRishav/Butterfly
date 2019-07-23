@@ -67,7 +67,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Default.html" />
     <Content Include="Web.config" />
+    <Content Include="Web\frontend\dist\build.js" />
+    <Content Include="Web\frontend\dist\logo.png" />
+    <Content Include="Web\frontend\src\assets\logo.png" />
+    <Content Include="Web\frontend\src\main.js" />
+    <Content Include="Web\frontend\webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,11 +86,16 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Web\frontend\dist\build.js.map" />
+    <Content Include="Web\frontend\src\App.vue" />
+    <Content Include="Web\frontend\.babelrc" />
+    <Content Include="Web\frontend\.editorconfig" />
+    <Content Include="Web\frontend\package-lock.json" />
+    <Content Include="Web\frontend\package.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CaseManagement\" />
     <Folder Include="Declarations\" />
-    <Folder Include="Web\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
