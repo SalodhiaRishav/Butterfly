@@ -69,8 +69,10 @@
   <ItemGroup>
     <Content Include="Default.html" />
     <Content Include="Web.config" />
+    <Content Include="Web\frontend\.gitignore" />
     <Content Include="Web\frontend\dist\build.js" />
     <Content Include="Web\frontend\dist\logo.png" />
+    <Content Include="Web\frontend\index.html" />
     <Content Include="Web\frontend\src\assets\logo.png" />
     <Content Include="Web\frontend\src\main.js" />
     <Content Include="Web\frontend\webpack.config.js" />
