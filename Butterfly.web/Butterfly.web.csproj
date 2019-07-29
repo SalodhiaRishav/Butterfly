@@ -9842,8 +9842,13 @@
     <Content Include="Web\frontend\node_modules\yargs\node_modules\cliui\node_modules\string-width\index.js" />
     <Content Include="Web\frontend\node_modules\yargs\yargs.js" />
     <Content Include="Web\frontend\src\assets\logo.png" />
+    <Content Include="Web\frontend\src\CaseManagement\styles\CaseHeaderStyle.css" />
+    <Content Include="Web\frontend\src\CaseManagement\styles\CaseManagementHeaderStyle.css" />
+    <Content Include="Web\frontend\src\GlobalStyle.css" />
     <Content Include="Web\frontend\src\main.js" />
     <Content Include="Web\frontend\src\router\index.js" />
+    <Content Include="Web\frontend\src\store\modules\CaseManagement.js" />
+    <Content Include="Web\frontend\src\store\store.js" />
     <Content Include="Web\frontend\webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
@@ -14464,12 +14469,29 @@
     <Content Include="Web\frontend\node_modules\yargs\node_modules\cliui\README.md" />
     <Content Include="Web\frontend\node_modules\yargs\package.json" />
     <Content Include="Web\frontend\node_modules\yargs\README.md" />
+    <Content Include="Web\frontend\src\CaseManagement\AssignedTo.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\CaseHeader.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\CaseInformation.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\CaseManagement.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\CaseManagementHeader.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\CaseStatus.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\Client.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\Notes.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\OpenCases.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\References.vue" />
+    <Content Include="Web\frontend\src\Declaration\DeclarationType.vue" />
+    <Content Include="Web\frontend\src\Declaration\DeliveryTransport.vue" />
+    <Content Include="Web\frontend\src\Declaration\header.vue" />
+    <Content Include="Web\frontend\src\Declaration\temp.vue" />
+    <Content Include="Web\frontend\src\Declaration\ValueDetails.vue" />
+    <Content Include="Web\frontend\src\Declaration\Consignee.vue" />
+    <Content Include="Web\frontend\src\Declaration\Consignor.vue" />
+    <Content Include="Web\frontend\src\Declaration\Declarant.vue" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CaseManagement\" />
     <Folder Include="Declarations\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Web\frontend\src\Case\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Web\frontend\node_modules\%40nuxt\opencollective\node_modules\chalk\types\index.d.ts" />

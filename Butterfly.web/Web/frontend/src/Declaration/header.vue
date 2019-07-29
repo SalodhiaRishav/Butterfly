@@ -30,7 +30,7 @@
           Taxation data<br>
           <p> -- </p>
       </b-col>
-      <b-row>
+      </b-row>
         
   </b-card-text>
   
