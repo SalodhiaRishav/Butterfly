@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\CaseManagement\Case.cs" />
     <Compile Include="Models\Declarations\Consignee.cs" />
     <Compile Include="Models\Declarations\Consignor.cs" />
     <Compile Include="Models\Declarations\Declarant.cs" />
