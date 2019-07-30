@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configurations\CaseManagement\ClientConfiguration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
     <Compile Include="Models\CaseManagement\CaseInformation.cs" />
@@ -54,20 +53,14 @@
     <Compile Include="Models\Declarations\Declarant.cs" />
     <Compile Include="Models\Declarations\DeclarationType.cs" />
     <Compile Include="Models\Declarations\DeliveryTransport.cs" />
-    <Compile Include="Models\Declarations\Reference.cs" />
+    <Compile Include="Models\Declarations\ReferenceModel.cs" />
     <Compile Include="Models\Declarations\ValueDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Butterfly.CaseManagement.Contracts\Butterfly.CaseManagement.Contracts.csproj">
-      <Project>{6eb5062e-11d9-4b90-bb88-1d4c53e1d377}</Project>
-      <Name>Butterfly.CaseManagement.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Declarations.Contracts\Butterfly.Declarations.Contracts.csproj">
-      <Project>{eed1b013-cc0c-47cb-9f2c-76eb92cd8dc7}</Project>
-      <Name>Butterfly.Declarations.Contracts</Name>
-    </ProjectReference>
+    <Folder Include="Configurations\" />
+    <Folder Include="Context\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
