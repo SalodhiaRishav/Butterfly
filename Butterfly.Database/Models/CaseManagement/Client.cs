@@ -2,7 +2,7 @@
 {
     using Butterfly.CaseManagement.Contracts.Enums;
 
-    public class Client
+    public class Client : BaseModel
     {
         public string  ClientIdentifier { get; set; }
         public IdentifierType IdentifierType { get; set; }
@@ -12,5 +12,6 @@
         public string City { get; set; }
         public Country Country { get; set; }
         public string Email { get; set;}
+        public Case Case { get; set; }
     }
 }
