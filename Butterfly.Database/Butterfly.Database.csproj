@@ -48,13 +48,8 @@
     <Compile Include="Models\CaseManagement\CaseStatus.cs" />
     <Compile Include="Models\CaseManagement\Client.cs" />
     <Compile Include="Models\CaseManagement\Notes.cs" />
-    <Compile Include="Models\Declarations\Consignee.cs" />
-    <Compile Include="Models\Declarations\Consignor.cs" />
-    <Compile Include="Models\Declarations\Declarant.cs" />
-    <Compile Include="Models\Declarations\DeclarationType.cs" />
-    <Compile Include="Models\Declarations\DeliveryTransport.cs" />
-    <Compile Include="Models\Declarations\ReferenceModel.cs" />
-    <Compile Include="Models\Declarations\ValueDetails.cs" />
+    <Compile Include="Models\Declarations\Declaration.cs" />
+    <Compile Include="Models\Declarations\DropDown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
