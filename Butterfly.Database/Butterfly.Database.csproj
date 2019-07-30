@@ -41,13 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Declarations\Consignee.cs" />
+    <Compile Include="Models\Declarations\Consignor.cs" />
+    <Compile Include="Models\Declarations\Declarant.cs" />
+    <Compile Include="Models\Declarations\DeclarationType.cs" />
+    <Compile Include="Models\Declarations\DeliveryTransport.cs" />
+    <Compile Include="Models\Declarations\Reference.cs" />
+    <Compile Include="Models\Declarations\ValueDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configurations\" />
     <Folder Include="Context\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
