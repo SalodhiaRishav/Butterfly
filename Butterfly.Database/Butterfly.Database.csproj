@@ -43,6 +43,11 @@
   <ItemGroup>
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
+    <Compile Include="Models\CaseManagement\CaseInformation.cs" />
+    <Compile Include="Models\CaseManagement\CaseReference.cs" />
+    <Compile Include="Models\CaseManagement\CaseStatus.cs" />
+    <Compile Include="Models\CaseManagement\Client.cs" />
+    <Compile Include="Models\CaseManagement\Notes.cs" />
     <Compile Include="Models\Declarations\Consignee.cs" />
     <Compile Include="Models\Declarations\Consignor.cs" />
     <Compile Include="Models\Declarations\Declarant.cs" />
@@ -56,6 +61,16 @@
     <Folder Include="Configurations\" />
     <Folder Include="Context\" />
     <Folder Include="Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Butterfly.CaseManagement.Contracts\Butterfly.CaseManagement.Contracts.csproj">
+      <Project>{6eb5062e-11d9-4b90-bb88-1d4c53e1d377}</Project>
+      <Name>Butterfly.CaseManagement.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Declarations.Contracts\Butterfly.Declarations.Contracts.csproj">
+      <Project>{eed1b013-cc0c-47cb-9f2c-76eb92cd8dc7}</Project>
+      <Name>Butterfly.Declarations.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
