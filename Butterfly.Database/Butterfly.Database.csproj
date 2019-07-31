@@ -65,6 +65,10 @@
     <Compile Include="Migrations\201907310621331_CaseOneToOneRelationship.Designer.cs">
       <DependentUpon>201907310621331_CaseOneToOneRelationship.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907310650114_ChangedIntToGuid.cs" />
+    <Compile Include="Migrations\201907310650114_ChangedIntToGuid.Designer.cs">
+      <DependentUpon>201907310650114_ChangedIntToGuid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
@@ -107,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907310621331_CaseOneToOneRelationship.resx">
       <DependentUpon>201907310621331_CaseOneToOneRelationship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907310650114_ChangedIntToGuid.resx">
+      <DependentUpon>201907310650114_ChangedIntToGuid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

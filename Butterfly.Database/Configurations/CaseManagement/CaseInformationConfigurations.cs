@@ -2,12 +2,14 @@
 {
     using Butterfly.Database.Models.CaseManagement;
     using System.Data.Entity.ModelConfiguration;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     class CaseInformationConfigurations : EntityTypeConfiguration<CaseInformation>
     {
         public CaseInformationConfigurations()
         {
-            this.HasKey<int>(caseInformation => caseInformation.Id);
+            this.HasKey(caseInformation => caseInformation.Id);
+            this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(caseInformation => caseInformation.Desription)
                 .HasMaxLength(200);

@@ -2,12 +2,14 @@
 {
     using Butterfly.Database.Models.CaseManagement;
     using System.Data.Entity.ModelConfiguration;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class ClientConfigurations : EntityTypeConfiguration<Client>
     {
         public ClientConfigurations()
         {
-            this.HasKey<int>(client => client.Id);
+            this.HasKey(client => client.Id);
+            this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(client => client.IdentifierType)
                 .IsRequired();

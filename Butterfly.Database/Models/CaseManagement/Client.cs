@@ -1,6 +1,7 @@
 ﻿namespace Butterfly.Database.Models.CaseManagement
 {
     using Butterfly.CaseManagement.Contracts.Enums;
+    using System;
 
     public class Client : BaseModel
     {
@@ -12,6 +13,6 @@
         public string City { get; set; }
         public Country Country { get; set; }
         public string Email { get; set;}
-        public int CaseId { get; set; }
+        public Guid CaseId { get; set; }
     }
 }
