@@ -9885,6 +9885,8 @@
   <ItemGroup>
     <Compile Include="AppHost.cs" />
     <Compile Include="CaseManagement\CaseManagementService.cs" />
+    <Compile Include="Declaration\AddDeclarationService.cs" />
+    <Compile Include="Declaration\AddDropDownItemService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -14525,7 +14527,6 @@
     <Content Include="Web\frontend\src\Declaration\Declarant.vue" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CaseManagement\" />
     <Folder Include="Declarations\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
@@ -14777,6 +14778,24 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Butterfly.CaseManagement.Application\Butterfly.CaseManagement.Application.csproj">
+      <Project>{bc9f5252-d0cc-4e11-bdc0-93aba792f245}</Project>
+      <Name>Butterfly.CaseManagement.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.CaseManagement.Contracts\Butterfly.CaseManagement.Contracts.csproj">
+      <Project>{6eb5062e-11d9-4b90-bb88-1d4c53e1d377}</Project>
+      <Name>Butterfly.CaseManagement.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Declarations.Application\Butterfly.Declarations.Application.csproj">
+      <Project>{ea23981f-b3b7-4e63-9a67-0e82eb3419b0}</Project>
+      <Name>Butterfly.Declarations.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Declarations.Contracts\Butterfly.Declarations.Contracts.csproj">
+      <Project>{eed1b013-cc0c-47cb-9f2c-76eb92cd8dc7}</Project>
+      <Name>Butterfly.Declarations.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
