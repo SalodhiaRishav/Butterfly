@@ -55,6 +55,13 @@
     <Compile Include="Configurations\CaseManagement\ClientConfigurations.cs" />
     <Compile Include="Configurations\CaseManagement\NotesConfigurations.cs" />
     <Compile Include="Configurations\Declaration\DeclarationConfig.cs" />
+    <Compile Include="Configurations\Declaration\DropDownConfig.cs" />
+    <Compile Include="Context\ButterflyContext.cs" />
+    <Compile Include="Migrations\201907310531357_butterfly-version1.0.0.cs" />
+    <Compile Include="Migrations\201907310531357_butterfly-version1.0.0.Designer.cs">
+      <DependentUpon>201907310531357_butterfly-version1.0.0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
     <Compile Include="Models\CaseManagement\CaseInformation.cs" />
@@ -67,12 +74,33 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="Migrations\" />
+    <Content Include="bin\Debug\Butterfly.Database.dll" />
+    <Content Include="bin\Debug\Butterfly.Database.pdb" />
+    <Content Include="obj\Debug\Butterfly.Database.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\Butterfly.Database.dll" />
+    <Content Include="obj\Debug\Butterfly.Database.pdb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="obj\Debug\Butterfly.Database.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\Butterfly.Database.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Butterfly.CaseManagement.Contracts\Butterfly.CaseManagement.Contracts.csproj">
+      <Project>{6eb5062e-11d9-4b90-bb88-1d4c53e1d377}</Project>
+      <Name>Butterfly.CaseManagement.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201907310531357_butterfly-version1.0.0.resx">
+      <DependentUpon>201907310531357_butterfly-version1.0.0.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
