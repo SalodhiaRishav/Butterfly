@@ -57,6 +57,10 @@
       <Project>{6eb5062e-11d9-4b90-bb88-1d4c53e1d377}</Project>
       <Name>Butterfly.CaseManagement.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Database\Butterfly.Database.csproj">
+      <Project>{d5a7ceeb-4022-4892-8595-b6a363bddfa7}</Project>
+      <Name>Butterfly.Database</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
