@@ -8,7 +8,7 @@ namespace Butterfly.Database.Models.Declarations
 {
     public class DropDown
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public String Type { get; set; }
         public String Key { get; set; }
         public String Value { get; set; }

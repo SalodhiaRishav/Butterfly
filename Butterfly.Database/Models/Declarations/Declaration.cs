@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Butterfly.Database.Models.Declarations
 {
     public class Declaration
     {
-        public int DeclarationId { get; set; }
+        public Guid DeclarationId { get; set; }
         public String ConsigneeName { get; set; }
         public String ConsigneeOrganisationNumber { get; set; }
         public String ConsigneeAddress1 { get; set; }
         public String ConsigneeAddress2 { get; set; }
         public String ConsigneePostalCode { get; set; }
         public String ConsigneeCity { get; set; }
-        public int ConsigneeCountry { get; set; }
+        public String ConsigneeCountry { get; set; }
         public String CustomCreditNumber { get; set; }
 
-        public int DefferedPayment { get; set; }
+        public String DefferedPayment { get; set; }
         public String ConsignorName { get; set; }
 
         public String ConsignorAddress1 { get; set; }
@@ -36,7 +33,7 @@ namespace Butterfly.Database.Models.Declarations
         public String DeclarantAddress2 { get; set; }
         public String DeclarantPostalCode { get; set; }
         public String DeclarantCity { get; set; }
-        public int DeclarantCountry { get; set; }
+        public String DeclarantCountry { get; set; }
         public String ContactPerson { get; set; }
         public String MessageName { get; set; }
         public String DeclarationType1 { get; set; }

@@ -12,7 +12,7 @@ namespace Butterfly.Database.Configurations.Declaration
     {
         public DropDownConfig()
         {
-            this.HasKey(d => d.Id);
+            this.HasKey<Guid>(d => d.Id);
             this.Property(d => d.Key)
                 .IsRequired();
             this.Property(d => d.Type)
