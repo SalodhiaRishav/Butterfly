@@ -54,6 +54,7 @@
     <Compile Include="Configurations\CaseManagement\CaseStatusConfigurations.cs" />
     <Compile Include="Configurations\CaseManagement\ClientConfigurations.cs" />
     <Compile Include="Configurations\CaseManagement\NotesConfigurations.cs" />
+    <Compile Include="Configurations\Declaration\DeclarationConfig.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
     <Compile Include="Models\CaseManagement\CaseInformation.cs" />

@@ -29,7 +29,7 @@ namespace Butterfly.Database.Models.Declarations
 
         public String ConsignorCity { get; set; }
 
-        public int ConsignorCountry { get; set; }
+        public String ConsignorCountry { get; set; }
         public String DeclarantName { get; set; }
         public String DeclarantOrganisationNumber { get; set; }
         public String DeclarantAddress1 { get; set; }
@@ -38,24 +38,24 @@ namespace Butterfly.Database.Models.Declarations
         public String DeclarantCity { get; set; }
         public int DeclarantCountry { get; set; }
         public String ContactPerson { get; set; }
-        public int MessageName { get; set; }
-        public int DeclarationType1 { get; set; }
+        public String MessageName { get; set; }
+        public String DeclarationType1 { get; set; }
 
-        public int DeclarationType2 { get; set; }
-        public int TermsOfDelivery { get; set; }
-        public int DeliveryPlace { get; set; }
-        public int CountryOfDispatch { get; set; }
-        public int NationalityOfTransport { get; set; }
-        public int ModeOfTransport { get; set; }
-        public int LocationOfGoods { get; set; }
-        public int SupervisingCustomOffice { get; set; }
-        public int NatureOfTransaction { get; set; }
+        public String DeclarationType2 { get; set; }
+        public String TermsOfDelivery { get; set; }
+        public String DeliveryPlace { get; set; }
+        public String CountryOfDispatch { get; set; }
+        public String NationalityOfTransport { get; set; }
+        public String ModeOfTransport { get; set; }
+        public String LocationOfGoods { get; set; }
+        public String SupervisingCustomOffice { get; set; }
+        public String NatureOfTransaction { get; set; }
         public String Reference { get; set; }
         public String InvoiceDate { get; set; }
-        public int Type { get; set; }
+        public String Type { get; set; }
         public String Freight { get; set; }
         public String Amount { get; set; }
-        public int Currency { get; set; }
+        public String Currency { get; set; }
         public String Rate { get; set; }
     }
 }
