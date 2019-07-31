@@ -57,6 +57,10 @@
     <Compile Include="Configurations\Declaration\DeclarationConfig.cs" />
     <Compile Include="Configurations\Declaration\DropDownConfig.cs" />
     <Compile Include="Context\ButterflyContext.cs" />
+    <Compile Include="Migrations\201907310741084_butterfly-version1.0.0.cs" />
+    <Compile Include="Migrations\201907310741084_butterfly-version1.0.0.Designer.cs">
+      <DependentUpon>201907310741084_butterfly-version1.0.0.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
@@ -92,6 +96,11 @@
       <Project>{6eb5062e-11d9-4b90-bb88-1d4c53e1d377}</Project>
       <Name>Butterfly.CaseManagement.Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201907310741084_butterfly-version1.0.0.resx">
+      <DependentUpon>201907310741084_butterfly-version1.0.0.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
