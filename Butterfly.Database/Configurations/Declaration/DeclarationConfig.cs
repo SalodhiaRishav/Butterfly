@@ -13,7 +13,7 @@ namespace Butterfly.Database.Configurations.Declaration
     {
         public DeclarationConfig()
         {
-            this.HasKey<int>(d => d.DeclarationId);
+            this.HasKey<Guid>(d => d.DeclarationId);
             this.Property(d => d.DeclarantCountry)
                 .IsRequired();
             this.Property(d => d.Amount)
