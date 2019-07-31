@@ -12,6 +12,6 @@
         public string City { get; set; }
         public Country Country { get; set; }
         public string Email { get; set;}
-        public Case Case { get; set; }
+        public int CaseId { get; set; }
     }
 }
