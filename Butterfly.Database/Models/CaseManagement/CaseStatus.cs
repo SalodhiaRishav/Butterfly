@@ -4,6 +4,6 @@
     public class CaseStatus:BaseModel
     {
         public CaseStatusType Status { get; set; }
-        public Case Case { get; set; }
+        public int CaseId { get; set; }
     }
 }

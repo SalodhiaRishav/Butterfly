@@ -3,6 +3,6 @@
     public class Notes : BaseModel
     {
         public string NotesByCpa { get; set; }
-        public Case Case { get; set; }
+        public int CaseId { get; set; }
     }
 }
