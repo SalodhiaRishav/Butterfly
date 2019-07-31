@@ -9884,8 +9884,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHost.cs" />
-    <Compile Include="Declaration\AddDeclarationService.cs" />
-    <Compile Include="Declaration\AddDropDownItemService.cs" />
+    <Compile Include="CaseManagement\CaseManagementService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -14527,6 +14526,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CaseManagement\" />
+    <Folder Include="Declarations\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
@@ -14777,16 +14777,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Butterfly.Declarations.Application\Butterfly.Declarations.Application.csproj">
-      <Project>{ea23981f-b3b7-4e63-9a67-0e82eb3419b0}</Project>
-      <Name>Butterfly.Declarations.Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Declarations.Contracts\Butterfly.Declarations.Contracts.csproj">
-      <Project>{eed1b013-cc0c-47cb-9f2c-76eb92cd8dc7}</Project>
-      <Name>Butterfly.Declarations.Contracts</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
