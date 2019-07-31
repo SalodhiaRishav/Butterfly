@@ -36,6 +36,9 @@ namespace Butterfly.Database.Configurations.Declaration
                 .IsRequired();
             this.Property(d => d.ConsignorCountry)
                 .IsRequired();
+            this.Property(d => d.InvoiceDate)
+                .IsRequired()
+                .HasColumnType("datetime2");
 
         }
 

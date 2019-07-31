@@ -51,7 +51,7 @@ namespace Butterfly.Database.Models.Declarations
         public String SupervisingCustomOffice { get; set; }
         public String NatureOfTransaction { get; set; }
         public String Reference { get; set; }
-        public String InvoiceDate { get; set; }
+        public DateTime InvoiceDate { get; set; }
         public String Type { get; set; }
         public String Freight { get; set; }
         public String Amount { get; set; }
