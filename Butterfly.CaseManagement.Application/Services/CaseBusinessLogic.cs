@@ -1,14 +1,12 @@
-﻿using Butterfly.Database.Models.CaseManagement;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Butterfly.CaseManagement.Contracts.Dto;
 
 namespace Butterfly.CaseManagement.Application.Services
 {
     public class CaseBusinessLogic
     {
-        
+        public void AddNewCase(ClientDto clientDto, CaseInformationDto caseInformationDto, CaseStatusDto caseStatusDto, NotesDto notesDto, CaseReferenceDto caseReferenceDto)
+        {
+
+        }
     }
 }

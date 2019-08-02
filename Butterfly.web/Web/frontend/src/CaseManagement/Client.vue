@@ -68,7 +68,7 @@
               </b-form-group>
               <b-form-group
                 id="city"
-                label="Client Identifier"
+                label="City"
                 label-for="cityInput"
               >
                 <b-form-input

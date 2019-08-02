@@ -7,9 +7,9 @@
     public interface IRepository<T>
     {
         List<T> List { get; }
-        void Add(T entity);
+        T Add(T entity);
         void Delete(T entity);
-        void Update(T entity);
+        T Update(T entity);
         T FindById(int Id);
         void AddRange(IEnumerable<T> entityList);
         void DeleteRange(IEnumerable<T> entityList);

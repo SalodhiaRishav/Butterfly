@@ -23,12 +23,20 @@
         }
         public List<T> List { get => DbSet.ToList(); }
 
-        public void Add(T entity)
+        public T Add(T entity)
         {
             entity.ModifiedOn = DateTime.Now;
             entity.CreatedOn = DateTime.Now;
-            DbSet.Add(entity);
-            ButterflyContext.SaveChanges();
+            try
+            {
+                DbSet.Add(entity);
+                ButterflyContext.SaveChanges();
+                return entity;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public void AddRange(IEnumerable<T> entityList)
@@ -38,37 +46,80 @@
                 item.CreatedOn = DateTime.Now;
                 item.ModifiedOn = DateTime.Now;
             }
-            DbSet.AddRange(entityList);
-            ButterflyContext.SaveChanges();
+            try
+            {
+                DbSet.AddRange(entityList);
+                ButterflyContext.SaveChanges();
+            }
+            catch(Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public void Delete(T entity)
         {
-            DbSet.Remove(entity);
-            ButterflyContext.SaveChanges();
+            try
+            {
+                DbSet.Remove(entity);
+                ButterflyContext.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public void DeleteRange(IEnumerable<T> entityList)
         {
-            DbSet.RemoveRange(entityList);
-            ButterflyContext.SaveChanges();
+            try
+            {
+                DbSet.RemoveRange(entityList);
+                ButterflyContext.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public List<T> Find(Expression<Func<T, bool>> predicate)
         {
-            return DbSet.Where(predicate).ToList();
+            try
+            {
+                return DbSet.Where(predicate).ToList();
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
         public T FindById(int Id)
         {
-            return DbSet.Find(Id);
+            try
+            {
+                return DbSet.Find(Id);
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
-            entity.ModifiedOn = DateTime.Now;
-            DbSet.AddOrUpdate(entity);
-            ButterflyContext.SaveChanges();
+            try
+            {
+                entity.ModifiedOn = DateTime.Now;
+                DbSet.AddOrUpdate(entity);
+                ButterflyContext.SaveChanges();
+                return entity;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
     }
 }
