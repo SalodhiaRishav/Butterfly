@@ -14,11 +14,9 @@ namespace Butterfly.web.Declaration
     
         public bool POST(AddDropDownItem NewItem)
         {
-            DropDownBll dropDownBll = new DropDownBll(); 
+            DropDownBll dropDownBll = new DropDownBll();
             var newitem = NewItem.AddItem;
             return dropDownBll.AddNewItem(newitem);
-
-
         }
     }
 }

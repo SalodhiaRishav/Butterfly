@@ -10,15 +10,21 @@ namespace Butterfly.Declarations.Application.Services
     using Butterfly.Declarations.Application.Repository;
     public class DropDownBll
     {
+        DropDownDal dropDownDal;
         public DropDownBll()
         {
-
+           dropDownDal= new DropDownDal();
         }
 
         public bool AddNewItem(DropDownDto newitem)
         {
-            DropDownDal dropDownDal = new DropDownDal();
+            
             return dropDownDal.AddNewItem(newitem);
+        }
+
+        public void GetDroDownItems()
+        {
+            return dropDownDal.GetDropDownItems();
         }
     }
 }

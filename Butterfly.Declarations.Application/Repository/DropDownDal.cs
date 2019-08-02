@@ -30,5 +30,15 @@ namespace Butterfly.Declarations.Application.Repository
             }
             return true;
         }
+
+        public bool GetAllDropDownItems()
+        {
+            using(var context = new ButterflyContext())
+            {
+                var items = context.DropDown.ToList();
+
+            }
+            return true;
+        }
     }
 }

@@ -9887,6 +9887,7 @@
     <Compile Include="CaseManagement\CaseManagementService.cs" />
     <Compile Include="Declaration\AddDeclarationService.cs" />
     <Compile Include="Declaration\AddDropDownItemService.cs" />
+    <Compile Include="Declaration\GetDropDownItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
