@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Butterfly.Database.Models.CaseManagement
+﻿namespace Butterfly.Database.Models.CaseManagement
 {
+    using System;
+
     public class Notes : BaseModel
     {
         public string NotesByCpa { get; set; }

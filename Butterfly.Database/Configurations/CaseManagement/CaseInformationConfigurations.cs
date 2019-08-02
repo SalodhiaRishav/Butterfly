@@ -11,7 +11,7 @@
             this.HasKey(caseInformation => caseInformation.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            this.Property(caseInformation => caseInformation.Desription)
+            this.Property(caseInformation => caseInformation.Description)
                 .HasMaxLength(200);
 
             this.Property(caseInformation => caseInformation.MessageFromClient)

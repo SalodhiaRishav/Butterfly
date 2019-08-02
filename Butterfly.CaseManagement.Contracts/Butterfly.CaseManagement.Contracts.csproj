@@ -66,6 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\CaseDto.cs" />
+    <Compile Include="Dto\CaseInformationDto.cs" />
+    <Compile Include="Dto\CaseReferenceDto.cs" />
+    <Compile Include="Dto\CaseStatusDto.cs" />
+    <Compile Include="Dto\ClientDto.cs" />
+    <Compile Include="Dto\NotesDto.cs" />
     <Compile Include="EndPoints\CreateCase.cs" />
     <Compile Include="EndPoints\GetCaseById.cs" />
     <Compile Include="Enums\CaseReferenceType.cs" />

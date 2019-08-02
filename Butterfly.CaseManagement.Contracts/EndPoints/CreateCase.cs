@@ -7,6 +7,6 @@
     [Route("/casemanagement", "POST")]
     public class CreateCase : IReturn<OperationResult<CaseDto>>
     {
-        public CaseDto CaseDTO { get; set; }
+        public CaseDto CaseDto{ get; set; }
     }
 }

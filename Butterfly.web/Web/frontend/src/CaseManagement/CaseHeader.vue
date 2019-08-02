@@ -32,16 +32,27 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   methods: {
     submitAll() {
-       console.log(
-            this.$store.getters.clientDetails,
-            this.$store.getters.statusForm,
-            this.$store.getters.references,
-            this.$store.getters.caseInformation,
-            this.$store.getters.notesForm
-       );
+     
+       
+  const caseDto={
+       client:this.$store.getters.clientDetails,
+           caseStatus:this.$store.getters.statusForm,
+           references: this.$store.getters.references,
+            caseInformation:this.$store.getters.caseInformation,
+            notes: this.$store.getters.notesForm
+  }
+       
+         axios.post('https://localhost:44313/casemanagement',{caseDto:caseDto})
+         .then((res)=>{
+            console.log(res);
+         })
+         .catch((error)=>{
+           console.log('in error'+error);
+         })
     }
   },
   computed: {

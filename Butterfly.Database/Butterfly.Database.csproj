@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201907310759157_Butterfly-version1.0.0.Designer.cs">
       <DependentUpon>201907310759157_Butterfly-version1.0.0.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908020933021_Butterfly-version1.0.1.cs" />
+    <Compile Include="Migrations\201908020933021_Butterfly-version1.0.1.Designer.cs">
+      <DependentUpon>201908020933021_Butterfly-version1.0.1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
@@ -100,6 +104,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907310759157_Butterfly-version1.0.0.resx">
       <DependentUpon>201907310759157_Butterfly-version1.0.0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908020933021_Butterfly-version1.0.1.resx">
+      <DependentUpon>201908020933021_Butterfly-version1.0.1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -50,6 +50,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
+    <Compile Include="Repository\CaseInformationRepository.cs" />
+    <Compile Include="Repository\CaseReferenceRepository.cs" />
+    <Compile Include="Repository\CaseRepository.cs" />
+    <Compile Include="Repository\CaseStatusRepository.cs" />
+    <Compile Include="Repository\ClientRepository.cs" />
+    <Compile Include="Repository\NotesRepository.cs" />
     <Compile Include="Services\CaseBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>

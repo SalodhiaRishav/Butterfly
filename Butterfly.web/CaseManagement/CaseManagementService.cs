@@ -10,27 +10,18 @@
         public OperationResult<CaseDto> Post(CreateCase request)
         {
             OperationResult<CaseDto> result = new OperationResult<CaseDto>();
-            CaseDto caseDto = new CaseDto()
-            {
-                name = "rishav"
-             };
-            result.Data = caseDto;
-            result.Success = true;
-            result.Message = "retrieved successfully";
+            
             return result;
         }
 
-        public OperationResult<CaseDto> Get(GetCaseById request)
-        {
-            OperationResult<CaseDto> result = new OperationResult<CaseDto>();
-            CaseDto caseDto = new CaseDto()
-            {
-                name = "rishav"
-            };
-            result.Data = caseDto;
-            result.Success = true;
-            result.Message = "retrieved successfully";
-            return result;
-        }
+        //public OperationResult<CaseDto> Get(GetCaseById request)
+        //{
+        //    OperationResult<CaseDto> result = new OperationResult<CaseDto>();
+           
+        //    result.Data = request;
+        //    result.Success = true;
+        //    result.Message = "retrieved successfully";
+        //    return result;
+        //}
     }
 }
