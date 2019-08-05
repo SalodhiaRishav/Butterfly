@@ -8,7 +8,9 @@ namespace Butterfly.web.Declaration
     using Butterfly.web.CommonResponse;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Declarations.Application.Services;
-    public class GetAllDeclarations
+    using ServiceStack.ServiceInterface;
+
+    public class GetAllDeclarations : Service
     {
         private readonly DeclarationBll declarationBll;
         public GetAllDeclarations()
