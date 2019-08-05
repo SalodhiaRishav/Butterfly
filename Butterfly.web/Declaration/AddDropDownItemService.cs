@@ -9,14 +9,26 @@ namespace Butterfly.web.Declaration
     using ServiceStack.ServiceInterface;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Declarations.Application.Services;
+    using Butterfly.web.CommonResponse;
     public class AddDropDownItemService : Service
     {
     
-        public bool POST(AddDropDownItem NewItem)
+        public OperationResponse<bool> POST(AddDropDownItem NewItem)
         {
+            OperationResponse<bool> response = new OperationResponse<bool>();
             DropDownBll dropDownBll = new DropDownBll();
             var newitem = NewItem.AddItem;
-            return dropDownBll.AddNewItem(newitem);
+            try
+            {
+                bool data = dropDownBll.AddNewItem(newitem);
+                response.OnSuccess(data,"New DropDown List Item successfully added");
+                return response;
+            }
+            catch(Exception e)
+            {
+                response.OnException(false, "Request to add new Drop down item failed at server side");
+                return response;
+            }
         }
     }
 }
