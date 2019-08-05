@@ -28,14 +28,7 @@
 
             }
 
-            //public OperationResult<CaseDto> Get(GetCaseById request)
-            //{
-            //    OperationResult<CaseDto> result = new OperationResult<CaseDto>();
-
-            //    result.Data = request;
-            //    result.Success = true;
-            //    result.Message = "retrieved successfully";
-            //    return result;
-            //}
         }
+
+    }
 }
