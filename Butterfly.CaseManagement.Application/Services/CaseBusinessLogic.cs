@@ -1,12 +1,14 @@
-﻿using Butterfly.CaseManagement.Contracts.Dto;
-
-namespace Butterfly.CaseManagement.Application.Services
+﻿namespace Butterfly.CaseManagement.Application.Services
 {
-    public class CaseBusinessLogic
-    {
-        public void AddNewCase(ClientDto clientDto, CaseInformationDto caseInformationDto, CaseStatusDto caseStatusDto, NotesDto notesDto, CaseReferenceDto caseReferenceDto)
-        {
+    using System.Collections.Generic;
+    using Butterfly.CaseManagement.Contracts.Dto;
+    using Butterfly.CaseManagement.Contracts.Interfaces;
 
+    public class CaseBusinessLogic : ICaseBusinessLogic
+    {
+        public CaseDto AddNewCase(ClientDto clientDto, CaseInformationDto caseInformationDto, NotesDto notesDto, CaseStatusDto caseStatusDto, List<CaseReferenceDto> referencesDto)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

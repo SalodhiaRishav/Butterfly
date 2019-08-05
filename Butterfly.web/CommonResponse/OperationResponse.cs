@@ -28,16 +28,14 @@ namespace Butterfly.web.CommonResponse
         public void OnError(string message, List<String> error)
         {
             this.Message = message;
-            
             this.Status = HttpStatusCode.Forbidden;
             this.Error = error; ;
             this.Success = false;
         }
 
-        public void OnException(T data, string message)
+        public void OnException(string message)
         {
             this.Message = message;
-            this.Data = data;
             this.Status = HttpStatusCode.InternalServerError;
             this.Error.Add("Internal Server Error");
             this.Success = false;
