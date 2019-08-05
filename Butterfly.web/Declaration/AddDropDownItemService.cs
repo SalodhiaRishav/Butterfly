@@ -21,7 +21,7 @@ namespace Butterfly.web.Declaration
             try
             {
                 bool data = dropDownBll.AddNewItem(newitem);
-                response.OnSuccess(data,"New DropDown List Item successfully added");
+                response.OnSuccess(data,"New drop down list item successfully added");
                 return response;
             }
             catch(Exception e)

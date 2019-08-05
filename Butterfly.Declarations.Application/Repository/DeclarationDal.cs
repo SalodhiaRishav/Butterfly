@@ -56,7 +56,7 @@ namespace Butterfly.Declarations.Application.Repository
                 throw;
             }
         }
-        public IEnumerable<DeclarationDto> GetDeclarationList()
+        public IEnumerable<DeclarationDto> GetAllDeclarations()
         {
             IEnumerable<DeclarationDto> declarationDtoList;
             try

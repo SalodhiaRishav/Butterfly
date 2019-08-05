@@ -9891,6 +9891,7 @@
     <Compile Include="CommonResponse\OperationResponse.cs" />
     <Compile Include="Declaration\AddDeclarationService.cs" />
     <Compile Include="Declaration\AddDropDownItemService.cs" />
+    <Compile Include="Declaration\GetAllDeclarations.cs" />
     <Compile Include="Declaration\GetDropDownItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

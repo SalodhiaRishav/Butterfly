@@ -9,11 +9,14 @@ namespace Butterfly.Declarations.Application.Repository
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Database.Context;
     using Butterfly.Database.Models.Declarations;
+    using Butterfly.Declarations.Application.Mapper;
     public class DropDownDal
     {
+        private readonly DatabaseMapper mapper;
         public DropDownDal()
         {
 
+            mapper = new DatabaseMapper();
         }
 
         public bool AddNewItem (DropDownDto newItem)
@@ -32,7 +35,7 @@ namespace Butterfly.Declarations.Application.Repository
                 }
                 return true;
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 throw;
             }
@@ -40,16 +43,17 @@ namespace Butterfly.Declarations.Application.Repository
            
         }
 
-        public bool GetAllDropDownItems()
+        public IEnumerable<DropDownDto> GetAllDropDownItems()
         {
+            IEnumerable<DropDownDto> dropDownList;
             try
             {
                 using (var context = new ButterflyContext())
                 {
                     var items = context.DropDown.ToList();
-
+                    dropDownList = mapper.DropDownListToDtoList(items);
                 }
-                return true;
+                return dropDownList;
             }
             catch(Exception e)
             {
