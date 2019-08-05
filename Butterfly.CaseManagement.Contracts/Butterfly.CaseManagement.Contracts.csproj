@@ -84,16 +84,11 @@
     <Compile Include="Enums\IdentifierType.cs" />
     <Compile Include="Enums\PriorityType.cs" />
     <Compile Include="Interfaces\ICaseBusinessLogic.cs" />
-    <Compile Include="Interfaces\ICaseRepository.cs" />
-    <Compile Include="Interfaces\ICaseInformationRepository.cs" />
-    <Compile Include="Interfaces\ICaseReferenceRepository.cs" />
-    <Compile Include="Interfaces\ICaseStatusRepository.cs" />
-    <Compile Include="Interfaces\INotesRepository.cs" />
-    <Compile Include="Interfaces\IClientRepository.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\CaseInformationValidator.cs" />
     <Compile Include="Validators\ClientValidator.cs" />
     <Compile Include="Validators\CustomNullOrEmptyValidator.cs" />
+    <Compile Include="Validators\NotesValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="obj\Debug\Butterfly.CaseManagement.Contracts.csproj.CoreCompileInputs.cache" />

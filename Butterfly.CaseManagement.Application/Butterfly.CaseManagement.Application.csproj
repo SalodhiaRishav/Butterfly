@@ -63,6 +63,13 @@
     <Compile Include="Repository\CaseStatusRepository.cs" />
     <Compile Include="Repository\ClientRepository.cs" />
     <Compile Include="Repository\NotesRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICaseInformationRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICaseReferenceRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICaseRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICaseStatusRepository.cs" />
+    <Compile Include="Repository\Interfaces\IClientRepository.cs" />
+    <Compile Include="Repository\Interfaces\INotesRepository.cs" />
+    <Compile Include="Repository\Interfaces\IRepository.cs" />
     <Compile Include="Services\CaseBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,5 +86,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
