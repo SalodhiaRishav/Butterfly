@@ -1,7 +1,7 @@
 ﻿namespace Butterfly.CaseManagement.Contracts.Interfaces
 {
-    public interface IClientRepository
+    using Butterfly.Database.Models.CaseManagement;
+    public interface IClientRepository : IRepository<Client>
     {
-
     }
 }

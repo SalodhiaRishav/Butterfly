@@ -6,6 +6,11 @@
 
     public class CaseBusinessLogic : ICaseBusinessLogic
     {
+        IClientRepository ClientRepository;
+        public CaseBusinessLogic(IClientRepository clientRepository)
+        {
+            ClientRepository=clientRepository;
+        }
         public CaseDto AddNewCase(ClientDto clientDto, CaseInformationDto caseInformationDto, NotesDto notesDto, CaseStatusDto caseStatusDto, List<CaseReferenceDto> referencesDto)
         {
             throw new System.NotImplementedException();
