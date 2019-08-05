@@ -22,9 +22,9 @@ namespace Butterfly.Declarations.Application.Services
             return dropDownDal.AddNewItem(newitem);
         }
 
-        public void GetDroDownItems()
+        public bool GetDropDownItems()
         {
-            return dropDownDal.GetDropDownItems();
+            return dropDownDal.GetAllDropDownItems();
         }
     }
 }
