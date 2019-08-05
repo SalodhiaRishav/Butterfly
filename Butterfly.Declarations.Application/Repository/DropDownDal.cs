@@ -18,17 +18,26 @@ namespace Butterfly.Declarations.Application.Repository
 
         public bool AddNewItem (DropDownDto newItem)
         {
-            using(var context = new ButterflyContext())
+            try
             {
-                var item = new DropDown();
-                item.Id = newItem.Id;
-                item.Key = newItem.Key;
-                item.Type = newItem.Type;
-                item.Value = newItem.Value;
-                context.DropDown.Add(item);
-                context.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    var item = new DropDown();
+                    item.Id = newItem.Id;
+                    item.Key = newItem.Key;
+                    item.Type = newItem.Type;
+                    item.Value = newItem.Value;
+                    context.DropDown.Add(item);
+                    context.SaveChanges();
+                }
+                return true;
             }
-            return true;
+            catch(Exception e)
+            {
+                throw;
+            }
+
+           
         }
 
         public bool GetAllDropDownItems()

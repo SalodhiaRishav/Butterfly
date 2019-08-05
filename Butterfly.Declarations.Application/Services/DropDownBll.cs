@@ -18,8 +18,14 @@ namespace Butterfly.Declarations.Application.Services
 
         public bool AddNewItem(DropDownDto newitem)
         {
-            
-            return dropDownDal.AddNewItem(newitem);
+            try
+            {
+                return dropDownDal.AddNewItem(newitem);
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
         }
 
         public bool GetDropDownItems()
