@@ -1,4 +1,4 @@
-﻿namespace Butterfly.CaseManagement.Contracts.Interfaces
+﻿namespace Butterfly.CaseManagement.Application.Repository.Interfaces
 {
     using System;
     using System.Collections.Generic;

@@ -24,7 +24,7 @@ namespace Butterfly.Declarations.Application.Services
             }
             catch(Exception e)
             {
-                throw;
+                throw e;
             }
         }
 

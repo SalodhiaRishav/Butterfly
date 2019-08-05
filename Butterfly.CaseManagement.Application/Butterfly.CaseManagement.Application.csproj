@@ -55,6 +55,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapper\BaseMapper.cs" />
+    <Compile Include="Mapper\CaseInformationMapper.cs" />
+    <Compile Include="Mapper\CaseStatusMapper.cs" />
+    <Compile Include="Mapper\CaseReferenceMapper.cs" />
+    <Compile Include="Mapper\MapperInterface\IBaseMapper.cs" />
+    <Compile Include="Mapper\MapperInterface\ICaseReferenceMapper.cs" />
+    <Compile Include="Mapper\MapperInterface\INotesMapper.cs" />
+    <Compile Include="Mapper\MapperInterface\ICaseStatusMapper.cs" />
+    <Compile Include="Mapper\MapperInterface\ICaseInformationMapper.cs" />
+    <Compile Include="Mapper\MapperInterface\IClientMapper.cs" />
+    <Compile Include="Mapper\NotesMapper.cs" />
+    <Compile Include="Mapper\ClientMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\CaseInformationRepository.cs" />
@@ -63,6 +75,13 @@
     <Compile Include="Repository\CaseStatusRepository.cs" />
     <Compile Include="Repository\ClientRepository.cs" />
     <Compile Include="Repository\NotesRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICaseInformationRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICaseReferenceRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICaseRepository.cs" />
+    <Compile Include="Repository\Interfaces\ICaseStatusRepository.cs" />
+    <Compile Include="Repository\Interfaces\IClientRepository.cs" />
+    <Compile Include="Repository\Interfaces\INotesRepository.cs" />
+    <Compile Include="Repository\Interfaces\IRepository.cs" />
     <Compile Include="Services\CaseBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,5 +98,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

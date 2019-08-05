@@ -16,6 +16,11 @@ namespace Butterfly.web.CommonResponse
 
         public HttpStatusCode Status { get; set; }
 
+        public OperationResponse()
+        {
+            Error = new List<string>();
+        }
+
         public void OnSuccess(T data, string message)
         {
             this.Message = message;

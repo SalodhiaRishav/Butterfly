@@ -29,7 +29,7 @@
             ClientDto client = request.CaseDto.Client;
             NotesDto notes = request.CaseDto.Notes;
             CaseStatusDto caseStatus = request.CaseDto.CaseStatus;
-            List<CaseReferenceDto> references = new List<CaseReferenceDto>(); 
+            List<CaseReferenceDto> references = request.CaseDto.References;
 
             ValidationResult validationResult = clientValidator.Validate(client);
             if (!validationResult.IsValid)

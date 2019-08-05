@@ -8,7 +8,7 @@
     using Butterfly.Database.Context;
     using System.Linq.Expressions;
     using System.Data.Entity.Migrations;
-    using Butterfly.CaseManagement.Contracts.Interfaces;
+    using Butterfly.CaseManagement.Application.Repository.Interfaces;
 
     public class BaseRepository<T> : IRepository<T> where T : BaseModel
     {
