@@ -28,9 +28,16 @@ namespace Butterfly.Declarations.Application.Services
             }
         }
 
-        public bool GetDropDownItems()
+        public IEnumerable<DropDownDto> GetDropDownItems()
         {
-            return dropDownDal.GetAllDropDownItems();
+            try
+            {
+                return dropDownDal.GetAllDropDownItems();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

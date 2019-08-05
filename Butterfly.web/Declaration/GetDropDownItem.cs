@@ -7,6 +7,8 @@ using System.Web;
 namespace Butterfly.web.Declaration
 {
     using Butterfly.Declarations.Application.Services;
+    using Butterfly.web.CommonResponse;
+    using Butterfly.Declarations.Contracts.DeclarationDTO;
     public class GetDropDownItem : Service
     {
         private readonly DropDownBll dropDownBll;
@@ -16,7 +18,16 @@ namespace Butterfly.web.Declaration
         }
         public void GET()
         {
-            dropDownBll.GetDropDownItems();
+            OperationResponse<IEnumerable<DropDownDto>> response = new OperationResponse<IEnumerable<DropDownDto>>();
+            try
+            {               
+                var data = dropDownBll.GetDropDownItems();
+                response.OnSuccess(data, "Drop Items Fetched Successfully");
+            }
+            catch(Exception e)
+            {
+                response.OnException("Drop down items failed to fetched due internal server error");
+            }
         }
     }
 }
