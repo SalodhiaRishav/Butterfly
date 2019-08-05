@@ -35,11 +35,11 @@
             if (!validationResult.IsValid)
             {
                 List<string> errors = new List<string>();
-                foreach(var error in validationResult.Errors)
+                foreach (var error in validationResult.Errors)
                 {
                     errors.Add(error.ErrorMessage);
                 }
-                operationResponse.OnError("Invalid client data",errors);
+                operationResponse.OnError("Invalid client data", errors);
                 return operationResponse;
             }
 
@@ -69,11 +69,36 @@
 
             try
             {
-                CaseDto caseDto=this.CaseBusinessLogic.AddNewCase(client, caseInformation, notes, caseStatus, references);
+                CaseDto caseDto = this.CaseBusinessLogic.AddNewCase(client, caseInformation, notes, caseStatus, references);
                 operationResponse.OnSuccess(caseDto, "Added successfully");
                 return operationResponse;
             }
-            catch(Exception e)
+            catch (Exception e)
+            {
+                operationResponse.OnException(e.Message);
+                return operationResponse;
+            }
+        }
+
+        public OperationResponse<CaseDto> Get(GetCaseById request)
+        {
+            OperationResponse<CaseDto> operationResponse = new OperationResponse<CaseDto>();
+            try
+            {
+                CaseDto caseDto = this.CaseBusinessLogic.GetCaseById(request.caseId);
+                if(caseDto!=null)
+                {
+                    operationResponse.OnSuccess(caseDto, "Fetched successfully");
+                    return operationResponse;
+                }
+                else
+                {
+                    operationResponse.OnError("No case found!!!", null);
+                    return operationResponse;
+                }
+                
+            }
+             catch (Exception e)
             {
                 operationResponse.OnException(e.Message);
                 return operationResponse;

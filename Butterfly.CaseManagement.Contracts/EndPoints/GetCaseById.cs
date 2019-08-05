@@ -2,10 +2,11 @@
 {
     using Butterfly.CaseManagement.Contracts.Dto;
     using ServiceStack.ServiceHost;
+    using System;
 
-    [Route("/casemanagement", "GET")]
+    [Route("/casemanagement/{caseId}", "GET")]
     public class GetCaseById 
     {
-        public int id { get; set; }
+       public Guid caseId { get; set; }
     }
 }

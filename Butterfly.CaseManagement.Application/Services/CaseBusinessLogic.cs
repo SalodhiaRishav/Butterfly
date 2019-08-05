@@ -7,6 +7,7 @@
     using Butterfly.Database.Models.CaseManagement;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class CaseBusinessLogic : ICaseBusinessLogic
     {
@@ -110,6 +111,90 @@
                 throw exception;
             }
             
+        }
+
+        public CaseDto GetCaseById(Guid caseId)
+        {
+            CaseDto caseDto = new CaseDto();
+            Client client;
+            CaseInformation caseInformation;
+            CaseStatus caseStatus;
+            List<CaseReference> caseReferences;
+            Notes notes;
+            try
+            {
+                var caseList = this.CaseRepository.Find(c => c.Id == caseId);
+                if (caseList.Count != 0)
+                {
+                    caseDto.Id = caseList.First().Id;
+                    caseDto.ModifiedOn = caseList.First().ModifiedOn;
+                    caseDto.CreatedOn = caseList.First().CreatedOn;
+                }
+                else
+                {
+                    return null;
+                }
+
+                var clientList = this.ClientRepository.Find(c => c.CaseId == caseId);
+                if (clientList.Count != 0)
+                {
+                    client = clientList.First();
+                    caseDto.Client = this.ClientMapper.ModelToDto(client);
+                }
+                else
+                {
+                    caseDto.Client = null;
+                }
+
+                var caseInformationList = this.CaseInformationRepository.Find(c => c.CaseId == caseId);
+                if (caseInformationList.Count != 0)
+                {
+                    caseInformation = caseInformationList.First();
+                    caseDto.CaseInformation = this.CaseInformationMapper.ModelToDto(caseInformation);
+                }
+                else
+                {
+                    caseDto.CaseInformation = null;
+                }
+
+                var caseStatusList = this.CaseStatusRepository.Find(c => c.CaseId == caseId);
+                if (caseStatusList.Count != 0)
+                {
+                    caseStatus = caseStatusList.First();
+                    caseDto.CaseStatus = this.CaseStatusMapper.ModelToDto(caseStatus);
+                }
+                else
+                {
+                    caseDto.CaseStatus = null;
+                }
+
+                var noteList = this.NotesRepository.Find(c => c.CaseId == caseId);
+                if (noteList.Count != 0)
+                {
+                    notes = noteList.First();
+                    caseDto.Notes = this.NotesMapper.ModelToDto(notes);
+                }
+                else
+                {
+                    caseDto.Notes = null;
+                }
+
+                caseReferences = this.CaseReferenceRepository.Find(c => c.CaseId == caseId);
+
+                if (caseReferences.Count != 0)
+                {
+                    caseDto.References = this.CaseReferenceMapper.ModelListToDtoList(caseReferences);
+                }
+                else
+                {
+                    caseDto.References = null;
+                }
+                return caseDto;
+            }
+            catch(Exception exception)
+            {
+                throw exception;
+            }
         }
     }
 }
