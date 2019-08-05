@@ -1,8 +1,8 @@
-﻿namespace Butterfly.Database.Models
-{
-    using System;
+﻿using System;
 
-    public class BaseModel
+namespace Butterfly.CaseManagement.Contracts.Dto
+{
+    public class BaseDto
     {
         public Guid Id { get; set; }
         public DateTime CreatedOn { get; set; }

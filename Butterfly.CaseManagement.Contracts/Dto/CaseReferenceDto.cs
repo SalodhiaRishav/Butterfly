@@ -3,7 +3,7 @@
     using Butterfly.CaseManagement.Contracts.Enums;
     using System;
 
-    public class CaseReferenceDto
+    public class CaseReferenceDto : BaseDto
     {
         public CaseReferenceType Type { get; set; }
         public string Identity { get; set; }

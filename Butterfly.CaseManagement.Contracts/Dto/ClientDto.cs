@@ -3,7 +3,7 @@
     using Butterfly.CaseManagement.Contracts.Enums;
     using System;
 
-    public class ClientDto
+    public class ClientDto : BaseDto
     {
         public string ClientIdentifier { get; set; }
         public IdentifierType IdentifierType { get; set; }

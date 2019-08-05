@@ -1,7 +1,7 @@
 ﻿namespace Butterfly.CaseManagement.Contracts.Dto
 {
     using System.Collections.Generic;
-    public class CaseDto
+    public class CaseDto : BaseDto
     {
         public ClientDto Client { get; set; }
         public CaseInformationDto CaseInformation { get; set; }
