@@ -26,7 +26,7 @@ namespace Butterfly.web.Declaration
             }
             catch(Exception e)
             {
-                response.OnException(false, "Request to add new Drop down item failed at server side");
+                response.OnException("Request to add new Drop down item failed at server side");
                 return response;
             }
         }

@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\BaseDto.cs" />
     <Compile Include="Dto\CaseDto.cs" />
     <Compile Include="Dto\CaseInformationDto.cs" />
     <Compile Include="Dto\CaseReferenceDto.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Enums\Country.cs" />
     <Compile Include="Enums\IdentifierType.cs" />
     <Compile Include="Enums\PriorityType.cs" />
+    <Compile Include="Interfaces\ICaseBusinessLogic.cs" />
     <Compile Include="Interfaces\ICaseRepository.cs" />
     <Compile Include="Interfaces\ICaseInformationRepository.cs" />
     <Compile Include="Interfaces\ICaseReferenceRepository.cs" />
@@ -90,7 +92,6 @@
     <Compile Include="Interfaces\IClientRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\OperationResult.cs" />
     <Compile Include="Validators\ClientValidator.cs" />
     <Compile Include="Validators\CustomNullOrEmptyValidator.cs" />
   </ItemGroup>

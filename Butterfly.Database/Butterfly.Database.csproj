@@ -96,18 +96,18 @@
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Butterfly.CaseManagement.Contracts\Butterfly.CaseManagement.Contracts.csproj">
-      <Project>{6eb5062e-11d9-4b90-bb88-1d4c53e1d377}</Project>
-      <Name>Butterfly.CaseManagement.Contracts</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201907310759157_Butterfly-version1.0.0.resx">
       <DependentUpon>201907310759157_Butterfly-version1.0.0.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908020933021_Butterfly-version1.0.1.resx">
       <DependentUpon>201908020933021_Butterfly-version1.0.1.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Butterfly.CaseManagement.Contracts\Butterfly.CaseManagement.Contracts.csproj">
+      <Project>{6eb5062e-11d9-4b90-bb88-1d4c53e1d377}</Project>
+      <Name>Butterfly.CaseManagement.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

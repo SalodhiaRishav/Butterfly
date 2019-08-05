@@ -42,12 +42,20 @@ namespace Butterfly.Declarations.Application.Repository
 
         public bool GetAllDropDownItems()
         {
-            using(var context = new ButterflyContext())
+            try
             {
-                var items = context.DropDown.ToList();
+                using (var context = new ButterflyContext())
+                {
+                    var items = context.DropDown.ToList();
 
+                }
+                return true;
             }
-            return true;
+            catch(Exception e)
+            {
+                throw;
+            }
+            
         }
     }
 }
