@@ -1,9 +1,9 @@
 ﻿namespace Butterfly.CaseManagement.Application.Repository
 {
-    using Butterfly.CaseManagement.Application.Interfaces;
+    using Butterfly.CaseManagement.Application.Repository.Interfaces;
     using Butterfly.Database.Models.CaseManagement;
 
-    class CaseRepository : BaseRepository<Case>, ICaseRepository
+    public class CaseRepository : BaseRepository<Case>, ICaseRepository
     {
     }
 }

@@ -2,10 +2,11 @@
 {
     using System.Collections.Generic;
     using AutoMapper;
+    using Butterfly.CaseManagement.Application.Mapper.MapperInterface;
 
-    public class BaseMapper<Entity,EntityDto>
+    public class BaseMapper<Entity,EntityDto>:IBaseMapper<Entity,EntityDto>
     {
-        IMapper Mapper;
+        private readonly IMapper Mapper;
 
         public BaseMapper()
         {
