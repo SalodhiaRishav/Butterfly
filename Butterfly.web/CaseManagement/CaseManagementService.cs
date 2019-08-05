@@ -86,7 +86,7 @@
             try
             {
                 CaseDto caseDto = this.CaseBusinessLogic.GetCaseById(request.caseId);
-                if(caseDto!=null)
+                if (caseDto != null)
                 {
                     operationResponse.OnSuccess(caseDto, "Fetched successfully");
                     return operationResponse;
@@ -96,9 +96,25 @@
                     operationResponse.OnError("No case found!!!", null);
                     return operationResponse;
                 }
-                
+
             }
-             catch (Exception e)
+            catch (Exception e)
+            {
+                operationResponse.OnException(e.Message);
+                return operationResponse;
+            }
+        }
+
+        public OperationResponse<CaseDto> Delete(DeleteCaseById request)
+        {
+            OperationResponse<CaseDto> operationResponse = new OperationResponse<CaseDto>();
+            try
+            {
+                this.CaseBusinessLogic.DeleteCaseById(request.caseId);
+                operationResponse.OnSuccess(null, "Deleted successfully");
+                return operationResponse;
+            }
+            catch (Exception e)
             {
                 operationResponse.OnException(e.Message);
                 return operationResponse;

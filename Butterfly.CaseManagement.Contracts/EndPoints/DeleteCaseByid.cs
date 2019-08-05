@@ -3,9 +3,9 @@
     using ServiceStack.ServiceHost;
     using System;
 
-    [Route("/casemanagement/{caseId}", "GET")]
-    public class GetCaseById 
+    [Route("/casemanagement/{caseId}", "DELETE")]
+    public class DeleteCaseById
     {
-       public Guid caseId { get; set; }
+        public Guid caseId { get; set; }
     }
 }

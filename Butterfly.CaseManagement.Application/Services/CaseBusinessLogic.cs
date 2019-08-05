@@ -196,5 +196,70 @@
                 throw exception;
             }
         }
+
+        public void DeleteCaseById(Guid caseId)
+        {
+            CaseDto caseDto = new CaseDto();
+            Case caseToDelete;
+            Client client;
+            CaseInformation caseInformation;
+            CaseStatus caseStatus;
+            List<CaseReference> caseReferences;
+            Notes notes;
+            try
+            {
+                var caseList = this.CaseRepository.Find(c => c.Id == caseId);
+                if (caseList.Count != 0)
+                {
+                    caseToDelete = caseList.First();
+                }
+                else
+                {
+                    return;
+                }
+
+                var clientList = this.ClientRepository.Find(c => c.CaseId == caseId);
+                if (clientList.Count != 0)
+                {
+                    client = clientList.First();
+                    this.ClientRepository.Delete(client);
+                }
+               
+
+                var caseInformationList = this.CaseInformationRepository.Find(c => c.CaseId == caseId);
+                if (caseInformationList.Count != 0)
+                {
+                    caseInformation = caseInformationList.First();
+                    this.CaseInformationRepository.Delete(caseInformation);
+                }
+
+                var caseStatusList = this.CaseStatusRepository.Find(c => c.CaseId == caseId);
+                if (caseStatusList.Count != 0)
+                {
+                    caseStatus = caseStatusList.First();
+                    this.CaseStatusRepository.Delete(caseStatus);
+                }
+
+                var noteList = this.NotesRepository.Find(c => c.CaseId == caseId);
+                if (noteList.Count != 0)
+                {
+                    notes = noteList.First();
+                    this.NotesRepository.Delete(notes);
+                }
+
+                caseReferences = this.CaseReferenceRepository.Find(c => c.CaseId == caseId);
+
+                if (caseReferences.Count != 0)
+                {
+                    this.CaseReferenceRepository.DeleteRange(caseReferences);
+                }
+
+                this.CaseRepository.Delete(caseToDelete);
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
     }
 }
