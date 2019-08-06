@@ -121,5 +121,25 @@
             }
         }
 
+        public OperationResponse<List<CaseDto>> Get(GetAllCases request)
+        {
+            OperationResponse<List<CaseDto>> operationResponse = new OperationResponse<List<CaseDto>>();
+            try
+            {
+                List<CaseDto> caseDtos=this.CaseBusinessLogic.GetAllCases();
+                if(caseDtos==null)
+                {
+                    operationResponse.OnError("No Case found", null);
+                }
+                operationResponse.OnSuccess(caseDtos, "Fetched successfully");
+                return operationResponse;
+            }
+            catch (Exception e)
+            {
+                operationResponse.OnException(e.Message);
+                return operationResponse;
+            }
+        }
+
     }
 }

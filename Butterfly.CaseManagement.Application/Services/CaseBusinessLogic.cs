@@ -261,5 +261,29 @@
                 throw exception;
             }
         }
+
+        public List<CaseDto> GetAllCases()
+        {
+            List<CaseDto> caseDtos = new List<CaseDto>();
+            try
+            {
+                List<Case> cases = this.CaseRepository.List;
+                if(cases.Count==0)
+                {
+                    return null;
+                }
+
+                foreach(var @case in cases)
+                {
+                    caseDtos.Add(this.GetCaseById(@case.Id));
+                }
+                return caseDtos;
+
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
     }
 }

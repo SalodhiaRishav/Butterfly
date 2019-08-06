@@ -9,5 +9,6 @@
         CaseDto AddNewCase(ClientDto clientDto, CaseInformationDto caseInformationDto, NotesDto notesDto, CaseStatusDto caseStatusDto, List<CaseReferenceDto> referencesDto);
         CaseDto GetCaseById(Guid caseId);
         void DeleteCaseById(Guid caseId);
+        List<CaseDto> GetAllCases();
     }
 }

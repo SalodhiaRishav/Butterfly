@@ -78,6 +78,7 @@
     <Compile Include="Dto\NotesDto.cs" />
     <Compile Include="EndPoints\CreateCase.cs" />
     <Compile Include="EndPoints\DeleteCaseById.cs" />
+    <Compile Include="EndPoints\GetAllCases.cs" />
     <Compile Include="EndPoints\GetCaseById.cs" />
     <Compile Include="Enums\CaseReferenceType.cs" />
     <Compile Include="Enums\CaseStatusType.cs" />
