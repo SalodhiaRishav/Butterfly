@@ -9888,6 +9888,7 @@
   <ItemGroup>
     <Compile Include="AppHost.cs" />
     <Compile Include="CaseManagement\CaseManagementService.cs" />
+    <Compile Include="CaseManagement\DropDownService.cs" />
     <Compile Include="CommonResponse\OperationResponse.cs" />
     <Compile Include="Declaration\AddDeclarationService.cs" />
     <Compile Include="Declaration\AddDropDownItemService.cs" />

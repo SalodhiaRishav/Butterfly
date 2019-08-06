@@ -81,6 +81,10 @@
     <Compile Include="EndPoints\EditCase.cs" />
     <Compile Include="EndPoints\GetAllCases.cs" />
     <Compile Include="EndPoints\GetCaseById.cs" />
+    <Compile Include="EndPoints\GetPriorityTypes.cs" />
+    <Compile Include="EndPoints\GetCaseReferenceTypes.cs" />
+    <Compile Include="EndPoints\GetIdentifierTypes.cs" />
+    <Compile Include="EndPoints\GetStatusTypes.cs" />
     <Compile Include="Enums\CaseReferenceType.cs" />
     <Compile Include="Enums\CaseStatusType.cs" />
     <Compile Include="Enums\Country.cs" />
