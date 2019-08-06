@@ -27,7 +27,7 @@
                 v-model="referenceForm.identity"
               ></b-form-input>
             </template>
-            <template slot="HEAD_type">
+            <template slot="HEAD_type" v-if="referenceTypesFetched">
               <b-form-select
                 id="referenceTypeInput"
                 :options="referenceTypes"
@@ -53,9 +53,19 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+  mounted(){
+  this.getCaseReferenceTypes()
+    .then((response)=>{
+      this.referenceTypes=response;
+      this.referenceTypesFetched=true;
+    })
+  },
   data() {
     return {
+      referenceTypes:[],
+      referenceTypesFetched:false,
       showReferenceForm: false,
       fields: ["type", "identity", "comment", "#"],
       references: this.$store.getters.references,
@@ -66,17 +76,26 @@ export default {
       }
     };
   },
-  computed: {
-    referenceTypes: () => {
-      return [
-        { text: "Select reference type", value: null },
-        "ABDC",
-        "EFGH",
-        "JKLM"
-      ];
-    }
-  },
   methods: {
+     getCaseReferenceTypes:function(){
+       return new Promise((resolve, reject)=> {
+          const url= "https://localhost:44313/referencetypes"
+          axios.get(url)
+          .then((response)=>{
+            if(response.data.success===true)
+            {
+             resolve(response.data.data)
+            }
+            else
+            {
+              resolve(null);
+            }
+          })
+          .catch((error)=>{
+            reject(error);
+          })
+       });
+    },
     deleteReference(index) {
       this.references.splice(index, 1);
     },

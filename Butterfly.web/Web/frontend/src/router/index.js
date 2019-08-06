@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import DeclarationForm from '../Declaration/DeclarationForm.vue'; 
 import temp from '../Declaration/temp.vue';
 import CaseManagementHeader from "./../CaseManagement/CaseManagementHeader.vue";
+import OpenCases from "./../CaseManagement/OpenCases.vue";
 
 Vue.use(Router);
 
@@ -14,9 +15,14 @@ const router = new Router({
     component: DeclarationForm,
     },
     {
-      path: '/case',
+      path: '/mycase',
       name: 'Case',
       component: CaseManagementHeader,
+    },
+    {
+      path: '/opencases',
+      name: 'opencases',
+      component: OpenCases,
     },
   {
       path:'/temp',

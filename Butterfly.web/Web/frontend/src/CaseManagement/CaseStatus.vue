@@ -15,7 +15,7 @@
       <b-collapse id="accordion-caseStatus" visible role="tabpanel">
         <b-card-body class="componentCard">
           <b-form>
-            <b-form-group id="status" label="Status" label-for="statusInput">
+            <b-form-group id="status" label="Status" label-for="statusInput" v-if="statusTypesFetched">
               <b-form-select
                 id="statusInput"
                 v-model="statusForm.status"
@@ -31,23 +31,43 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+  mounted(){
+    this.getCaseStatusTypes()
+    .then((response)=>{
+      this.statusTypes=response;
+      this.statusTypesFetched=true;
+    })
+  },
   data() {
     return {
+      statusTypes:[],
+      statusTypesFetched:false,
       statusForm: this.$store.getters.statusForm
     };
   },
-  computed: {
-    statusTypes: () => {
-      const statusTypes = [
-        { text: "Select Status", value: null },
-
-        "New",
-        "In progress",
-        "Closed"
-      ];
-      return statusTypes;
+   methods:{
+     getCaseStatusTypes:function(){
+       return new Promise((resolve, reject)=> {
+          const url= "https://localhost:44313/statustypes"
+          axios.get(url)
+          .then((response)=>{
+            if(response.data.success===true)
+            {
+             resolve(response.data.data)
+            }
+            else
+            {
+              resolve(null);
+            }
+          })
+          .catch((error)=>{
+            reject(error);
+          })
+       });
     }
-  }
+  },
 };
 </script>

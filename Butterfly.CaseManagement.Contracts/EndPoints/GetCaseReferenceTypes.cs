@@ -2,7 +2,7 @@
 {
     using ServiceStack.ServiceHost;
 
-    [Route("/casereferencetypes", "GET")]
+    [Route("/referencetypes", "GET")]
     public class GetCaseReferenceTypes
     {
     }

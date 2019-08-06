@@ -36,6 +36,7 @@
                   v-model="caseInformation.messageFromClient"
                 ></b-form-textarea>
               </b-form-group>
+               <div v-if="priorityFetched">
               <b-form-group
                 id="priority"
                 label="Priority"
@@ -47,6 +48,7 @@
                   :options="priorities"
                 ></b-form-select>
               </b-form-group>
+                </div>
             </b-form>
           </b-card-body>
         </b-collapse>
@@ -56,21 +58,42 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+  mounted(){
+    this.getPriorityTypes()
+    .then((response)=>{
+      this.priorities=response;
+      this.priorityFetched=true;
+    })
+  },
   data() {
     return {
+      priorities:[],
+      priorityFetched:false,
       caseInformation: this.$store.getters.caseInformation
     };
   },
-  computed: {
-    priorities: () => {
-      return [
-        { text: "Select priority", value: null },
-        "High",
-        "Medium",
-        "Low"
-      ];
+   methods:{
+     getPriorityTypes:function(){
+       return new Promise((resolve, reject)=> {
+          const url= "https://localhost:44313/prioritytypes"
+          axios.get(url)
+          .then((response)=>{
+            if(response.data.success===true)
+            {
+             resolve(response.data.data)
+            }
+            else
+            {
+              resolve(null);
+            }
+          })
+          .catch((error)=>{
+            reject(error);
+          })
+       });
     }
-  }
+  },
 };
 </script>

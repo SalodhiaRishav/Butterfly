@@ -16,6 +16,7 @@
         <b-collapse id="accordion-client" visible role="tabpanel">
           <b-card-body class="componentCard">
             <b-form>
+              <div v-if="identifierFetched">
               <b-form-group
                 id="clientIdentifier"
                 label="Client Identifier"
@@ -27,6 +28,7 @@
                   required
                 ></b-form-input>
               </b-form-group>
+              </div>
               <b-form-group
                 id="identifierType"
                 label="Identifier Type"
@@ -107,11 +109,42 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+  mounted(){
+    this.getIdentiferTypes()
+    .then((response)=>{
+      this.identifierTypes=response;
+      this.identifierFetched=true;
+    })
+  },
   data() {
     return {
+      identifierFetched:false,
+      identifierTypes:[],
       clientDetails: this.$store.getters.clientDetails
     };
+  },
+  methods:{
+    getIdentiferTypes:function(){
+       return new Promise((resolve, reject)=> {
+          const url= "https://localhost:44313/identifiertypes"
+          axios.get(url)
+          .then((response)=>{
+            if(response.data.success===true)
+            {
+             resolve(response.data.data)
+            }
+            else
+            {
+              resolve(null);
+            }
+          })
+          .catch((error)=>{
+            reject(error);
+          })
+       });
+    }
   },
   computed: {
     countries: () => {
@@ -125,10 +158,6 @@ export default {
       ];
       return countries;
     },
-    identifierTypes: () => {
-      const identifierTypes = ["EORI", "TIN", "CNR"];
-      return identifierTypes;
-    }
   }
 };
 </script>

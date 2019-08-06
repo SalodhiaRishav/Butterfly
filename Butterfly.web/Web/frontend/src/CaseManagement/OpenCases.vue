@@ -8,6 +8,7 @@
         :items="openCases"
         :current-page="currentPage"
         :per-page="perPage"
+        @row-clicked="someFunction" 
       ></b-table>
     </div>
     <b-row>
@@ -24,12 +25,36 @@
 </template>
 
 <script>
-import openCases from "@/assets/tempData";
+import axios from 'axios';
 
 export default {
+  mounted(){
+    this.getAllCases()
+    .then((response)=>{
+      let openCase=[];
+      this.allCases=response;
+      for(let i=0;i<response.length;++i)
+      {
+        let obj={
+          caseId:response[i].id,
+          createdDate:response[i].createdOn,
+          status:response[i].caseStatus.status,
+          description:response[i].caseInformation.description,
+          client:response[i].client.clientIdentifier,
+          priority:response[i].caseInformation.priority
+          }
+          openCase.push(obj);
+      }
+      this.openCases=openCase;
+    })
+    .catch((error)=>{
+      
+    })
+  },
   data() {
     return {
-      openCases: openCases,
+      allCases:[],
+      openCases: [],
       currentPage: 1,
       perPage: 2,
       fields: [
@@ -62,28 +87,39 @@ export default {
           sortable: true
         },
         {
-          key: "eta",
-          sortable: true
-        },
-        {
           key: "notes",
           sortable: true
         },
-        {
-          key: "eta",
-          sortable: true
-        },
-        {
-          key: "organizationalUnit",
-          label: "org. unit",
-          sortable: true
-        },
-        {
-          key: "cpa",
-          sortable: true
-        }
       ]
     };
+  },
+  methods:{
+    someFunction:function(row)
+    {
+      const foundCase = this.allCases.find(function(element) { 
+                return element.id === row.caseId; 
+            });
+            
+    },
+      getAllCases:function(){
+       return new Promise((resolve, reject)=> {
+          const url= "https://localhost:44313/casemanagement"
+          axios.get(url)
+          .then((response)=>{
+            if(response.data.success===true)
+            {
+             resolve(response.data.data)
+            }
+            else
+            {
+              resolve(null);
+            }
+          })
+          .catch((error)=>{
+            reject(error);
+          })
+       });
+    }
   }
 };
 </script>
