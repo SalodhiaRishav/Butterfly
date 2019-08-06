@@ -15,10 +15,10 @@
 
     public class AppHost : AppHostBase
     {
-        public AppHost() : base("Butterfly.web",typeof(CaseManagementService).Assembly) { }
+        public AppHost() : base("Butterfly.web", typeof(CaseManagementService).Assembly) { }
         public override void Configure(Container container)
         {
-            
+
             JsConfig.EmitCamelCaseNames = true;
 
             container.Register<ICaseRepository>(new CaseRepository());
@@ -34,22 +34,23 @@
             container.Register<ICaseReferenceMapper>(new CaseReferenceMapper());
             container.Register<INotesMapper>(new NotesMapper());
 
+            container.Register<IClientBusinessLogic>(new ClientBusinessLogic(new ClientRepository(), new ClientMapper()));
+            container.Register<ICaseInformationBusinessLogic>(new CaseInformationBusinessLogic(
+                new CaseInformationRepository(), new CaseInformationMapper()));
+            container.Register<ICaseStatusBusinessLogic>(new CaseStatusBusinessLogic(new CaseStatusRepository(),
+                new CaseStatusMapper()));
+            container.Register<INotesBusinessLogic>(new NotesBusinessLogic(new NotesRepository(), new NotesMapper()));
+            container.Register<ICaseReferenceBusinessLogic>(new CaseReferenceBusinessLogic(new CaseReferenceRepository(),
+                new CaseReferenceMapper()));
+
             container.Register<ICaseBusinessLogic>(new CaseBusinessLogic(
-              new CaseRepository(),
-              new ClientRepository(),
-              new CaseInformationRepository(),
-              new CaseStatusRepository(),
-              new CaseReferenceRepository(),
-              new NotesRepository(),
-              new CaseInformationMapper(),
-              new CaseStatusMapper(),
-              new ClientMapper(),
-              new NotesMapper(),
-              new CaseReferenceMapper()
-              )
-              );
-
-
+                new ClientBusinessLogic(new ClientRepository(), new ClientMapper()),
+                new CaseInformationBusinessLogic(new CaseInformationRepository(), new CaseInformationMapper()),
+                new CaseStatusBusinessLogic(new CaseStatusRepository(), new CaseStatusMapper()),
+                new NotesBusinessLogic(new NotesRepository(), new NotesMapper()),
+                new CaseReferenceBusinessLogic(new CaseReferenceRepository(), new CaseReferenceMapper()),
+                new CaseRepository()
+                ));
 
             Plugins.Add(new CorsFeature());
             RequestFilters.Add((httpReq, httpRes, requestDto) =>

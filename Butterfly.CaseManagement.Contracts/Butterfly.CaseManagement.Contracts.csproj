@@ -78,6 +78,7 @@
     <Compile Include="Dto\NotesDto.cs" />
     <Compile Include="EndPoints\CreateCase.cs" />
     <Compile Include="EndPoints\DeleteCaseById.cs" />
+    <Compile Include="EndPoints\EditCase.cs" />
     <Compile Include="EndPoints\GetAllCases.cs" />
     <Compile Include="EndPoints\GetCaseById.cs" />
     <Compile Include="Enums\CaseReferenceType.cs" />
@@ -86,6 +87,11 @@
     <Compile Include="Enums\IdentifierType.cs" />
     <Compile Include="Enums\PriorityType.cs" />
     <Compile Include="Interfaces\ICaseBusinessLogic.cs" />
+    <Compile Include="Interfaces\ICaseInformationBusinessLogic.cs" />
+    <Compile Include="Interfaces\ICaseReferenceBusinessLogic.cs" />
+    <Compile Include="Interfaces\ICaseStatusBusinessLogic.cs" />
+    <Compile Include="Interfaces\INotesBusinessLogic.cs" />
+    <Compile Include="Interfaces\IClientBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\CaseInformationValidator.cs" />
     <Compile Include="Validators\ClientValidator.cs" />

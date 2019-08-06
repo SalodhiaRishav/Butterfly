@@ -83,6 +83,11 @@
     <Compile Include="Repository\Interfaces\INotesRepository.cs" />
     <Compile Include="Repository\Interfaces\IRepository.cs" />
     <Compile Include="Services\CaseBusinessLogic.cs" />
+    <Compile Include="Services\CaseInformationBusinessLogic.cs" />
+    <Compile Include="Services\CaseReferenceBusinessLogic.cs" />
+    <Compile Include="Services\CaseStatusBusinessLogic.cs" />
+    <Compile Include="Services\NotesBusinessLogic.cs" />
+    <Compile Include="Services\ClientBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Butterfly.CaseManagement.Contracts\Butterfly.CaseManagement.Contracts.csproj">
