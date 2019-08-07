@@ -58,9 +58,8 @@ export default {
     })
   },
   data() {
-    return {
-      allCases:[],
-      openCases: [],
+    return {      
+      declarations: [],
       currentPage: 1,
       perPage: 5,
       fields: [
@@ -113,23 +112,22 @@ export default {
   methods:{
     someFunction:function(row)
     {
-      const foundCase = this.allCases.find(function(element) { 
-                return element.id === row.caseId; 
-            });
-            if(foundCase!==null)
-            {
-              this.$store.dispatch("setCaseToEdit",foundCase);
-            }
-            this.$router.push('/editcase');
+            console.log(row);
+            // if(foundCase!==null)
+            // {
+            //   this.$store.dispatch("setCaseToEdit",foundCase);
+            // }
+            this.$router.push({path:`/editdeclaration/${row.ID}`});
 
     },
       getAllCases:function(){
        return new Promise((resolve, reject)=> {
-          const url= "https://localhost:44313/casemanagement"
+          const url= "https://localhost:44313/getalldeclaration"
           axios.get(url)
           .then((response)=>{
             if(response.data.success===true)
             {
+            console.log("declaration: ",response.data.data) 
              resolve(response.data.data)
             }
             else
