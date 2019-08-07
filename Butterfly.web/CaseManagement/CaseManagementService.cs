@@ -130,6 +130,7 @@
                 if(caseDtos==null)
                 {
                     operationResponse.OnError("No Case found", null);
+                    return operationResponse;
                 }
                 operationResponse.OnSuccess(caseDtos, "Fetched successfully");
                 return operationResponse;

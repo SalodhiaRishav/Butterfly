@@ -10,7 +10,7 @@ namespace Butterfly.web.CommonResponse
     {
         public String Message { get; set; }
         public T Data { get; set; }
-        public List<String> Error { get; set; }
+        public List<string> Error { get; set; }
 
         public bool Success { get; set; }
 

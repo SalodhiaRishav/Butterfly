@@ -5,6 +5,7 @@ import temp from '../Declaration/temp.vue';
 import AddNewCase from "./../CaseManagement/AddNewCase.vue";
 import EditCase from "./../CaseManagement/EditCase.vue";
 import OpenCases from "./../CaseManagement/OpenCases.vue";
+import DeclarationDashboard from './../Declaration/DeclarationDashboard.vue';
 
 Vue.use(Router);
 
@@ -15,6 +16,11 @@ const router = new Router({
     name: 'DeclarationForm',
     component: DeclarationForm,
     },
+    {
+      path: '/declarationdashboard',
+      name: 'DeclarationDashboard',
+      component: DeclarationDashboard,
+      },
     {
       path: '/newcase',
       name: 'Case',
