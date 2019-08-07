@@ -46,7 +46,7 @@ export default {
             openCase.push(obj);
           }
           this.openCases = openCase;
-          this.totalRows=this.openCases.length;
+          this.totalRows = this.openCases.length;
         }
       })
       .catch(error => {
@@ -58,8 +58,8 @@ export default {
       allCases: [],
       openCases: [],
       currentPage: 1,
-      perPage:3,
-      totalRows:0,
+      perPage: 3,
+      totalRows: 0,
       fields: [
         {
           key: "caseId",

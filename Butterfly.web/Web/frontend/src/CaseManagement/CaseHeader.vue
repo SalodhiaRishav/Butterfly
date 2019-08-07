@@ -7,7 +7,7 @@
       <b-col class="leftBorder">
         <div class="field">
           <div class="fieldName">Case ID</div>
-          <div class="fieldAnswer">{{caseIdentifier}}</div>
+          <div class="fieldAnswer">{{ caseIdentifier }}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
@@ -80,8 +80,8 @@ export default {
         .post("https://localhost:44313/casemanagement", { caseDto: caseDto })
         .then(res => {
           if (res.data.success === true) {
-            this.caseIdentifier=res.data.data.id;
-            this.createdDate=this.convertDate(res.data.data.createdOn);
+            this.caseIdentifier = res.data.data.id;
+            this.createdDate = this.convertDate(res.data.data.createdOn);
             this.dismissCountDown = 5;
             this.alertMessage = res.data.message;
             this.alertVariant = "success";
