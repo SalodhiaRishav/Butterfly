@@ -28,11 +28,11 @@ namespace Butterfly.Declarations.Application.Services
             }
         }
 
-        public IEnumerable<DropDownDto> GetDropDownItems()
+        public IEnumerable<DropDownDto> GetDropDownItems(String listType)
         {
             try
             {
-                return dropDownDal.GetAllDropDownItems();
+                return dropDownDal.GetAllDropDownItems(listType);
             }
             catch (Exception)
             {

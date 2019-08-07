@@ -43,19 +43,19 @@ namespace Butterfly.Declarations.Application.Repository
            
         }
 
-        public IEnumerable<DropDownDto> GetAllDropDownItems()
+        public IEnumerable<DropDownDto> GetAllDropDownItems(String listType)
         {
             IEnumerable<DropDownDto> dropDownList;
             try
             {
                 using (var context = new ButterflyContext())
                 {
-                    var items = context.DropDown.ToList();
+                    var items = context.DropDown.Where(d => d.Type.Equals(listType)).ToList();
                     dropDownList = mapper.DropDownListToDtoList(items);
                 }
                 return dropDownList;
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 throw;
             }

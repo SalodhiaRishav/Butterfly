@@ -52,7 +52,7 @@ import ValueDetails from "./ValueDetails";
 
 export default {
   components: {
-       declarationheader,
+    declarationheader,
     DeclarationType,
     Consignor,
     Consignee,
@@ -63,56 +63,48 @@ export default {
   data() {
     return {
       declaration : {
-        declarationType:{
         messageName:"",
         declarationType1:"",
         declarationType2:"",
-        },
-        consignor:{
-          name:"",
-          address1:"",
-          address2:"",
-          postalCode:"",
-          city:"",
-          country:""
-        },
-        consignee:{
-          orgNumber:"",
-          name:"",
-          address1:"",
-          address2:"",
-          customCreditNumber:"",
-          defferedPayment:""
-        },
-        declarant:{
-          orgNumber:"",
-          name:"",
-          address1:"",
-          address2:"",
-          postalCode:"",
-          city:"",
-          country:"",
-          contactPerson:""
-        },
-        deliverySupport:{
-          termsOfDelivery:"",
-          deliveryPlace:"",
-          countryOfDispatch:"",
-          nationalityOfTransport1:"",
-          modeOfTransport:"",
-          locationOfGoods:"",
-          supervisingCustomOffice:"",
-        },
-        valueDetails:{
-          freight:"",
-          amount:"",
-          currency:"",
-          rate:"",
+        consignorName:"",
+        consignorAddress1:"",
+        consignorAdress2:"",
+        consignorPostalCode:"",
+        consignorCity:"",
+        consignorCountry:"",
+        consigneeOrganisationNumber:"",
+        consigneeName:"",
+        consigneeAddress1:"",
+        consigneeAddress2:"",
+        consigneePostalCode:"",
+        consigneeCity:"",
+        consigneeCountry:"",
+        customCreditNumber:"",
+        defferedPayment:"",
+        declarantOrganisationNumber:"",
+        declarantName:"",
+        declarantAddress1:"",
+        declarantAddress2:"",
+        declarantPostalCode:"",
+        declarantCity:"",
+        declarantCountry:"",
+        contactPerson:"",
+        termsOfDelivery:"",
+        deliveryPlace:"",
+        countryOfDispatch:"",
+        nationalityOfTransport:"",
+        modeOfTransport:"",
+        locationOfGoods:"",
+        supervisingCustomOffice:"",
+        freight:"",
+        amount:"",
+        currency:"",
+        rate:"",
         },
         reference:[],
       }
-    };
   },
+
   methods: {
     onSubmit(evt) {
       //   evt.preventDefault();

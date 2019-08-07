@@ -6,6 +6,6 @@
     [Route("/newdeclaration","POST")]
     public class AddDeclaration
     {
-        public DeclarationDto NewDeclaration { get; set; } 
+        public DeclarationDto declaration { get; set; } 
     }
 }

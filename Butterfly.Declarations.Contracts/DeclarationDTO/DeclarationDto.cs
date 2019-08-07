@@ -9,6 +9,9 @@ namespace Butterfly.Declarations.Contracts.DeclarationDTO
     public class DeclarationDto
     {
         public Guid DeclarationId { get; set; }
+        public String Country { get; set; } = "NO";
+        public String Status { get; set; } = "Processing";
+        public String Procedure { get; set; } = "Import";
         public String ConsigneeName { get; set; }
         public String ConsigneeOrganisationNumber { get; set; }
         public String ConsigneeAddress1 { get; set; }

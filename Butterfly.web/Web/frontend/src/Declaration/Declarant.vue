@@ -4,41 +4,43 @@
               <p class="block-heading">Declarant</p>
  
             <b-form-group label="*Org. number">
-              <b-form-input v-model="declaration.declarant.orgNumber" required></b-form-input>
+              <b-form-input v-model="declaration.declarantOrganisationNumber" required></b-form-input>
             </b-form-group>
            
           <b-form-group label="Name">
-               <b-form-input v-model="declaration.declarant.name" required></b-form-input>
+               <b-form-input v-model="declaration.declarantName" required></b-form-input>
             </b-form-group>
 
             <b-form-group label="Address 1:">
-              <b-form-input v-model="declaration.declarant.address1" required></b-form-input>
+              <b-form-input v-model="declaration.declarantAddress1" required></b-form-input>
             </b-form-group>
             <b-form-group label="Address 2:">
-              <b-form-input v-model="declaration.declarant.address2" :options="foods" required></b-form-input>
+              <b-form-input v-model="declaration.declarantAddress2"  required></b-form-input>
             </b-form-group>
              <b-row>
             <b-col> 
               *postal code
-             <b-form-input v-model="declaration.declarant.postalCode" 
+             <b-form-input v-model="declaration.declarantPostalCode" 
                  ></b-form-input>
                  </b-col>
                  <b-col>
               *City
-              <b-form-input v-model="declaration.declarant.city"></b-form-input>
+              <b-form-input v-model="declaration.declarantCity"></b-form-input>
                  </b-col>
                  <b-col>
                Country    
-              <b-form-select v-model="declaration.declarant.country" :options="dropDown" required></b-form-select>
+              <b-form-select v-model="declaration.declarantCountry" :options="Country" required></b-form-select>
                </b-col>  
             </b-row>
              <b-form-group label="*Contact person:">
-              <b-form-input v-model="declaration.declarant.contactPerson" required></b-form-input>
+              <b-form-input v-model="declaration.contactPerson" required></b-form-input>
             </b-form-group>    
           </b-form>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
  props:{
    declaration: Object,
@@ -51,11 +53,25 @@ data() {
       declarantAddress2:"",
       declarantPostalCode:"",
       declarantCity:"",
-      declarantCountry:"",
+      Country:[],
       declarantContactPerson:"",
       dropDown: [{ text: "<Please select>", value: null }, "1", "2", "3", "4"],
       show: true
     };
+  },
+  mounted(){
+      axios.get('https://localhost:44313/getdropdownitems/Country')
+            .then((response)=>{
+              if(response.data){
+                console.log(response.data.data)
+                  this.Country= response.data.data.map(x=>
+                    {
+                      return {value: x.key, text:x.value}
+                  })
+                }
+            }
+            )
+            .catch((error)=>console.log(error))
   },
   methods: {
     onSubmit(evt) {

@@ -23,7 +23,7 @@ namespace Butterfly.web.Declaration
             OperationResponse<bool> response = new OperationResponse<bool>();
             try
             {
-                var declaration = NewDeclaration.NewDeclaration;
+                var declaration = NewDeclaration.declaration;
                 var data = declarationBll.AddDeclaration(declaration);
                 response.OnSuccess(data, "Declaration Successfully added!");
                 return response;

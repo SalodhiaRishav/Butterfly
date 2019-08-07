@@ -8,9 +8,9 @@ namespace Butterfly.Declarations.Contracts.EndPoints
 {
     using ServiceStack.ServiceHost;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
-    [Route("/getdropdownitems","GET")]
+    [Route("/getdropdownitems/{ListType}","GET")]
     public class GetDropDownItems
     {
-
+        public String ListType { get; set; } 
     }
 }

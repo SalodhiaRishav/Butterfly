@@ -4,21 +4,21 @@
             
             <p class="block-heading">Value details</p>
             <b-form-group label="freight, outward NDK">
-              <b-form-input v-model="declaration.valueDetails.freight" required ></b-form-input>
+              <b-form-input v-model="declaration.freight" required ></b-form-input>
             </b-form-group>
             Total invoice amount <br>
             <b-row>
               <b-col>
               Amount<br>
-              <b-form-input v-model="declaration.valueDetails.amount" required></b-form-input>
+              <b-form-input v-model="declaration.amount" required></b-form-input>
             </b-col>
             <b-col>
             Cuurency <br>
-              <b-form-select v-model="declaration.valueDetails.currency" :options="dropDown" required></b-form-select>
+              <b-form-select v-model="declaration.currency" :options="dropDown" ></b-form-select>
             </b-col>
             <b-col>
               Rate <br> 
-              <b-form-select v-model="declaration.valueDetails.rate" :options="dropDown" required></b-form-select>
+              <b-form-input v-model="declaration.rate" :options="dropDown" required></b-form-input>
             </b-col>      
             </b-row>   
           </b-form> 
@@ -97,7 +97,7 @@ export default {
   methods: {
     deleteReference(index) {
       this.references.splice(index, 1);
-      this.declaration.reference = this.references;
+  //    this.declaration.reference = this.references;
     },
     resetReferenceForm: function() {
       this.referenceForm.type = null;
@@ -117,7 +117,7 @@ export default {
           reference: this.referenceForm.reference
         };
         this.references.push(newReferenceDetails);
-        this.declaration.reference = this.references;
+     //   this.declaration.reference = this.references;
         this.resetReferenceForm();
       }
     },

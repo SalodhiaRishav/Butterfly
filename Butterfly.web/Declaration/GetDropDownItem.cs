@@ -9,6 +9,7 @@ namespace Butterfly.web.Declaration
     using Butterfly.Declarations.Application.Services;
     using Butterfly.web.CommonResponse;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
+    using Butterfly.Declarations.Contracts.EndPoints;
     public class GetDropDownItem : Service
     {
         private readonly DropDownBll dropDownBll;
@@ -16,17 +17,20 @@ namespace Butterfly.web.Declaration
         {
             dropDownBll = new DropDownBll();
         }
-        public void GET()
+        public OperationResponse<IEnumerable<DropDownDto>> GET(GetDropDownItems ListType )
         {
             OperationResponse<IEnumerable<DropDownDto>> response = new OperationResponse<IEnumerable<DropDownDto>>();
             try
-            {               
-                var data = dropDownBll.GetDropDownItems();
+            {
+                var listType = ListType.ListType;           
+                var data = dropDownBll.GetDropDownItems(listType);
                 response.OnSuccess(data, "Drop Items Fetched Successfully");
+                return response;
             }
             catch(Exception e)
             {
                 response.OnException("Drop down items failed to fetched due internal server error");
+                return response;
             }
         }
     }

@@ -22,7 +22,7 @@
           <p> -- </p>  
       </b-col>
       <b-col>
-        <b-button style="float:right; margin-right:17px" pill :click="onSave()">Save</b-button>
+        <b-button style="float:right; margin-right:17px" pill @click="onSave()">Save</b-button>
           Declaration status <br>
           <p> -- </p>
           Customs response <br>
@@ -39,6 +39,7 @@
 
 <script>
 //import declarationform from './DeclarationForm';
+import axios from 'axios'
 
 export default {  
   props:{
@@ -46,7 +47,7 @@ export default {
   },
 data() {
     return {
-      
+      postBody:null,
     };
   },
   methods: {
@@ -62,7 +63,18 @@ data() {
     },
     onSave(){
       //add some code here
-      console.log(this.declaration);
+    console.log(this.declaration);
+    // this.postBody = Object.assign({},declaration : {
+    //   declaration : this.declaration
+    // })
+      axios.post('https://localhost:44313/newdeclaration',{declaration:this.declaration})
+          .then((response)=>{
+            console.log("Success");
+            console.log(response.data.data);
+          }
+
+          )
+     
       
     }
   }

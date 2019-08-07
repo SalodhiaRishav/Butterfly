@@ -28,6 +28,7 @@ namespace Butterfly.Declarations.Application.Repository
                 {
                     var declaration = mapper.DtoToDeclaration(declarationDto);
                     context.Declaration.Add(declaration);
+                    context.SaveChanges();
                     success = true;
                 }
                 return success;
