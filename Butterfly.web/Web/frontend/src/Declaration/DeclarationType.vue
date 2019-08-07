@@ -7,7 +7,7 @@
   >
     <p class="block-heading">Declaration type</p>
     <b-form-group label="*Message Name">
-      <b-form-input v-model="declaration.messageName" required></b-form-input>
+      <b-form-select v-model="declaration.messageName" :options="messageNameList" required></b-form-select>
     </b-form-group>
     <b-form-group label="Declaration Type(1:1):">
       <b-form-select
