@@ -112,6 +112,10 @@
             try
             {
                 entity.ModifiedOn = DateTime.Now;
+                if(entity.CreatedOn ==  DateTime.MinValue)
+                {
+                    entity.CreatedOn = DateTime.Now;
+                }
                 DbSet.AddOrUpdate(entity);
                 ButterflyContext.SaveChanges();
                 return entity;

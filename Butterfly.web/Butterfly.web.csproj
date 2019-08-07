@@ -24,7 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>3.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.5</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -14517,8 +14517,6 @@
     <Content Include="Web\frontend\src\CaseManagement\AssignedTo.vue" />
     <Content Include="Web\frontend\src\CaseManagement\CaseHeader.vue" />
     <Content Include="Web\frontend\src\CaseManagement\CaseInformation.vue" />
-    <Content Include="Web\frontend\src\CaseManagement\CaseManagement.vue" />
-    <Content Include="Web\frontend\src\CaseManagement\CaseManagementHeader.vue" />
     <Content Include="Web\frontend\src\CaseManagement\CaseStatus.vue" />
     <Content Include="Web\frontend\src\CaseManagement\Client.vue" />
     <Content Include="Web\frontend\src\CaseManagement\Notes.vue" />
@@ -14532,6 +14530,10 @@
     <Content Include="Web\frontend\src\Declaration\Consignee.vue" />
     <Content Include="Web\frontend\src\Declaration\Consignor.vue" />
     <Content Include="Web\frontend\src\Declaration\Declarant.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\CaseManagementBody.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\EditCase.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\AddNewCase.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\EditCaseHeader.vue" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Declarations\" />

@@ -117,6 +117,7 @@ export default {
       this.identifierTypes=response;
       this.identifierFetched=true;
     })
+    console.log(this.clientDetails);
   },
   data() {
     return {

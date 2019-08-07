@@ -157,7 +157,7 @@
                 caseDto.CaseInformation = this.CaseInformationBusinessLogic.EditCaseInformation(caseInformationDto);
                 caseDto.CaseStatus = this.CaseStatusBusinessLogic.EditCaseStatus(caseStatusDto);
                 caseDto.Notes = this.NotesBusinessLogic.EditNotes(notesDto);
-                caseDto.References = this.CaseReferenceBusinessLogic.EditCaseReferences(caseReferenceDtos);
+                caseDto.References = this.CaseReferenceBusinessLogic.EditCaseReferences(caseReferenceDtos,caseId);
                 return caseDto;
             }
             catch (Exception exception)

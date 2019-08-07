@@ -10,5 +10,7 @@
         CaseDto GetCaseById(Guid caseId);
         void DeleteCaseById(Guid caseId);
         List<CaseDto> GetAllCases();
+        CaseDto EditCase(Guid caseId, ClientDto clientDto, CaseInformationDto caseInformationDto, NotesDto notesDto, CaseStatusDto caseStatusDto, List<CaseReferenceDto> caseReferenceDtos);
+
     }
 }

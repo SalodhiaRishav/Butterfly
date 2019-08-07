@@ -6,7 +6,7 @@
     <b-col class="leftBorder">
       <div class="field">
         <div class="fieldName">Case ID</div>
-        <div class="fieldAnswer">{{ clientIdentifier }}</div>
+        <div class="fieldAnswer">{{ caseId }}</div>
       </div>
     </b-col>
     <b-col class="leftBorder">
@@ -26,7 +26,7 @@
       </div>
     </b-col>
     <b-col>
-      <button @click="submitAll">Submit</button>
+      <button @click="EditCase">Edit</button>
     </b-col>
   </b-row>
 </template>
@@ -35,15 +35,21 @@
 import axios from 'axios'
 export default {
   methods: {
-    submitAll() {
+    EditCase() {
+     
+       
   const caseDto={
-           client:this.$store.getters.clientDetails,
+        id:this.$store.getters.caseToEdit.id,
+          client:this.$store.getters.clientDetails,
            caseStatus:this.$store.getters.statusForm,
            references: this.$store.getters.references,
             caseInformation:this.$store.getters.caseInformation,
-            notes: this.$store.getters.notesForm
-  }
-         axios.post('https://localhost:44313/casemanagement',{caseDto:caseDto})
+            notes: this.$store.getters.notesForm,
+            createdOn:this.$store.getters.caseToEdit.createdOn,
+            modifiedOn:this.$store.getters.caseToEdit.modifiedOn,
+      }
+      const url="https://localhost:44313/casemanagement";
+     axios.put(url,{caseDto:caseDto})
          .then((res)=>{
             console.log(res);
          })
@@ -53,8 +59,9 @@ export default {
     }
   },
   computed: {
-    clientIdentifier: function() {
-      return this.$store.getters.clientDetails.clientIdentifier;
+    
+    caseId: function() {
+      return this.$store.getters.caseInformation.caseId;
     },
     status: function() {
       return this.$store.getters.statusForm.status;
@@ -63,7 +70,7 @@ export default {
       return this.$store.getters.caseInformation.priority;
     },
     createdDate: function() {
-      return "29/07/2019";
+      return this.$store.getters.caseToEdit.createdOn;
     }
   }
 };

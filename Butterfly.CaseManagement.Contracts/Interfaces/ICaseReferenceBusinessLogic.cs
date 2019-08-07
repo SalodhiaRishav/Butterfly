@@ -9,6 +9,6 @@
         List<CaseReferenceDto> AddNewCaseReferences(List<CaseReferenceDto> caseReferenceDtos, Guid caseId);
         List<CaseReferenceDto> GetCaseReferencesByCaseId(Guid caseId);
         void DeleteCaseReferenceByCaseId(Guid caseId);
-        List<CaseReferenceDto> EditCaseReferences(List<CaseReferenceDto> caseReferenceDto);
+        List<CaseReferenceDto> EditCaseReferences(List<CaseReferenceDto> caseReferenceDto,Guid caseId);
     }
 }

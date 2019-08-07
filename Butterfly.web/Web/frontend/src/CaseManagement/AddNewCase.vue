@@ -12,7 +12,7 @@
       </div>
       <b-tabs card class="myMainBodyCard">
         <b-tab title="Header" active>
-          <appCaseManagement></appCaseManagement>
+          <appCaseManagementBody></appCaseManagementBody>
         </b-tab>
       </b-tabs>
     </b-card>
@@ -20,13 +20,13 @@
 </template>
 
 <script>
-import CaseManagement from "./CaseManagement.vue";
+import CaseManagementBody from "./CaseManagementBody.vue";
 import CaseHeader from "./CaseHeader.vue";
 
 export default {
   components: {
     appCaseHeader: CaseHeader,
-    appCaseManagement: CaseManagement
+    appCaseManagementBody: CaseManagementBody
   }
 };
 </script>

@@ -99,7 +99,12 @@ export default {
       const foundCase = this.allCases.find(function(element) { 
                 return element.id === row.caseId; 
             });
-            
+            if(foundCase!==null)
+            {
+              this.$store.dispatch("setCaseToEdit",foundCase);
+            }
+            this.$router.push('/editcase');
+
     },
       getAllCases:function(){
        return new Promise((resolve, reject)=> {

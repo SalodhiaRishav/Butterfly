@@ -81,16 +81,18 @@
             }
         }
 
-        public List<CaseReferenceDto> EditCaseReferences(List<CaseReferenceDto> caseReferenceDtos)
+        public List<CaseReferenceDto> EditCaseReferences(List<CaseReferenceDto> caseReferenceDtos,Guid caseId)
         {
             try
             {
+                this.DeleteCaseReferenceByCaseId(caseId);
                 if (caseReferenceDtos != null && caseReferenceDtos.Count != 0)
                 {
                     List<CaseReferenceDto> updatedCaseReferenceList = new List<CaseReferenceDto>();
                     foreach (CaseReferenceDto caseReferenceDto in caseReferenceDtos)
                     {
                         CaseReference caseReference = this.CaseReferenceMapper.DtoToModel(caseReferenceDto);
+                        caseReference.CaseId = caseId;
                         caseReference = this.CaseReferenceRepository.Update(caseReference);
                         updatedCaseReferenceList.Add(this.CaseReferenceMapper.ModelToDto(caseReference));
                     }

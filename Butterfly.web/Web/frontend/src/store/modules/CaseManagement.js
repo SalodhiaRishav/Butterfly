@@ -1,8 +1,13 @@
 const state = {
+  caseToEdit:null,
   caseInformation: {
+    id:"",
+    caseId:"",
     description: "",
     messageFromClient: "",
-    priority: null
+    priority: null,
+    createdOn:"",
+    modifiedOn:""
   },
   statusForm: {
     status: null
@@ -38,12 +43,29 @@ const getters = {
   },
   references: state => {
     return state.references;
+  },
+  caseToEdit:state=>{
+    return state.caseToEdit;
   }
 };
 
-const mutations = {};
+const mutations = {
+  setCaseToEdit: (state, caseToEdit) => {
+    state.caseToEdit = caseToEdit;
+    state.caseInformation=caseToEdit.caseInformation;
+    state.clientDetails=caseToEdit.client;
+    state.statusForm=caseToEdit.caseStatus;
+    state.references=caseToEdit.references;
+    state.notesForm=caseToEdit.notes;
 
-const actions = {};
+  }
+};
+
+const actions = {
+  setCaseToEdit: (context,caseToEdit) => {
+      context.commit("setCaseToEdit",caseToEdit)
+  }
+};
 
 export default {
   state,

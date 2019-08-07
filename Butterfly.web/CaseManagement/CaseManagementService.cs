@@ -140,6 +140,68 @@
                 return operationResponse;
             }
         }
+        public OperationResponse<CaseDto> Put(EditCase request)
+        {
+            OperationResponse<CaseDto> operationResponse = new OperationResponse<CaseDto>();
+
+            ClientValidator clientValidator = new ClientValidator();
+            CaseInformationValidator caseInformationValidator = new CaseInformationValidator();
+            NotesValidator notesValidator = new NotesValidator();
+
+            CaseInformationDto caseInformation = request.CaseDto.CaseInformation;
+            ClientDto client = request.CaseDto.Client;
+            NotesDto notes = request.CaseDto.Notes;
+            CaseStatusDto caseStatus = request.CaseDto.CaseStatus;
+            List<CaseReferenceDto> references = request.CaseDto.References;
+
+            ValidationResult validationResult = clientValidator.Validate(client);
+            if (!validationResult.IsValid)
+            {
+                List<string> errors = new List<string>();
+                foreach (var error in validationResult.Errors)
+                {
+                    errors.Add(error.ErrorMessage);
+                }
+                operationResponse.OnError("Invalid client data", errors);
+                return operationResponse;
+            }
+
+            validationResult = caseInformationValidator.Validate(caseInformation);
+            if (!validationResult.IsValid)
+            {
+                List<string> errors = new List<string>();
+                foreach (var error in validationResult.Errors)
+                {
+                    errors.Add(error.ErrorMessage);
+                }
+                operationResponse.OnError("Invalid case-information data", errors);
+                return operationResponse;
+            }
+
+            validationResult = notesValidator.Validate(notes);
+            if (!validationResult.IsValid)
+            {
+                List<string> errors = new List<string>();
+                foreach (var error in validationResult.Errors)
+                {
+                    errors.Add(error.ErrorMessage);
+                }
+                operationResponse.OnError("Invalid case-information data", errors);
+                return operationResponse;
+            }
+
+            try
+            {
+                CaseDto caseDto = this.CaseBusinessLogic.EditCase(client.CaseId,client, caseInformation, notes, caseStatus, references);
+                operationResponse.OnSuccess(caseDto, "Added successfully");
+                return operationResponse;
+            }
+            catch (Exception e)
+            {
+                operationResponse.OnException(e.Message);
+                return operationResponse;
+            }
+        }
 
     }
 }
