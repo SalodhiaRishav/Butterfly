@@ -15,7 +15,7 @@
       <b-col md="6" class="my-1">
         <b-pagination
           v-model="currentPage"
-          :total-rows="3"
+          :total-rows="totalRows"
           :per-page="perPage"
           class="my-0"
         ></b-pagination>
@@ -46,6 +46,7 @@ export default {
             openCase.push(obj);
           }
           this.openCases = openCase;
+          this.totalRows=this.openCases.length;
         }
       })
       .catch(error => {
@@ -57,7 +58,8 @@ export default {
       allCases: [],
       openCases: [],
       currentPage: 1,
-      perPage: 2,
+      perPage:3,
+      totalRows:0,
       fields: [
         {
           key: "caseId",
