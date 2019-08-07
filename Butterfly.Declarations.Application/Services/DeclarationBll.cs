@@ -51,5 +51,17 @@ namespace Butterfly.Declarations.Application.Services
                 throw;
             }
         }
+
+        public bool EditDeclaration(DeclarationDto declarationDto)
+        {
+            try
+            {
+                return declarationDal.EditDeclaration(declarationDto);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
     }
 }

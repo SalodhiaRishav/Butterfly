@@ -9,6 +9,7 @@ namespace Butterfly.web.Declaration
     using Butterfly.web.CommonResponse;
     using Butterfly.Declarations.Application.Services;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
+    using Butterfly.Declarations.Contracts.EndPoints;
     public class GetDeclarationByGuid : Service
     {
         private readonly DeclarationBll declarationBll;
@@ -17,11 +18,12 @@ namespace Butterfly.web.Declaration
             declarationBll = new DeclarationBll();
         }
 
-        public OperationResponse<DeclarationDto> GET(Guid id)
+        public OperationResponse<DeclarationDto> GET(Butterfly.Declarations.Contracts.EndPoints.GetDeclarationByGuid guid)
         {
             OperationResponse<DeclarationDto> response = new OperationResponse<DeclarationDto>();
             try
             {
+                var id = guid.guid;
                 var data = declarationBll.GetDeclarationById(id);
                 response.OnSuccess(data, "Declaration successfully fetched");
                 return response;

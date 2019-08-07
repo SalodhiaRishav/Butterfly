@@ -57,7 +57,6 @@ const mutations = {
     state.statusForm=caseToEdit.caseStatus;
     state.references=caseToEdit.references;
     state.notesForm=caseToEdit.notes;
-
   }
 };
 

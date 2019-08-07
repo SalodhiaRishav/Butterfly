@@ -42,33 +42,45 @@ export default {
       dropDown: [{ text: "<Please Select>", value: "" }, "1", "2", "3", "4"],
       show: true,
       declarationType1List: [],
-      declarationType2List: []
+      declarationType2List: [],
+      messageNameList: [],        
     };
   },
-
-  mounted() {
-    axios
-      .get("https://localhost:44313/getdropdownitems/DeclarationType1")
-      .then(response => {
-        if (response.data) {
-          console.log(response.data.data);
-          this.declarationType1List = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
-    axios
-      .get("https://localhost:44313/getdropdownitems/DeclarationType2")
-      .then(response => {
-        if (response.data) {
-          console.log(response.data.data);
-          this.declarationType2List = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+  
+  mounted(){
+      axios.get('https://localhost:44313/getdropdownitems/DeclarationType1')
+            .then((response)=>{
+              if(response.data){
+                console.log(response.data.data)
+                  this.declarationType1List= response.data.data.map(x=>{
+                    return {value: x.key, text:x.value}
+                  })
+                }
+            }
+            )
+            .catch((error)=>console.log(error))
+        axios.get('https://localhost:44313/getdropdownitems/DeclarationType2')
+            .then((response)=>{
+              if(response.data){
+                console.log(response.data.data)
+                  this.declarationType2List= response.data.data.map(x=>{
+                    return {value: x.key, text:x.value}
+                  })
+                }
+            }
+            )
+            .catch((error)=>console.log(error))
+            axios.get('https://localhost:44313/getdropdownitems/MessageName')
+            .then((response)=>{
+              if(response.data){
+                console.log(response.data.data)
+                  this.messageNameList= response.data.data.map(x=>{
+                    return {value: x.key, text: x.value}
+                  })
+                }
+            }
+            )
+            .catch((error)=>console.log(error))
   },
   methods: {
     onSubmit() {},

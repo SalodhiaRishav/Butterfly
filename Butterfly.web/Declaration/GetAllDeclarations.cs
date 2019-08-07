@@ -9,6 +9,7 @@ namespace Butterfly.web.Declaration
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Declarations.Application.Services;
     using ServiceStack.ServiceInterface;
+    using Butterfly.Declarations.Contracts.EndPoints;
 
     public class GetAllDeclarations : Service
     {
@@ -18,7 +19,7 @@ namespace Butterfly.web.Declaration
             declarationBll = new DeclarationBll();
         }
 
-        public OperationResponse<IEnumerable<DeclarationDto>> GET()
+        public OperationResponse<IEnumerable<DeclarationDto>> GET(GetAllDeclaration  Request)
         {
             OperationResponse<IEnumerable<DeclarationDto>> response = new OperationResponse<IEnumerable<DeclarationDto>>();
             try

@@ -5,7 +5,7 @@
         striped
         hover
         :fields="fields"
-        :items="openCases"
+        :items="declarations"
         :current-page="currentPage"
         :per-page="perPage"
         @row-clicked="someFunction"
@@ -25,90 +25,115 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  mounted() {
+  mounted(){
     this.getAllCases()
-      .then(response => {
-        let openCase = [];
-        this.allCases = response;
-        for (let i = 0; i < response.length; ++i) {
-          let obj = {
-            caseId: response[i].id,
-            createdDate: response[i].createdOn,
-            status: response[i].caseStatus.status,
-            description: response[i].caseInformation.description,
-            client: response[i].client.clientIdentifier,
-            priority: response[i].caseInformation.priority
-          };
-          openCase.push(obj);
-        }
-        this.openCases = openCase;
-      })
-      .catch(error => {});
+    .then((response)=>{
+      let declaration=[];
+     // this.allCases=response;
+      for(let i=0;i<response.length;++i)
+      {
+        let obj={
+          ID:response[i].declarationId,
+          createdDate:"",
+          status:response[i].status,
+          LRN: " ",
+          MRN: " ",
+          Country: response[i].country,
+          Procedure: response[i].procedure,
+          Type: response[i].messageName,
+          Status: "Processing",
+          CustomResponse:" ",
+          User: " ",
+          TaxationDate: " ",
+          }
+          declaration.push(obj);
+      }
+      this.declarations=declaration;
+    })
+    .catch((error)=>{
+      
+    })
   },
   data() {
     return {
-      allCases: [],
+      allCases:[],
       openCases: [],
       currentPage: 1,
-      perPage: 2,
+      perPage: 5,
       fields: [
         {
-          key: "caseId",
+          key: "ID",
           sortable: true
         },
         {
-          key: "createdDate",
+          key: "LRN",
           sortable: true
         },
         {
-          key: "status",
+          key: "MRN",
           sortable: true
         },
         {
-          key: "description",
+          key: "Country",
           sortable: true
         },
         {
-          key: "client",
+          key: "Procedure",
           sortable: true
         },
         {
-          key: "priority",
+          key: "Type",
           sortable: true
         },
         {
-          key: "references",
+          key: "Status",
           sortable: true
         },
         {
-          key: "notes",
+          key: "Custom Response",
+          sortable: true
+        },
+        {
+          key: "User",
+          sortable: true
+        },
+        {
+          key: "Creation Date",
+          sortable: true
+        },{
+          key: "Taxation date",
           sortable: true
         }
       ]
     };
   },
-  methods: {
-    someFunction: function(row) {
-      const foundCase = this.allCases.find(function(element) {
-        return element.id === row.caseId;
-      });
-      if (foundCase !== null) {
-        this.$store.dispatch("setCaseToEdit", foundCase);
-      }
-      this.$router.push("/editcase");
+  methods:{
+    someFunction:function(row)
+    {
+      const foundCase = this.allCases.find(function(element) { 
+                return element.id === row.caseId; 
+            });
+            if(foundCase!==null)
+            {
+              this.$store.dispatch("setCaseToEdit",foundCase);
+            }
+            this.$router.push('/editcase');
+
     },
-    getAllCases: function() {
-      return new Promise((resolve, reject) => {
-        const url = "https://localhost:44313/casemanagement";
-        axios
-          .get(url)
-          .then(response => {
-            if (response.data.success === true) {
-              resolve(response.data.data);
-            } else {
+      getAllCases:function(){
+       return new Promise((resolve, reject)=> {
+          const url= "https://localhost:44313/casemanagement"
+          axios.get(url)
+          .then((response)=>{
+            if(response.data.success===true)
+            {
+             resolve(response.data.data)
+            }
+            else
+            {
               resolve(null);
             }
           })

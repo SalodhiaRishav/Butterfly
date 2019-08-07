@@ -6,6 +6,7 @@ import AddNewCase from "./../CaseManagement/AddNewCase.vue";
 import EditCase from "./../CaseManagement/EditCase.vue";
 import OpenCases from "./../CaseManagement/OpenCases.vue";
 import DeclarationDashboard from './../Declaration/DeclarationDashboard.vue';
+import EditDeclaration from './../Declaration/editDeclaration.vue';
 
 Vue.use(Router);
 
@@ -21,6 +22,11 @@ const router = new Router({
       name: 'DeclarationDashboard',
       component: DeclarationDashboard,
       },
+      {
+        path: '/editdeclaration/:id',
+        name: 'EditDeclaration',
+        component: EditDeclaration,
+        },
     {
       path: '/newcase',
       name: 'Case',

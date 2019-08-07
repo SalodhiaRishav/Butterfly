@@ -9892,6 +9892,7 @@
     <Compile Include="CommonResponse\OperationResponse.cs" />
     <Compile Include="Declaration\AddDeclarationService.cs" />
     <Compile Include="Declaration\AddDropDownItemService.cs" />
+    <Compile Include="Declaration\EditDeclarationService.cs" />
     <Compile Include="Declaration\GetAllDeclarations.cs" />
     <Compile Include="Declaration\GetDeclarationByGuid.cs" />
     <Compile Include="Declaration\GetDropDownItem.cs" />

@@ -10,6 +10,8 @@ namespace Butterfly.Declarations.Application.Repository
     using Butterfly.Declarations.Application.Mapper;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Database.Context;
+    using System.Data.Entity.Migrations;
+
     public class DeclarationDal
     {
         private readonly DatabaseMapper mapper;
@@ -71,6 +73,28 @@ namespace Butterfly.Declarations.Application.Repository
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public bool EditDeclaration(DeclarationDto declarationDto)
+        {
+            bool response;
+            try
+            {
+                using (var _context = new ButterflyContext())
+                {
+                    //_context.Declaration.Log = s => { System.Diagnostics.Debug.WriteLine(s); };
+                    var declaration = mapper.DtoToDeclaration(declarationDto);
+                    _context.Declaration.AddOrUpdate(declaration);
+                    _context.SaveChanges();
+                    response = true;
+                }
+                return response;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
