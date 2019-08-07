@@ -8,7 +8,7 @@
         :items="openCases"
         :current-page="currentPage"
         :per-page="perPage"
-        @row-clicked="someFunction" 
+        @row-clicked="someFunction"
       ></b-table>
     </div>
     <b-row>
@@ -25,35 +25,36 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  mounted(){
+  mounted() {
     this.getAllCases()
-    .then((response)=>{
-      let openCase=[];
-      this.allCases=response;
-      for(let i=0;i<response.length;++i)
-      {
-        let obj={
-          caseId:response[i].id,
-          createdDate:response[i].createdOn,
-          status:response[i].caseStatus.status,
-          description:response[i].caseInformation.description,
-          client:response[i].client.clientIdentifier,
-          priority:response[i].caseInformation.priority
+      .then(response => {
+        if (response !== null) {
+          let openCase = [];
+          this.allCases = response;
+          for (let i = 0; i < response.length; ++i) {
+            let obj = {
+              caseId: response[i].id,
+              createdDate: response[i].createdOn,
+              status: response[i].caseStatus.status,
+              description: response[i].caseInformation.description,
+              client: response[i].client.clientIdentifier,
+              priority: response[i].caseInformation.priority
+            };
+            openCase.push(obj);
           }
-          openCase.push(obj);
-      }
-      this.openCases=openCase;
-    })
-    .catch((error)=>{
-      
-    })
+          this.openCases = openCase;
+        }
+      })
+      .catch(error => {
+        alert(error);
+      });
   },
   data() {
     return {
-      allCases:[],
+      allCases: [],
       openCases: [],
       currentPage: 1,
       perPage: 2,
@@ -89,41 +90,36 @@ export default {
         {
           key: "notes",
           sortable: true
-        },
+        }
       ]
     };
   },
-  methods:{
-    someFunction:function(row)
-    {
-      const foundCase = this.allCases.find(function(element) { 
-                return element.id === row.caseId; 
-            });
-            if(foundCase!==null)
-            {
-              this.$store.dispatch("setCaseToEdit",foundCase);
-            }
-            this.$router.push('/editcase');
-
+  methods: {
+    someFunction: function(row) {
+      const foundCase = this.allCases.find(function(element) {
+        return element.id === row.caseId;
+      });
+      if (foundCase !== null) {
+        this.$store.dispatch("setCaseToEdit", foundCase);
+      }
+      this.$router.push("/editcase");
     },
-      getAllCases:function(){
-       return new Promise((resolve, reject)=> {
-          const url= "https://localhost:44313/casemanagement"
-          axios.get(url)
-          .then((response)=>{
-            if(response.data.success===true)
-            {
-             resolve(response.data.data)
-            }
-            else
-            {
+    getAllCases: function() {
+      return new Promise((resolve, reject) => {
+        const url = "https://localhost:44313/casemanagement";
+        axios
+          .get(url)
+          .then(response => {
+            if (response.data.success === true) {
+              resolve(response.data.data);
+            } else {
               resolve(null);
             }
           })
-          .catch((error)=>{
+          .catch(error => {
             reject(error);
-          })
-       });
+          });
+      });
     }
   }
 };

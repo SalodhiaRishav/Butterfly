@@ -30,7 +30,6 @@
             <b-col col="5" class="pd-lf-0 pd-rt-27">
               <!-- Value Details -->
               <ValueDetails :declaration="declaration"></ValueDetails>
-            
             </b-col>
           </b-row>
         </div>
@@ -42,7 +41,7 @@
 <script>
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-import declarationheader from './header.vue';
+import declarationheader from "./header.vue";
 import DeclarationType from "./DeclarationType";
 import Consignor from "./Consignor";
 import Consignee from "./Consignee";
@@ -62,47 +61,47 @@ export default {
   },
   data() {
     return {
-      declaration : {
-        messageName:"",
-        declarationType1:"",
-        declarationType2:"",
-        consignorName:"",
-        consignorAddress1:"",
-        consignorAdress2:"",
-        consignorPostalCode:"",
-        consignorCity:"",
-        consignorCountry:"",
-        consigneeOrganisationNumber:"",
-        consigneeName:"",
-        consigneeAddress1:"",
-        consigneeAddress2:"",
-        consigneePostalCode:"",
-        consigneeCity:"",
-        consigneeCountry:"",
-        customCreditNumber:"",
-        defferedPayment:"",
-        declarantOrganisationNumber:"",
-        declarantName:"",
-        declarantAddress1:"",
-        declarantAddress2:"",
-        declarantPostalCode:"",
-        declarantCity:"",
-        declarantCountry:"",
-        contactPerson:"",
-        termsOfDelivery:"",
-        deliveryPlace:"",
-        countryOfDispatch:"",
-        nationalityOfTransport:"",
-        modeOfTransport:"",
-        locationOfGoods:"",
-        supervisingCustomOffice:"",
-        freight:"",
-        amount:"",
-        currency:"",
-        rate:"",
-        },
-        reference:[],
-      }
+      declaration: {
+        messageName: "",
+        declarationType1: "",
+        declarationType2: "",
+        consignorName: "",
+        consignorAddress1: "",
+        consignorAdress2: "",
+        consignorPostalCode: "",
+        consignorCity: "",
+        consignorCountry: "",
+        consigneeOrganisationNumber: "",
+        consigneeName: "",
+        consigneeAddress1: "",
+        consigneeAddress2: "",
+        consigneePostalCode: "",
+        consigneeCity: "",
+        consigneeCountry: "",
+        customCreditNumber: "",
+        defferedPayment: "",
+        declarantOrganisationNumber: "",
+        declarantName: "",
+        declarantAddress1: "",
+        declarantAddress2: "",
+        declarantPostalCode: "",
+        declarantCity: "",
+        declarantCountry: "",
+        contactPerson: "",
+        termsOfDelivery: "",
+        deliveryPlace: "",
+        countryOfDispatch: "",
+        nationalityOfTransport: "",
+        modeOfTransport: "",
+        locationOfGoods: "",
+        supervisingCustomOffice: "",
+        freight: "",
+        amount: "",
+        currency: "",
+        rate: ""
+      },
+      reference: []
+    };
   },
 
   methods: {

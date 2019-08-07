@@ -1,91 +1,114 @@
 <template>
-     <b-form style="padding:10px; background:#F2F2F2 ;" @submit="onSubmit" @reset="onReset" v-if="show">             
-            <p class="block-heading">Consignee</p>
-             
-            <b-form-group label="Org. number:">
-              <b-form-input v-model="declaration.consigneeOrganisationNumber" required></b-form-input>
-            </b-form-group>
-      
-             <b-form-group label="Name">
-              <b-form-input v-model="declaration.consigneeName" required></b-form-input>
-            </b-form-group>
+  <b-form
+    style="padding:10px; background:#F2F2F2 ;"
+    @submit="onSubmit"
+    @reset="onReset"
+    v-if="show"
+  >
+    <p class="block-heading">Consignee</p>
 
-             <b-form-group label="Address 1">
-              <b-form-input v-model="declaration.consigneeAddress1" required></b-form-input>
-            </b-form-group>
+    <b-form-group label="Org. number:">
+      <b-form-input
+        v-model="declaration.consigneeOrganisationNumber"
+        required
+      ></b-form-input>
+    </b-form-group>
 
-            <b-form-group label="Address 2">
-              <b-form-input v-model="declaration.consigneeAddress2" required></b-form-input>
-            </b-form-group>
-             <b-row>
-              <b-col>
-                *postal code
-              <b-form-input v-model="declaration.consigneePostalCode"></b-form-input>
-              </b-col>
-            <b-col>
-            *City
-            <b-form-input v-model="declaration.consigneeCity"></b-form-input>
-          </b-col>
-          <b-col>
-          Country
-          <b-form-select v-model="declaration.consigneeCountry" :options="countryList" required></b-form-select>
-        </b-col>
-             </b-row>
-            <b-form-group label="Customs credit number(48)">
-              <b-form-input v-model="declaration.customCreditNumber" required></b-form-input>
-            </b-form-group>
+    <b-form-group label="Name">
+      <b-form-input v-model="declaration.consigneeName" required></b-form-input>
+    </b-form-group>
 
-             <b-form-group label="Deffered payment(48)">
-              <b-form-select v-model="declaration.defferedPayment" :options="defferedPayment" required></b-form-select>
-            </b-form-group>          
-      </b-form>
+    <b-form-group label="Address 1">
+      <b-form-input
+        v-model="declaration.consigneeAddress1"
+        required
+      ></b-form-input>
+    </b-form-group>
+
+    <b-form-group label="Address 2">
+      <b-form-input
+        v-model="declaration.consigneeAddress2"
+        required
+      ></b-form-input>
+    </b-form-group>
+    <b-row>
+      <b-col>
+        *postal code
+        <b-form-input v-model="declaration.consigneePostalCode"></b-form-input>
+      </b-col>
+      <b-col>
+        *City
+        <b-form-input v-model="declaration.consigneeCity"></b-form-input>
+      </b-col>
+      <b-col>
+        Country
+        <b-form-select
+          v-model="declaration.consigneeCountry"
+          :options="countryList"
+          required
+        ></b-form-select>
+      </b-col>
+    </b-row>
+    <b-form-group label="Customs credit number(48)">
+      <b-form-input
+        v-model="declaration.customCreditNumber"
+        required
+      ></b-form-input>
+    </b-form-group>
+
+    <b-form-group label="Deffered payment(48)">
+      <b-form-select
+        v-model="declaration.defferedPayment"
+        :options="defferedPayment"
+        required
+      ></b-form-select>
+    </b-form-group>
+  </b-form>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
- props:{
-   declaration: Object,
- }, 
-data() {
+  props: {
+    declaration: Object
+  },
+  data() {
     return {
-      OrgNum:"",
-      consigneeName:"",
-      consigneeAddress1:"",
-      consigneeAddress2:"",
-      customsCreditNumber:"",
-      defferedPayment:[],
+      OrgNum: "",
+      consigneeName: "",
+      consigneeAddress1: "",
+      consigneeAddress2: "",
+      customsCreditNumber: "",
+      defferedPayment: [],
       dropDown: [{ text: "<Please select>", value: null }, "1", "2", "3", "4"],
       show: true,
-      countryList:[]
+      countryList: []
     };
   },
-  mounted(){
-        axios.get('https://localhost:44313/getdropdownitems/DefferedPayment')
-            .then((response)=>{
-              if(response.data){
-                console.log(response.data.data)
-                  this.defferedPayment= response.data.data.map(x=>
-                    {
-                      return {text:x.value}
-                  })
-                }
-            }
-            )
-            .catch((error)=>console.log(error))
-            axios.get('https://localhost:44313/getdropdownitems/Country')
-            .then((response)=>{
-              if(response.data){
-                console.log(response.data.data)
-                  this.countryList= response.data.data.map(x=>
-                    {
-                      return {text:x.value}
-                  })
-                }
-            }
-            )
-            .catch((error)=>console.log(error))
+  mounted() {
+    axios
+      .get("https://localhost:44313/getdropdownitems/DefferedPayment")
+      .then(response => {
+        if (response.data) {
+          console.log(response.data.data);
+          this.defferedPayment = response.data.data.map(x => {
+            return { text: x.value };
+          });
+        }
+      })
+      .catch(error => console.log(error));
+    axios
+      .get("https://localhost:44313/getdropdownitems/Country")
+      .then(response => {
+        if (response.data) {
+          console.log(response.data.data);
+          this.countryList = response.data.data.map(x => {
+            return { text: x.value };
+          });
+        }
+      })
+      .catch(error => console.log(error));
   },
   methods: {
     onSubmit(evt) {
@@ -94,17 +117,17 @@ data() {
       //some code here
     },
     onReset(evt) {
-     //add some code here
+      //add some code here
     }
   }
-}
+};
 </script>
 
 <style>
 .block-heading {
   margin: -10px -10px 0px -10px;
   color: white;
-  background: #929397 ;
+  background: #929397;
   padding: 3px;
 }
 .pd-rt-0 {

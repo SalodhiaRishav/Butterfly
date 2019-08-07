@@ -17,17 +17,17 @@
           <b-card-body class="componentCard">
             <b-form>
               <div v-if="identifierFetched">
-              <b-form-group
-                id="clientIdentifier"
-                label="Client Identifier"
-                label-for="clientIdentifierInput"
-              >
-                <b-form-input
-                  id="clientIdentifierInput"
-                  v-model="clientDetails.clientIdentifier"
-                  required
-                ></b-form-input>
-              </b-form-group>
+                <b-form-group
+                  id="clientIdentifier"
+                  label="Client Identifier"
+                  label-for="clientIdentifierInput"
+                >
+                  <b-form-input
+                    id="clientIdentifierInput"
+                    v-model="clientDetails.clientIdentifier"
+                    required
+                  ></b-form-input>
+                </b-form-group>
               </div>
               <b-form-group
                 id="identifierType"
@@ -68,11 +68,7 @@
                   required
                 ></b-form-input>
               </b-form-group>
-              <b-form-group
-                id="city"
-                label="City"
-                label-for="cityInput"
-              >
+              <b-form-group id="city" label="City" label-for="cityInput">
                 <b-form-input
                   id="cityInput"
                   v-model="clientDetails.city"
@@ -109,77 +105,70 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  mounted(){
+  mounted() {
     this.getIdentiferTypes()
-    .then((response)=>{
-      this.identifierTypes=response;
-      this.identifierFetched=true;
-    })
-    .catch(error=>{
-      console.log(error);
-    })
-     this.getCountries()
-    .then((response)=>{
-      let countriesObj=response;
-      let countries=[];
-      if(countriesObj!==null)
-      {
-        for(let i = 0 ; i<response.length; ++i)
-        {
+      .then(response => {
+        this.identifierTypes = response;
+        this.identifierFetched = true;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    this.getCountries().then(response => {
+      let countriesObj = response;
+      let countries = [];
+      if (countriesObj !== null) {
+        for (let i = 0; i < response.length; ++i) {
           countries.push(countriesObj[i].value);
         }
-        this.countries=countries;
+        this.countries = countries;
       }
-    })
+    });
   },
   data() {
     return {
-      countries:[],
-      identifierFetched:false,
-      identifierTypes:[],
+      countries: [],
+      identifierFetched: false,
+      identifierTypes: [],
       clientDetails: this.$store.getters.clientDetails
     };
   },
-  methods:{
-    getCountries:function(){
-       return new Promise((resolve, reject)=> {
-          const url= "https://localhost:44313/getdropdownitems/countries"
-          axios.get(url)
-          .then((response)=>{
-            if(response.data.success===true)
-            {
-             resolve(response.data.data)
-            }
-            else
-            {
+  methods: {
+    getCountries: function() {
+      return new Promise((resolve, reject) => {
+        const url = "https://localhost:44313/getdropdownitems/countries";
+        axios
+          .get(url)
+          .then(response => {
+            if (response.data.success === true) {
+              resolve(response.data.data);
+            } else {
               resolve(null);
             }
           })
-          .catch((error)=>{
+          .catch(error => {
             reject(error);
-          })
-       });
+          });
+      });
     },
-    getIdentiferTypes:function(){
-       return new Promise((resolve, reject)=> {
-          const url= "https://localhost:44313/identifiertypes"
-          axios.get(url)
-          .then((response)=>{
-            if(response.data.success===true)
-            {
-             resolve(response.data.data)
-            }
-            else
-            {
+    getIdentiferTypes: function() {
+      return new Promise((resolve, reject) => {
+        const url = "https://localhost:44313/identifiertypes";
+        axios
+          .get(url)
+          .then(response => {
+            if (response.data.success === true) {
+              resolve(response.data.data);
+            } else {
               resolve(null);
             }
           })
-          .catch((error)=>{
+          .catch(error => {
             reject(error);
-          })
-       });
+          });
+      });
     }
   }
 };

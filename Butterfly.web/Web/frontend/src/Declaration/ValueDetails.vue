@@ -1,77 +1,86 @@
 <template>
-<div>
-     <b-form style="padding:10px; background:#F2F2F2;" @submit="onSubmit" @reset="onReset" v-if="show">
-            
-            <p class="block-heading">Value details</p>
-            <b-form-group label="freight, outward NDK">
-              <b-form-input v-model="declaration.freight" required ></b-form-input>
-            </b-form-group>
-            Total invoice amount <br>
-            <b-row>
-              <b-col>
-              Amount<br>
-              <b-form-input v-model="declaration.amount" required></b-form-input>
-            </b-col>
-            <b-col>
-            Cuurency <br>
-              <b-form-select v-model="declaration.currency" :options="dropDown" ></b-form-select>
-            </b-col>
-            <b-col>
-              Rate <br> 
-              <b-form-input v-model="declaration.rate" :options="dropDown" required></b-form-input>
-            </b-col>      
-            </b-row>   
-          </b-form> 
-          <div role="tablist" style="padding:10px; background:#F2F2F2;">
-            <p class="block-heading">References</p>
-          <b-table  hover :items="references" :fields="fields">
-            <template slot="#" slot-scope="data">
-              <button @click="deleteReference(data.index)">Delete</button>
-            </template>
-          </b-table>
-          <b-table  :fields="fields">
-            <template slot="HEAD_invoiceDate">
-              <b-form-input
-                id="invoiceDateInput"
-                type="date"
-                v-model="referenceForm.invoiceDate"
-              ></b-form-input>
-            </template>
-            <template slot="HEAD_type">
-              <b-form-select
-                id="referenceTypeInput"
-                :options="referenceTypes"
-                v-model="referenceForm.type"
-              ></b-form-select>
-            </template>
-            <template slot="HEAD_reference">
-              <b-form-input
-                id="referenceInput"
-                
-                v-model="referenceForm.reference"
-              ></b-form-input>
-            </template>
-            <template slot="HEAD_#">
-              {{&nbsp;}}
-            </template>
-          </b-table>
-          <b-button @click="addNewReference">Add</b-button>
-       
-  </div> 
-</div>        
+  <div>
+    <b-form
+      style="padding:10px; background:#F2F2F2;"
+      @submit="onSubmit"
+      @reset="onReset"
+      v-if="show"
+    >
+      <p class="block-heading">Value details</p>
+      <b-form-group label="freight, outward NDK">
+        <b-form-input v-model="declaration.freight" required></b-form-input>
+      </b-form-group>
+      Total invoice amount <br />
+      <b-row>
+        <b-col>
+          Amount<br />
+          <b-form-input v-model="declaration.amount" required></b-form-input>
+        </b-col>
+        <b-col>
+          Cuurency <br />
+          <b-form-select
+            v-model="declaration.currency"
+            :options="dropDown"
+          ></b-form-select>
+        </b-col>
+        <b-col>
+          Rate <br />
+          <b-form-input
+            v-model="declaration.rate"
+            :options="dropDown"
+            required
+          ></b-form-input>
+        </b-col>
+      </b-row>
+    </b-form>
+    <div role="tablist" style="padding:10px; background:#F2F2F2;">
+      <p class="block-heading">References</p>
+      <b-table hover :items="references" :fields="fields">
+        <template slot="#" slot-scope="data">
+          <button @click="deleteReference(data.index)">Delete</button>
+        </template>
+      </b-table>
+      <b-table :fields="fields">
+        <template slot="HEAD_invoiceDate">
+          <b-form-input
+            id="invoiceDateInput"
+            type="date"
+            v-model="referenceForm.invoiceDate"
+          ></b-form-input>
+        </template>
+        <template slot="HEAD_type">
+          <b-form-select
+            id="referenceTypeInput"
+            :options="referenceTypes"
+            v-model="referenceForm.type"
+          ></b-form-select>
+        </template>
+        <template slot="HEAD_reference">
+          <b-form-input
+            id="referenceInput"
+            v-model="referenceForm.reference"
+          ></b-form-input>
+        </template>
+        <template slot="HEAD_#">
+          {{&nbsp;}}
+        </template>
+      </b-table>
+      <b-button @click="addNewReference">Add</b-button>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  props:{
-    declaration:Object,
+  props: {
+    declaration: Object
   },
- data() {
+  data() {
     return {
-      frieght:"",
-      amount:"",
-      currency:"",
-      rate:"",
+      frieght: "",
+      amount: "",
+      currency: "",
+      rate: "",
       dropDown: [{ text: "<Please select>", value: null }, "1", "2", "3", "4"],
       show: true,
       showReferenceForm: false,
@@ -80,24 +89,19 @@ export default {
       referenceForm: {
         reference: "",
         invoiceDate: "",
-        type: null,
+        type: null
       }
     };
   },
-   computed: {
+  computed: {
     referenceTypes: () => {
-      return [
-        { text: "Select", value: null },
-        "1234",
-        "2345",
-        "34567"
-      ];
+      return [{ text: "Select", value: null }, "1234", "2345", "34567"];
     }
   },
   methods: {
     deleteReference(index) {
       this.references.splice(index, 1);
-  //    this.declaration.reference = this.references;
+      //    this.declaration.reference = this.references;
     },
     resetReferenceForm: function() {
       this.referenceForm.type = null;
@@ -117,7 +121,7 @@ export default {
           reference: this.referenceForm.reference
         };
         this.references.push(newReferenceDetails);
-     //   this.declaration.reference = this.references;
+        //   this.declaration.reference = this.references;
         this.resetReferenceForm();
       }
     },
@@ -129,17 +133,16 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-     
     }
   }
-}
+};
 </script>
 
 <style>
 .block-heading {
   margin: -10px -10px 0px -10px;
   color: white;
-  background: #929397 ;
+  background: #929397;
   padding: 3px;
 }
 .pd-rt-0 {

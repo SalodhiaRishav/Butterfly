@@ -36,19 +36,19 @@
                   v-model="caseInformation.messageFromClient"
                 ></b-form-textarea>
               </b-form-group>
-               <div v-if="priorityFetched">
-              <b-form-group
-                id="priority"
-                label="Priority"
-                label-for="priorityInput"
-              >
-                <b-form-select
-                  id="priorityInput"
-                  v-model="caseInformation.priority"
-                  :options="priorities"
-                ></b-form-select>
-              </b-form-group>
-                </div>
+              <div v-if="priorityFetched">
+                <b-form-group
+                  id="priority"
+                  label="Priority"
+                  label-for="priorityInput"
+                >
+                  <b-form-select
+                    id="priorityInput"
+                    v-model="caseInformation.priority"
+                    :options="priorities"
+                  ></b-form-select>
+                </b-form-group>
+              </div>
             </b-form>
           </b-card-body>
         </b-collapse>
@@ -58,42 +58,39 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  mounted(){
-    this.getPriorityTypes()
-    .then((response)=>{
-      this.priorities=response;
-      this.priorityFetched=true;
-    })
+  mounted() {
+    this.getPriorityTypes().then(response => {
+      this.priorities = response;
+      this.priorityFetched = true;
+    });
   },
   data() {
     return {
-      priorities:[],
-      priorityFetched:false,
+      priorities: [],
+      priorityFetched: false,
       caseInformation: this.$store.getters.caseInformation
     };
   },
-   methods:{
-     getPriorityTypes:function(){
-       return new Promise((resolve, reject)=> {
-          const url= "https://localhost:44313/prioritytypes"
-          axios.get(url)
-          .then((response)=>{
-            if(response.data.success===true)
-            {
-             resolve(response.data.data)
-            }
-            else
-            {
+  methods: {
+    getPriorityTypes: function() {
+      return new Promise((resolve, reject) => {
+        const url = "https://localhost:44313/prioritytypes";
+        axios
+          .get(url)
+          .then(response => {
+            if (response.data.success === true) {
+              resolve(response.data.data);
+            } else {
               resolve(null);
             }
           })
-          .catch((error)=>{
+          .catch(error => {
             reject(error);
-          })
-       });
+          });
+      });
     }
-  },
+  }
 };
 </script>

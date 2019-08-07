@@ -53,19 +53,18 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  mounted(){
-  this.getCaseReferenceTypes()
-    .then((response)=>{
-      this.referenceTypes=response;
-      this.referenceTypesFetched=true;
-    })
+  mounted() {
+    this.getCaseReferenceTypes().then(response => {
+      this.referenceTypes = response;
+      this.referenceTypesFetched = true;
+    });
   },
   data() {
     return {
-      referenceTypes:[],
-      referenceTypesFetched:false,
+      referenceTypes: [],
+      referenceTypesFetched: false,
       showReferenceForm: false,
       fields: ["type", "identity", "comment", "#"],
       references: this.$store.getters.references,
@@ -77,24 +76,22 @@ export default {
     };
   },
   methods: {
-     getCaseReferenceTypes:function(){
-       return new Promise((resolve, reject)=> {
-          const url= "https://localhost:44313/referencetypes"
-          axios.get(url)
-          .then((response)=>{
-            if(response.data.success===true)
-            {
-             resolve(response.data.data)
-            }
-            else
-            {
+    getCaseReferenceTypes: function() {
+      return new Promise((resolve, reject) => {
+        const url = "https://localhost:44313/referencetypes";
+        axios
+          .get(url)
+          .then(response => {
+            if (response.data.success === true) {
+              resolve(response.data.data);
+            } else {
               resolve(null);
             }
           })
-          .catch((error)=>{
+          .catch(error => {
             reject(error);
-          })
-       });
+          });
+      });
     },
     deleteReference(index) {
       this.references.splice(index, 1);
