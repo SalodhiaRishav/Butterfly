@@ -14535,6 +14535,7 @@
     <Content Include="Web\frontend\src\CaseManagement\EditCase.vue" />
     <Content Include="Web\frontend\src\CaseManagement\AddNewCase.vue" />
     <Content Include="Web\frontend\src\CaseManagement\EditCaseHeader.vue" />
+    <Content Include="Web\frontend\src\Declaration\DeclarationDashBoard.vue" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Declarations\" />

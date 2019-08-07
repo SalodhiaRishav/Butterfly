@@ -7,7 +7,7 @@
       <b-col class="leftBorder">
         <div class="field">
           <div class="fieldName">Case ID</div>
-          <div class="fieldAnswer">{{ clientIdentifier }}</div>
+          <div class="fieldAnswer">{{caseIdentifier}}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
@@ -53,13 +53,18 @@ import axios from "axios";
 export default {
   data() {
     return {
+      caseIdentifier: "",
       dismissCountDown: 0,
       showDismissibleAlert: false,
       alertVariant: "",
-      alertMessage: ""
+      alertMessage: "",
+      createdDate: ""
     };
   },
   methods: {
+    convertDate(someDate) {
+      return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
+    },
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },
@@ -75,6 +80,8 @@ export default {
         .post("https://localhost:44313/casemanagement", { caseDto: caseDto })
         .then(res => {
           if (res.data.success === true) {
+            this.caseIdentifier=res.data.data.id;
+            this.createdDate=this.convertDate(res.data.data.createdOn);
             this.dismissCountDown = 5;
             this.alertMessage = res.data.message;
             this.alertVariant = "success";
@@ -95,17 +102,11 @@ export default {
     }
   },
   computed: {
-    clientIdentifier: function() {
-      return this.$store.getters.clientDetails.clientIdentifier;
-    },
     status: function() {
       return this.$store.getters.statusForm.status;
     },
     priority: function() {
       return this.$store.getters.caseInformation.priority;
-    },
-    createdDate: function() {
-      return "29/07/2019";
     }
   }
 };

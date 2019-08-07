@@ -37,7 +37,7 @@ export default {
           for (let i = 0; i < response.length; ++i) {
             let obj = {
               caseId: response[i].id,
-              createdDate: response[i].createdOn,
+              createdDate: this.convertDate(response[i].createdOn),
               status: response[i].caseStatus.status,
               description: response[i].caseInformation.description,
               client: response[i].client.clientIdentifier,
@@ -97,6 +97,9 @@ export default {
     };
   },
   methods: {
+    convertDate(someDate) {
+      return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
+    },
     someFunction: function(row) {
       const foundCase = this.allCases.find(function(element) {
         return element.id === row.caseId;

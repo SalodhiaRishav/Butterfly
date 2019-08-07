@@ -60,6 +60,9 @@ export default {
     };
   },
   methods: {
+    convertDate(someDate) {
+      return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
+    },
     EditCase() {
       const caseDto = {
         id: this.$store.getters.caseToEdit.id,
@@ -106,7 +109,7 @@ export default {
       return this.$store.getters.caseInformation.priority;
     },
     createdDate: function() {
-      return this.$store.getters.caseToEdit.createdOn;
+      return this.convertDate(this.$store.getters.caseToEdit.createdOn);
     }
   }
 };
