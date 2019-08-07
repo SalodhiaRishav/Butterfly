@@ -1,4 +1,6 @@
 <template>
+<div>
+  
   <b-card-group columns>
     <appClient></appClient>
     <appCaseInformation></appCaseInformation>
@@ -6,6 +8,7 @@
     <appNotes></appNotes>
     <appCaseStatus></appCaseStatus>
   </b-card-group>
+  </div>
 </template>
 
 <script>
@@ -15,6 +18,7 @@ import CaseStatus from "./CaseStatus.vue";
 import CaseInformation from "./CaseInformation.vue";
 import Notes from "./Notes.vue";
 export default {
+   
   components: {
     appClient: Client,
     appCaseInformation: CaseInformation,

@@ -1,4 +1,5 @@
 <template>
+<div>
   <b-row>
     <b-col>
       <div class="heading">Manage Case</div>
@@ -29,12 +30,39 @@
       <button @click="submitAll">Submit</button>
     </b-col>
   </b-row>
+  <b-row>
+  <b-col>
+
+  </b-col>
+  <b-col>
+
+  </b-col>
+  <b-col>
+<b-alert :variant="alertVariant" :show="dismissCountDown" @dismissed="dismissCountDown=0"
+      @dismiss-count-down="countDownChanged" dismissible>
+      {{alertMessage}}
+    </b-alert>
+  </b-col>
+    
+  </b-row>
+</div>
+  
 </template>
 
 <script>
 import axios from 'axios'
 export default {
+   data() {
+    return {
+      dismissCountDown:0,
+      showDismissibleAlert:false,
+      alertVariant:'',
+      alertMessage:''
+    }},
   methods: {
+     countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
     submitAll() {
   const caseDto={
            client:this.$store.getters.clientDetails,
@@ -45,10 +73,26 @@ export default {
   }
          axios.post('https://localhost:44313/casemanagement',{caseDto:caseDto})
          .then((res)=>{
-            console.log(res);
+           if(res.data.success ===  true)
+           {
+              this.dismissCountDown = 5;
+             this.alertMessage=res.data.message;
+             this.alertVariant="success";
+             this.showDismissibleAlert=true;
+           }
+           else
+           {
+              this.dismissCountDown = 5;
+             this.alertMessage=res.data.message;
+             this.alertVariant="danger";
+             this.showDismissibleAlert=true;
+           }
          })
          .catch((error)=>{
-           console.log('in error'+error);
+              this.dismissCountDown = 5;
+            this.alertMessage=res.data.message;
+             this.alertVariant="danger";
+             this.showDismissibleAlert=true;
          })
     }
   },
