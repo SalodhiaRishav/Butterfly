@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  mounted(){
+  mounted() {
     this.getAllCases()
     .then((response)=>{
       let declaration=[];
