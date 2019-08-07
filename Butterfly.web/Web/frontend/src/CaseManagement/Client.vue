@@ -117,16 +117,51 @@ export default {
       this.identifierTypes=response;
       this.identifierFetched=true;
     })
-    console.log(this.clientDetails);
+    .catch(error=>{
+      console.log(error);
+    })
+     this.getCountries()
+    .then((response)=>{
+      let countriesObj=response;
+      let countries=[];
+      if(countriesObj!==null)
+      {
+        for(let i = 0 ; i<response.length; ++i)
+        {
+          countries.push(countriesObj[i].value);
+        }
+        this.countries=countries;
+      }
+    })
   },
   data() {
     return {
+      countries:[],
       identifierFetched:false,
       identifierTypes:[],
       clientDetails: this.$store.getters.clientDetails
     };
   },
   methods:{
+    getCountries:function(){
+       return new Promise((resolve, reject)=> {
+          const url= "https://localhost:44313/getdropdownitems/countries"
+          axios.get(url)
+          .then((response)=>{
+            if(response.data.success===true)
+            {
+             resolve(response.data.data)
+            }
+            else
+            {
+              resolve(null);
+            }
+          })
+          .catch((error)=>{
+            reject(error);
+          })
+       });
+    },
     getIdentiferTypes:function(){
        return new Promise((resolve, reject)=> {
           const url= "https://localhost:44313/identifiertypes"
@@ -146,19 +181,6 @@ export default {
           })
        });
     }
-  },
-  computed: {
-    countries: () => {
-      const countries = [
-        { text: "Select Country", value: null },
-        "India",
-        "Pakistan",
-        "Poland",
-        "Germany",
-        "USA"
-      ];
-      return countries;
-    },
   }
 };
 </script>

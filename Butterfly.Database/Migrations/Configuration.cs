@@ -42,8 +42,13 @@ namespace Butterfly.Database.Migrations
             DropDownList.Add(new DropDown { Type = "DeclarationType2", Key = "4", Value = "Ordinary Imports" });
             DropDownList.Add(new DropDown { Type = "DefferedPayment", Key = "M", Value = "Monthly" });
             DropDownList.Add(new DropDown { Type = "DefferedPayment", Key = "D", Value = "Daily" });
-            context.DropDown.AddRange(DropDownList);
-            context.SaveChanges();
+
+            foreach(var dropDownItem in DropDownList)
+            {
+                context.DropDown.AddOrUpdate(item=>item.Value,dropDownItem);
+                context.SaveChanges();
+            }
+           
 
 
 

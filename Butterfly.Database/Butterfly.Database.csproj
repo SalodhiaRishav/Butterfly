@@ -65,6 +65,10 @@
     <Compile Include="Migrations\201908020933021_Butterfly-version1.0.1.Designer.cs">
       <DependentUpon>201908020933021_Butterfly-version1.0.1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908070715056_updatedSeedAndClient.cs" />
+    <Compile Include="Migrations\201908070715056_updatedSeedAndClient.Designer.cs">
+      <DependentUpon>201908070715056_updatedSeedAndClient.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
@@ -101,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908020933021_Butterfly-version1.0.1.resx">
       <DependentUpon>201908020933021_Butterfly-version1.0.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908070715056_updatedSeedAndClient.resx">
+      <DependentUpon>201908070715056_updatedSeedAndClient.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
