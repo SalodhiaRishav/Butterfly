@@ -16,7 +16,7 @@ namespace Butterfly.Declarations.Application.Services
             declarationDal = new DeclarationDal();
         }
 
-        public bool AddDeclaration(DeclarationDto declarationDto)
+        public Guid AddDeclaration(DeclarationDto declarationDto)
         {
             try
             {
@@ -57,6 +57,30 @@ namespace Butterfly.Declarations.Application.Services
             try
             {
                 return declarationDal.EditDeclaration(declarationDto);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        public void AddReference(ReferenceDto reference)
+        {
+            try
+            {
+                declarationDal.AddReference(reference);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<ReferenceDto> GetReferenceData(Guid id)
+        {
+            try
+            {
+                return declarationDal.GetReferenceData(id);
             }
             catch(Exception)
             {

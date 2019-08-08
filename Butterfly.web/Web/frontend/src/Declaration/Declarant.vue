@@ -77,7 +77,7 @@ export default {
   },
   mounted() {
     axios
-      .get("https://localhost:44313/getdropdownitems/Country")
+      .get("https://localhost:44313/getdropdownitems/Countries")
       .then(response => {
         if (response.data) {
           console.log(response.data.data);

@@ -35,7 +35,7 @@
     </b-form>
     <div role="tablist" style="padding:10px; background:#F2F2F2;">
       <p class="block-heading">References</p>
-      <b-table hover :items="references" :fields="fields">
+      <b-table hover :items="referenceData.reference" :fields="fields">
         <template slot="#" slot-scope="data">
           <button @click="deleteReference(data.index)">Delete</button>
         </template>
@@ -73,7 +73,8 @@
 <script>
 export default {
   props: {
-    declaration: Object
+    declaration: Object,
+    referenceData: Object
   },
   data() {
     return {
@@ -95,13 +96,14 @@ export default {
   },
   computed: {
     referenceTypes: () => {
+      console.log(this.references)
       return [{ text: "Select", value: null }, "1234", "2345", "34567"];
-    }
+    },
   },
   methods: {
     deleteReference(index) {
       this.references.splice(index, 1);
-      //    this.declaration.reference = this.references;
+      this.referenceData.reference = this.references;
     },
     resetReferenceForm: function() {
       this.referenceForm.type = null;
@@ -121,7 +123,7 @@ export default {
           reference: this.referenceForm.reference
         };
         this.references.push(newReferenceDetails);
-        //   this.declaration.reference = this.references;
+        this.referenceData.reference = this.references;
         this.resetReferenceForm();
       }
     },

@@ -99,12 +99,12 @@ export default {
       })
       .catch(error => console.log(error));
     axios
-      .get("https://localhost:44313/getdropdownitems/Country")
+      .get("https://localhost:44313/getdropdownitems/Countries")
       .then(response => {
         if (response.data) {
           console.log(response.data.data);
           this.countryList = response.data.data.map(x => {
-            return { text: x.value };
+            return {value:x.key, text: x.value };
           });
         }
       })

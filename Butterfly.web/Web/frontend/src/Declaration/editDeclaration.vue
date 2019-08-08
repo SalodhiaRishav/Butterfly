@@ -29,7 +29,7 @@
             </b-col>
             <b-col col="5" class="pd-lf-0 pd-rt-27">
               <!-- Value Details -->
-              <ValueDetails :declaration="declaration"></ValueDetails>
+              <ValueDetails :declaration="declaration" :referenceData="referenceData"></ValueDetails>
             
             </b-col>
           </b-row>
@@ -66,8 +66,10 @@ export default {
       axios.get(`https://localhost:44313/getdeclarationbyguid/${guid}`)
             .then((response)=>{
                     if(response.data.data)
-                    console.log(response.data);
-                        this.declaration = response.data.data
+                  //  console.log(response.data.data);
+                        this.declaration = response.data.data.declaration;
+                        this.referenceData.reference = response.data.data.referenceData;
+                      //  console.log("refere",this.referenceData)
             })
             .catch(e=> console.log(e))
   },
@@ -113,7 +115,9 @@ export default {
         currency:"",
         rate:"",
         },
+       referenceData:{ 
         reference:[],
+       }
       }
   },
 

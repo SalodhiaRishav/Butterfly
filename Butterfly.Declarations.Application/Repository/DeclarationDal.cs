@@ -20,18 +20,19 @@ namespace Butterfly.Declarations.Application.Repository
             mapper = new DatabaseMapper();
         }
 
-        public bool AddDeclaration(DeclarationDto declarationDto)
+        public Guid AddDeclaration(DeclarationDto declarationDto)
         {
-            bool success;
+            Guid success;
             
             try
             {
                 using(var context = new ButterflyContext())
                 {
                     var declaration = mapper.DtoToDeclaration(declarationDto);
-                    context.Declaration.Add(declaration);
+                    var newDeclaration = context.Declaration.Add(declaration);
                     context.SaveChanges();
-                    success = true;
+
+                    success = newDeclaration.DeclarationId;
                 }
                 return success;
             }
@@ -95,6 +96,41 @@ namespace Butterfly.Declarations.Application.Repository
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public void AddReference(ReferenceDto reference)
+        {
+            try
+            {
+                using(var context = new ButterflyContext())
+                {
+                    var data = mapper.DtoToReferenceModel(reference);
+                    context.Reference.Add(data);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<ReferenceDto> GetReferenceData(Guid id)
+        {
+            IEnumerable<ReferenceDto> refData;
+            try
+            {
+                using(var context = new ButterflyContext())
+                {
+                    var data = context.Reference.Where(x => x.DeclarationId == id).ToList();
+                    refData = mapper.ReferenceListToDtoList(data);
+                }
+                return refData;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

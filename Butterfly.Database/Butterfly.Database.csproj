@@ -56,6 +56,7 @@
     <Compile Include="Configurations\CaseManagement\NotesConfigurations.cs" />
     <Compile Include="Configurations\Declaration\DeclarationConfig.cs" />
     <Compile Include="Configurations\Declaration\DropDownConfig.cs" />
+    <Compile Include="Configurations\Declaration\ReferenceConfig.cs" />
     <Compile Include="Context\ButterflyContext.cs" />
     <Compile Include="Migrations\201907310759157_Butterfly-version1.0.0.cs" />
     <Compile Include="Migrations\201907310759157_Butterfly-version1.0.0.Designer.cs">
@@ -69,6 +70,34 @@
     <Compile Include="Migrations\201908070715056_updatedSeedAndClient.Designer.cs">
       <DependentUpon>201908070715056_updatedSeedAndClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908080615482_addedreferencetable.cs" />
+    <Compile Include="Migrations\201908080615482_addedreferencetable.Designer.cs">
+      <DependentUpon>201908080615482_addedreferencetable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908080732195_addedreferencetable1.0.1.cs" />
+    <Compile Include="Migrations\201908080732195_addedreferencetable1.0.1.Designer.cs">
+      <DependentUpon>201908080732195_addedreferencetable1.0.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908080831576_addedreferencetable1.0.2.cs" />
+    <Compile Include="Migrations\201908080831576_addedreferencetable1.0.2.Designer.cs">
+      <DependentUpon>201908080831576_addedreferencetable1.0.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908080845162_addedreferencetable1.0.3.cs" />
+    <Compile Include="Migrations\201908080845162_addedreferencetable1.0.3.Designer.cs">
+      <DependentUpon>201908080845162_addedreferencetable1.0.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908080905309_addedreferencetable1.0.4.cs" />
+    <Compile Include="Migrations\201908080905309_addedreferencetable1.0.4.Designer.cs">
+      <DependentUpon>201908080905309_addedreferencetable1.0.4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908080924183_addedreferences.cs" />
+    <Compile Include="Migrations\201908080924183_addedreferences.Designer.cs">
+      <DependentUpon>201908080924183_addedreferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908080932260_addedreferencesagain.cs" />
+    <Compile Include="Migrations\201908080932260_addedreferencesagain.Designer.cs">
+      <DependentUpon>201908080932260_addedreferencesagain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
@@ -79,6 +108,7 @@
     <Compile Include="Models\CaseManagement\Notes.cs" />
     <Compile Include="Models\Declarations\Declaration.cs" />
     <Compile Include="Models\Declarations\DropDown.cs" />
+    <Compile Include="Models\Declarations\ReferenceTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -109,11 +139,36 @@
     <EmbeddedResource Include="Migrations\201908070715056_updatedSeedAndClient.resx">
       <DependentUpon>201908070715056_updatedSeedAndClient.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908080615482_addedreferencetable.resx">
+      <DependentUpon>201908080615482_addedreferencetable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908080732195_addedreferencetable1.0.1.resx">
+      <DependentUpon>201908080732195_addedreferencetable1.0.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908080831576_addedreferencetable1.0.2.resx">
+      <DependentUpon>201908080831576_addedreferencetable1.0.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908080845162_addedreferencetable1.0.3.resx">
+      <DependentUpon>201908080845162_addedreferencetable1.0.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908080905309_addedreferencetable1.0.4.resx">
+      <DependentUpon>201908080905309_addedreferencetable1.0.4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908080924183_addedreferences.resx">
+      <DependentUpon>201908080924183_addedreferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908080932260_addedreferencesagain.resx">
+      <DependentUpon>201908080932260_addedreferencesagain.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Butterfly.CaseManagement.Contracts\Butterfly.CaseManagement.Contracts.csproj">
       <Project>{6eb5062e-11d9-4b90-bb88-1d4c53e1d377}</Project>
       <Name>Butterfly.CaseManagement.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Declarations.Contracts\Butterfly.Declarations.Contracts.csproj">
+      <Project>{eed1b013-cc0c-47cb-9f2c-76eb92cd8dc7}</Project>
+      <Name>Butterfly.Declarations.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

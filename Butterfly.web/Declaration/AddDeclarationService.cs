@@ -5,7 +5,7 @@ using System.Web;
 namespace Butterfly.web.Declaration
 {
     using Butterfly.Declarations.Contracts.EndPoints;
-   // using Butterfly.Declarations.Contracts.DeclarationDTO;
+    using Butterfly.Declarations.Contracts.DeclarationDTO;
     using ServiceStack.ServiceInterface;
     using Butterfly.web.CommonResponse;
     using Butterfly.Declarations.Application.Services;
@@ -25,7 +25,17 @@ namespace Butterfly.web.Declaration
             {
                 var declaration = NewDeclaration.declaration;
                 var data = declarationBll.AddDeclaration(declaration);
-                response.OnSuccess(data, "Declaration Successfully added!");
+                var id = data;
+                ReferenceDto temp = new ReferenceDto();
+                for(int i = 0; i < NewDeclaration.referenceData.Length; i++)
+                {
+                    temp.DeclarationId = data;
+                    temp.InvoiceDate = NewDeclaration.referenceData[i].InvoiceDate;
+                    temp.Reference = NewDeclaration.referenceData[i].Reference;
+                    temp.Type = NewDeclaration.referenceData[i].Type;
+                    declarationBll.AddReference(temp);
+                }
+                response.OnSuccess(true, "Declaration Successfully added!");
                 return response;
             }
             catch(Exception e)

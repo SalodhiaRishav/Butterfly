@@ -7,6 +7,7 @@ namespace Butterfly.Database.Context
     using Butterfly.Database.Configurations.Declaration;
     using Butterfly.Database.Models.CaseManagement;
     using Butterfly.Database.Configurations.CaseManagement;
+
     public class ButterflyContext : DbContext
     {
         public ButterflyContext() : base("ButterflyContext")
@@ -24,6 +25,7 @@ namespace Butterfly.Database.Context
         public DbSet<CaseStatus> CaseStatus { get; set; }
         public DbSet<Client> Client { get; set; }
         public DbSet<Notes> Notes { get; set; }
+        public DbSet<ReferenceTable> Reference { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -36,7 +38,9 @@ namespace Butterfly.Database.Context
             modelBuilder.Configurations.Add(new CaseStatusConfigurations());
             modelBuilder.Configurations.Add(new ClientConfigurations());
             modelBuilder.Configurations.Add(new NotesConfigurations());
-;         
+            modelBuilder.Configurations.Add(new ReferenceConfig());
+
+
         }
 
     }

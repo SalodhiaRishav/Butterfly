@@ -65,8 +65,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeclarationDTO\DeclarationData.cs" />
     <Compile Include="DeclarationDTO\DeclarationDto.cs" />
     <Compile Include="DeclarationDTO\DropDownDto.cs" />
+    <Compile Include="DeclarationDTO\ReferenceDto.cs" />
     <Compile Include="EndPoints\AddDeclaration.cs" />
     <Compile Include="EndPoints\AddDropDownItem.cs" />
     <Compile Include="EndPoints\EditDeclaration.cs" />

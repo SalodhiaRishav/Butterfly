@@ -29,15 +29,16 @@ import axios from "axios";
 
 export default {
   mounted() {
-    this.getAllCases()
+    this.getAllDeclaration()
     .then((response)=>{
+        console.log(response[0].createdOn);
       let declaration=[];
      // this.allCases=response;
       for(let i=0;i<response.length;++i)
       {
         let obj={
           ID:response[i].declarationId,
-          createdDate:"",
+          createdOn:response[i].createdOn,
           status:response[i].status,
           LRN: " ",
           MRN: " ",
@@ -92,7 +93,7 @@ export default {
           sortable: true
         },
         {
-          key: "Custom Response",
+          key: "customResponse",
           sortable: true
         },
         {
@@ -100,10 +101,10 @@ export default {
           sortable: true
         },
         {
-          key: "Creation Date",
+          key: "createdOn",
           sortable: true
         },{
-          key: "Taxation date",
+          key: "taxationDate",
           sortable: true
         }
       ]
@@ -120,7 +121,7 @@ export default {
             this.$router.push({path:`/editdeclaration/${row.ID}`});
 
     },
-      getAllCases:function(){
+      getAllDeclaration:function(){
        return new Promise((resolve, reject)=> {
           const url= "https://localhost:44313/getalldeclaration"
           axios.get(url)

@@ -53,12 +53,12 @@ namespace Butterfly.Declarations.Contracts.DeclarationDTO
         public String LocationOfGoods { get; set; }
         public String SupervisingCustomOffice { get; set; }
         public String NatureOfTransaction { get; set; }
-        public String Reference { get; set; }
-        public DateTime InvoiceDate { get; set; }
-        public String Type { get; set; }
         public String Freight { get; set; }
         public String Amount { get; set; }
         public String Currency { get; set; }
         public String Rate { get; set; }
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+
+        public ICollection<ReferenceDto> References { get; set; }
     }
 }

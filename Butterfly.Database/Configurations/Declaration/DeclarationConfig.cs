@@ -38,9 +38,13 @@ namespace Butterfly.Database.Configurations.Declaration
                 .IsRequired();
             this.Property(d => d.ConsignorCountry)
                 .IsRequired();
-            this.Property(d => d.InvoiceDate)
+            
+            this.Property(d => d.CreatedOn)
                 .IsRequired()
                 .HasColumnType("datetime2");
+            this.HasMany<ReferenceTable>(d => d.References)
+                .WithRequired()
+                .HasForeignKey<Guid>(r => r.DeclarationId);
 
         }
 

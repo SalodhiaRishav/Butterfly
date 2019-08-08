@@ -18,13 +18,17 @@ namespace Butterfly.web.Declaration
             declarationBll = new DeclarationBll();
         }
 
-        public OperationResponse<DeclarationDto> GET(Butterfly.Declarations.Contracts.EndPoints.GetDeclarationByGuid guid)
+        public OperationResponse<DeclarationData> GET(Butterfly.Declarations.Contracts.EndPoints.GetDeclarationByGuid guid)
         {
-            OperationResponse<DeclarationDto> response = new OperationResponse<DeclarationDto>();
+            OperationResponse<DeclarationData> response = new OperationResponse<DeclarationData>();
             try
             {
                 var id = guid.guid;
-                var data = declarationBll.GetDeclarationById(id);
+                var declarationData = declarationBll.GetDeclarationById(id);
+                var referenceData = declarationBll.GetReferenceData(id);
+                DeclarationData data = new DeclarationData();
+                data.Declaration = declarationData;
+                data.ReferenceData = referenceData;
                 response.OnSuccess(data, "Declaration successfully fetched");
                 return response;
             }

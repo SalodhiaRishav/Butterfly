@@ -46,32 +46,24 @@ import axios from "axios";
 
 export default {
   props: {
-    declaration: Object
+    declaration: Object,
+    referenceData: Object
   },
-  data() {
-    return {
-      postBody: null
-    };
-  },
+  
   methods: {
-    onSubmit(evt) {
-      //   evt.preventDefault();
-      //   alert(JSON.stringify(this.form));
-      //some code here
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      // Reset our form values
-    },
     onSave() {
       //add some code here
-      console.log(this.declaration);
+     // console.log(this.declaration);
       // this.postBody = Object.assign({},declaration : {
       //   declaration : this.declaration
       // })
+      console.log(this.referenceData.reference);
+      debugger;
+      //todo: send reference table data
       axios
         .post("https://localhost:44313/newdeclaration", {
-          declaration: this.declaration
+          declaration: this.declaration,
+          referenceData: this.referenceData.reference
         })
         .then(response => {
           console.log("Success");

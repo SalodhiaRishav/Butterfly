@@ -51,5 +51,14 @@ namespace Butterfly.Declarations.Application.Mapper
         {
             return mapper.Map<IEnumerable<DeclarationDto>>(declaration);
         }
+
+        public IEnumerable<ReferenceDto> ReferenceListToDtoList(IEnumerable<ReferenceTable> reference)
+        {
+            return mapper.Map<IEnumerable<ReferenceDto>>(reference);
+        }
+        public ReferenceTable DtoToReferenceModel(ReferenceDto reference)
+        {
+            return mapper.Map<ReferenceTable>(reference);
+        }
     }
 }

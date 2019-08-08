@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace Butterfly.Database.Models.Declarations
 {
@@ -37,7 +37,6 @@ namespace Butterfly.Database.Models.Declarations
         public String ContactPerson { get; set; }
         public String MessageName { get; set; }
         public String DeclarationType1 { get; set; }
-
         public String DeclarationType2 { get; set; }
         public String TermsOfDelivery { get; set; }
         public String DeliveryPlace { get; set; }
@@ -47,12 +46,12 @@ namespace Butterfly.Database.Models.Declarations
         public String LocationOfGoods { get; set; }
         public String SupervisingCustomOffice { get; set; }
         public String NatureOfTransaction { get; set; }
-        public String Reference { get; set; }
-        public DateTime InvoiceDate { get; set; }
-        public String Type { get; set; }
         public String Freight { get; set; }
         public String Amount { get; set; }
         public String Currency { get; set; }
         public String Rate { get; set; }
+        public DateTime CreatedOn { get; set; }
+
+        public ICollection<ReferenceTable> References { get; set; }
     }
 }
