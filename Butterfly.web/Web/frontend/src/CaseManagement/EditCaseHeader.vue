@@ -60,6 +60,9 @@ export default {
     };
   },
   methods: {
+     countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
     convertDate(someDate) {
       return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
     },
