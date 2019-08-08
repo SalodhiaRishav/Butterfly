@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     public class CaseDto : BaseDto
     {
+        public int CaseId { get; set; }
         public ClientDto Client { get; set; }
         public CaseInformationDto CaseInformation { get; set; }
         public CaseStatusDto CaseStatus { get; set; }
