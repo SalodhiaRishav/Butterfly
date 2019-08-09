@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import DeclarationForm from '../Declaration/DeclarationForm.vue'; 
-import temp from '../Declaration/temp.vue';
 import AddNewCase from "./../CaseManagement/AddNewCase.vue";
 import EditCase from "./../CaseManagement/EditCase.vue";
 import OpenCases from "./../CaseManagement/OpenCases.vue";
 import DeclarationDashboard from './../Declaration/DeclarationDashboard.vue';
 import EditDeclaration from './../Declaration/editDeclaration.vue';
+import Dashboard from './../CommonComponent/Dashboard.vue';
+
 
 Vue.use(Router);
 
@@ -29,24 +30,19 @@ const router = new Router({
         },
     {
       path: '/newcase',
-      name: 'Case',
+      name: 'NewCase',
       component: AddNewCase,
     },
     {
-      path: '/opencases',
-      name: 'opencases',
-      component: OpenCases,
+      path: '/home',
+      name: 'Dashboard',
+      component: Dashboard,
     },
     {
       path: '/editcase',
-      name: 'Case',
+      name: 'EditCase',
       component: EditCase,
     },
-  {
-      path:'/temp',
-      name:'temp',
-      component: temp,
-  }
   ],
   mode: 'history',
 }
