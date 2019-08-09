@@ -41,6 +41,7 @@
                 CaseDto addedCaseDto = new CaseDto();
                 Case newCase = new Case();
                 Case addedCase = this.CaseRepository.Add(newCase);
+                addedCaseDto.CaseId = addedCase.CaseId;
                 addedCaseDto.Id = addedCase.Id;
                 addedCaseDto.ModifiedOn = addedCase.ModifiedOn;
                 addedCaseDto.CreatedOn = addedCase.CreatedOn;
@@ -68,6 +69,7 @@
                 {
                     return null;
                 }
+                caseDto.CaseId = caseList.First().CaseId;
                 caseDto.Id = caseList.First().Id;
                 caseDto.ModifiedOn = caseList.First().ModifiedOn;
                 caseDto.CreatedOn = caseList.First().CreatedOn;
@@ -150,6 +152,7 @@
                 Case @case = caseList.First();
                 @case = this.CaseRepository.Update(@case);
                 caseDto.Id = @case.Id;
+                caseDto.CaseId = @case.CaseId;
                 caseDto.ModifiedOn = @case.ModifiedOn;
                 caseDto.CreatedOn = @case.CreatedOn;
 
