@@ -9878,6 +9878,8 @@
     <Content Include="Web\frontend\src\assets\logo.png" />
     <Content Include="Web\frontend\src\CaseManagement\styles\CaseHeaderStyle.css" />
     <Content Include="Web\frontend\src\CaseManagement\styles\CaseManagementHeaderStyle.css" />
+    <Content Include="Web\frontend\src\CommonComponent\styles\DashboardStyle.css" />
+    <Content Include="Web\frontend\src\CommonComponent\styles\NavbarStyle.css" />
     <Content Include="Web\frontend\src\GlobalStyle.css" />
     <Content Include="Web\frontend\src\main.js" />
     <Content Include="Web\frontend\src\router\index.js" />
@@ -14537,6 +14539,8 @@
     <Content Include="Web\frontend\src\CaseManagement\AddNewCase.vue" />
     <Content Include="Web\frontend\src\CaseManagement\EditCaseHeader.vue" />
     <Content Include="Web\frontend\src\Declaration\DeclarationDashBoard.vue" />
+    <Content Include="Web\frontend\src\CommonComponent\Dashboard.vue" />
+    <Content Include="Web\frontend\src\CommonComponent\Navbar.vue" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Declarations\" />

@@ -3,7 +3,7 @@ namespace Butterfly.Database.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class caseIdAddition : DbMigration
+    public partial class somethingnew : DbMigration
     {
         public override void Up()
         {
