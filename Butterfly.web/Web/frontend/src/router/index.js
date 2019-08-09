@@ -3,11 +3,10 @@ import Router from 'vue-router';
 import DeclarationForm from '../Declaration/DeclarationForm.vue'; 
 import AddNewCase from "./../CaseManagement/AddNewCase.vue";
 import EditCase from "./../CaseManagement/EditCase.vue";
-import OpenCases from "./../CaseManagement/OpenCases.vue";
+import Dashboard from './../CommonComponent/Dashboard.vue';
 import DeclarationDashboard from './../Declaration/DeclarationDashboard.vue';
 import EditDeclaration from './../Declaration/editDeclaration.vue';
-import Dashboard from './../CommonComponent/Dashboard.vue';
-
+>>>>>>>>> Temporary merge branch 2
 
 Vue.use(Router);
 
