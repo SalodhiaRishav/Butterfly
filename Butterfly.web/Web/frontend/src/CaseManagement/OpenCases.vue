@@ -4,12 +4,22 @@
       <b-table
         striped
         hover
+        fixed
         :fields="fields"
         :items="openCases"
         :current-page="currentPage"
         :per-page="perPage"
         @row-clicked="someFunction"
-      ></b-table>
+      >
+      <span slot-scope="data" slot="status">
+        <appCaseStatusDropDown :defaultValue="data.item.caseStatus">
+        </appCaseStatusDropDown>
+      </span>
+       <span slot-scope="data" slot="priority">
+        <appCasePriorityDropDown :defaultValue="data.item.casePriority">
+        </appCasePriorityDropDown>
+      </span>
+     </b-table>
     </div>
     <b-row>
       <b-col md="6" class="my-1">
@@ -26,23 +36,44 @@
 
 <script>
 import axios from "axios";
+import CaseStatusDropDown from './CaseStatusDropDown.vue';
+import CasePriorityDropDown from './CasePriorityDropDown.vue';
+
 
 export default {
+  components:{
+    appCaseStatusDropDown:CaseStatusDropDown,
+    appCasePriorityDropDown:CasePriorityDropDown
+  },
   mounted() {
     this.getAllCases()
       .then(response => {
         if (response !== null) {
           let openCase = [];
+          
           this.allCases = response;
           for (let i = 0; i < response.length; ++i) {
+            let referencesString="";
+            
+            if(response[i].references)
+            {
+              referencesString=response[i].references[0].type;
+              for(let j=1;j<response[i].references.length;++j)
+            {
+              referencesString=referencesString+", "+response[i].references[j].type;
+            }
+            }
+            
             let obj = {
               caseId: "KGH-19-"+response[i].caseId,
               id:response[i].id,
               createdDate: this.convertDate(response[i].createdOn),
-              status: response[i].caseStatus.status,
+              caseStatus: response[i].caseStatus.status,
               description: response[i].caseInformation.description,
               client: response[i].client.clientIdentifier,
-              priority: response[i].caseInformation.priority
+              notes:response[i].notes.notesByCpa,
+              casePriority: response[i].caseInformation.priority,
+              references:referencesString
             };
             openCase.push(obj);
           }
