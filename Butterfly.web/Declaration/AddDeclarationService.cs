@@ -9,6 +9,8 @@ namespace Butterfly.web.Declaration
     using ServiceStack.ServiceInterface;
     using Butterfly.web.CommonResponse;
     using Butterfly.Declarations.Application.Services;
+    using Butterfly.Declarations.Contracts.Validation;
+    using FluentValidation.Results;
 
     public class AddDeclarationService : Service
     {
@@ -24,19 +26,34 @@ namespace Butterfly.web.Declaration
             try
             {
                 var declaration = NewDeclaration.declaration;
-                var data = declarationBll.AddDeclaration(declaration);
-                var id = data;
-                ReferenceDto temp = new ReferenceDto();
-                for(int i = 0; i < NewDeclaration.referenceData.Length; i++)
+                DeclarationValidator obj = new DeclarationValidator();
+                ValidationResult result = obj.Validate(declaration);
+                if (result.IsValid)
                 {
-                    temp.DeclarationId = data;
-                    temp.InvoiceDate = NewDeclaration.referenceData[i].InvoiceDate;
-                    temp.Reference = NewDeclaration.referenceData[i].Reference;
-                    temp.Type = NewDeclaration.referenceData[i].Type;
-                    declarationBll.AddReference(temp);
+                    var data = declarationBll.AddDeclaration(declaration);
+                    var id = data;
+                    ReferenceDto temp = new ReferenceDto();
+                    for (int i = 0; i < NewDeclaration.referenceData.Length; i++)
+                    {
+                        temp.DeclarationId = data;
+                        temp.InvoiceDate = NewDeclaration.referenceData[i].InvoiceDate;
+                        temp.Reference = NewDeclaration.referenceData[i].Reference;
+                        temp.Type = NewDeclaration.referenceData[i].Type;
+                        declarationBll.AddReference(temp);
+                    }
+                    response.OnSuccess(true, "Declaration Successfully added!");
+                    return response;
                 }
-                response.OnSuccess(true, "Declaration Successfully added!");
-                return response;
+                else
+                {
+                    List<string> error = new List<string>();
+                    foreach(var err in result.Errors)
+                    {
+                        error.Add(err.ErrorMessage);
+                    }
+                    response.OnError("One or more validations failed", error);
+                    return response;
+                }
             }
             catch(Exception e)
             {

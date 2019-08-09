@@ -38,7 +38,7 @@ export default {
       {
         let obj={
           ID:response[i].declarationId,
-          createdOn:response[i].createdOn,
+          createdOn:this.convertDate(response[i].createdOn),
           status:response[i].status,
           LRN: " ",
           MRN: " ",
@@ -111,6 +111,9 @@ export default {
     };
   },
   methods:{
+     convertDate(date){
+         return new Date(date.match(/\d+/)[0]*1).toString().substring(4,16);
+     }, 
     someFunction:function(row)
     {
             console.log(row);

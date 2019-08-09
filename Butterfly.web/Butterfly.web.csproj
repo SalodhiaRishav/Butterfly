@@ -14539,7 +14539,6 @@
     <Content Include="Web\frontend\src\Declaration\DeclarationDashBoard.vue" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Declarations\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
