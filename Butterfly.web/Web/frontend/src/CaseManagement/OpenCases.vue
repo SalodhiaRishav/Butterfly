@@ -36,7 +36,8 @@ export default {
           this.allCases = response;
           for (let i = 0; i < response.length; ++i) {
             let obj = {
-              caseId: response[i].id,
+              caseId: "KGH-19-"+response[i].caseId,
+              id:response[i].id,
               createdDate: this.convertDate(response[i].createdOn),
               status: response[i].caseStatus.status,
               description: response[i].caseInformation.description,
@@ -102,7 +103,7 @@ export default {
     },
     someFunction: function(row) {
       const foundCase = this.allCases.find(function(element) {
-        return element.id === row.caseId;
+        return element.id === row.id;
       });
       if (foundCase !== null) {
         this.$store.dispatch("setCaseToEdit", foundCase);

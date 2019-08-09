@@ -139,27 +139,6 @@
     <EmbeddedResource Include="Migrations\201908070715056_updatedSeedAndClient.resx">
       <DependentUpon>201908070715056_updatedSeedAndClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908080615482_addedreferencetable.resx">
-      <DependentUpon>201908080615482_addedreferencetable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908080732195_addedreferencetable1.0.1.resx">
-      <DependentUpon>201908080732195_addedreferencetable1.0.1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908080831576_addedreferencetable1.0.2.resx">
-      <DependentUpon>201908080831576_addedreferencetable1.0.2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908080845162_addedreferencetable1.0.3.resx">
-      <DependentUpon>201908080845162_addedreferencetable1.0.3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908080905309_addedreferencetable1.0.4.resx">
-      <DependentUpon>201908080905309_addedreferencetable1.0.4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908080924183_addedreferences.resx">
-      <DependentUpon>201908080924183_addedreferences.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908080932260_addedreferencesagain.resx">
-      <DependentUpon>201908080932260_addedreferencesagain.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Butterfly.CaseManagement.Contracts\Butterfly.CaseManagement.Contracts.csproj">

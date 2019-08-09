@@ -7,7 +7,7 @@
       <b-col class="leftBorder">
         <div class="field">
           <div class="fieldName">Case ID</div>
-          <div class="fieldAnswer">{{ caseId }}</div>
+          <div class="fieldAnswer">KGH-19-{{ caseId }}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
@@ -103,7 +103,7 @@ export default {
   },
   computed: {
     caseId: function() {
-      return this.$store.getters.caseInformation.caseId;
+      return this.$store.getters.caseToEdit.caseId;
     },
     status: function() {
       return this.$store.getters.statusForm.status;
