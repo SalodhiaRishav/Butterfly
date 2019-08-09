@@ -102,6 +102,10 @@
     <Compile Include="Migrations\201908090629537_somethingnew.Designer.cs">
       <DependentUpon>201908090629537_somethingnew.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908090743481_newdeclarationmodel.cs" />
+    <Compile Include="Migrations\201908090743481_newdeclarationmodel.Designer.cs">
+      <DependentUpon>201908090743481_newdeclarationmodel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
@@ -166,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908090629537_somethingnew.resx">
       <DependentUpon>201908090629537_somethingnew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908090743481_newdeclarationmodel.resx">
+      <DependentUpon>201908090743481_newdeclarationmodel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
