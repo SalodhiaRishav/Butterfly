@@ -80,7 +80,7 @@ export default {
         .post("https://localhost:44313/casemanagement", { caseDto: caseDto })
         .then(res => {
           if (res.data.success === true) {
-            this.caseIdentifier = res.data.data.id;
+            this.caseIdentifier = "KGH-19-"+res.data.data.caseId;
             this.createdDate = this.convertDate(res.data.data.createdOn);
             this.dismissCountDown = 5;
             this.alertMessage = res.data.message;
