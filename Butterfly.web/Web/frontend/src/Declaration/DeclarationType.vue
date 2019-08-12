@@ -51,7 +51,7 @@ export default {
       axios.get('https://localhost:44313/getdropdownitems/DeclarationType1')
             .then((response)=>{
               if(response.data){
-                console.log(response.data.data)
+               
                   this.declarationType1List= response.data.data.map(x=>{
                     return {value: x.key, text:x.value}
                   })
@@ -62,7 +62,7 @@ export default {
         axios.get('https://localhost:44313/getdropdownitems/DeclarationType2')
             .then((response)=>{
               if(response.data){
-                console.log(response.data.data)
+                
                   this.declarationType2List= response.data.data.map(x=>{
                     return {value: x.key, text:x.value}
                   })
@@ -73,7 +73,7 @@ export default {
             axios.get('https://localhost:44313/getdropdownitems/MessageName')
             .then((response)=>{
               if(response.data){
-                console.log(response.data.data)
+               
                   this.messageNameList= response.data.data.map(x=>{
                     return {value: x.key, text: x.value}
                   })

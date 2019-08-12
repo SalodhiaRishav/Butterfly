@@ -98,7 +98,7 @@ export default {
       .get("https://localhost:44313/getdropdownitems/Countries")
       .then(response => {
         if (response.data) {
-          console.log(response.data.data);
+         // console.log(response.data.data);
           this.countryList = response.data.data.map(x => {
             return { value: x.key, text: x.value };
           });
@@ -109,7 +109,7 @@ export default {
       .get("https://localhost:44313/getdropdownitems/LocationOfGoods")
       .then(response => {
         if (response.data) {
-          console.log(response.data.data);
+         // console.log(response.data.data);
           this.LocationOfGoods = response.data.data.map(x => {
             return { value: x.key, text: x.value };
           });
@@ -120,7 +120,7 @@ export default {
       .get("https://localhost:44313/getdropdownitems/ModeOfTransport")
       .then(response => {
         if (response.data) {
-          console.log(response.data.data);
+         // console.log(response.data.data);
           this.ModeOfTransport = response.data.data.map(x => {
             return { value: x.key, text: x.value };
           });
@@ -131,7 +131,7 @@ export default {
       .get("https://localhost:44313/getdropdownitems/SupervisingCustomOfiice")
       .then(response => {
         if (response.data) {
-          console.log(response.data.data);
+        //  console.log(response.data.data);
           this.SupervisingCustomsOffice = response.data.data.map(x => {
             return { value: x.key, text: x.value };
           });
