@@ -4,9 +4,8 @@ import DeclarationForm from '../Declaration/DeclarationForm.vue';
 import AddNewCase from "./../CaseManagement/AddNewCase.vue";
 import EditCase from "./../CaseManagement/EditCase.vue";
 import Dashboard from './../CommonComponent/Dashboard.vue';
-import DeclarationDashboard from './../Declaration/DeclarationDashboard.vue';
+import DeclarationDashBoard from './../Declaration/DeclarationDashBoard.vue';
 import EditDeclaration from './../Declaration/editDeclaration.vue';
->>>>>>>>> Temporary merge branch 2
 
 Vue.use(Router);
 
@@ -20,7 +19,7 @@ const router = new Router({
     {
       path: '/declarationdashboard',
       name: 'DeclarationDashboard',
-      component: DeclarationDashboard,
+      component: DeclarationDashBoard,
       },
       {
         path: '/editdeclaration/:id',
