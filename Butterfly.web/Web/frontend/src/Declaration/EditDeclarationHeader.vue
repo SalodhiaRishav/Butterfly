@@ -43,6 +43,7 @@ import axios from 'axios'
 export default {  
   props:{
     declaration:Object,
+    referenceData: Object
   },
 data() {
     return {
@@ -66,7 +67,7 @@ data() {
     // this.postBody = Object.assign({},declaration : {
     //   declaration : this.declaration
     // })
-      axios.post('https://localhost:44313/editdeclaration',{declaration:this.declaration})
+      axios.post('https://localhost:44313/editdeclaration',{declaration:this.declaration, referenceData:this.referenceData.reference})
           .then((response)=>{
             console.log("Success");
             console.log(response.data.data);

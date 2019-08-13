@@ -12,6 +12,7 @@ namespace Butterfly.web.Declaration
     using Butterfly.Declarations.Application.Services;
     using FluentValidation.Results;
     using Butterfly.Declarations.Contracts.Validation;
+    using Butterfly.Declarations.Contracts.DeclarationDTO;
 
     public class EditDeclarationService : Service
     {
@@ -27,11 +28,23 @@ namespace Butterfly.web.Declaration
             {
                 //todo add reference data
                 var newDeclaration = editDeclaration.declaration;
+                var reference = editDeclaration.referenceData;
                 DeclarationValidator obj = new DeclarationValidator();
                 ValidationResult result = obj.Validate(newDeclaration);
                 if (result.IsValid)
                 {
                     var data = declarationBll.EditDeclaration(newDeclaration);
+                    
+                    ReferenceDto temp = new ReferenceDto();
+                    for (int i = 0; i < editDeclaration.referenceData.Length; i++)
+                    {
+                        temp.DeclarationId = newDeclaration.DeclarationId;
+                        temp.ReferenceId = editDeclaration.referenceData[i].ReferenceId;
+                        temp.InvoiceDate = editDeclaration.referenceData[i].InvoiceDate;
+                        temp.Reference = editDeclaration.referenceData[i].Reference;
+                        temp.Type = editDeclaration.referenceData[i].Type;
+                        declarationBll.AddReference(temp);
+                    }
                     response.OnSuccess(data, "Record Successfully Updated");
                     return response;
                 }

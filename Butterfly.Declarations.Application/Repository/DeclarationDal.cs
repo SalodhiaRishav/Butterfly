@@ -107,7 +107,7 @@ namespace Butterfly.Declarations.Application.Repository
                 using(var context = new ButterflyContext())
                 {
                     var data = mapper.DtoToReferenceModel(reference);
-                    context.Reference.Add(data);
+                    context.Reference.AddOrUpdate(d => d.ReferenceId,data);
                     context.SaveChanges();
                 }
             }

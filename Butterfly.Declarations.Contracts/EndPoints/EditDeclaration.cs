@@ -7,5 +7,6 @@
     public class EditDeclaration
     {
         public DeclarationDto declaration { get; set; }
+        public ReferenceDto[] referenceData { get; set; }
     }
 }
