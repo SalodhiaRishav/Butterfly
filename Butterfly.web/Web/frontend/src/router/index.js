@@ -42,6 +42,11 @@ const router = new Router({
       name: 'EditCase',
       component: EditCase,
     },
+    {
+      path: '/default.html',
+      name: 'Dashboard',
+      component: Dashboard,
+    },
   ],
   mode: 'history',
 }
