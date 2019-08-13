@@ -3,7 +3,22 @@
     <b-card-text>
       <b-row>
     <b-col class="border-rt">
-          NO Import
+          <p>NO Import</p>
+           <b-button v-b-modal.error-modal v-show="isError">Issues</b-button>
+            <b-modal id="error-modal">
+               <li v-for="(error,index) in errorList" :key="index">
+                    {{ error }}
+               </li>
+            </b-modal>
+           <b-alert
+            :variant="alertVariant"
+            :show="dismissCountDown"
+            @dismissed="dismissCountDown = 0"
+            @dismiss-count-down="countDownChanged"
+            dismissible>
+            {{alertMessage}}
+            </b-alert> 
+
       </b-col>
       <b-col class="border-rt" >
           Declaration ID: <br>
@@ -48,6 +63,12 @@ export default {
 data() {
     return {
       postBody:null,
+       dismissCountDown: 0,
+      showDismissibleAlert: false,
+       alertVariant: "",
+      alertMessage: "",
+      isError:false,
+      errorList:[],
     };
   },
   methods: {
@@ -67,15 +88,27 @@ data() {
     // this.postBody = Object.assign({},declaration : {
     //   declaration : this.declaration
     // })
-      axios.post('https://localhost:44313/editdeclaration',{declaration:this.declaration, referenceData:this.referenceData.reference})
-          .then((response)=>{
+      axios.post('https://localhost:44313/editdeclaration',
+      {
+        declaration:this.declaration, 
+        referenceData:this.referenceData.reference
+      })
+      .then((response)=>{
             console.log("Success");
+            if(response.data.success == true){
+                 this.isError = false;
+          console.log("Success");
+          this.alertVariant = "success";
+          this.alertMessage = "declaration saved!";
+          this.dismissCountDown = 2;
+            }
+            else{
+              console.log("error :",response.data.error);
+              this.errorList = response.data.error;
+              this.isError = true;      
+            }
             console.log(response.data.data);
-          }
-
-          )
-     
-      
+      })     
     }
   }
 }
