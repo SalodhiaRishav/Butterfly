@@ -10,6 +10,8 @@ namespace Butterfly.web.Declaration
     using Butterfly.web.CommonResponse;
     using Butterfly.Declarations.Contracts.EndPoints;
     using Butterfly.Declarations.Application.Services;
+    using FluentValidation.Results;
+    using Butterfly.Declarations.Contracts.Validation;
 
     public class EditDeclarationService : Service
     {
@@ -23,10 +25,26 @@ namespace Butterfly.web.Declaration
             OperationResponse<bool> response = new OperationResponse<bool>();
             try
             {
+                //todo add reference data
                 var newDeclaration = editDeclaration.declaration;
-                var data = declarationBll.EditDeclaration(newDeclaration);
-                response.OnSuccess(data, "Record Successfully Updated");
-                return response;
+                DeclarationValidator obj = new DeclarationValidator();
+                ValidationResult result = obj.Validate(newDeclaration);
+                if (result.IsValid)
+                {
+                    var data = declarationBll.EditDeclaration(newDeclaration);
+                    response.OnSuccess(data, "Record Successfully Updated");
+                    return response;
+                }
+                else
+                {
+                    List<string> errors = new List<string>();
+                    foreach(var err in result.Errors)
+                    {
+                        errors.Add(err.ErrorMessage);
+                    }
+                    response.OnError("one or more validations failed", errors);
+                    return response;
+                }
 
             }
             catch(Exception e)

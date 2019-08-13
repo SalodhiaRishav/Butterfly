@@ -14543,7 +14543,6 @@
     <Content Include="Web\frontend\src\CommonComponent\Navbar.vue" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Declarations\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ import Dashboard from './../CommonComponent/Dashboard.vue';
 import DeclarationDashBoard from './../Declaration/DeclarationDashBoard.vue';
 import EditDeclaration from './../Declaration/editDeclaration.vue';
 
+
 Vue.use(Router);
 
 const router = new Router({

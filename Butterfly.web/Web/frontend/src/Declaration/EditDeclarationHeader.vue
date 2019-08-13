@@ -7,7 +7,7 @@
       </b-col>
       <b-col class="border-rt" >
           Declaration ID: <br>
-          <p> -- </p>
+          <p> CD - {{declaration.declarationId.toString().substring(0,5)}} </p>
            LRN <br>
           <p> -- </p>
           MRN<br>

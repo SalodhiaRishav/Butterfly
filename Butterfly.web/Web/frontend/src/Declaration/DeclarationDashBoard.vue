@@ -31,14 +31,14 @@ export default {
   mounted() {
     this.getAllDeclaration()
     .then((response)=>{
-        console.log(response[0].createdOn);
+     
       let declaration=[];
-     // this.allCases=response;
+    
       for(let i=0;i<response.length;++i)
       {
         let obj={
-          ID:response[i].declarationId,
-          createdOn:response[i].createdOn,
+          BaseID:response[i].declarationId,
+          createdOn:this.convertDate(response[i].createdOn),
           status:response[i].status,
           LRN: " ",
           MRN: " ",
@@ -49,6 +49,7 @@ export default {
           CustomResponse:" ",
           User: " ",
           TaxationDate: " ",
+          ID:"CD-"+response[i].declarationId.toString().substring(0,5),
           }
           declaration.push(obj);
       }
@@ -111,14 +112,17 @@ export default {
     };
   },
   methods:{
+     convertDate(date){
+         return new Date(date.match(/\d+/)[0]*1).toString().substring(4,16);
+     }, 
     someFunction:function(row)
     {
-            console.log(row);
+            //console.log(row);
             // if(foundCase!==null)
             // {
             //   this.$store.dispatch("setCaseToEdit",foundCase);
             // }
-            this.$router.push({path:`/editdeclaration/${row.ID}`});
+            this.$router.push({path:`/editdeclaration/${row.BaseID}`});
 
     },
       getAllDeclaration:function(){
@@ -128,7 +132,7 @@ export default {
           .then((response)=>{
             if(response.data.success===true)
             {
-            console.log("declaration: ",response.data.data) 
+           
              resolve(response.data.data)
             }
             else

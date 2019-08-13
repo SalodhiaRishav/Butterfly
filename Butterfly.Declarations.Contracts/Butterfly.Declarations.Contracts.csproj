@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.4.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack, Version=3.9.71.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.3.9.71\lib\net35\ServiceStack.dll</HintPath>
     </Reference>
@@ -56,6 +59,7 @@
       <HintPath>..\packages\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -69,6 +73,7 @@
     <Compile Include="DeclarationDTO\DeclarationDto.cs" />
     <Compile Include="DeclarationDTO\DropDownDto.cs" />
     <Compile Include="DeclarationDTO\ReferenceDto.cs" />
+    <Compile Include="Validation\DeclarationValidator.cs" />
     <Compile Include="EndPoints\AddDeclaration.cs" />
     <Compile Include="EndPoints\AddDropDownItem.cs" />
     <Compile Include="EndPoints\EditDeclaration.cs" />
@@ -80,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
-    <Folder Include="Validators\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
