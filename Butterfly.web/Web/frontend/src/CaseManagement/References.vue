@@ -56,6 +56,7 @@
 import axios from "axios";
 export default {
   mounted() {
+   
     this.getCaseReferenceTypes().then(response => {
       this.referenceTypes = response;
       this.referenceTypesFetched = true;
@@ -113,6 +114,12 @@ export default {
           identity: this.referenceForm.identity,
           comment: this.referenceForm.comment
         };
+    if(!this.$store.getters.references)
+    {
+      this.$store.dispatch('setReferences',[]);
+      this.references=this.$store.getters.references;
+    }
+        console.log(this.references);
         this.references.push(newReferenceDetails);
         this.resetReferenceForm();
       }
