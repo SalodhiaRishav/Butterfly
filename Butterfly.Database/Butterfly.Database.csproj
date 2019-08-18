@@ -106,7 +106,15 @@
     <Compile Include="Migrations\201908090743481_newdeclarationmodel.Designer.cs">
       <DependentUpon>201908090743481_newdeclarationmodel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908181208368_AddedAuthentication.cs" />
+    <Compile Include="Migrations\201908181208368_AddedAuthentication.Designer.cs">
+      <DependentUpon>201908181208368_AddedAuthentication.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Authentication\Role.cs" />
+    <Compile Include="Models\Authentication\User.cs" />
+    <Compile Include="Models\Authentication\UserRole.cs" />
+    <Compile Include="Models\Authentication\Token.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CaseManagement\Case.cs" />
     <Compile Include="Models\CaseManagement\CaseInformation.cs" />
@@ -173,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908090743481_newdeclarationmodel.resx">
       <DependentUpon>201908090743481_newdeclarationmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908181208368_AddedAuthentication.resx">
+      <DependentUpon>201908181208368_AddedAuthentication.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

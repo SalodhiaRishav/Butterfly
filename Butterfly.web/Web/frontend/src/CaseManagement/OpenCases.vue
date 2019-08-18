@@ -140,11 +140,28 @@ export default {
       this.$router.push("/editcase");
     },
     getAllCases: function() {
+
       return new Promise((resolve, reject) => {
+        let config = {
+          headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJ1dHRlcmZseS5jb20iLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1NjYxNDU5NDEsImV4cCI6MTU2NjE0NjA2MSwiaWF0IjoxNTY2MTQ1OTQxLCJpc3MiOiJyaXNoYXYgc2VydmVyIn0.ReUG4umjbMGPZRkuqy0szGCs30gzy03uryst1nEeNkg",
+          }
+}
         const url = "https://localhost:44313/casemanagement";
         axios
-          .get(url)
+          .get(url,config)
           .then(response => {
+            if(response.data === "token expired")
+            {
+              const refreshTokenUrl = "https://localhost:44313/refreshtoken";
+              let postData={
+                "refreshTokenSerialId":"9f66098a944a1cc3e81c0a45146932fa"
+              }
+              axios.post(refreshTokenUrl,postData)
+              .then(myresponse =>{
+                console.log(myresponse);
+              })
+            }
             if (response.data.success === true) {
               resolve(response.data.data);
             } else {

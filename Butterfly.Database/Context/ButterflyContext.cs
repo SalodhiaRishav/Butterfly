@@ -7,6 +7,7 @@ namespace Butterfly.Database.Context
     using Butterfly.Database.Configurations.Declaration;
     using Butterfly.Database.Models.CaseManagement;
     using Butterfly.Database.Configurations.CaseManagement;
+    using Butterfly.Database.Models.Authentication;
 
     public class ButterflyContext : DbContext
     {
@@ -15,17 +16,18 @@ namespace Butterfly.Database.Context
 
         }
         public DbSet<Declaration> Declaration { get; set; }
-
         public DbSet<DropDown> DropDown { get; set; }
         public DbSet<Case> Case { get; set; }
         public DbSet<CaseInformation> CaseInformation {get; set;}
-
         public DbSet<CaseReference> CaseReference { get; set; }
-
         public DbSet<CaseStatus> CaseStatus { get; set; }
         public DbSet<Client> Client { get; set; }
         public DbSet<Notes> Notes { get; set; }
         public DbSet<ReferenceTable> Reference { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<UserRole> UserRole { get; set; }
+        public DbSet<Token> UserToken { get; set; }
+        public DbSet<Role> Role { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
