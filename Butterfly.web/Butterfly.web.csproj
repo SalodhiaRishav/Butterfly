@@ -14518,7 +14518,6 @@
     <Content Include="Web\frontend\node_modules\yargs\node_modules\cliui\README.md" />
     <Content Include="Web\frontend\node_modules\yargs\package.json" />
     <Content Include="Web\frontend\node_modules\yargs\README.md" />
-    <Content Include="Web\frontend\src\CaseManagement\AssignedTo.vue" />
     <Content Include="Web\frontend\src\CaseManagement\CaseHeader.vue" />
     <Content Include="Web\frontend\src\CaseManagement\CaseInformation.vue" />
     <Content Include="Web\frontend\src\CaseManagement\CaseStatus.vue" />
@@ -14541,6 +14540,8 @@
     <Content Include="Web\frontend\src\Declaration\DeclarationDashBoard.vue" />
     <Content Include="Web\frontend\src\CommonComponent\Dashboard.vue" />
     <Content Include="Web\frontend\src\CommonComponent\Navbar.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\CasePriorityDropDown.vue" />
+    <Content Include="Web\frontend\src\CaseManagement\CaseStatusDropDown.vue" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
