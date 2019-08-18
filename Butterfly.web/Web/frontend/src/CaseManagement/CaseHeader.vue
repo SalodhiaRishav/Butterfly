@@ -45,12 +45,17 @@
         </b-alert>
       </b-col>
     </b-row>
-  </div>
+    </div>
 </template>
 
 <script>
 import axios from "axios";
+import appNavbar from './../CommonComponent/Navbar';
+
 export default {
+  components:{
+    appNavbar
+  },
   data() {
     return {
       caseIdentifier: "",

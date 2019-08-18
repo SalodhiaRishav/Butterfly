@@ -1,5 +1,6 @@
 <template>
   <div>
+    <appNavbar></appNavbar>
     <b-card no-body>
       <div class="mainCaseHeader">
         <b-card-header
@@ -22,11 +23,13 @@
 <script>
 import CaseManagementBody from "./CaseManagementBody.vue";
 import EditCaseHeader from "./EditCaseHeader.vue";
+import appNavbar from './../CommonComponent/Navbar'
 
 export default {
   components: {
     appEditCaseHeader: EditCaseHeader,
-    appCaseManagementBody: CaseManagementBody
+    appCaseManagementBody: CaseManagementBody,
+    appNavbar
   }
 };
 </script>

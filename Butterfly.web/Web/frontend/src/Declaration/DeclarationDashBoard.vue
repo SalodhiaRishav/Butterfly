@@ -1,4 +1,5 @@
 <template>
+<div>
   <div>
     <div>
       <b-table
@@ -22,12 +23,15 @@
       </b-col>
     </b-row>
   </div>
+</div>
 </template>
 
 <script>
 import axios from "axios";
+import appNavbar from './../CommonComponent/Navbar';
 
 export default {
+  
   mounted() {
     this.getAllDeclaration()
     .then((response)=>{

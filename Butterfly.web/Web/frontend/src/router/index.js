@@ -6,12 +6,18 @@ import EditCase from "./../CaseManagement/EditCase.vue";
 import Dashboard from './../CommonComponent/Dashboard.vue';
 import DeclarationDashBoard from './../Declaration/DeclarationDashBoard.vue';
 import EditDeclaration from './../Declaration/editDeclaration.vue';
+import Login from './../CommonComponent/Login.vue'
 
 
 Vue.use(Router);
 
 const router = new Router({
   routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+      },
   {
     path: '/declarationform',
     name: 'DeclarationForm',

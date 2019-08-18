@@ -1,5 +1,6 @@
 <template>
     <div>
+       <appNavbar></appNavbar>
     <b-card no-body>
           <div class="dashboardHeader">
         <b-card-header

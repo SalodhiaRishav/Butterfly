@@ -1,5 +1,6 @@
 <template>
   <div>
+     <appNavbar></appNavbar>
     <declarationheader :declaration="declaration" :referenceData="referenceData"></declarationheader>
     <b-tabs card style="color:black; background-color:#E6E6E6">
       <b-tab title="Header" active>
@@ -48,6 +49,7 @@ import Consignee from "./Consignee";
 import Declarant from "./Declarant";
 import Delivery from "./DeliveryTransport";
 import ValueDetails from "./ValueDetails";
+import appNavbar from './../CommonComponent/Navbar';
 
 export default {
   components: {
@@ -57,7 +59,8 @@ export default {
     Consignee,
     Declarant,
     Delivery,
-    ValueDetails
+    ValueDetails,
+    appNavbar
   },
   data() {
     return {

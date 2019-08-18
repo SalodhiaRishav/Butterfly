@@ -1,5 +1,6 @@
 <template>
   <div>
+     <appNavbar></appNavbar>
     <editdeclarationheader :declaration="declaration" :referenceData="referenceData"></editdeclarationheader>
     <b-tabs card style="color:black; background-color:#E6E6E6">
       <b-tab title="Header" active>
@@ -49,6 +50,7 @@ import Consignee from "./Consignee";
 import Declarant from "./Declarant";
 import Delivery from "./DeliveryTransport";
 import ValueDetails from "./ValueDetails";
+import appNavbar from './../CommonComponent/Navbar.vue'
 import axios from 'axios';
 
 export default {
@@ -59,7 +61,8 @@ export default {
     Declarant,
     Delivery,
     ValueDetails,
-    editdeclarationheader
+    editdeclarationheader,
+    appNavbar
   },
   mounted(){
       var guid=this.$route.params.id;
