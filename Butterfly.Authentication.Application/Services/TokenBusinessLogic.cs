@@ -27,6 +27,7 @@
 
         public JwtTokenData CreateJwtTokens(User user)
         {
+            DeleteExpiredTokens();
             var (accessToken, claims) = GenerateAccessToken(user);
             var (refreshTokenValue, refreshTokenSerial) = GenerateRefreshToken(user);
             return new JwtTokenData
@@ -55,7 +56,7 @@
                 Issuer = "rishav server",
                 NotBefore = DateTime.UtcNow,
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(2),
+                Expires = DateTime.UtcNow.AddMinutes(1),
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256Signature)
             };
@@ -101,13 +102,14 @@
 
         public void AddNewToken(User user, string accessToken, string refreshTokenSerialNumber)
         {
+            DeleteExpiredTokens();
             Token userToken = new Token();
             userToken.UserId = user.Id;
             userToken.AccessTokenHash = accessToken;
             userToken.RefreshTokenIdHash = refreshTokenSerialNumber;
             userToken.RefreshTokenIdHashSource = null;
             userToken.RefreshTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(60);
-            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(2);
+            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(1);
             TokenRepository.Add(userToken);
         }
 
@@ -166,7 +168,7 @@
             }
             var accessToken = GenerateAccessToken(user).AccessToken;
             userToken.AccessTokenHash = accessToken;
-            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(8);
+            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(1);
             TokenRepository.Update(userToken);
             return userToken.AccessTokenHash;
         }

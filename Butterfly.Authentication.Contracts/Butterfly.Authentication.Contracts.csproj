@@ -93,7 +93,6 @@
     <Compile Include="EndPoints\LoginUser.cs" />
     <Compile Include="EndPoints\RefreshAccessToken.cs" />
     <Compile Include="EndPoints\RefreshTokenResult.cs" />
-    <Compile Include="Filters\AdminAuthenticationFilter.cs" />
     <Compile Include="Interfaces\IRoleBusinessLogic.cs" />
     <Compile Include="Interfaces\ITokenBusinessLogic.cs" />
     <Compile Include="Interfaces\IUserBusinessLogic.cs" />

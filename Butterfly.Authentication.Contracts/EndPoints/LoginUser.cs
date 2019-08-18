@@ -2,7 +2,7 @@
 {
     using ServiceStack.ServiceHost;
 
-    [Route("/login", "POST")]
+    [Route("/checkuser", "POST")]
     public class LoginUser
     {
         public string Email { get; set; }

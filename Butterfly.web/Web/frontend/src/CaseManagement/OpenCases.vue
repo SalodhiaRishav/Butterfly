@@ -45,43 +45,7 @@ export default {
     appCasePriorityDropDown: CasePriorityDropDown
   },
   mounted() {
-    this.getAllCases()
-      .then(response => {
-        if (response !== null) {
-          let openCase = [];
-
-          this.allCases = response;
-          for (let i = 0; i < response.length; ++i) {
-            let referencesString = "";
-
-            if (response[i].references) {
-              referencesString = response[i].references[0].type;
-              for (let j = 1; j < response[i].references.length; ++j) {
-                referencesString =
-                  referencesString + ", " + response[i].references[j].type;
-              }
-            }
-
-            let obj = {
-              caseId: "KGH-19-" + response[i].caseId,
-              id: response[i].id,
-              createdDate: this.convertDate(response[i].createdOn),
-              caseStatus: response[i].caseStatus.status,
-              description: response[i].caseInformation.description,
-              client: response[i].client.clientIdentifier,
-              notes: response[i].notes.notesByCpa,
-              casePriority: response[i].caseInformation.priority,
-              references: referencesString
-            };
-            openCase.push(obj);
-          }
-          this.openCases = openCase;
-          this.totalRows = this.openCases.length;
-        }
-      })
-      .catch(error => {
-        alert(error);
-      });
+    this.getAllCases();
   },
   data() {
     return {
@@ -141,37 +105,74 @@ export default {
     },
     getAllCases: function() {
 
-      return new Promise((resolve, reject) => {
+ 
+        const accessToken=this.$store.getters.accessToken;
+        if(accessToken ===  null)
+        {
+          alert("Refresh Token expired,Please login again");
+          this.$router.push("/login");
+          return;
+        }
         let config = {
           headers: {
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJ1dHRlcmZseS5jb20iLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE1NjYxNDU5NDEsImV4cCI6MTU2NjE0NjA2MSwiaWF0IjoxNTY2MTQ1OTQxLCJpc3MiOiJyaXNoYXYgc2VydmVyIn0.ReUG4umjbMGPZRkuqy0szGCs30gzy03uryst1nEeNkg",
+            "Authorization": accessToken
           }
-}
+         }
         const url = "https://localhost:44313/casemanagement";
         axios
           .get(url,config)
           .then(response => {
-            if(response.data === "token expired")
-            {
-              const refreshTokenUrl = "https://localhost:44313/refreshtoken";
-              let postData={
-                "refreshTokenSerialId":"9f66098a944a1cc3e81c0a45146932fa"
+            if (response.data.success === true) {
+              let openCase = [];
+
+          this.allCases = response.data.data;
+          for (let i = 0; i < this.allCases.length; ++i) {
+            let referencesString = "";
+
+            if (this.allCases[i].references) {
+              referencesString = this.allCases[i].references[0].type;
+              for (let j = 1; j < this.allCases[i].references.length; ++j) {
+                referencesString =
+                  referencesString + ", " + this.allCases[i].references[j].type;
               }
-              axios.post(refreshTokenUrl,postData)
-              .then(myresponse =>{
-                console.log(myresponse);
+            }
+
+            let obj = {
+              caseId: "KGH-19-" + this.allCases[i].caseId,
+              id: this.allCases[i].id,
+              createdDate: this.convertDate(this.allCases[i].createdOn),
+              caseStatus: this.allCases[i].caseStatus.status,
+              description: this.allCases[i].caseInformation.description,
+              client: this.allCases[i].client.clientIdentifier,
+              notes: this.allCases[i].notes.notesByCpa,
+              casePriority: this.allCases[i].caseInformation.priority,
+              references: referencesString
+            };
+            openCase.push(obj);
+          }
+          this.openCases = openCase;
+          this.totalRows = this.openCases.length;
+            } 
+            else if(response.data == "token expired")
+            {
+              const refreshTokenSerial=this.$store.getters.refreshTokenSerial;
+              this.$store.dispatch("getNewToken",refreshTokenSerial)
+              .then((myresponse)=>{
+                    this.$store.dispatch("setAccessToken","bearer "+myresponse);
+                    this.getAllCases();
+              })
+              .catch(error=>{
+                alert(error);
               })
             }
-            if (response.data.success === true) {
-              resolve(response.data.data);
-            } else {
-              resolve(null);
+            else{
+              alert(response.data.message);
             }
           })
           .catch(error => {
-            reject(error);
+            alert(error);
           });
-      });
+     
     }
   }
 };

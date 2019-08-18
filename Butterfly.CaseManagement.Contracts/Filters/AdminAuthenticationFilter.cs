@@ -82,13 +82,17 @@ namespace Butterfly.CaseManagement.Contracts.Filters
 
         public ClaimsPrincipal GetPrincipal(string token)
         {
+            
             try
             {
                 JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
                 JwtSecurityToken jwtToken = (JwtSecurityToken)tokenHandler.ReadToken(token);
-                if (jwtToken == null)
-                    return null;
-
+                if(DateTime.Compare(jwtToken.ValidTo,DateTime.UtcNow)<0)
+                {
+                    throw  new SecurityTokenExpiredException();
+                }
+                var tempTime = jwtToken.ValidFrom - jwtToken.ValidTo;
+                var temptime = DateTime.UtcNow.Ticks;
                 byte[] key = Convert.FromBase64String(secret);
 
                 TokenValidationParameters parameters = new TokenValidationParameters()

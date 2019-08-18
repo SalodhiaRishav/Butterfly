@@ -3,9 +3,9 @@
         <h2>Login</h2>
         <form @submit.prevent="handleSubmit">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" v-model="username" name="username" class="form-control" :class="{ 'is-invalid': submitted && !username }" />
-                <div v-show="submitted && !username" class="invalid-feedback">Username is required</div>
+                <label for="email">Email</label>
+                <input type="email" v-model="email" name="email" class="form-control" :class="{ 'is-invalid': submitted && !email }" />
+                <div v-show="submitted && !email" class="invalid-feedback">email is required</div>
             </div>
             <div class="form-group">
                 <label htmlFor="password">Password</label>
@@ -13,18 +13,19 @@
                 <div v-show="submitted && !password" class="invalid-feedback">Password is required</div>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" :disabled="error">Login</button>
+                <button class="btn btn-primary">Login</button>
             </div>
-            <div v-if="error" class="alert alert-danger">{{error}}</div>
+            <!-- <div v-if="error" class="alert alert-danger">{{error}}</div> -->
         </form>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
      data () {
         return {
-            username: '',
+            email: '',
             password: '',
             submitted: false,
             returnUrl: '',
@@ -33,7 +34,27 @@ export default {
     },
     methods:{
         handleSubmit(){
-            console.log("testing login");
+            const url="https://localhost:44313/checkuser"
+            const loginData={
+                email:this.email,
+                password:this.password
+            }
+            axios.post(url,loginData)
+            .then(response =>{
+                if(response.data.success === true)
+                {
+                    this.$store.dispatch("setRefreshTokenSerial",response.data.data.refreshTokenSerial);
+                    this.$store.dispatch("setAccessToken","bearer "+response.data.data.accessToken);
+                    this.$router.push("/home")
+                }
+                else
+                {
+                    alert(response.data.message);
+                }
+            })
+            .catch(error=>{
+                    alert(error);
+            })
         }
     }
 
