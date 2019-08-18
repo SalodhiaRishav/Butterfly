@@ -1,5 +1,5 @@
 <template>
-    <b-card style="background-color:#666; border-radius:0px" text-variant="white">
+  <b-card style="background-color:#666; border-radius:0px" text-variant="white">
     <b-card-text>
       <b-row>
     <b-col class="border-rt">
@@ -46,21 +46,19 @@
           <p> -- </p>
       </b-col>
       </b-row>
-        
-  </b-card-text>
-  
-</b-card> 
+    </b-card-text>
+  </b-card>
 </template>
 <script>
 //import declarationform from './DeclarationForm';
-import axios from 'axios'
+import axios from "axios";
 
 export default {  
   props:{
     declaration:Object,
     referenceData: Object
   },
-data() {
+  data() {
     return {
       postBody:null,
        dismissCountDown: 0,
@@ -76,13 +74,12 @@ data() {
       //   evt.preventDefault();
       //   alert(JSON.stringify(this.form));
       //some code here
-      
     },
     onReset(evt) {
       evt.preventDefault();
-      // Reset our form values    
+      // Reset our form values
     },
-    onSave(){
+    onSave() {
       //add some code here
     console.log(this.declaration);
     // this.postBody = Object.assign({},declaration : {

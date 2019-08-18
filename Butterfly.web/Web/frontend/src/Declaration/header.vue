@@ -4,20 +4,21 @@
       <b-row>
         <b-col class="border-rt">
           <p>NO Import</p>
-            <b-button v-b-modal.error-modal v-show="isError">Issues</b-button>
-            <b-modal id="error-modal">
-               <li v-for="(error,index) in errorList" :key="index">
-                    {{ error }}
-               </li>
-            </b-modal>
-            <b-alert
+          <b-button v-b-modal.error-modal v-show="isError">Issues</b-button>
+          <b-modal id="error-modal">
+            <li v-for="(error, index) in errorList" :key="index">
+              {{ error }}
+            </li>
+          </b-modal>
+          <b-alert
             :variant="alertVariant"
             :show="dismissCountDown"
             @dismissed="dismissCountDown = 0"
             @dismiss-count-down="countDownChanged"
-            dismissible>
-            {{alertMessage}}
-            </b-alert>
+            dismissible
+          >
+            {{ alertMessage }}
+          </b-alert>
         </b-col>
         <b-col class="border-rt">
           Declaration ID: <br />
@@ -63,20 +64,20 @@ export default {
     declaration: Object,
     referenceData: Object
   },
-  data(){
-    return{
+  data() {
+    return {
       dismissCountDown: 0,
       showDismissibleAlert: false,
-       alertVariant: "",
+      alertVariant: "",
       alertMessage: "",
-      isError:false,
-      errorList:[],
-    }
+      isError: false,
+      errorList: []
+    };
   },
   methods: {
     onSave() {
       //add some code here
-     // console.log(this.declaration);
+      // console.log(this.declaration);
       // this.postBody = Object.assign({},declaration : {
       //   declaration : this.declaration
       // })
@@ -89,20 +90,17 @@ export default {
           referenceData: this.referenceData.reference
         })
         .then(response => {
-          if(response.data.success===true)
-          {
-          this.isError = false;
-          console.log("Success");
-          this.alertVariant = "success";
-          this.alertMessage = "declaration saved!";
-          this.dismissCountDown = 2;
+          if (response.data.success === true) {
+            this.isError = false;
+            console.log("Success");
+            this.alertVariant = "success";
+            this.alertMessage = "declaration saved!";
+            this.dismissCountDown = 2;
+          } else {
+            console.log("error :", response.data.error);
+            this.errorList = response.data.error;
+            this.isError = true;
           }
-          else
-          {
-              console.log("error :",response.data.error);
-              this.errorList = response.data.error;
-              this.isError = true;      
-          }       
         });
     }
   }

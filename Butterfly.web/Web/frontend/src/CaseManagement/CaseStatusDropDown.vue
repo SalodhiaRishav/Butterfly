@@ -1,15 +1,13 @@
 <template>
   <div>
-   
-          <b-form>
-              <b-form-select
-                id="statusInput"
-                v-model="statusForm.status"
-                :options="statusTypes"
-                required
-              ></b-form-select>
-          </b-form>
-       
+    <b-form>
+      <b-form-select
+        id="statusInput"
+        v-model="statusForm.status"
+        :options="statusTypes"
+        required
+      ></b-form-select>
+    </b-form>
   </div>
 </template>
 
@@ -17,7 +15,7 @@
 import axios from "axios";
 
 export default {
-  props: ['defaultValue'],
+  props: ["defaultValue"],
   mounted() {
     this.getCaseStatusTypes().then(response => {
       this.statusTypes = response;
@@ -28,7 +26,7 @@ export default {
     return {
       statusTypes: [],
       statusTypesFetched: false,
-      statusForm: {status:this.defaultValue}
+      statusForm: { status: this.defaultValue }
     };
   },
   methods: {

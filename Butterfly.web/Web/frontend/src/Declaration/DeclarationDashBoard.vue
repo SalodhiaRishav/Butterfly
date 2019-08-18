@@ -34,37 +34,33 @@ export default {
   
   mounted() {
     this.getAllDeclaration()
-    .then((response)=>{
-     
-      let declaration=[];
-    
-      for(let i=0;i<response.length;++i)
-      {
-        let obj={
-          BaseID:response[i].declarationId,
-          createdOn:this.convertDate(response[i].createdOn),
-          status:response[i].status,
-          LRN: " ",
-          MRN: " ",
-          Country: response[i].country,
-          Procedure: response[i].procedure,
-          Type: response[i].messageName,
-          Status: "Processing",
-          CustomResponse:" ",
-          User: " ",
-          TaxationDate: " ",
-          ID:"CD-"+response[i].declarationId.toString().substring(0,5),
-          }
+      .then(response => {
+        let declaration = [];
+
+        for (let i = 0; i < response.length; ++i) {
+          let obj = {
+            BaseID: response[i].declarationId,
+            createdOn: this.convertDate(response[i].createdOn),
+            status: response[i].status,
+            LRN: " ",
+            MRN: " ",
+            Country: response[i].country,
+            Procedure: response[i].procedure,
+            Type: response[i].messageName,
+            Status: "Processing",
+            CustomResponse: " ",
+            User: " ",
+            TaxationDate: " ",
+            ID: "CD-" + response[i].declarationId.toString().substring(0, 5)
+          };
           declaration.push(obj);
-      }
-      this.declarations=declaration;
-    })
-    .catch((error)=>{
-      
-    })
+        }
+        this.declarations = declaration;
+      })
+      .catch(error => {});
   },
   data() {
-    return {      
+    return {
       declarations: [],
       currentPage: 1,
       perPage: 5,
@@ -108,39 +104,35 @@ export default {
         {
           key: "createdOn",
           sortable: true
-        },{
+        },
+        {
           key: "taxationDate",
           sortable: true
         }
       ]
     };
   },
-  methods:{
-     convertDate(date){
-         return new Date(date.match(/\d+/)[0]*1).toString().substring(4,16);
-     }, 
-    someFunction:function(row)
-    {
-            //console.log(row);
-            // if(foundCase!==null)
-            // {
-            //   this.$store.dispatch("setCaseToEdit",foundCase);
-            // }
-            this.$router.push({path:`/editdeclaration/${row.BaseID}`});
-
+  methods: {
+    convertDate(date) {
+      return new Date(date.match(/\d+/)[0] * 1).toString().substring(4, 16);
     },
-      getAllDeclaration:function(){
-       return new Promise((resolve, reject)=> {
-          const url= "https://localhost:44313/getalldeclaration"
-          axios.get(url)
-          .then((response)=>{
-            if(response.data.success===true)
-            {
-           
-             resolve(response.data.data)
-            }
-            else
-            {
+    someFunction: function(row) {
+      //console.log(row);
+      // if(foundCase!==null)
+      // {
+      //   this.$store.dispatch("setCaseToEdit",foundCase);
+      // }
+      this.$router.push({ path: `/editdeclaration/${row.BaseID}` });
+    },
+    getAllDeclaration: function() {
+      return new Promise((resolve, reject) => {
+        const url = "https://localhost:44313/getalldeclaration";
+        axios
+          .get(url)
+          .then(response => {
+            if (response.data.success === true) {
+              resolve(response.data.data);
+            } else {
               resolve(null);
             }
           })

@@ -30,8 +30,10 @@
             </b-col>
             <b-col col="5" class="pd-lf-0 pd-rt-27">
               <!-- Value Details -->
-              <ValueDetails :declaration="declaration" :referenceData="referenceData"></ValueDetails>
-            
+              <ValueDetails
+                :declaration="declaration"
+                :referenceData="referenceData"
+              ></ValueDetails>
             </b-col>
           </b-row>
         </div>
@@ -43,7 +45,7 @@
 <script>
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-import editdeclarationheader from './EditDeclarationHeader';
+import editdeclarationheader from "./EditDeclarationHeader";
 import DeclarationType from "./DeclarationType";
 import Consignor from "./Consignor";
 import Consignee from "./Consignee";
@@ -64,64 +66,65 @@ export default {
     editdeclarationheader,
     appNavbar
   },
-  mounted(){
-      var guid=this.$route.params.id;
-      axios.get(`https://localhost:44313/getdeclarationbyguid/${guid}`)
-            .then((response)=>{
-                    if(response.data.data)
-                  //  console.log(response.data.data);
-                        this.declaration = response.data.data.declaration;
-                        this.referenceData.reference = response.data.data.referenceData;
-                      //  console.log("refere",this.referenceData)
-            })
-            .catch(e=> console.log(e))
+  mounted() {
+    var guid = this.$route.params.id;
+    axios
+      .get(`https://localhost:44313/getdeclarationbyguid/${guid}`)
+      .then(response => {
+        if (response.data.data)
+          //  console.log(response.data.data);
+          this.declaration = response.data.data.declaration;
+        this.referenceData.reference = response.data.data.referenceData;
+        //  console.log("refere",this.referenceData)
+      })
+      .catch(e => console.log(e));
   },
   data() {
     return {
-      declaration : {
-        declarationId:"",  
-        messageName:"",
-        declarationType1:"",
-        declarationType2:"",
-        consignorName:"",
-        consignorAddress1:"",
-        consignorAdress2:"",
-        consignorPostalCode:"",
-        consignorCity:"",
-        consignorCountry:"",
-        consigneeOrganisationNumber:"",
-        consigneeName:"",
-        consigneeAddress1:"",
-        consigneeAddress2:"",
-        consigneePostalCode:"",
-        consigneeCity:"",
-        consigneeCountry:"",
-        customCreditNumber:"",
-        defferedPayment:"",
-        declarantOrganisationNumber:"",
-        declarantName:"",
-        declarantAddress1:"",
-        declarantAddress2:"",
-        declarantPostalCode:"",
-        declarantCity:"",
-        declarantCountry:"",
-        contactPerson:"",
-        termsOfDelivery:"",
-        deliveryPlace:"",
-        countryOfDispatch:"",
-        nationalityOfTransport:"",
-        modeOfTransport:"",
-        locationOfGoods:"",
-        supervisingCustomOffice:"",
-        freight:"",
-        amount:"",
-        currency:"",
-        rate:"",
-        },
-       referenceData:{ 
-        reference:[],
-       }
+      declaration: {
+        declarationId: "",
+        messageName: "",
+        declarationType1: "",
+        declarationType2: "",
+        consignorName: "",
+        consignorAddress1: "",
+        consignorAdress2: "",
+        consignorPostalCode: "",
+        consignorCity: "",
+        consignorCountry: "",
+        consigneeOrganisationNumber: "",
+        consigneeName: "",
+        consigneeAddress1: "",
+        consigneeAddress2: "",
+        consigneePostalCode: "",
+        consigneeCity: "",
+        consigneeCountry: "",
+        customCreditNumber: "",
+        defferedPayment: "",
+        declarantOrganisationNumber: "",
+        declarantName: "",
+        declarantAddress1: "",
+        declarantAddress2: "",
+        declarantPostalCode: "",
+        declarantCity: "",
+        declarantCountry: "",
+        contactPerson: "",
+        termsOfDelivery: "",
+        deliveryPlace: "",
+        countryOfDispatch: "",
+        nationalityOfTransport: "",
+        modeOfTransport: "",
+        locationOfGoods: "",
+        supervisingCustomOffice: "",
+        freight: "",
+        amount: "",
+        currency: "",
+        rate: ""
+      },
+      referenceData: {
+        reference: []
       }
+    };
   },
 
   methods: {

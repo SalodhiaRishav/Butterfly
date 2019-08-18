@@ -11,12 +11,12 @@ import Navbar from "./CommonComponent/Navbar.vue";
 import Dashboard from "./CommonComponent/Dashboard.vue";
 
 export default {
-  name: 'app',
-  components:{
-    appNavbar:Navbar,
-    appDashboard:Dashboard
+  name: "app",
+  components: {
+    appNavbar: Navbar,
+    appDashboard: Dashboard
   }
-}
+};
 </script>
 
 <style>
