@@ -1,11 +1,9 @@
 namespace Butterfly.Database.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
     using Butterfly.Database.Models.Declarations;
     using System.Collections.Generic;
+    using System.Data.Entity.Migrations;
+    using Butterfly.Database.Models.Authentication;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Butterfly.Database.Context.ButterflyContext>
     {
@@ -48,7 +46,22 @@ namespace Butterfly.Database.Migrations
                 context.DropDown.AddOrUpdate(item=>item.Value,dropDownItem);
                 context.SaveChanges();
             }
-           
+            Role role = new Role();
+            role.RoleName = "Admin";
+            context.Role.AddOrUpdate(r => r.RoleName, role);
+            context.SaveChanges();
+
+            User user = new User();
+            user.Email = "admin@butterfly.com";
+            user.Password = "Lkjh";
+            context.User.AddOrUpdate(u => u.Email, user);
+            context.SaveChanges();
+
+            UserRole userRole = new UserRole();
+            userRole.RoleId = role.Id;
+            userRole.UserId = user.Id;
+            context.UserRole.AddOrUpdate(userRole);
+            context.SaveChanges();
 
 
 

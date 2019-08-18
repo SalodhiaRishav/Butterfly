@@ -8,10 +8,14 @@
     using ServiceStack.WebHost.Endpoints;
     using Butterfly.CaseManagement.Application.Services;
     using Butterfly.CaseManagement.Application.Repository;
+    using Butterfly.Authentication.Application.Repository;
     using Butterfly.CaseManagement.Contracts.Interfaces;
     using Butterfly.CaseManagement.Application.Mapper;
     using Butterfly.CaseManagement.Application.Repository.Interfaces;
+    using Butterfly.Authentication.Application.Repository.Interfaces;
     using Butterfly.CaseManagement.Application.Mapper.MapperInterface;
+    using Butterfly.Authentication.Contracts.Interfaces;
+    using Butterfly.Authentication.Application.Services;
 
     public class AppHost : AppHostBase
     {
@@ -22,6 +26,10 @@
             JsConfig.EmitCamelCaseNames = true;
 
             container.Register<ICaseRepository>(new CaseRepository());
+            container.Register<IUserRepository>(new UserRepository());
+            container.Register<IUserRoleRepository>(new UserRoleRepository());
+            container.Register<ITokenRepository>(new TokenRepository());
+            container.Register<IRoleRepository>(new RoleRepository());
             container.Register<ICaseInformationRepository>(new CaseInformationRepository());
             container.Register<ICaseReferenceRepository>(new CaseReferenceRepository());
             container.Register<ICaseStatusRepository>(new CaseStatusRepository());
@@ -34,6 +42,16 @@
             container.Register<ICaseReferenceMapper>(new CaseReferenceMapper());
             container.Register<INotesMapper>(new NotesMapper());
 
+
+            container.Register<IUserBusinessLogic>(new UserBusinessLogic(new UserRepository(),
+                new TokenBusinessLogic(new RoleBusinessLogic(new UserRoleRepository(),new RoleRepository()),
+                new TokenRepository(),
+                new UserRepository())));
+
+            container.Register<IRoleBusinessLogic>(new RoleBusinessLogic(new UserRoleRepository(), new RoleRepository()));
+            container.Register<ITokenBusinessLogic>(new TokenBusinessLogic(new RoleBusinessLogic(new UserRoleRepository(), new RoleRepository()),
+                new TokenRepository(),
+                new UserRepository()));
             container.Register<IClientBusinessLogic>(new ClientBusinessLogic(new ClientRepository(), new ClientMapper()));
             container.Register<ICaseInformationBusinessLogic>(new CaseInformationBusinessLogic(
                 new CaseInformationRepository(), new CaseInformationMapper()));
