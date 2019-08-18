@@ -91,7 +91,6 @@ export default {
       .get("https://localhost:44313/getdropdownitems/DefferedPayment")
       .then(response => {
         if (response.data) {
-
           this.defferedPayment = response.data.data.map(x => {
             return { text: x.value };
           });
@@ -102,9 +101,8 @@ export default {
       .get("https://localhost:44313/getdropdownitems/Countries")
       .then(response => {
         if (response.data) {
-        
           this.countryList = response.data.data.map(x => {
-            return {value:x.key, text: x.value };
+            return { value: x.key, text: x.value };
           });
         }
       })

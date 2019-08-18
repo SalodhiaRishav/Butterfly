@@ -60,7 +60,7 @@ export default {
     };
   },
   methods: {
-     countDownChanged(dismissCountDown) {
+    countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },
     convertDate(someDate) {

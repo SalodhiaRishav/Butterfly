@@ -1,15 +1,13 @@
 <template>
   <div>
-   
-          <b-form>
-              <b-form-select
-                id="priorityInput"
-                v-model="priorityForm.priority"
-                :options="priorityTypes"
-                required
-              ></b-form-select>
-          </b-form>
-       
+    <b-form>
+      <b-form-select
+        id="priorityInput"
+        v-model="priorityForm.priority"
+        :options="priorityTypes"
+        required
+      ></b-form-select>
+    </b-form>
   </div>
 </template>
 
@@ -17,7 +15,7 @@
 import axios from "axios";
 
 export default {
-  props: ['defaultValue'],
+  props: ["defaultValue"],
   mounted() {
     this.getCasePriorityTypes().then(response => {
       this.priorityTypes = response;
@@ -28,7 +26,7 @@ export default {
     return {
       priorityTypes: [],
       priorityTypesFetched: false,
-      priorityForm: {priority:this.defaultValue}
+      priorityForm: { priority: this.defaultValue }
     };
   },
   methods: {

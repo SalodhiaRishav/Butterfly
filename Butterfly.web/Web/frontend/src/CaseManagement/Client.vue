@@ -110,15 +110,13 @@ export default {
   mounted() {
     this.getIdentiferTypes()
       .then(response => {
-        if(response!==null)
-        {
-           this.identifierTypes = response;
-           this.identifierFetched = true;
+        if (response !== null) {
+          this.identifierTypes = response;
+          this.identifierFetched = true;
         }
-       
       })
       .catch(error => {
-       alert(error);
+        alert(error);
       });
     this.getCountries().then(response => {
       let countriesObj = response;

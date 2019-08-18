@@ -96,9 +96,9 @@ export default {
   },
   computed: {
     referenceTypes: () => {
-     // console.log(this.references)
+      // console.log(this.references)
       return [{ text: "Select", value: null }, "1234", "2345", "34567"];
-    },
+    }
   },
   methods: {
     deleteReference(index) {
@@ -122,9 +122,9 @@ export default {
           invoiceDate: this.referenceForm.invoiceDate,
           reference: this.referenceForm.reference
         };
-      //  console.log(this.referenceData.reference);
+        //  console.log(this.referenceData.reference);
         this.referenceData.reference.push(newReferenceDetails);
-      //  this.referenceData.reference = this.references;
+        //  this.referenceData.reference = this.references;
         this.resetReferenceForm();
       }
     },

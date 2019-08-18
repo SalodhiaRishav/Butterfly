@@ -1,6 +1,9 @@
 <template>
   <div>
-    <declarationheader :declaration="declaration" :referenceData="referenceData"></declarationheader>
+    <declarationheader
+      :declaration="declaration"
+      :referenceData="referenceData"
+    ></declarationheader>
     <b-tabs card style="color:black; background-color:#E6E6E6">
       <b-tab title="Header" active>
         <div style="padding-top:10px; padding-right:0px; padding-left:0px">
@@ -29,7 +32,10 @@
             </b-col>
             <b-col col="5" class="pd-lf-0 pd-rt-27">
               <!-- Value Details -->
-              <ValueDetails :declaration="declaration" :referenceData="referenceData"></ValueDetails>
+              <ValueDetails
+                :declaration="declaration"
+                :referenceData="referenceData"
+              ></ValueDetails>
             </b-col>
           </b-row>
         </div>
@@ -100,8 +106,8 @@ export default {
         currency: "",
         rate: ""
       },
-      referenceData:{
-      reference: []
+      referenceData: {
+        reference: []
       }
     };
   },

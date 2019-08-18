@@ -1,7 +1,7 @@
 <template>
-    <div>
+  <div>
     <b-card no-body>
-          <div class="dashboardHeader">
+      <div class="dashboardHeader">
         <b-card-header
           header-tag="header"
           header-text-variant="white"
@@ -9,7 +9,7 @@
         >
           <h1 class="dashboardHeading">Dashboard</h1>
         </b-card-header>
-          </div>
+      </div>
       <b-tabs card>
         <b-tab title="OpenCases" active>
           <appOpenCases></appOpenCases>
@@ -23,19 +23,19 @@
 </template>
 
 <script>
-import OpenCases from './../CaseManagement/OpenCases.vue';
-import DeclarationDashBoard from './../Declaration/DeclarationDashBoard.vue'
-import Navbar from './Navbar.vue';
+import OpenCases from "./../CaseManagement/OpenCases.vue";
+import DeclarationDashBoard from "./../Declaration/DeclarationDashBoard.vue";
+import Navbar from "./Navbar.vue";
 
 export default {
-components:{
-    appDeclarationDashBoard:DeclarationDashBoard,
-    appOpenCases:OpenCases,
-    appNavbar:Navbar
-}
-}
+  components: {
+    appDeclarationDashBoard: DeclarationDashBoard,
+    appOpenCases: OpenCases,
+    appNavbar: Navbar
+  }
+};
 </script>
 
 <style>
-@import url('./styles/DashboardStyle.css');
+@import url("./styles/DashboardStyle.css");
 </style>

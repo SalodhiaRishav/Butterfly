@@ -7,7 +7,11 @@
   >
     <p class="block-heading">Declaration type</p>
     <b-form-group label="*Message Name">
-      <b-form-select v-model="declaration.messageName" :options="messageNameList" required></b-form-select>
+      <b-form-select
+        v-model="declaration.messageName"
+        :options="messageNameList"
+        required
+      ></b-form-select>
     </b-form-group>
     <b-form-group label="Declaration Type(1:1):">
       <b-form-select
@@ -43,44 +47,41 @@ export default {
       show: true,
       declarationType1List: [],
       declarationType2List: [],
-      messageNameList: [],        
+      messageNameList: []
     };
   },
-  
-  mounted(){
-      axios.get('https://localhost:44313/getdropdownitems/DeclarationType1')
-            .then((response)=>{
-              if(response.data){
-               
-                  this.declarationType1List= response.data.data.map(x=>{
-                    return {value: x.key, text:x.value}
-                  })
-                }
-            }
-            )
-            .catch((error)=>console.log(error))
-        axios.get('https://localhost:44313/getdropdownitems/DeclarationType2')
-            .then((response)=>{
-              if(response.data){
-                
-                  this.declarationType2List= response.data.data.map(x=>{
-                    return {value: x.key, text:x.value}
-                  })
-                }
-            }
-            )
-            .catch((error)=>console.log(error))
-            axios.get('https://localhost:44313/getdropdownitems/MessageName')
-            .then((response)=>{
-              if(response.data){
-               
-                  this.messageNameList= response.data.data.map(x=>{
-                    return {value: x.key, text: x.value}
-                  })
-                }
-            }
-            )
-            .catch((error)=>console.log(error))
+
+  mounted() {
+    axios
+      .get("https://localhost:44313/getdropdownitems/DeclarationType1")
+      .then(response => {
+        if (response.data) {
+          this.declarationType1List = response.data.data.map(x => {
+            return { value: x.key, text: x.value };
+          });
+        }
+      })
+      .catch(error => console.log(error));
+    axios
+      .get("https://localhost:44313/getdropdownitems/DeclarationType2")
+      .then(response => {
+        if (response.data) {
+          this.declarationType2List = response.data.data.map(x => {
+            return { value: x.key, text: x.value };
+          });
+        }
+      })
+      .catch(error => console.log(error));
+    axios
+      .get("https://localhost:44313/getdropdownitems/MessageName")
+      .then(response => {
+        if (response.data) {
+          this.messageNameList = response.data.data.map(x => {
+            return { value: x.key, text: x.value };
+          });
+        }
+      })
+      .catch(error => console.log(error));
   },
   methods: {
     onSubmit() {},
