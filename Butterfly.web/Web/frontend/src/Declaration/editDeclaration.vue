@@ -1,6 +1,6 @@
 <template>
   <div>
-    <editdeclarationheader :declaration="declaration"></editdeclarationheader>
+    <editdeclarationheader :declaration="declaration" :referenceData="referenceData"></editdeclarationheader>
     <b-tabs card style="color:black; background-color:#E6E6E6">
       <b-tab title="Header" active>
         <div style="padding-top:10px; padding-right:0px; padding-left:0px">
