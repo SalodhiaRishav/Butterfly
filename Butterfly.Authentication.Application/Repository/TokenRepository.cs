@@ -27,8 +27,11 @@
         {
             try
             {
-                DbSet.Add(entity);
-                ButterflyContext.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    context.UserToken.Add(entity);
+                    context.SaveChanges();
+                }
                 return entity;
             }
             catch (Exception exception)
@@ -41,8 +44,12 @@
         {
             try
             {
-                DbSet.AddRange(entityList);
-                ButterflyContext.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    context.UserToken.AddRange(entityList);
+                    context.SaveChanges();
+                }
+
             }
             catch (Exception exception)
             {
@@ -54,8 +61,11 @@
         {
             try
             {
-                DbSet.Remove(entity);
-                ButterflyContext.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    DbSet.Remove(entity);
+                    ButterflyContext.SaveChanges();
+                }
             }
             catch (Exception exception)
             {
@@ -67,8 +77,11 @@
         {
             try
             {
-                DbSet.RemoveRange(entityList);
-                ButterflyContext.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    context.UserToken.RemoveRange(entityList);
+                    context.SaveChanges();
+                }
             }
             catch (Exception exception)
             {
@@ -80,7 +93,10 @@
         {
             try
             {
-                return DbSet.Where(predicate).ToList();
+                using (var context = new ButterflyContext())
+                {
+                    return context.UserToken.Where(predicate).ToList();
+                }
             }
             catch (Exception exception)
             {
@@ -92,7 +108,10 @@
         {
             try
             {
-                return DbSet.Find(Id);
+                using (var context = new ButterflyContext())
+                {
+                    return context.UserToken.Find(Id);
+                }
             }
             catch (Exception exception)
             {
@@ -104,8 +123,11 @@
         {
             try
             {
-                DbSet.AddOrUpdate(entity);
-                ButterflyContext.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    context.UserToken.AddOrUpdate(entity);
+                    context.SaveChanges();
+                }
                 return entity;
             }
             catch (Exception exception)
