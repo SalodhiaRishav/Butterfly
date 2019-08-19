@@ -12,14 +12,14 @@
 
     public class UserRepository : IUserRepository
     {
-        private readonly ButterflyContext ButterflyContext;
+       // private readonly ButterflyContext ButterflyContext;
 
         private readonly DbSet<User> DbSet;
 
         public UserRepository()
         {
-            ButterflyContext = new ButterflyContext();
-            DbSet = ButterflyContext.Set<User>();
+          //  ButterflyContext = new ButterflyContext();
+           // DbSet = ButterflyContext.Set<User>();
         }
         public List<User> List { get => DbSet.ToList(); }
 
@@ -27,8 +27,11 @@
         {
             try
             {
-                DbSet.Add(entity);
-                ButterflyContext.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    context.User.Add(entity);
+                    context.SaveChanges();
+                }
                 return entity;
             }
             catch (Exception exception)
@@ -41,8 +44,11 @@
         {
             try
             {
-                DbSet.AddRange(entityList);
-                ButterflyContext.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    context.User.AddRange(entityList);
+                    context.SaveChanges();
+                }
             }
             catch (Exception exception)
             {
@@ -54,8 +60,11 @@
         {
             try
             {
-                DbSet.Remove(entity);
-                ButterflyContext.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    context.User.Remove(entity);
+                    context.SaveChanges();
+                }
             }
             catch (Exception exception)
             {
@@ -67,8 +76,11 @@
         {
             try
             {
-                DbSet.RemoveRange(entityList);
-                ButterflyContext.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    context.User.RemoveRange(entityList);
+                    context.SaveChanges();
+                }
             }
             catch (Exception exception)
             {
@@ -80,6 +92,7 @@
         {
             try
             {
+
                 return DbSet.Where(predicate).ToList();
             }
             catch (Exception exception)
@@ -104,8 +117,11 @@
         {
             try
             {
-                DbSet.AddOrUpdate(entity);
-                ButterflyContext.SaveChanges();
+                using (var context = new ButterflyContext())
+                {
+                    context.User.AddOrUpdate(entity);
+                    context.SaveChanges();
+                }
                 return entity;
             }
             catch (Exception exception)
