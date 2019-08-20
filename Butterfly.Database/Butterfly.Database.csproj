@@ -110,6 +110,10 @@
     <Compile Include="Migrations\201908181208368_AddedAuthentication.Designer.cs">
       <DependentUpon>201908181208368_AddedAuthentication.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908200613157_addedrefreshtoken.cs" />
+    <Compile Include="Migrations\201908200613157_addedrefreshtoken.Designer.cs">
+      <DependentUpon>201908200613157_addedrefreshtoken.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Authentication\Role.cs" />
     <Compile Include="Models\Authentication\User.cs" />
@@ -184,6 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908181208368_AddedAuthentication.resx">
       <DependentUpon>201908181208368_AddedAuthentication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908200613157_addedrefreshtoken.resx">
+      <DependentUpon>201908200613157_addedrefreshtoken.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
