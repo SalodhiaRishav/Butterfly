@@ -9,6 +9,7 @@
         public DateTimeOffset AccessTokenExpiresDateTime { get; set; }
         public string RefreshTokenIdHash { get; set; }
         public string RefreshTokenIdHashSource { get; set; }
+        public string RefreshTokenValue { get; set; }
         public DateTimeOffset RefreshTokenExpiresDateTime { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; }

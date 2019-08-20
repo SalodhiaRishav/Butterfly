@@ -33,7 +33,7 @@
             try
             {
                 JwtTokenData jwtTokensData = TokenBusinessLogic.CreateJwtTokens(user);
-                TokenBusinessLogic.AddNewToken(user, jwtTokensData.AccessToken, jwtTokensData.RefreshTokenSerial);
+                TokenBusinessLogic.AddNewToken(user, jwtTokensData.AccessToken, jwtTokensData.RefreshTokenSerial,jwtTokensData.RefreshToken);
                 loginResultDto.AccessToken = jwtTokensData.AccessToken;
                 loginResultDto.RefreshTokenSerial = jwtTokensData.RefreshTokenSerial;
                 return loginResultDto;

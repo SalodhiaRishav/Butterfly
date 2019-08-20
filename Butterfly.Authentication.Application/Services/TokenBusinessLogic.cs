@@ -27,16 +27,16 @@
 
         public JwtTokenData CreateJwtTokens(User user)
         {
-            DeleteExpiredTokens();
             var (accessToken, claims) = GenerateAccessToken(user);
             var (refreshTokenValue, refreshTokenSerial) = GenerateRefreshToken(user);
-            return new JwtTokenData
+            var token = new JwtTokenData
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshTokenValue,
                 RefreshTokenSerial = refreshTokenSerial,
                 Claims = claims
             };
+            return token;
         }
 
         private (string AccessToken, IEnumerable<Claim> Claims) GenerateAccessToken(User user)
@@ -53,10 +53,10 @@
             }
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
-                Issuer = "rishav server",
+                Issuer = "Butterfly",
                 NotBefore = DateTime.UtcNow,
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.UtcNow.AddMinutes(10),
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256Signature)
             };
@@ -86,7 +86,7 @@
 
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
-                Issuer = "rishav server",
+                Issuer = "Butterfly",
                 NotBefore = DateTime.UtcNow,
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddMinutes(60),
@@ -100,16 +100,17 @@
             return (refreshTokenValue, refreshTokenSerial);
         }
 
-        public void AddNewToken(User user, string accessToken, string refreshTokenSerialNumber)
+        public void AddNewToken(User user, string accessToken, string refreshTokenSerialNumber, string refreshToken)
         {
-            DeleteExpiredTokens();
+          //  DeleteExpiredTokens();
             Token userToken = new Token();
             userToken.UserId = user.Id;
+            userToken.RefreshTokenValue = refreshToken;
             userToken.AccessTokenHash = accessToken;
             userToken.RefreshTokenIdHash = refreshTokenSerialNumber;
             userToken.RefreshTokenIdHashSource = null;
             userToken.RefreshTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(60);
-            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(1);
+            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(10);
             TokenRepository.Add(userToken);
         }
 
@@ -206,15 +207,6 @@
             foreach (var token in expiredTokenList)
             {
                TokenRepository.Delete(token);
-            }
-        }
-
-        private void RevokeRefereshToken(string refreshToken)
-        {
-            var refreshTokenList = TokenRepository.Find(uToken => uToken.RefreshTokenIdHash == refreshToken).ToList();
-            if (refreshTokenList.Count != 0)
-            {
-                TokenRepository.Delete(refreshTokenList.First());
             }
         }
     }

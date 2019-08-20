@@ -12,7 +12,7 @@ namespace Butterfly.Authentication.Contracts.Interfaces
     public interface ITokenBusinessLogic
     {
         JwtTokenData CreateJwtTokens(User user);
-        void AddNewToken(User user, string accessToken, string refreshTokenSerialNumber);
+        void AddNewToken(User user, string accessToken, string refreshTokenSerialNumber, string refreshToken);
         string RefreshToken(string RefreshTokenSerialId);
     }
 }
