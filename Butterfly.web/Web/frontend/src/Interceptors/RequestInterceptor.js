@@ -1,14 +1,29 @@
-import axios from 'axios';
-import store from './../store/store'
+import HttpClient from "./../Utils/HttpRequestWrapper";
+import store from "./../store/store";
 
-export default function setTokenToRequest() {
-    axios.interceptors.request.use(function(config) {
-        const token = store.getters.accessToken;
-        if(token) {
-            config.headers.Authorization = token;
-        }
-        return config;
-    }, function(err) {
-        return Promise.reject(err);
-    });
+export default function someFunction() {
+  HttpClient.myAxios.interceptors.request.use(
+    function(config) {
+      let finalConfig = applyToken(config);
+      return finalConfig;
+    },
+    function(error) {
+      return Promise.reject(error);
+    }
+  );
 }
+
+const applyToken = config => {
+  const token = store.getters.accessToken;
+  if (token && checkValidEndpointForAddingHeader(config.url)) {
+    config.headers.Authorization = token;
+  }
+  return config;
+};
+
+const checkValidEndpointForAddingHeader = url => {
+  if (url === "checkuser") {
+    return false;
+  }
+  return true;
+};

@@ -1,13 +1,13 @@
 const state = {
-  caseToEdit:null,
+  caseToEdit: null,
   caseInformation: {
-    id:"",
-    caseId:"",
+    id: "",
+    caseId: "",
     description: "",
     messageFromClient: "",
     priority: null,
-    createdOn:"",
-    modifiedOn:""
+    createdOn: "",
+    modifiedOn: ""
   },
   statusForm: {
     status: null
@@ -44,7 +44,7 @@ const getters = {
   references: state => {
     return state.references;
   },
-  caseToEdit:state=>{
+  caseToEdit: state => {
     return state.caseToEdit;
   }
 };
@@ -52,49 +52,48 @@ const getters = {
 const mutations = {
   setCaseToEdit: (state, caseToEdit) => {
     state.caseToEdit = caseToEdit;
-    state.caseInformation=caseToEdit.caseInformation;
-    state.clientDetails=caseToEdit.client;
-    state.statusForm=caseToEdit.caseStatus;
-    state.references=caseToEdit.references;
-    state.notesForm=caseToEdit.notes;
-
+    state.caseInformation = caseToEdit.caseInformation;
+    state.clientDetails = caseToEdit.client;
+    state.statusForm = caseToEdit.caseStatus;
+    state.references = caseToEdit.references;
+    state.notesForm = caseToEdit.notes;
   },
-  setClientDetails: (state,clientData)=>{
-    state.clientDetails=clientData;
+  setClientDetails: (state, clientData) => {
+    state.clientDetails = clientData;
   },
-  setCaseInformation: (state,caseInformation)=>{
-    state.caseInformation=caseInformation;
+  setCaseInformation: (state, caseInformation) => {
+    state.caseInformation = caseInformation;
   },
-  setStatusForm: (state,statusForm)=>{
-    state.statusForm=statusForm;
+  setStatusForm: (state, statusForm) => {
+    state.statusForm = statusForm;
   },
-  setNotesForm: (state,notesForm)=>{
-    state.notesForm=notesForm;
+  setNotesForm: (state, notesForm) => {
+    state.notesForm = notesForm;
   },
-  setReferences: (state,references)=>{
-    state.references=references;
-  },
+  setReferences: (state, references) => {
+    state.references = references;
+  }
 };
 
 const actions = {
-  setCaseToEdit: (context,caseToEdit) => {
-      context.commit("setCaseToEdit",caseToEdit)
+  setCaseToEdit: (context, caseToEdit) => {
+    context.commit("setCaseToEdit", caseToEdit);
   },
-  setClientDetails: (context,clientDetails) => {
-    context.commit("setClientDetails",clientDetails)
-},
-setCaseInformation: (context,caseInformation) => {
-      context.commit("setCaseInformation",caseInformation)
+  setClientDetails: (context, clientDetails) => {
+    context.commit("setClientDetails", clientDetails);
   },
-  setStatusForm: (context,statusForm) => {
-    context.commit("setStatusForm",statusForm)
-},
-setNotesForm: (context,notesForm) => {
-  context.commit("setNotesForm",notesForm)
-},
-setReferences: (context,references) => {
-  context.commit("setReferences",references)
-}
+  setCaseInformation: (context, caseInformation) => {
+    context.commit("setCaseInformation", caseInformation);
+  },
+  setStatusForm: (context, statusForm) => {
+    context.commit("setStatusForm", statusForm);
+  },
+  setNotesForm: (context, notesForm) => {
+    context.commit("setNotesForm", notesForm);
+  },
+  setReferences: (context, references) => {
+    context.commit("setReferences", references);
+  }
 };
 
 export default {

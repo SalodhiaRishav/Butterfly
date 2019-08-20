@@ -20,7 +20,7 @@ namespace Butterfly.CaseManagement.Contracts.Filters
                 res.Close();
                 return;
             }
-
+           
             var token = bearerToken.Split(' ')[1];
             try
             {

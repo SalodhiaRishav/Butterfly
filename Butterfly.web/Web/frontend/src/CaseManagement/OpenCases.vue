@@ -9,7 +9,7 @@
         :items="openCases"
         :current-page="currentPage"
         :per-page="perPage"
-        @row-clicked="someFunction"
+        @row-clicked="editCase"
       >
         <span slot-scope="data" slot="status">
           <appCaseStatusDropDown :defaultValue="data.item.caseStatus">
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import HttpClient from "./../Utils/HttpRequestWrapper";
 import CaseStatusDropDown from "./CaseStatusDropDown.vue";
 import CasePriorityDropDown from "./CasePriorityDropDown.vue";
 
@@ -94,7 +94,7 @@ export default {
     convertDate(someDate) {
       return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
     },
-    someFunction: function(row) {
+    editCase: function(row) {
       const foundCase = this.allCases.find(function(element) {
         return element.id === row.id;
       });
@@ -104,75 +104,52 @@ export default {
       this.$router.push("/editcase");
     },
     getAllCases: function() {
-
- 
-        const accessToken=this.$store.getters.accessToken;
-        if(accessToken ===  null)
-        {
-          alert("Refresh Token expired,Please login again");
-          this.$router.push("/login");
-          return;
-        }
-        let config = {
-          headers: {
-            "Authorization": accessToken
+      const resource = "casemanagement";
+      const token = this.$store.getters.accessToken;
+      HttpClient.get(resource)
+        .then(response => {
+          if(response.data === "token refreshed")
+          {
+            this.getAllCases();
+            return;
           }
-         }
-        const url = "https://localhost:44313/casemanagement";
-        axios
-          .get(url,config)
-          .then(response => {
-            if (response.data.success === true) {
-              let openCase = [];
+          if (response.data.success === true) {
+            let openCase = [];
 
-          this.allCases = response.data.data;
-          for (let i = 0; i < this.allCases.length; ++i) {
-            let referencesString = "";
+            this.allCases = response.data.data;
+            for (let i = 0; i < this.allCases.length; ++i) {
+              let referencesString = "";
 
-            if (this.allCases[i].references) {
-              referencesString = this.allCases[i].references[0].type;
-              for (let j = 1; j < this.allCases[i].references.length; ++j) {
-                referencesString =
-                  referencesString + ", " + this.allCases[i].references[j].type;
+              if (this.allCases[i].references) {
+                referencesString = this.allCases[i].references[0].type;
+                for (let j = 1; j < this.allCases[i].references.length; ++j) {
+                  referencesString =
+                    referencesString +
+                    ", " +
+                    this.allCases[i].references[j].type;
+                }
               }
-            }
 
-            let obj = {
-              caseId: "KGH-19-" + this.allCases[i].caseId,
-              id: this.allCases[i].id,
-              createdDate: this.convertDate(this.allCases[i].createdOn),
-              caseStatus: this.allCases[i].caseStatus.status,
-              description: this.allCases[i].caseInformation.description,
-              client: this.allCases[i].client.clientIdentifier,
-              notes: this.allCases[i].notes.notesByCpa,
-              casePriority: this.allCases[i].caseInformation.priority,
-              references: referencesString
-            };
-            openCase.push(obj);
+              let obj = {
+                caseId: "KGH-19-" + this.allCases[i].caseId,
+                id: this.allCases[i].id,
+                createdDate: this.convertDate(this.allCases[i].createdOn),
+                caseStatus: this.allCases[i].caseStatus.status,
+                description: this.allCases[i].caseInformation.description,
+                client: this.allCases[i].client.clientIdentifier,
+                notes: this.allCases[i].notes.notesByCpa,
+                casePriority: this.allCases[i].caseInformation.priority,
+                references: referencesString
+              };
+              openCase.push(obj);
+            }
+            this.openCases = openCase;
+            this.totalRows = this.openCases.length;
           }
-          this.openCases = openCase;
-          this.totalRows = this.openCases.length;
-            } 
-            else if(response.data == "token expired")
-            {
-              const refreshTokenSerial=this.$store.getters.refreshTokenSerial;
-              this.$store.dispatch("getNewToken",refreshTokenSerial)
-              .then((myresponse)=>{
-                    this.$store.dispatch("setAccessToken","bearer "+myresponse);
-                    this.getAllCases();
-              })
-              .catch(error=>{
-                alert(error);
-              })
-            }
-            else{
-              alert(response.data.message);
-            }
-          })
-          .catch(error => {
-            alert(error);
-          });
-     
+        })
+        .catch(error => {
+          alert(error);
+        });
     }
   }
 };
