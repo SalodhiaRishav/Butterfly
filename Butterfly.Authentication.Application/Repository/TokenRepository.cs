@@ -63,8 +63,9 @@
             {
                 using (var context = new ButterflyContext())
                 {
-                    DbSet.Remove(entity);
-                    ButterflyContext.SaveChanges();
+                    context.UserToken.Attach(entity);
+                    context.UserToken.Remove(entity);
+                    context.SaveChanges();
                 }
             }
             catch (Exception exception)

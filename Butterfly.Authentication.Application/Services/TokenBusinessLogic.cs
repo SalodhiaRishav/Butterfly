@@ -114,9 +114,6 @@
             TokenRepository.Add(userToken);
         }
 
-
-       
-
         private ClaimsPrincipal GetPrincipalForRefreshingToken(string token)
         {
             try
@@ -203,7 +200,7 @@
 
         private void DeleteExpiredTokens()
         {
-            var expiredTokenList = TokenRepository.Find(uToken => uToken.RefreshTokenExpiresDateTime <= DateTime.UtcNow).ToList();
+            var expiredTokenList = TokenRepository.Find(uToken => uToken.RefreshTokenExpiresDateTime <= DateTime.UtcNow);
             foreach (var token in expiredTokenList)
             {
                TokenRepository.Delete(token);

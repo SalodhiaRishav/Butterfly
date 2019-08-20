@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import HttpClient from './../Utils/HttpRequestWrapper';
 export default {
      data () {
         return {
@@ -34,12 +34,12 @@ export default {
     },
     methods:{
         handleSubmit(){
-            const url="https://localhost:44313/checkuser"
+            const resource="checkuser";
             const loginData={
                 email:this.email,
                 password:this.password
             }
-            axios.post(url,loginData)
+            HttpClient.post(resource,loginData)
             .then(response =>{
                 if(response.data.success === true)
                 {

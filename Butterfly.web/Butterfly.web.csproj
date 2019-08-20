@@ -9881,6 +9881,8 @@
     <Content Include="Web\frontend\src\CommonComponent\styles\DashboardStyle.css" />
     <Content Include="Web\frontend\src\CommonComponent\styles\NavbarStyle.css" />
     <Content Include="Web\frontend\src\GlobalStyle.css" />
+    <Content Include="Web\frontend\src\Interceptors\ExceptionResponseInterceptor.js" />
+    <Content Include="Web\frontend\src\Interceptors\RequestInterceptor.js" />
     <Content Include="Web\frontend\src\main.js" />
     <Content Include="Web\frontend\src\router\index.js" />
     <Content Include="Web\frontend\src\store\modules\CaseManagement.js" />

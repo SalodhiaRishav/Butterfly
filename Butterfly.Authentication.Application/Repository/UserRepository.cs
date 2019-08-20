@@ -12,14 +12,14 @@
 
     public class UserRepository : IUserRepository
     {
-       // private readonly ButterflyContext ButterflyContext;
+        private readonly ButterflyContext ButterflyContext;
 
         private readonly DbSet<User> DbSet;
 
         public UserRepository()
         {
-          //  ButterflyContext = new ButterflyContext();
-           // DbSet = ButterflyContext.Set<User>();
+            ButterflyContext = new ButterflyContext();
+            DbSet = ButterflyContext.Set<User>();
         }
         public List<User> List { get => DbSet.ToList(); }
 
@@ -92,8 +92,11 @@
         {
             try
             {
-
-                return DbSet.Where(predicate).ToList();
+                using (var context = new ButterflyContext())
+                {
+                    return context.User.Where(predicate).ToList();
+                }
+                
             }
             catch (Exception exception)
             {

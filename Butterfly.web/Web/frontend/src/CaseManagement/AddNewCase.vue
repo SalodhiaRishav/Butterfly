@@ -23,13 +23,13 @@
 <script>
 import CaseManagementBody from "./CaseManagementBody.vue";
 import CaseHeader from "./CaseHeader.vue";
-import appNavbar from './../CommonComponent/Navbar'
+import appNavbar from "./../CommonComponent/Navbar";
 
 export default {
   components: {
+    appNavbar,
     appCaseHeader: CaseHeader,
-    appCaseManagementBody: CaseManagementBody,
-    appNavbar
+    appCaseManagementBody: CaseManagementBody
   }
 };
 </script>
