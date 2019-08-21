@@ -57,4 +57,18 @@ const router = new Router({
   mode: 'history',
 }
 )
+router.beforeEach((to, from, next) => {
+  const user = sessionStorage.getItem("accessToken");
+  if (to.fullPath === '/home' || to.fullPath === '/declarationform' || to.fullPath === '/newcase') {
+    if (user == null) {
+      next('/login');
+    }
+  }
+  if (to.fullPath === '/' || to.fullPath === '/login') {
+    if (user != null) {
+      next('/home');
+    }
+  }
+  next();
+});
 export default router;

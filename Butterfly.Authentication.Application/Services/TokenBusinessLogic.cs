@@ -17,14 +17,14 @@
     public class TokenBusinessLogic : ITokenBusinessLogic
     {
         private readonly IRoleBusinessLogic RoleBusinessLogic;
-        private readonly ITokenRepository TokenRepository;
-        private readonly IUserRepository UserRepository;
-        private readonly NameValueCollection tokenConfiguration;
+        private readonly ITokenRepository _tokenRepository;
+        private readonly IUserRepository _userRepository;
+        private NameValueCollection tokenConfiguration;
         public TokenBusinessLogic(IRoleBusinessLogic roleBusinessLogic,ITokenRepository tokenRepository,IUserRepository userRepository)
         {
             RoleBusinessLogic = roleBusinessLogic;
-            TokenRepository = tokenRepository;
-            UserRepository = userRepository;
+            _tokenRepository = tokenRepository;
+            _userRepository = userRepository;
             tokenConfiguration= ConfigurationManager.GetSection("tokenConfig") as NameValueCollection;
         }
 
@@ -115,7 +115,7 @@
             userToken.RefreshTokenIdHashSource = null;
             userToken.RefreshTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(60);
             userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddSeconds(5);
-            TokenRepository.Add(userToken);
+            _tokenRepository.Add(userToken);
         }
 
         private ClaimsPrincipal GetPrincipalForRefreshingToken(string token)
@@ -150,7 +150,7 @@
 
         public string RefreshToken(string RefreshTokenSerialId)
         {
-            var tokenList =TokenRepository.Find(ut => ut.RefreshTokenIdHash == RefreshTokenSerialId).ToList();
+            var tokenList =_tokenRepository.Find(ut => ut.RefreshTokenIdHash == RefreshTokenSerialId).ToList();
             if (tokenList.Count == 0)
             {
                 return null;
@@ -171,7 +171,7 @@
             var accessToken = GenerateAccessToken(user).AccessToken;
             userToken.AccessTokenHash = accessToken;
             userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddSeconds(5);
-            TokenRepository.Update(userToken);
+            _tokenRepository.Update(userToken);
             return userToken.AccessTokenHash;
         }
 
@@ -189,7 +189,7 @@
                     return null;
                 }
                 var email = identity.FindFirst(ClaimTypes.Email).Value;
-                var userList = UserRepository.Find(u => u.Email == email).ToList();
+                var userList = _userRepository.Find(u => u.Email == email).ToList();
                 if (userList.Count == 0)
                 {
                     return null;
@@ -204,11 +204,18 @@
 
         private void DeleteExpiredTokens()
         {
-            var expiredTokenList = TokenRepository.Find(uToken => uToken.RefreshTokenExpiresDateTime <= DateTime.UtcNow);
+            var expiredTokenList = _tokenRepository.Find(uToken => uToken.RefreshTokenExpiresDateTime <= DateTime.UtcNow);
             foreach (var token in expiredTokenList)
             {
-               TokenRepository.Delete(token);
+               _tokenRepository.Delete(token);
             }
+        }
+
+        public void DeleteToken(string token)
+        {
+            var delTokenList = _tokenRepository.Find(t => t.AccessTokenHash == token);
+
+            _tokenRepository.Delete(delTokenList.First());
         }
     }
 }

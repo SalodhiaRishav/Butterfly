@@ -36,6 +36,7 @@ const errorHandler = error => {
     router.push("/login");
     return;
   } else if (500 === error.response.status) {
+    console.log(error);
     alert("internal server error,redirecting to login");
     router.push("/login");
     return;
@@ -44,12 +45,12 @@ const errorHandler = error => {
 
 const refreshToken = () => {
     return new Promise((resolve,reject)=>{
-        const refreshTokenSerial = localStorage.getItem("refreshTokenId")
+        const refreshTokenSerial = sessionStorage.getItem("refreshTokenId")
         store
         .dispatch("getNewToken", refreshTokenSerial)
         .then(myresponse => {
           if (myresponse) {
-            localStorage.setItem("accessToken",myresponse)
+            sessionStorage.setItem("accessToken",myresponse)
             resolve({ isTokenRefreshed: true,token:myresponse});
           }
         })
