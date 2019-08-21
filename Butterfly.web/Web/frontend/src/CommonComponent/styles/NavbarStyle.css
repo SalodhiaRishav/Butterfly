@@ -1,3 +1,9 @@
 .mynavbar{
     background-color:#6A54A6;
 }
+.btn-style{
+    background: transparent;
+    border:none;
+    float: right;
+    color: rgba(255,255,255,0.5)
+}

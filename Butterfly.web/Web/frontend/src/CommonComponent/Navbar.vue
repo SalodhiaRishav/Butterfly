@@ -18,10 +18,11 @@
             >Create new declaration</router-link
           >
         </b-nav-item-dropdown>
-         <button v-on:click="logout">Logout</button>
+        
       </b-navbar-nav>
-      
+      <button class="btn-style" right v-on:click="logout">Logout</button>
     </b-navbar>
+     
   </div>
 </template>
 
@@ -52,4 +53,5 @@ export default {
 
 <style>
 @import url(./styles/NavbarStyle.css);
+
 </style>
