@@ -60,15 +60,17 @@ export default {
           if (response.data.success === true)
           {
             localStorage.setItem("accessToken",response.data.data.accessToken);
-            localStorage.setItem("refreshToken",response.data.data.refreshTokenSerial);
+            localStorage.setItem("refreshTokenId",response.data.data.refreshTokenSerial);
             this.$router.push("/home");
           } 
           else
-           {
+            {
+             console.log(response.data.message);   
             alert(response.data.message);
           }
         })
         .catch(error => {
+            console.log(error);
           alert(error);
         });
     }
