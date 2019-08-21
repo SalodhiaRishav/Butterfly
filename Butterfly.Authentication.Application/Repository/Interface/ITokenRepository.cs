@@ -14,6 +14,7 @@
         Token FindById(int Id);
         void AddRange(IEnumerable<Token> entityList);
         void DeleteRange(IEnumerable<Token> entityList);
+       
         List<Token> Find(Expression<Func<Token, bool>> predicate);
     }
 }

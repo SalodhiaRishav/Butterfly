@@ -36,6 +36,7 @@ const errorHandler = error => {
     router.push("/login");
     return;
   } else if (500 === error.response.status) {
+    console.log(error);
     alert("internal server error,redirecting to login");
     router.push("/login");
     return;

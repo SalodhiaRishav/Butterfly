@@ -3,15 +3,19 @@
     using Butterfly.Authentication.Contracts.EndPoints;
     using Butterfly.Authentication.Contracts.Interfaces;
     using Butterfly.web.CommonResponse;
+    using ServiceStack.ServiceHost;
     using ServiceStack.ServiceInterface;
     using System;
+    using System.Web;
+
     public class TokenService : Service
     {
-        private readonly ITokenBusinessLogic TokenBusinessLogic;
+        private readonly ITokenBusinessLogic _tokenBusinessLogic;
 
         public TokenService(ITokenBusinessLogic tokenBusinessLogic)
         {
-            TokenBusinessLogic = tokenBusinessLogic;
+            _tokenBusinessLogic = tokenBusinessLogic;
+           
         }
         public OperationResponse<RefreshTokenResult> Post(RefreshAccessToken request)
         {
@@ -23,7 +27,7 @@
                 return result;
             }
 
-            var accessToken = TokenBusinessLogic.RefreshToken(refreshTokenSerial);
+            var accessToken = _tokenBusinessLogic.RefreshToken(refreshTokenSerial);
             if (accessToken == null)
             {
                 result.OnError("Invalid token, please login again", null);
@@ -32,6 +36,16 @@
             result.OnSuccess(new RefreshTokenResult() { AccessToken = accessToken },
                 "new token recieved successfully");
             return result;
+        }
+        public string GET(LogoutUser request)
+        {
+            // var token = req.Headers.Get("Authorization");
+
+
+           var token = HttpContext.Current.Request.Headers.Get("Authorization");
+            _tokenBusinessLogic.DeleteToken(token);
+            return "logged out";
+
         }
     }
 }

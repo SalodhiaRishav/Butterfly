@@ -91,6 +91,7 @@
     <Compile Include="Dto\LoginResultDto.cs" />
     <Compile Include="Dto\RoleDto.cs" />
     <Compile Include="EndPoints\LoginUser.cs" />
+    <Compile Include="EndPoints\LogoutUser.cs" />
     <Compile Include="EndPoints\RefreshAccessToken.cs" />
     <Compile Include="EndPoints\RefreshTokenResult.cs" />
     <Compile Include="Interfaces\IRoleBusinessLogic.cs" />

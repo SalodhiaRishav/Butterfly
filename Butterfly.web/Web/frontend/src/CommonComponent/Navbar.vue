@@ -18,14 +18,36 @@
             >Create new declaration</router-link
           >
         </b-nav-item-dropdown>
-         <b-nav-item href="#">Logout</b-nav-item>
+         <button v-on:click="logout">Logout</button>
       </b-navbar-nav>
+      
     </b-navbar>
   </div>
 </template>
 
 <script>
-export default {};
+import HttpClient from "./../Utils/HttpRequestWrapper";
+
+export default {
+  methods: {
+    logout(){
+      var endpoint = "logout" 
+        const token = localStorage.getItem("accessToken");
+        HttpClient.get(endpoint)
+          .then((response)=>{
+          if(response){
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshTokenId");
+            this.$router.push("/login");
+            alert("logged out!");
+          }
+        })
+        .catch((error)=>{
+          console.log(error);
+        });       
+      },
+  },
+};
 </script>
 
 <style>

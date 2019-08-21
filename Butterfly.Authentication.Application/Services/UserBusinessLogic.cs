@@ -2,27 +2,29 @@
 {
     using Butterfly.Authentication.Application.Repository.Interfaces;
     using Butterfly.Authentication.Contracts.Dto;
+    using Butterfly.Authentication.Contracts.EndPoints;
     using Butterfly.Authentication.Contracts.Interfaces;
     using Butterfly.Database.Models.Authentication;
+    using ServiceStack.ServiceHost;
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
     public class UserBusinessLogic : IUserBusinessLogic
     {
-        private readonly IUserRepository UserRepository;
-        private readonly ITokenBusinessLogic TokenBusinessLogic;
+        private readonly IUserRepository _userRepository;
+        private readonly ITokenBusinessLogic _tokenBusinessLogic;
 
         public UserBusinessLogic(IUserRepository userRepository,ITokenBusinessLogic tokenBusinessLogic )
         {
-            UserRepository = userRepository;
-            TokenBusinessLogic = tokenBusinessLogic;
+            _userRepository = userRepository;
+            _tokenBusinessLogic = tokenBusinessLogic;
         }
 
         public LoginResultDto LoginUser(string email,string password)
         {
             LoginResultDto loginResultDto = new LoginResultDto();
-            List<User> userList = UserRepository.Find(u => u.Email == email && u.Password == password);
+            List<User> userList = _userRepository.Find(u => u.Email == email && u.Password == password);
 
             if (userList.Count == 0)
             {
@@ -32,8 +34,8 @@
             User user = userList.First();
             try
             {
-                JwtTokenData jwtTokensData = TokenBusinessLogic.CreateJwtTokens(user);
-                TokenBusinessLogic.AddNewToken(user, jwtTokensData.AccessToken, jwtTokensData.RefreshTokenSerial,jwtTokensData.RefreshToken);
+                JwtTokenData jwtTokensData = _tokenBusinessLogic.CreateJwtTokens(user);
+                _tokenBusinessLogic.AddNewToken(user, jwtTokensData.AccessToken, jwtTokensData.RefreshTokenSerial, jwtTokensData.RefreshToken);
                 loginResultDto.AccessToken = jwtTokensData.AccessToken;
                 loginResultDto.RefreshTokenSerial = jwtTokensData.RefreshTokenSerial;
                 return loginResultDto;
@@ -42,6 +44,13 @@
             {
                 return null;
             }
+        }
+        public string GET(LogoutUser request, IHttpRequest req)
+        {
+            var token = req.Headers.Get("Authorization");
+            _tokenBusinessLogic.DeleteToken(token);
+            return "logged out";
+
         }
     }
 }
