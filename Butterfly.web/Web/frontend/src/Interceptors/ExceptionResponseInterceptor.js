@@ -3,7 +3,7 @@ import store from "./../store/store";
 import router from "./../router/index";
 
 export default function exceptionResponse() {
-  HttpClient.myAxios.interceptors.response.use(
+  HttpClient.http.interceptors.response.use(
     function(response) {
             if (isTokenExpired(response)) {
                 return new Promise((resolve,reject)=>{

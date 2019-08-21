@@ -1,8 +1,7 @@
 import HttpClient from "./../Utils/HttpRequestWrapper";
-import store from "./../store/store";
 
 export default function someFunction() {
-  HttpClient.myAxios.interceptors.request.use(
+  HttpClient.http.interceptors.request.use(
     function(config) {
       let finalConfig = applyToken(config);
       return finalConfig;
@@ -14,7 +13,7 @@ export default function someFunction() {
 }
 
 const applyToken = config => {
-  const token = store.getters.accessToken;
+  const token = localStorage.getItem("accessToken");
   if (token && checkValidEndpointForAddingHeader(config.url)) {
     config.headers.Authorization = token;
   }
@@ -22,7 +21,7 @@ const applyToken = config => {
 };
 
 const checkValidEndpointForAddingHeader = url => {
-  if (url === "checkuser") {
+  if (url === "loginRequest") {
     return false;
   }
   return true;

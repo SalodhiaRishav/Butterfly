@@ -50,8 +50,8 @@ const router = new Router({
     },
     {
       path: '/default.html',
-      name: 'Dashboard',
-      component: Dashboard,
+      name: 'Default',
+      component: Login,
     },
   ],
   mode: 'history',

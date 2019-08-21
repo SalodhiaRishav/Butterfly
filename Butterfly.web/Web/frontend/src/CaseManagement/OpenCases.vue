@@ -105,9 +105,10 @@ export default {
     },
     getAllCases: function() {
       const resource = "casemanagement";
-      const token = this.$store.getters.accessToken;
+     // const token = localStorage.getItem("accessToken");
       HttpClient.get(resource)
         .then(response => {
+        //  console.log(response);
           if(response.data === "token refreshed")
           {
             this.getAllCases();
@@ -148,6 +149,7 @@ export default {
           }
         })
         .catch(error => {
+          console.log(error);
           alert(error);
         });
     }

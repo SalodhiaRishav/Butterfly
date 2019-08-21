@@ -57,17 +57,14 @@ export default {
       };
       HttpClient.post(resource, loginData)
         .then(response => {
-          if (response.data.success === true) {
-            this.$store.dispatch(
-              "setRefreshTokenSerial",
-              response.data.data.refreshTokenSerial
-            );
-            this.$store.dispatch(
-              "setAccessToken",
-              "bearer " + response.data.data.accessToken
-            );
+          if (response.data.success === true)
+          {
+            localStorage.setItem("accessToken",response.data.data.accessToken);
+            localStorage.setItem("refreshToken",response.data.data.refreshTokenSerial);
             this.$router.push("/home");
-          } else {
+          } 
+          else
+           {
             alert(response.data.message);
           }
         })

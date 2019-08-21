@@ -12,16 +12,16 @@ namespace Butterfly.CaseManagement.Contracts.Filters
         private static string secret = "XCAP05H6LoKvbRRa/QkqLNMI7cOHguaRyHzyg7n5qEkGjQmtBhz4SzYh4Fqwjyi3KJHlSXKPwVu2+bXr6CtpgQ==";
         public override void Execute(IHttpRequest req, IHttpResponse res, object requestDto)
         {
-            string bearerToken = req.Headers.Get("Authorization");
+            string token = req.Headers.Get("Authorization");
 
-            if (String.IsNullOrEmpty(bearerToken))
+            if (String.IsNullOrEmpty(token))
             {
                 res.ReturnAuthRequired("You are not authorized");
                 res.Close();
                 return;
             }
            
-            var token = bearerToken.Split(' ')[1];
+          //  var token = bearerToken.Split(' ')[1];
             try
             {
                 bool isAdmin = ValidateTokenForAdmin(token);

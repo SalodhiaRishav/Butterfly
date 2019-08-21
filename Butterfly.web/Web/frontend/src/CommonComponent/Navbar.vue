@@ -18,6 +18,7 @@
             >Create new declaration</router-link
           >
         </b-nav-item-dropdown>
+         <b-nav-item href="#">Logout</b-nav-item>
       </b-navbar-nav>
     </b-navbar>
   </div>

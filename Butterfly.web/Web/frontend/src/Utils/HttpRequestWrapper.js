@@ -1,23 +1,23 @@
 import axios from 'axios';
 
 const baseUrl="https://localhost:44313/";
-const myAxios=axios.create({baseUrl});
+const http=axios.create({baseUrl});
 
 export default {
-    myAxios:myAxios,
+    http:http,
     get(resource){
-        return myAxios.get(resource);
+        return http.get(resource);
     },
     post(resource,payload){
-         return myAxios.post(resource,payload);
+         return http.post(resource,payload);
     },
     put(resource,payload)
     {
-        return myAxios.put(resource,payload);
+        return http.put(resource,payload);
     },
     delete(resource,payload)
     {
-        return myAxios.delete(resource,payload);
+        return http.delete(resource,payload);
     }
 
 }
