@@ -45,12 +45,12 @@ const errorHandler = error => {
 
 const refreshToken = () => {
     return new Promise((resolve,reject)=>{
-        const refreshTokenSerial = localStorage.getItem("refreshTokenId")
+        const refreshTokenSerial = sessionStorage.getItem("refreshTokenId")
         store
         .dispatch("getNewToken", refreshTokenSerial)
         .then(myresponse => {
           if (myresponse) {
-            localStorage.setItem("accessToken",myresponse)
+            sessionStorage.setItem("accessToken",myresponse)
             resolve({ isTokenRefreshed: true,token:myresponse});
           }
         })

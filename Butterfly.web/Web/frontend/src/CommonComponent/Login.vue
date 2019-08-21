@@ -59,8 +59,9 @@ export default {
         .then(response => {
           if (response.data.success === true)
           {
-            localStorage.setItem("accessToken",response.data.data.accessToken);
-            localStorage.setItem("refreshTokenId",response.data.data.refreshTokenSerial);
+            alert("entering..")
+            sessionStorage.setItem("accessToken",response.data.data.accessToken);
+            sessionStorage.setItem("refreshTokenId",response.data.data.refreshTokenSerial);
             this.$router.push("/home");
           } 
           else

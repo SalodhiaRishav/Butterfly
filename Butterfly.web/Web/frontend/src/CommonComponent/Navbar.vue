@@ -32,12 +32,12 @@ export default {
   methods: {
     logout(){
       var endpoint = "logout" 
-        const token = localStorage.getItem("accessToken");
+        const token = sessionStorage.getItem("accessToken");
         HttpClient.get(endpoint)
           .then((response)=>{
           if(response){
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshTokenId");
+            sessionStorage.removeItem("accessToken");
+            sessionStorage.removeItem("refreshTokenId");
             this.$router.push("/login");
             alert("logged out!");
           }
