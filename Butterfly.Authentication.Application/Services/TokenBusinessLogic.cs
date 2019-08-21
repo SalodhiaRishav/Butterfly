@@ -11,18 +11,21 @@
     using Butterfly.Authentication.Contracts.Dto;
     using Butterfly.Authentication.Contracts.Interfaces;
     using Butterfly.Authentication.Application.Repository.Interfaces;
+    using System.Configuration;
+    using System.Collections.Specialized;
 
     public class TokenBusinessLogic : ITokenBusinessLogic
     {
-        private static string secret = "XCAP05H6LoKvbRRa/QkqLNMI7cOHguaRyHzyg7n5qEkGjQmtBhz4SzYh4Fqwjyi3KJHlSXKPwVu2+bXr6CtpgQ==";
         private readonly IRoleBusinessLogic RoleBusinessLogic;
         private readonly ITokenRepository TokenRepository;
         private readonly IUserRepository UserRepository;
+        private readonly NameValueCollection tokenConfiguration;
         public TokenBusinessLogic(IRoleBusinessLogic roleBusinessLogic,ITokenRepository tokenRepository,IUserRepository userRepository)
         {
             RoleBusinessLogic = roleBusinessLogic;
             TokenRepository = tokenRepository;
             UserRepository = userRepository;
+            tokenConfiguration= ConfigurationManager.GetSection("tokenConfig") as NameValueCollection;
         }
 
         public JwtTokenData CreateJwtTokens(User user)
@@ -41,7 +44,8 @@
 
         private (string AccessToken, IEnumerable<Claim> Claims) GenerateAccessToken(User user)
         {
-            byte[] key = Convert.FromBase64String(secret);
+            var tempkey = tokenConfiguration.Get("secret");
+            byte[] key = Convert.FromBase64String(tokenConfiguration.Get("secret"));
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             List<Claim> claims = new List<Claim>();
 
@@ -77,7 +81,7 @@
 
         private (string RefreshTokenValue, string RefreshTokenSerial) GenerateRefreshToken(User user)
         {
-            byte[] key = Convert.FromBase64String(secret);
+            byte[] key = Convert.FromBase64String(tokenConfiguration.Get("secret"));
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
             var refreshTokenSerial = this.CreateCryptographicallySecureGuid().ToString().Replace("-", "");
@@ -123,7 +127,7 @@
                 if (jwtToken == null)
                     return null;
 
-                byte[] key = Convert.FromBase64String(secret);
+                byte[] key = Convert.FromBase64String(tokenConfiguration.Get("secret"));
                
                 TokenValidationParameters parameters = new TokenValidationParameters()
                 {

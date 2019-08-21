@@ -9913,7 +9913,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHost.cs" />
-    <Compile Include="Authentication\Filters\AdminAuthenticationFilter.cs" />
+    <Compile Include="Authentication\Filters\AuthFilter.cs" />
     <Compile Include="Authentication\TokenService.cs" />
     <Compile Include="Authentication\UserService.cs" />
     <Compile Include="CaseManagement\CaseManagementService.cs" />

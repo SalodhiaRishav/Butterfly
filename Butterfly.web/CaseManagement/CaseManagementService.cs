@@ -10,7 +10,9 @@
     using System;
     using Butterfly.web.Authentication.Filters;
     using System.Collections.Generic;
+    using System.Configuration;
 
+    [AuthFilter(RoleName = "User")]
     public class CaseManagementService : Service
     {
         private readonly ICaseBusinessLogic CaseBusinessLogic;
@@ -123,7 +125,6 @@
             }
         }
 
-        [AuthFilter(RoleName = "Admin")]
         public OperationResponse<List<CaseDto>> Get(GetAllCases request)
         {
             OperationResponse<List<CaseDto>> operationResponse = new OperationResponse<List<CaseDto>>();

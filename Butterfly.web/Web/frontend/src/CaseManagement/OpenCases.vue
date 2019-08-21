@@ -105,10 +105,9 @@ export default {
     },
     getAllCases: function() {
       const resource = "casemanagement";
-     // const token = localStorage.getItem("accessToken");
       HttpClient.get(resource)
         .then(response => {
-        //  console.log(response);
+          console.log('token token'+response);
           if(response.data === "token refreshed")
           {
             this.getAllCases();
