@@ -57,4 +57,18 @@ const router = new Router({
   mode: 'history',
 }
 )
+router.beforeEach((to, from, next) => {
+  const user = localStorage.getItem("accessToken");
+  if (to.fullPath === '/home') {
+    if (user == null) {
+      next('/login');
+    }
+  }
+  if (to.fullPath === '/') {
+    if (user != null) {
+      next('/home');
+    }
+  }
+  next();
+});
 export default router;
