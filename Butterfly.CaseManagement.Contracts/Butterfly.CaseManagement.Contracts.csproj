@@ -105,7 +105,6 @@
     <Compile Include="Enums\Country.cs" />
     <Compile Include="Enums\IdentifierType.cs" />
     <Compile Include="Enums\PriorityType.cs" />
-    <Compile Include="Filters\AdminAuthenticationFilter.cs" />
     <Compile Include="Interfaces\ICaseBusinessLogic.cs" />
     <Compile Include="Interfaces\ICaseInformationBusinessLogic.cs" />
     <Compile Include="Interfaces\ICaseReferenceBusinessLogic.cs" />
