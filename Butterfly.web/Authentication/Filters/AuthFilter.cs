@@ -5,10 +5,11 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace Butterfly.CaseManagement.Contracts.Filters
+namespace Butterfly.web.Authentication.Filters
 {
-    public class AdminAuthenticationFilter : RequestFilterAttribute
+    public class AuthFilter : RequestFilterAttribute
     {
+        public string RoleName { get; set; }
         private static string secret = "XCAP05H6LoKvbRRa/QkqLNMI7cOHguaRyHzyg7n5qEkGjQmtBhz4SzYh4Fqwjyi3KJHlSXKPwVu2+bXr6CtpgQ==";
         public override void Execute(IHttpRequest req, IHttpResponse res, object requestDto)
         {
@@ -20,19 +21,17 @@ namespace Butterfly.CaseManagement.Contracts.Filters
                 res.Close();
                 return;
             }
-           
-          //  var token = bearerToken.Split(' ')[1];
             try
             {
-                bool isAdmin = ValidateTokenForAdmin(token);
-                if (!isAdmin)
+                bool isAuthenticated = ValidateToken(token,RoleName);
+                if (!isAuthenticated)
                 {
                     res.ReturnAuthRequired("You are not authorized");
                     res.Close();
                     return;
                 }
             }
-            catch(SecurityTokenExpiredException e)
+            catch(SecurityTokenExpiredException)
             {
                 res.Write("token expired");
                 res.Close();
@@ -42,7 +41,7 @@ namespace Butterfly.CaseManagement.Contracts.Filters
 
         }
 
-        private bool ValidateTokenForAdmin(string token)
+        private bool ValidateToken(string token,string roleName)
         {
 
             try
@@ -57,20 +56,19 @@ namespace Butterfly.CaseManagement.Contracts.Filters
                     return false;
                 }
                 var roles = identity.FindAll(ClaimTypes.Role);
-                bool isAdmin = false;
+                bool isAuthenticated = false;
                 foreach (var role in roles)
                 {
-                    if (role.Value == "Admin")
+                    if (role.Value == roleName)
                     {
-                        isAdmin = true;
+                        isAuthenticated = true;
                         break;
                     }
                 }
-                return isAdmin;
+                return isAuthenticated;
             }
             catch (SecurityTokenExpiredException exception)
             {
-                //TODO handle
                 throw exception;
             }
             catch (Exception)

@@ -8,8 +8,11 @@
     using FluentValidation.Results;
     using ServiceStack.ServiceInterface;
     using System;
+    using Butterfly.web.Authentication.Filters;
     using System.Collections.Generic;
+    using System.Configuration;
 
+    [AuthFilter(RoleName = "User")]
     public class CaseManagementService : Service
     {
         private readonly ICaseBusinessLogic CaseBusinessLogic;
@@ -17,6 +20,7 @@
         {
             CaseBusinessLogic = caseBusinessLogic;
         }
+
         public OperationResponse<CaseDto> Post(CreateCase request)
         {
             OperationResponse<CaseDto> operationResponse = new OperationResponse<CaseDto>();
