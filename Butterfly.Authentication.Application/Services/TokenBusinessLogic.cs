@@ -20,6 +20,7 @@
         private readonly ITokenRepository _tokenRepository;
         private readonly IUserRepository _userRepository;
         private NameValueCollection tokenConfiguration;
+        private readonly string secretKey = System.Configuration.ConfigurationManager.AppSettings["secret"];
         public TokenBusinessLogic(IRoleBusinessLogic roleBusinessLogic,ITokenRepository tokenRepository,IUserRepository userRepository)
         {
             RoleBusinessLogic = roleBusinessLogic;
@@ -41,11 +42,11 @@
             };
             return token;
         }
-
         private (string AccessToken, IEnumerable<Claim> Claims) GenerateAccessToken(User user)
         {
-            var tempkey = tokenConfiguration.Get("secret");
-            byte[] key = Convert.FromBase64String(tokenConfiguration.Get("secret"));
+           // var secretKey= System.Configuration.ConfigurationManager.AppSettings["secret"];
+          //  var tempkey = tokenConfiguration.Get("secret");
+            byte[] key = Convert.FromBase64String(secretKey);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             List<Claim> claims = new List<Claim>();
 
@@ -81,7 +82,7 @@
 
         private (string RefreshTokenValue, string RefreshTokenSerial) GenerateRefreshToken(User user)
         {
-            byte[] key = Convert.FromBase64String(tokenConfiguration.Get("secret"));
+            byte[] key = Convert.FromBase64String(secretKey);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
             var refreshTokenSerial = this.CreateCryptographicallySecureGuid().ToString().Replace("-", "");
@@ -114,7 +115,7 @@
             userToken.RefreshTokenIdHash = refreshTokenSerialNumber;
             userToken.RefreshTokenIdHashSource = null;
             userToken.RefreshTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(60);
-            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddSeconds(5);
+            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(2);
             _tokenRepository.Add(userToken);
         }
 
@@ -127,7 +128,7 @@
                 if (jwtToken == null)
                     return null;
 
-                byte[] key = Convert.FromBase64String(tokenConfiguration.Get("secret"));
+                byte[] key = Convert.FromBase64String(secretKey);
                
                 TokenValidationParameters parameters = new TokenValidationParameters()
                 {

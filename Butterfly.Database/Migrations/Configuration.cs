@@ -46,21 +46,31 @@ namespace Butterfly.Database.Migrations
                 context.DropDown.AddOrUpdate(item=>item.Value,dropDownItem);
                 context.SaveChanges();
             }
-            Role role = new Role();
-            role.RoleName = "Admin";
-            context.Role.AddOrUpdate(r => r.RoleName, role);
+            Role adminRole = new Role();
+            adminRole.RoleName = "Admin";
+            context.Role.AddOrUpdate(r => r.RoleName, adminRole);
+            context.SaveChanges();
+            Role userRole = new Role();
+            userRole.RoleName = "User";
+            context.Role.AddOrUpdate(r => r.RoleName, userRole);
             context.SaveChanges();
 
             User user = new User();
-            user.Email = "admin@butterfly.com";
+            user.Email = "virat@butterfly.com";
             user.Password = "Lkjh";
             context.User.AddOrUpdate(u => u.Email, user);
             context.SaveChanges();
 
-            UserRole userRole = new UserRole();
-            userRole.RoleId = role.Id;
-            userRole.UserId = user.Id;
-            context.UserRole.AddOrUpdate(userRole);
+            UserRole viratRole1 = new UserRole();
+            viratRole1.RoleId = adminRole.Id;
+            viratRole1.UserId = user.Id;
+            context.UserRole.AddOrUpdate(viratRole1);
+            context.SaveChanges();
+
+            UserRole viratRole2 = new UserRole();
+            viratRole2.RoleId = userRole.Id;
+            viratRole2.UserId = user.Id;
+            context.UserRole.AddOrUpdate(viratRole2);
             context.SaveChanges();
 
 

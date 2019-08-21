@@ -10,7 +10,7 @@ namespace Butterfly.web.Authentication.Filters
     public class AuthFilter : RequestFilterAttribute
     {
         public string RoleName { get; set; }
-        private static string secret = "XCAP05H6LoKvbRRa/QkqLNMI7cOHguaRyHzyg7n5qEkGjQmtBhz4SzYh4Fqwjyi3KJHlSXKPwVu2+bXr6CtpgQ==";
+        private static string secret = System.Configuration.ConfigurationManager.AppSettings["secret"];
         public override void Execute(IHttpRequest req, IHttpResponse res, object requestDto)
         {
             string token = req.Headers.Get("Authorization");
@@ -106,7 +106,7 @@ namespace Butterfly.web.Authentication.Filters
                       parameters, out securityToken);
                 return principal;
             }
-            catch (Exception e)
+            catch (Exception  e)
             {
                 throw e;
             }
