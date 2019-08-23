@@ -15,7 +15,6 @@ export default function someFunction() {
 const applyToken = config => {
   const token = sessionStorage.getItem("accessToken");
   if (token && checkValidEndpointForAddingHeader(config.url)) {
-    console.log(token);
     config.headers.Authorization = token;
   }
   return config;

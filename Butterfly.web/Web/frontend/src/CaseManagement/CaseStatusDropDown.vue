@@ -12,15 +12,12 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
 
 export default {
   props: ["defaultValue"],
   mounted() {
-    this.getCaseStatusTypes().then(response => {
-      this.statusTypes = response;
-      this.statusTypesFetched = true;
-    });
+    this.getCaseStatusTypes();
   },
   data() {
     return {
@@ -30,22 +27,26 @@ export default {
     };
   },
   methods: {
-    getCaseStatusTypes: function() {
-      return new Promise((resolve, reject) => {
-        const url = "https://localhost:44313/statustypes";
-        axios
-          .get(url)
+   getCaseStatusTypes: function() {
+        const resource = "/statustypes";
+        httpClient
+          .get(resource)
           .then(response => {
+          if(response.data === "token refreshed")
+          {
+            this.getCaseStatusTypes();
+            return;
+          }
             if (response.data.success === true) {
-              resolve(response.data.data);
+              this.statusTypes = response.data.data;
+              this.statusTypesFetched = true;
             } else {
-              resolve(null);
+              alert(response.data.message);
             }
           })
           .catch(error => {
-            reject(error);
+            alert(error);
           });
-      });
     }
   }
 };

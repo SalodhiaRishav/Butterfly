@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
+
 export default {
   props: {
     declaration: Object
@@ -52,19 +53,40 @@ export default {
   },
 
   mounted() {
-    axios
-      .get("https://localhost:44313/getdropdownitems/DeclarationType1")
+    console.log(this.declaration);
+    this.getDeclarationType1();
+    this.getDeclarationType2();
+    this.getMessageNames();
+  },
+  methods: {
+    getMessageNames(){
+      const url="/getdropdownitems/MessageName";
+      httpClient
+      .get(url)
       .then(response => {
-        if (response.data) {
-          this.declarationType1List = response.data.data.map(x => {
+        if(response.data === "token refreshed")
+        {
+          this.getDeclarationType1();
+          return;
+        }
+        if (response.data) {          
+          this.messageNameList = response.data.data.map(x => {
             return { value: x.key, text: x.value };
           });
         }
       })
       .catch(error => console.log(error));
-    axios
-      .get("https://localhost:44313/getdropdownitems/DeclarationType2")
+    },
+    getDeclarationType2(){    
+      const url="/getdropdownitems/DeclarationType2";
+      httpClient
+      .get(url)
       .then(response => {
+        if(response.data === "token refreshed")
+        {
+          this.getDeclarationType1();
+          return;
+        }
         if (response.data) {
           this.declarationType2List = response.data.data.map(x => {
             return { value: x.key, text: x.value };
@@ -72,18 +94,25 @@ export default {
         }
       })
       .catch(error => console.log(error));
-    axios
-      .get("https://localhost:44313/getdropdownitems/MessageName")
+    },
+    getDeclarationType1(){
+      const url="/getdropdownitems/DeclarationType1";
+      httpClient
+      .get(url)
       .then(response => {
+        if(response.data === "token refreshed")
+        {
+          this.getDeclarationType1();
+          return;
+        }
         if (response.data) {
-          this.messageNameList = response.data.data.map(x => {
+          this.declarationType1List = response.data.data.map(x => {
             return { value: x.key, text: x.value };
           });
         }
       })
       .catch(error => console.log(error));
-  },
-  methods: {
+    },
     onSubmit() {},
     onReset() {}
   }

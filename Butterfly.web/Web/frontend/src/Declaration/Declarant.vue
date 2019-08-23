@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
 
 export default {
   props: {
@@ -76,9 +76,18 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("https://localhost:44313/getdropdownitems/Countries")
+  this.getCountries();
+  },
+  methods: {
+    getCountries(){
+      const url="/getdropdownitems/Countries";
+       httpClient
+      .get(url)
       .then(response => {
+        if(response.data=="token refreshed")
+        {
+          this.getCountries();
+        }
         if (response.data) {
           this.Country = response.data.data.map(x => {
             return { value: x.key, text: x.value };
@@ -86,8 +95,7 @@ export default {
         }
       })
       .catch(error => console.log(error));
-  },
-  methods: {
+    },
     onSubmit(evt) {
       //   evt.preventDefault();
       //   alert(JSON.stringify(this.form));

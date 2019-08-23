@@ -13,7 +13,10 @@
     using FluentValidation.Results;
     using Serilog;
     using ServiceStack.ServiceInterface;
+    using System.Configuration;
+    using Butterfly.web.Authentication.Filters;
 
+    [AuthFilter(RoleName = "User")]
     public class AddDeclarationService : Service
     {
         private readonly DeclarationBll declarationBll;

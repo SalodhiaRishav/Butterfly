@@ -10,6 +10,8 @@
     using Serilog;
     using ServiceStack.ServiceInterface;
 
+    using Butterfly.web.Authentication.Filters;
+
     public class GetDeclarationByGuid : Service
     {
         private readonly DeclarationBll declarationBll;
@@ -18,6 +20,7 @@
             declarationBll = new DeclarationBll();
         }
 
+        [AuthFilter(RoleName = "User")]
         public OperationResponse<DeclarationData> GET(Butterfly.Declarations.Contracts.EndPoints.GetDeclarationByGuid guid)
         {
             OperationResponse<DeclarationData> response = new OperationResponse<DeclarationData>();

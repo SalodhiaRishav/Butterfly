@@ -12,15 +12,12 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
 
 export default {
   props: ["defaultValue"],
   mounted() {
-    this.getCasePriorityTypes().then(response => {
-      this.priorityTypes = response;
-      this.priorityTypesFetched = true;
-    });
+    this.getCasePriorityTypes();
   },
   data() {
     return {
@@ -31,21 +28,25 @@ export default {
   },
   methods: {
     getCasePriorityTypes: function() {
-      return new Promise((resolve, reject) => {
-        const url = "https://localhost:44313/prioritytypes";
-        axios
-          .get(url)
+        const resource = "/prioritytypes";
+        httpClient
+          .get(resource)
           .then(response => {
+          if(response.data === "token refreshed")
+          {
+            this.getPriorityTypes();
+            return;
+          }
             if (response.data.success === true) {
-              resolve(response.data.data);
+              this.priorityTypes = response.data.data;
+              this.priorityTypesFetched = true;
             } else {
-              resolve(null);
+              alert(response.data.message);
             }
           })
           .catch(error => {
-            reject(error);
+              alert(error);
           });
-      });
     }
   }
 };

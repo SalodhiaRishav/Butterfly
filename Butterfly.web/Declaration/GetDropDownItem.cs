@@ -14,6 +14,8 @@
     using ServiceStack.ServiceInterface;
 
 
+    using Butterfly.web.Authentication.Filters;
+
     public class GetDropDownItem : Service
     {
         private readonly DropDownBll dropDownBll;
@@ -21,6 +23,8 @@
         {
             dropDownBll = new DropDownBll();
         }
+
+        [AuthFilter(RoleName = "User")]
         public OperationResponse<IEnumerable<DropDownDto>> GET(GetDropDownItems ListType )
         {
             OperationResponse<IEnumerable<DropDownDto>> response = new OperationResponse<IEnumerable<DropDownDto>>();

@@ -51,7 +51,7 @@
 </template>
 <script>
 //import declarationform from './DeclarationForm';
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
 
 export default {  
   props:{
@@ -80,17 +80,17 @@ export default {
       // Reset our form values
     },
     onSave() {
-      //add some code here
-    console.log(this.declaration);
-    // this.postBody = Object.assign({},declaration : {
-    //   declaration : this.declaration
-    // })
-      axios.post('https://localhost:44313/editdeclaration',
+    const url="/updatedeclaration";
+      httpClient.post(url,
       {
         declaration:this.declaration, 
         referenceData:this.referenceData.reference
       })
       .then((response)=>{
+        if(response.data === "token refreshed")
+        {
+          this.onSave();
+        }
             console.log("Success");
             if(response.data.success == true){
                  this.isError = false;

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import HttpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../Utils/HttpRequestWrapper";
 import CaseStatusDropDown from "./CaseStatusDropDown.vue";
 import CasePriorityDropDown from "./CasePriorityDropDown.vue";
 
@@ -104,8 +104,8 @@ export default {
       this.$router.push("/editcase");
     },
     getAllCases: function() {
-      const resource = "casemanagement";
-      HttpClient.get(resource)
+      const resource = "/casemanagement";
+      httpClient.get(resource)
         .then(response => {
           console.log('token token'+response);
           if(response.data === "token refreshed")

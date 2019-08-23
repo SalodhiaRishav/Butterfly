@@ -3,7 +3,7 @@
     using ServiceStack.ServiceHost;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
 
-    [Route("/editdeclaration","POST")]
+    [Route("/updatedeclaration","POST")]
     public class EditDeclaration
     {
         public DeclarationDto declaration { get; set; }

@@ -11,8 +11,10 @@
 
     using FluentValidation.Results;
     using Serilog;
+    using Butterfly.web.Authentication.Filters;
     using ServiceStack.ServiceInterface;
 
+    [AuthFilter(RoleName = "User")]
     public class EditDeclarationService : Service
     {
         private readonly DeclarationBll declarationBll;

@@ -1,4 +1,4 @@
-import axios from "axios";
+import httpCLient from "./../../Utils/HttpRequestWrapper";
 
 const state = {
   refreshTokenSerial: null,
@@ -32,12 +32,12 @@ const actions = {
   },
   getNewToken: (context, refreshTokenSerial) => {
     return new Promise((resolve, reject) => {
-      const refreshTokenUrl = "https://localhost:44313/refreshtoken";
+      const resource="/refreshtoken";
       let postData = {
         refreshTokenSerialId: refreshTokenSerial
       };
-      axios
-        .post(refreshTokenUrl, postData)
+      httpCLient
+        .post(resource, postData)
         .then(myresponse => {
           if (myresponse.data.success === true) {
             resolve(myresponse.data.data.accessToken);

@@ -6,11 +6,13 @@
     using Butterfly.Declarations.Application.Services;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Declarations.Contracts.EndPoints;
+    using Butterfly.web.Authentication.Filters;
     using Butterfly.web.CommonResponse;
 
     using Serilog;
     using ServiceStack.ServiceInterface;
 
+    [AuthFilter(RoleName = "User")]
     public class GetAllDeclarations : Service
     {
         private readonly DeclarationBll declarationBll;

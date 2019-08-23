@@ -27,37 +27,13 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
 import appNavbar from './../CommonComponent/Navbar';
 
 export default {
   
   mounted() {
-    this.getAllDeclaration()
-      .then(response => {
-        let declaration = [];
-
-        for (let i = 0; i < response.length; ++i) {
-          let obj = {
-            BaseID: response[i].declarationId,
-            createdOn: this.convertDate(response[i].createdOn),
-            status: response[i].status,
-            LRN: " ",
-            MRN: " ",
-            Country: response[i].country,
-            Procedure: response[i].procedure,
-            Type: response[i].messageName,
-            Status: "Processing",
-            CustomResponse: " ",
-            User: " ",
-            TaxationDate: " ",
-            ID: "CD-" + response[i].declarationId.toString().substring(0, 5)
-          };
-          declaration.push(obj);
-        }
-        this.declarations = declaration;
-      })
-      .catch(error => {});
+    this.getAllDeclaration();
   },
   data() {
     return {
@@ -117,29 +93,48 @@ export default {
       return new Date(date.match(/\d+/)[0] * 1).toString().substring(4, 16);
     },
     someFunction: function(row) {
-      //console.log(row);
-      // if(foundCase!==null)
-      // {
-      //   this.$store.dispatch("setCaseToEdit",foundCase);
-      // }
-      this.$router.push({ path: `/editdeclaration/${row.BaseID}` });
+      // this.$store.dispatch("setDeclrationIdToEdit",row.BaseID);
+      
+      this.$router.push(`/editdeclaration/${row.BaseID}`);
     },
     getAllDeclaration: function() {
-      return new Promise((resolve, reject) => {
-        const url = "https://localhost:44313/getalldeclaration";
-        axios
+      
+        const url = "/getalldeclaration";
+        httpClient
           .get(url)
           .then(response => {
+            if(response.data==="token refreshed")
+            {
+              this.getAllDeclaration();
+            }
             if (response.data.success === true) {
-              resolve(response.data.data);
+              let declaration = [];
+              for (let i = 0; i < response.data.data.length; ++i) {
+                let obj = {
+                  BaseID: response.data.data[i].declarationId,
+                  createdOn: this.convertDate(response.data.data[i].createdOn),
+                  status: response.data.data[i].status,
+                  LRN: " ",
+                  MRN: " ",
+                  Country: response.data.data[i].country,
+                  Procedure: response.data.data[i].procedure,
+                  Type: response.data.data[i].messageName,
+                  Status: "Processing",
+                  CustomResponse: " ",
+                  User: " ",
+                  TaxationDate: " ",
+                  ID: "CD-" + response.data.data[i].declarationId.toString().substring(0, 5)
+                };
+                declaration.push(obj);
+              }
+              this.declarations = declaration;
             } else {
-              resolve(null);
+              alert(response.data.message);
             }
           })
           .catch(error => {
-            reject(error);
+            alert(error);
           });
-      });
     }
   }
 };

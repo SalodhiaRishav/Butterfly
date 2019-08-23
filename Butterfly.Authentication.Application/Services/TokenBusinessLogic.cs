@@ -21,6 +21,10 @@
         private readonly IUserRepository _userRepository;
         private NameValueCollection tokenConfiguration;
         private readonly string secretKey = System.Configuration.ConfigurationManager.AppSettings["secret"];
+        private readonly string tokenIssuerName = ConfigurationManager.AppSettings["issuerName"];
+        private readonly double accessTokenExpirationTimeInMinutes = double.Parse(ConfigurationManager.AppSettings["accessTokenExpirationTimeInMinute"]);
+        private readonly double refreshTokenExpirationTimeInMinutes = double.Parse(ConfigurationManager.AppSettings["refreshTokenExpirationTimeInMinute"]);
+
         public TokenBusinessLogic(IRoleBusinessLogic roleBusinessLogic,ITokenRepository tokenRepository,IUserRepository userRepository)
         {
             RoleBusinessLogic = roleBusinessLogic;
@@ -44,8 +48,6 @@
         }
         private (string AccessToken, IEnumerable<Claim> Claims) GenerateAccessToken(User user)
         {
-           // var secretKey= System.Configuration.ConfigurationManager.AppSettings["secret"];
-          //  var tempkey = tokenConfiguration.Get("secret");
             byte[] key = Convert.FromBase64String(secretKey);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             List<Claim> claims = new List<Claim>();
@@ -58,10 +60,10 @@
             }
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
-                Issuer = "Butterfly",
+                Issuer = tokenIssuerName,
                 NotBefore = DateTime.UtcNow,
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddSeconds(10),
+                Expires = DateTime.UtcNow.AddMinutes(accessTokenExpirationTimeInMinutes),
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256Signature)
             };
@@ -84,17 +86,16 @@
         {
             byte[] key = Convert.FromBase64String(secretKey);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
-            //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
             var refreshTokenSerial = this.CreateCryptographicallySecureGuid().ToString().Replace("-", "");
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.SerialNumber, refreshTokenSerial));
 
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
-                Issuer = "Butterfly",
+                Issuer = tokenIssuerName,
                 NotBefore = DateTime.UtcNow,
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(60),
+                Expires = DateTime.UtcNow.AddMinutes(refreshTokenExpirationTimeInMinutes),
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256Signature)
             };
@@ -114,8 +115,8 @@
             userToken.AccessTokenHash = accessToken;
             userToken.RefreshTokenIdHash = refreshTokenSerialNumber;
             userToken.RefreshTokenIdHashSource = null;
-            userToken.RefreshTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(60);
-            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddSeconds(10);
+            userToken.RefreshTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(refreshTokenExpirationTimeInMinutes);
+            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(accessTokenExpirationTimeInMinutes);
             _tokenRepository.Add(userToken);
         }
 
@@ -171,7 +172,7 @@
             }
             var accessToken = GenerateAccessToken(user).AccessToken;
             userToken.AccessTokenHash = accessToken;
-            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddSeconds(5);
+            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(accessTokenExpirationTimeInMinutes);
             _tokenRepository.Update(userToken);
             return userToken.AccessTokenHash;
         }
