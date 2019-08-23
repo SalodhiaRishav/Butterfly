@@ -4,7 +4,6 @@ export default function someFunction() {
   HttpClient.http.interceptors.request.use(
     function(config) {
       let finalConfig = applyToken(config);
-      console.log(finalConfig);
       return finalConfig;
     },
     function(error) {
