@@ -1,4 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Context;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 using System;
@@ -26,13 +28,18 @@ namespace Butterfly.web.Authentication.Filters
                 bool isAuthenticated = ValidateToken(token,RoleName);
                 if (!isAuthenticated)
                 {
+                   
+                    LogContext.PushProperty("Method", System.Reflection.MethodBase.GetCurrentMethod().Name);
+                    Log.ForContext<AuthFilter>().Error("Forbidden");
+                    Log.Error("Forbidden ");
                     res.ReturnAuthRequired("You are not authorized");
                     res.Close();
                     return;
                 }
             }
-            catch(SecurityTokenExpiredException)
+            catch(SecurityTokenExpiredException e)
             {
+                Log.Error(e.Message +"\n"+ e.StackTrace);
                 res.Write("token expired");
                 res.Close();
                 return;
@@ -71,8 +78,9 @@ namespace Butterfly.web.Authentication.Filters
             {
                 throw exception;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log.Error(e.Message);
                 return false;
             }
 
@@ -108,6 +116,7 @@ namespace Butterfly.web.Authentication.Filters
             }
             catch (Exception  e)
             {
+                Log.Error(e.Message);
                 throw e;
             }
         }

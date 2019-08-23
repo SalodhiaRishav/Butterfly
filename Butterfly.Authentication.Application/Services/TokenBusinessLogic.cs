@@ -61,7 +61,7 @@
                 Issuer = "Butterfly",
                 NotBefore = DateTime.UtcNow,
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.UtcNow.AddSeconds(10),
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256Signature)
             };
@@ -115,7 +115,7 @@
             userToken.RefreshTokenIdHash = refreshTokenSerialNumber;
             userToken.RefreshTokenIdHashSource = null;
             userToken.RefreshTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(60);
-            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(2);
+            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddSeconds(10);
             _tokenRepository.Add(userToken);
         }
 

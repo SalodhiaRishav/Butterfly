@@ -6,6 +6,7 @@
     using Butterfly.Authentication.Contracts.Interfaces;
     using Butterfly.Authentication.Contracts.Dto;
     using System;
+    using Serilog;
 
     public class UserService : Service
     {
@@ -21,17 +22,20 @@
             OperationResponse<LoginResultDto> result = new OperationResponse<LoginResultDto>();
             try
             {
+               
                 LoginResultDto loginResultDto = UserBusinessLogic.LoginUser(request.Email, request.Password);
                 if (loginResultDto == null)
                 {
+                    Log.Error("Wrong Username ");
                     result.OnError("Wrong username or password", null);
                     return result;
                 }
                 result.OnSuccess(loginResultDto, "Logined successfully");
                 return result;
             }
-            catch(Exception)
+            catch(Exception e)
             {
+                Log.Error(e.Message + "\n" + e.StackTrace);
                 result.OnException("server error while login");
                 return result;
             }

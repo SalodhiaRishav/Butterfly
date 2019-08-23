@@ -10,6 +10,7 @@ namespace Butterfly.web.Declaration
     using Butterfly.Declarations.Application.Services;
     using ServiceStack.ServiceInterface;
     using Butterfly.Declarations.Contracts.EndPoints;
+    using Serilog;
 
     public class GetAllDeclarations : Service
     {
@@ -30,6 +31,7 @@ namespace Butterfly.web.Declaration
             }
             catch(Exception e)
             {
+                Log.Error(e.Message+" "+e.StackTrace);
                 response.OnException("Declaration failed to fetched");
                 return response;
             }

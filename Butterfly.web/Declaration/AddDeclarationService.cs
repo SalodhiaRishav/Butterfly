@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-namespace Butterfly.web.Declaration
+﻿namespace Butterfly.web.Declaration
 {
-    using Butterfly.Declarations.Contracts.EndPoints;
-    using Butterfly.Declarations.Contracts.DeclarationDTO;
-    using ServiceStack.ServiceInterface;
-    using Butterfly.web.CommonResponse;
+    using System;
+    using System.Collections.Generic;
+
     using Butterfly.Declarations.Application.Services;
+    using Butterfly.Declarations.Contracts.DeclarationDTO;
+    using Butterfly.Declarations.Contracts.EndPoints;
     using Butterfly.Declarations.Contracts.Validation;
+    using Butterfly.web.CommonResponse;
+
     using FluentValidation.Results;
-    using System.Configuration;
+    using Serilog;
+    using ServiceStack.ServiceInterface;
 
     public class AddDeclarationService : Service
     {
@@ -33,14 +33,14 @@ namespace Butterfly.web.Declaration
                 {
                     var data = declarationBll.AddDeclaration(declaration);
                     var id = data;
-                    ReferenceDto temp = new ReferenceDto();
+                    ReferenceDto reference = new ReferenceDto();
                     for (int i = 0; i < NewDeclaration.referenceData.Length; i++)
                     {
-                        temp.DeclarationId = data;
-                        temp.InvoiceDate = NewDeclaration.referenceData[i].InvoiceDate;
-                        temp.Reference = NewDeclaration.referenceData[i].Reference;
-                        temp.Type = NewDeclaration.referenceData[i].Type;
-                        declarationBll.AddReference(temp);
+                        reference.DeclarationId = data;
+                        reference.InvoiceDate = NewDeclaration.referenceData[i].InvoiceDate;
+                        reference.Reference = NewDeclaration.referenceData[i].Reference;
+                        reference.Type = NewDeclaration.referenceData[i].Type;
+                        declarationBll.AddReference(reference);
                     }
                     response.OnSuccess(true, "Declaration Successfully added!");
                     return response;
@@ -58,6 +58,7 @@ namespace Butterfly.web.Declaration
             }
             catch(Exception e)
             {
+                Log.Error(e.Message+" "+e.StackTrace);
                 response.OnException("Request to Add new declaration failed at server side.");
                 return response;
             }

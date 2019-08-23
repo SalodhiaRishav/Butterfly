@@ -10,6 +10,8 @@ namespace Butterfly.web.Declaration
     using Butterfly.web.CommonResponse;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Declarations.Contracts.EndPoints;
+    using Serilog;
+
     public class GetDropDownItem : Service
     {
         private readonly DropDownBll dropDownBll;
@@ -29,6 +31,7 @@ namespace Butterfly.web.Declaration
             }
             catch(Exception e)
             {
+                Log.Error(e.Message +" "+e.StackTrace);
                 response.OnException("Drop down items failed to fetched due internal server error");
                 return response;
             }
