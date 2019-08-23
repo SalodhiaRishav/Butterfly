@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Butterfly.web.CommonResponse
+﻿namespace Butterfly.web.CommonResponse
 {
     using System.Net;
+    using System;
+    using System.Collections.Generic;
+
     public class OperationResponse<T>
     {
         public String Message { get; set; }

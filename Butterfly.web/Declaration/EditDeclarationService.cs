@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Butterfly.web.Declaration
+﻿namespace Butterfly.web.Declaration
 {
-    
-    using ServiceStack.ServiceInterface;
-    using Butterfly.web.CommonResponse;
-    using Butterfly.Declarations.Contracts.EndPoints;
+    using System;
+    using System.Collections.Generic;
+
     using Butterfly.Declarations.Application.Services;
-    using FluentValidation.Results;
-    using Butterfly.Declarations.Contracts.Validation;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
+    using Butterfly.Declarations.Contracts.EndPoints;
+    using Butterfly.Declarations.Contracts.Validation;
+    using Butterfly.web.CommonResponse;
+
+    using FluentValidation.Results;
     using Serilog;
+    using ServiceStack.ServiceInterface;
 
     public class EditDeclarationService : Service
     {
@@ -26,25 +24,23 @@ namespace Butterfly.web.Declaration
         {
             OperationResponse<bool> response = new OperationResponse<bool>();
             try
-            {
-                //todo add reference data
+            {               
                 var newDeclaration = editDeclaration.declaration;
-                var reference = editDeclaration.referenceData;
                 DeclarationValidator obj = new DeclarationValidator();
                 ValidationResult result = obj.Validate(newDeclaration);
                 if (result.IsValid)
                 {
                     var data = declarationBll.EditDeclaration(newDeclaration);
                     
-                    ReferenceDto temp = new ReferenceDto();
+                    ReferenceDto reference = new ReferenceDto();
                     for (int i = 0; i < editDeclaration.referenceData.Length; i++)
                     {
-                        temp.DeclarationId = newDeclaration.DeclarationId;
-                        temp.ReferenceId = editDeclaration.referenceData[i].ReferenceId;
-                        temp.InvoiceDate = editDeclaration.referenceData[i].InvoiceDate;
-                        temp.Reference = editDeclaration.referenceData[i].Reference;
-                        temp.Type = editDeclaration.referenceData[i].Type;
-                        declarationBll.AddReference(temp);
+                        reference.DeclarationId = newDeclaration.DeclarationId;
+                        reference.ReferenceId = editDeclaration.referenceData[i].ReferenceId;
+                        reference.InvoiceDate = editDeclaration.referenceData[i].InvoiceDate;
+                        reference.Reference = editDeclaration.referenceData[i].Reference;
+                        reference.Type = editDeclaration.referenceData[i].Type;
+                        declarationBll.AddReference(reference);
                     }
                     response.OnSuccess(data, "Record Successfully Updated");
                     return response;
@@ -63,7 +59,7 @@ namespace Butterfly.web.Declaration
             }
             catch(Exception e)
             {
-                Log.Error(e.Message);
+                Log.Error(e.Message+" "+e.StackTrace);
                 response.OnException("Error in updating record");
                 return response;
             }

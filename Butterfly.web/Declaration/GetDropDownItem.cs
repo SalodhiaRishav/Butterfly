@@ -1,16 +1,18 @@
-﻿using ServiceStack.ServiceInterface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Butterfly.web.Declaration
+﻿namespace Butterfly.web.Declaration
 {
+    
+    using System;
+    
+
+    using System.Collections.Generic;
     using Butterfly.Declarations.Application.Services;
-    using Butterfly.web.CommonResponse;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Declarations.Contracts.EndPoints;
+    using Butterfly.web.CommonResponse;
+
     using Serilog;
+    using ServiceStack.ServiceInterface;
+
 
     public class GetDropDownItem : Service
     {

@@ -1,14 +1,15 @@
 ﻿namespace Butterfly.web.Authentication
 {
-    using Butterfly.Authentication.Contracts.EndPoints;
-    using Butterfly.Authentication.Contracts.Interfaces;
-    using Butterfly.web.CommonResponse;
-    using Serilog;
-    using ServiceStack.ServiceHost;
-    using ServiceStack.ServiceInterface;
     using System;
     using System.Web;
 
+    using Butterfly.Authentication.Contracts.EndPoints;
+    using Butterfly.Authentication.Contracts.Interfaces;
+    using Butterfly.web.CommonResponse;
+
+    using Serilog;
+    using ServiceStack.ServiceInterface;
+    
     public class TokenService : Service
     {
         private readonly ITokenBusinessLogic _tokenBusinessLogic;
@@ -52,14 +53,15 @@
                 
             }
         }
-        public string GET(LogoutUser request)
+        public OperationResponse<bool> GET(LogoutUser request)
         {
             // var token = req.Headers.Get("Authorization");
 
-
-           var token = HttpContext.Current.Request.Headers.Get("Authorization");
+            OperationResponse<bool> result = new OperationResponse<bool>();
+            var token = HttpContext.Current.Request.Headers.Get("Authorization");
             _tokenBusinessLogic.DeleteToken(token);
-            return "logged out";
+            result.OnSuccess(true, "logged out");
+            return result;
 
         }
     }

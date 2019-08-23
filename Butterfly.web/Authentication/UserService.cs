@@ -1,12 +1,14 @@
 ﻿namespace Butterfly.web.Authentication
 {
-    using ServiceStack.ServiceInterface;
+    using System;
+
     using Butterfly.Authentication.Contracts.EndPoints;
     using Butterfly.web.CommonResponse;
     using Butterfly.Authentication.Contracts.Interfaces;
     using Butterfly.Authentication.Contracts.Dto;
-    using System;
+   
     using Serilog;
+    using ServiceStack.ServiceInterface;
 
     public class UserService : Service
     {
