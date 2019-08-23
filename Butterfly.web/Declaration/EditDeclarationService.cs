@@ -13,6 +13,7 @@ namespace Butterfly.web.Declaration
     using FluentValidation.Results;
     using Butterfly.Declarations.Contracts.Validation;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
+    using Serilog;
     using Butterfly.web.Authentication.Filters;
 
     [AuthFilter(RoleName = "User")]
@@ -64,6 +65,7 @@ namespace Butterfly.web.Declaration
             }
             catch(Exception e)
             {
+                Log.Error(e.Message);
                 response.OnException("Error in updating record");
                 return response;
             }

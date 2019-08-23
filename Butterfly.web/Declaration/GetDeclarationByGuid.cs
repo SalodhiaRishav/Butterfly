@@ -10,6 +10,8 @@ namespace Butterfly.web.Declaration
     using Butterfly.Declarations.Application.Services;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Declarations.Contracts.EndPoints;
+    using Serilog;
+
     using Butterfly.web.Authentication.Filters;
 
     public class GetDeclarationByGuid : Service
@@ -37,6 +39,7 @@ namespace Butterfly.web.Declaration
             }
             catch(Exception e)
             {
+                Log.Error(e.Message+" "+e.StackTrace);
                 response.OnException("Failed to Fetch declaration");
                 return response;
             }

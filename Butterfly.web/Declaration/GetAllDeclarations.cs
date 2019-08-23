@@ -11,6 +11,7 @@ namespace Butterfly.web.Declaration
     using ServiceStack.ServiceInterface;
     using Butterfly.Declarations.Contracts.EndPoints;
     using Butterfly.web.Authentication.Filters;
+    using Serilog;
 
     [AuthFilter(RoleName = "User")]
     public class GetAllDeclarations : Service
@@ -32,6 +33,7 @@ namespace Butterfly.web.Declaration
             }
             catch(Exception e)
             {
+                Log.Error(e.Message+" "+e.StackTrace);
                 response.OnException("Declaration failed to fetched");
                 return response;
             }

@@ -16,12 +16,17 @@
     using Butterfly.CaseManagement.Application.Mapper.MapperInterface;
     using Butterfly.Authentication.Contracts.Interfaces;
     using Butterfly.Authentication.Application.Services;
+    using Serilog;
 
     public class AppHost : AppHostBase
     {
         public AppHost() : base("Butterfly.web", typeof(CaseManagementService).Assembly) { }
         public override void Configure(Container container)
         {
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.AppSettings()
+                .Enrich.FromLogContext()
+                .CreateLogger();
 
             JsConfig.EmitCamelCaseNames = true;
 

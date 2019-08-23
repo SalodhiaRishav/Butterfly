@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Butterfly.web.Declaration
+﻿namespace Butterfly.web.Declaration
 {
-    using Butterfly.Declarations.Contracts.EndPoints;
-    using ServiceStack.ServiceInterface;
-    using Butterfly.Declarations.Contracts.DeclarationDTO;
+    using System;
+
     using Butterfly.Declarations.Application.Services;
+    using Butterfly.Declarations.Contracts.EndPoints;
     using Butterfly.web.CommonResponse;
+
+    using ServiceStack.ServiceInterface;
     public class AddDropDownItemService : Service
     {
     

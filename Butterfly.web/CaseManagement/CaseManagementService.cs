@@ -1,16 +1,18 @@
 ﻿namespace Butterfly.web.CaseManagement
 {
+    using System;
+    using System.Collections.Generic;
+
     using Butterfly.CaseManagement.Contracts.Dto;
     using Butterfly.CaseManagement.Contracts.EndPoints;
     using Butterfly.CaseManagement.Contracts.Interfaces;
     using Butterfly.CaseManagement.Contracts.Validators;
-    using Butterfly.web.CommonResponse;
+    using Butterfly.web.CommonResponse;     
+    using Butterfly.web.Authentication.Filters;
+
     using FluentValidation.Results;
     using ServiceStack.ServiceInterface;
-    using System;
-    using Butterfly.web.Authentication.Filters;
-    using System.Collections.Generic;
-    using System.Configuration;
+    using Serilog;
 
     [AuthFilter(RoleName = "User")]
     public class CaseManagementService : Service
@@ -79,6 +81,7 @@
             }
             catch (Exception e)
             {
+                Log.Error(e.Message);
                 operationResponse.OnException(e.Message);
                 return operationResponse;
             }
@@ -104,6 +107,7 @@
             }
             catch (Exception e)
             {
+                Log.Error(e.Message);
                 operationResponse.OnException(e.Message);
                 return operationResponse;
             }
@@ -120,6 +124,7 @@
             }
             catch (Exception e)
             {
+                Log.Error(e.Message);
                 operationResponse.OnException(e.Message);
                 return operationResponse;
             }
@@ -141,6 +146,7 @@
             }
             catch (Exception e)
             {
+                Log.Error(e.Message+" "+e.StackTrace);
                 operationResponse.OnException(e.Message);
                 return operationResponse;
             }
@@ -203,6 +209,7 @@
             }
             catch (Exception e)
             {
+                Log.Error(e.Message+" "+e.StackTrace);
                 operationResponse.OnException(e.Message);
                 return operationResponse;
             }
