@@ -4,6 +4,7 @@ export default function someFunction() {
   HttpClient.http.interceptors.request.use(
     function(config) {
       let finalConfig = applyToken(config);
+      console.log(finalConfig);
       return finalConfig;
     },
     function(error) {
@@ -15,7 +16,6 @@ export default function someFunction() {
 const applyToken = config => {
   const token = sessionStorage.getItem("accessToken");
   if (token && checkValidEndpointForAddingHeader(config.url)) {
-    console.log(token);
     config.headers.Authorization = token;
   }
   return config;

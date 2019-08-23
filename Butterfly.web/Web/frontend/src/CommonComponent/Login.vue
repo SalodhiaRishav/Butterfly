@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import HttpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../Utils/HttpRequestWrapper";
 export default {
   data() {
     return {
@@ -50,28 +50,26 @@ export default {
   },
   methods: {
     handleSubmit() {
-      const resource = "checkuser";
+      const resource = "/checkuser";
       const loginData = {
         email: this.email,
         password: this.password
       };
-      HttpClient.post(resource, loginData)
+      httpClient.post(resource, loginData)
         .then(response => {
+          console.log(response);
           if (response.data.success === true)
           {
-            alert("entering..")
             sessionStorage.setItem("accessToken",response.data.data.accessToken);
             sessionStorage.setItem("refreshTokenId",response.data.data.refreshTokenSerial);
             this.$router.push("/home");
           } 
           else
             {
-             console.log(response.data.message);   
             alert(response.data.message);
           }
         })
         .catch(error => {
-            console.log(error);
           alert(error);
         });
     }

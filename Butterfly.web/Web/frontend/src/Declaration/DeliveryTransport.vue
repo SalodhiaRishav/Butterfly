@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
 
 export default {
   props: {
@@ -83,53 +83,24 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("https://localhost:44313/getdropdownitems/TermsOfDelivery")
+  this.getTermsOfDelivery();
+  this.getCountries();
+  this.getLocationOfGoods();
+  this.getSupervisingCustomOfiice();
+  this.getModeOfTransport();
+  },
+  
+  methods: {
+    getSupervisingCustomOfiice(){
+      const url="/getdropdownitems/SupervisingCustomOfiice";
+       httpClient
+      .get(url)
       .then(response => {
-        if (response.data) {
-          console.log(response.data.data);
-          this.TermsOfDelivery = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
-    axios
-      .get("https://localhost:44313/getdropdownitems/Countries")
-      .then(response => {
-        if (response.data) {
-          // console.log(response.data.data);
-          this.countryList = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
-    axios
-      .get("https://localhost:44313/getdropdownitems/LocationOfGoods")
-      .then(response => {
-        if (response.data) {
-          // console.log(response.data.data);
-          this.LocationOfGoods = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
-    axios
-      .get("https://localhost:44313/getdropdownitems/ModeOfTransport")
-      .then(response => {
-        if (response.data) {
-          // console.log(response.data.data);
-          this.ModeOfTransport = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
-    axios
-      .get("https://localhost:44313/getdropdownitems/SupervisingCustomOfiice")
-      .then(response => {
+        if(response.data === "token refreshed")
+          {
+            this.getSupervisingCustomOfiice();
+            return;
+          }
         if (response.data) {
           //  console.log(response.data.data);
           this.SupervisingCustomsOffice = response.data.data.map(x => {
@@ -138,8 +109,83 @@ export default {
         }
       })
       .catch(error => console.log(error));
-  },
-  methods: {
+    },
+    getModeOfTransport(){
+      const url="/getdropdownitems/ModeOfTransport";
+      httpClient
+      .get(url)
+      .then(response => {
+        if(response.data === "token refreshed")
+          {
+            this.getModeOfTransport();
+            return;
+          }
+        if (response.data) {
+          // console.log(response.data.data);
+          this.ModeOfTransport = response.data.data.map(x => {
+            return { value: x.key, text: x.value };
+          });
+        }
+      })
+      .catch(error => console.log(error));
+    },
+    getLocationOfGoods(){
+      const url="/getdropdownitems/LocationOfGoods";
+      httpClient
+      .get(url)
+      .then(response => {
+        if(response.data === "token refreshed")
+          {
+            this.getLocationOfGoods();
+            return;
+          }
+        if (response.data) {
+          // console.log(response.data.data);
+          this.LocationOfGoods = response.data.data.map(x => {
+            return { value: x.key, text: x.value };
+          });
+        }
+      })
+      .catch(error => console.log(error));
+    },
+    getCountries(){
+      const url="/getdropdownitems/Countries";
+      httpClient
+      .get(url)
+      .then(response => {
+        if(response.data === "token refreshed")
+          {
+            this.getCountries();
+            return;
+          }
+        if (response.data) {
+          // console.log(response.data.data);
+          this.countryList = response.data.data.map(x => {
+            return { value: x.key, text: x.value };
+          });
+        }
+      })
+      .catch(error => console.log(error));
+    },
+    getTermsOfDelivery(){
+      const url="/getdropdownitems/TermsOfDelivery";
+      httpClient
+      .get(url)
+      .then(response => {
+        if(response.data === "token refreshed")
+          {
+            this.getTermsOfDelivery();
+            return;
+          }
+        if (response.data) {
+          console.log(response.data.data);
+          this.TermsOfDelivery = response.data.data.map(x => {
+            return { value: x.key, text: x.value };
+          });
+        }
+      })
+      .catch(error => console.log(error));
+    },
     onSubmit(evt) {
       //   evt.preventDefault();
       //   alert(JSON.stringify(this.form));

@@ -12,7 +12,9 @@ namespace Butterfly.web.Declaration
     using Butterfly.Declarations.Contracts.Validation;
     using FluentValidation.Results;
     using System.Configuration;
+    using Butterfly.web.Authentication.Filters;
 
+    [AuthFilter(RoleName = "User")]
     public class AddDeclarationService : Service
     {
         private readonly DeclarationBll declarationBll;

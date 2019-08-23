@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
+
 export default {
   data() {
     return {
@@ -77,10 +78,15 @@ export default {
         createdOn: this.$store.getters.caseToEdit.createdOn,
         modifiedOn: this.$store.getters.caseToEdit.modifiedOn
       };
-      const url = "https://localhost:44313/casemanagement";
-      axios
-        .put(url, { caseDto: caseDto })
+      const resource = "/casemanagement";
+      httpClient
+        .put(resource, { caseDto: caseDto })
         .then(res => {
+           if(res.data === "token refreshed")
+          {
+            this.EditCase();
+            return;
+          }
           if (res.data.success === true) {
             this.dismissCountDown = 5;
             this.alertMessage = res.data.message;

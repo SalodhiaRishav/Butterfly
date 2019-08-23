@@ -10,6 +10,8 @@ namespace Butterfly.web.Declaration
     using Butterfly.web.CommonResponse;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Declarations.Contracts.EndPoints;
+    using Butterfly.web.Authentication.Filters;
+
     public class GetDropDownItem : Service
     {
         private readonly DropDownBll dropDownBll;
@@ -17,6 +19,8 @@ namespace Butterfly.web.Declaration
         {
             dropDownBll = new DropDownBll();
         }
+
+        [AuthFilter(RoleName = "User")]
         public OperationResponse<IEnumerable<DropDownDto>> GET(GetDropDownItems ListType )
         {
             OperationResponse<IEnumerable<DropDownDto>> response = new OperationResponse<IEnumerable<DropDownDto>>();

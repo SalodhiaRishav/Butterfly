@@ -53,7 +53,9 @@ import Declarant from "./Declarant";
 import Delivery from "./DeliveryTransport";
 import ValueDetails from "./ValueDetails";
 import appNavbar from './../CommonComponent/Navbar.vue'
-import axios from 'axios';
+import httpClient from "./../Utils/HttpRequestWrapper";
+import { constants } from 'crypto';
+// import axios from 'axios';
 
 export default {
   components: {
@@ -67,17 +69,7 @@ export default {
     appNavbar
   },
   mounted() {
-    var guid = this.$route.params.id;
-    axios
-      .get(`https://localhost:44313/getdeclarationbyguid/${guid}`)
-      .then(response => {
-        if (response.data.data)
-          //  console.log(response.data.data);
-          this.declaration = response.data.data.declaration;
-        this.referenceData.reference = response.data.data.referenceData;
-        //  console.log("refere",this.referenceData)
-      })
-      .catch(e => console.log(e));
+  this.getDeclarationById();
   },
   data() {
     return {
@@ -128,6 +120,23 @@ export default {
   },
 
   methods: {
+    getDeclarationById()
+    {
+    //  var guid = this.$store.getters.declrationIdToEdit;
+    var guid=this.$route.params.id;
+      httpClient
+      .get(`/getdeclarationbyguid/${guid}`)
+      .then(response => {
+        if(response.data === "token refreshed")
+        {
+          this.getDeclarationById();
+        }
+        if (response.data.data)
+          this.declaration = response.data.data.declaration;
+        this.referenceData.reference = response.data.data.referenceData;
+      })
+      .catch(e => console.log(e));
+    },
     onSubmit(evt) {
       //   evt.preventDefault();
       //   alert(JSON.stringify(this.form));

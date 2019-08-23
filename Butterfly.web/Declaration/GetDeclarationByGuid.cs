@@ -10,6 +10,8 @@ namespace Butterfly.web.Declaration
     using Butterfly.Declarations.Application.Services;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
     using Butterfly.Declarations.Contracts.EndPoints;
+    using Butterfly.web.Authentication.Filters;
+
     public class GetDeclarationByGuid : Service
     {
         private readonly DeclarationBll declarationBll;
@@ -18,6 +20,7 @@ namespace Butterfly.web.Declaration
             declarationBll = new DeclarationBll();
         }
 
+        [AuthFilter(RoleName = "User")]
         public OperationResponse<DeclarationData> GET(Butterfly.Declarations.Contracts.EndPoints.GetDeclarationByGuid guid)
         {
             OperationResponse<DeclarationData> response = new OperationResponse<DeclarationData>();

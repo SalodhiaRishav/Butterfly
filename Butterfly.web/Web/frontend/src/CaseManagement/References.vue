@@ -53,13 +53,11 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
+
 export default {
   mounted() {
-    this.getCaseReferenceTypes().then(response => {
-      this.referenceTypes = response;
-      this.referenceTypesFetched = true;
-    });
+    this.getCaseReferenceTypes();
   },
   data() {
     return {
@@ -77,21 +75,25 @@ export default {
   },
   methods: {
     getCaseReferenceTypes: function() {
-      return new Promise((resolve, reject) => {
-        const url = "https://localhost:44313/referencetypes";
-        axios
-          .get(url)
+        const resource = "/referencetypes";
+        httpClient
+          .get(resource)
           .then(response => {
+            if(response.data === "token refreshed")
+            {
+              this.getCaseReferenceTypes();
+              return;
+            }
             if (response.data.success === true) {
-              resolve(response.data.data);
+              this.referenceTypes = response.data.data;
+              this.referenceTypesFetched = true;
             } else {
-              resolve(null);
+              alert(response.data.message);
             }
           })
           .catch(error => {
-            reject(error);
+            alert(error);
           });
-      });
     },
     deleteReference(index) {
       this.references.splice(index, 1);
@@ -117,6 +119,7 @@ export default {
           this.$store.dispatch("setReferences", []);
           this.references = this.$store.getters.references;
         }
+        console.log(this.references);
         this.references.push(newReferenceDetails);
         this.resetReferenceForm();
       }

@@ -58,13 +58,11 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
+
 export default {
   mounted() {
-    this.getPriorityTypes().then(response => {
-      this.priorities = response;
-      this.priorityFetched = true;
-    });
+    this.getPriorityTypes();
   },
   data() {
     return {
@@ -75,21 +73,25 @@ export default {
   },
   methods: {
     getPriorityTypes: function() {
-      return new Promise((resolve, reject) => {
-        const url = "https://localhost:44313/prioritytypes";
-        axios
-          .get(url)
+        const resource = "/prioritytypes";
+        httpClient
+          .get(resource)
           .then(response => {
+          if(response.data === "token refreshed")
+          {
+            this.getPriorityTypes();
+            return;
+          }
             if (response.data.success === true) {
-              resolve(response.data.data);
+              this.priorities = response.data.data;
+              this.priorityFetched = true;
             } else {
-              resolve(null);
+              alert(response.data.message);
             }
           })
           .catch(error => {
-            reject(error);
+            alert(error);
           });
-      });
     }
   }
 };

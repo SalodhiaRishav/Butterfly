@@ -105,29 +105,12 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
+
 export default {
   mounted() {
-    this.getIdentiferTypes()
-      .then(response => {
-        if (response !== null) {
-          this.identifierTypes = response;
-          this.identifierFetched = true;
-        }
-      })
-      .catch(error => {
-        alert(error);
-      });
-    this.getCountries().then(response => {
-      let countriesObj = response;
-      let countries = [];
-      if (countriesObj !== null) {
-        for (let i = 0; i < response.length; ++i) {
-          countries.push(countriesObj[i].value);
-        }
-        this.countries = countries;
-      }
-    });
+    this.getIdentiferTypes();
+    this.getCountries();
   },
   data() {
     return {
@@ -139,38 +122,52 @@ export default {
   },
   methods: {
     getCountries: function() {
-      return new Promise((resolve, reject) => {
-        const url = "https://localhost:44313/getdropdownitems/countries";
-        axios
-          .get(url)
+        const resource = "/getdropdownitems/countries";
+        httpClient
+          .get(resource)
           .then(response => {
+          if(response.data === "token refreshed")
+          {
+            this.getCountries();
+            return;
+          }
             if (response.data.success === true) {
-              resolve(response.data.data);
+              let countries = response.data.data;
+              let countriesNames = [];
+            if (countries !== null) {
+                for (let i = 0; i < countries.length; ++i) {
+                  countriesNames.push(countries[i].value);
+                }
+                this.countries = countriesNames;
             } else {
-              resolve(null);
-            }
+              alert(response.data.message);
+            }         
+          }
           })
-          .catch(error => {
-            reject(error);
-          });
-      });
+          .catch(error =>{
+            alert(error);
+          })
     },
     getIdentiferTypes: function() {
-      return new Promise((resolve, reject) => {
-        const url = "https://localhost:44313/identifiertypes";
-        axios
-          .get(url)
+        const resource = "identifiertypes";
+        httpClient
+          .get(resource)
           .then(response => {
+          if(response.data === "token refreshed")
+          {
+            this.getIdentiferTypes();
+            return;
+          }
             if (response.data.success === true) {
-              resolve(response.data.data);
+             this.identifierTypes = response.data.data;
+             this.identifierFetched = true;
             } else {
-              resolve(null);
+              alert(response.data.message);
             }
           })
           .catch(error => {
-            reject(error);
+              alert(error);
           });
-      });
     }
   }
 };

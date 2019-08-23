@@ -10,7 +10,9 @@ namespace Butterfly.web.Declaration
     using Butterfly.Declarations.Application.Services;
     using ServiceStack.ServiceInterface;
     using Butterfly.Declarations.Contracts.EndPoints;
+    using Butterfly.web.Authentication.Filters;
 
+    [AuthFilter(RoleName = "User")]
     public class GetAllDeclarations : Service
     {
         private readonly DeclarationBll declarationBll;

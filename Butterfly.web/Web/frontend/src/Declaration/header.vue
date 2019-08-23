@@ -57,7 +57,7 @@
 
 <script>
 //import declarationform from './DeclarationForm';
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
 
 export default {
   props: {
@@ -84,12 +84,17 @@ export default {
       console.log(this.referenceData.reference);
       debugger;
       //todo: send reference table data
-      axios
-        .post("https://localhost:44313/newdeclaration", {
+      const url="/newdeclaration";
+      httpClient
+        .post(url, {
           declaration: this.declaration,
           referenceData: this.referenceData.reference
         })
         .then(response => {
+          if(response === "token refreshed")
+          {
+            this.onSave();
+          }
           if (response.data.success === true) {
             this.isError = false;
             console.log("Success");

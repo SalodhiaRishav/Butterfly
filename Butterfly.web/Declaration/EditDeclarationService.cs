@@ -13,7 +13,9 @@ namespace Butterfly.web.Declaration
     using FluentValidation.Results;
     using Butterfly.Declarations.Contracts.Validation;
     using Butterfly.Declarations.Contracts.DeclarationDTO;
+    using Butterfly.web.Authentication.Filters;
 
+    [AuthFilter(RoleName = "User")]
     public class EditDeclarationService : Service
     {
         private readonly DeclarationBll declarationBll;

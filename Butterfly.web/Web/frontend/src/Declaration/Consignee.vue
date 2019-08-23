@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import httpClient from "./../Utils/HttpRequestWrapper";
 
 export default {
   props: {
@@ -87,9 +87,24 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("https://localhost:44313/getdropdownitems/DefferedPayment")
+      this.getDefferedPayment();
+      this.getCountries();
+  },
+  methods: {
+    getDefferedPayment(){
+      const url="/getdropdownitems/DefferedPayment";
+      console.log("testing payment");
+      httpClient
+      .get(url)
       .then(response => {
+        console.log("data fethec defferedpayment");
+        console.log(response);
+        console.log("testing");
+        if(response.data=="token refreshed")
+        {
+          this.getDefferedPayment();
+          return ;
+        }
         if (response.data) {
           this.defferedPayment = response.data.data.map(x => {
             return { text: x.value };
@@ -97,18 +112,27 @@ export default {
         }
       })
       .catch(error => console.log(error));
-    axios
-      .get("https://localhost:44313/getdropdownitems/Countries")
+    },
+
+    getCountries(){
+      const url="/getdropdownitems/Countries";
+       httpClient
+      .get(url)
       .then(response => {
+        
         if (response.data) {
+        if(response.data=="token refreshed")
+        {
+          this.getCountries();
+        }
           this.countryList = response.data.data.map(x => {
             return { value: x.key, text: x.value };
           });
         }
       })
       .catch(error => console.log(error));
-  },
-  methods: {
+    },
+
     onSubmit(evt) {
       //   evt.preventDefault();
       //   alert(JSON.stringify(this.form));
