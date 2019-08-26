@@ -1,8 +1,5 @@
 ﻿namespace CTDS.Authentication.Application.Repository
 {
-    using CTDS.Authentication.Application.Repository.Interfaces;
-    using CTDS.Database.Context;
-    using CTDS.Database.Models.Authentication;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
