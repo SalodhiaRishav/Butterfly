@@ -11,7 +11,7 @@
         Token Add(Token entity);
         void Delete(Token entity);
         Token Update(Token entity);
-        Token FindById(int Id);
+        Token FindById(int id);
         void AddRange(IEnumerable<Token> entityList);
         void DeleteRange(IEnumerable<Token> entityList);
        

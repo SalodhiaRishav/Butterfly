@@ -10,7 +10,7 @@
         UserRole Add(UserRole entity);
         void Delete(UserRole entity);
         UserRole Update(UserRole entity);
-        UserRole FindById(int Id);
+        UserRole FindById(int id);
         void AddRange(IEnumerable<UserRole> entityList);
         void DeleteRange(IEnumerable<UserRole> entityList);
         List<UserRole> Find(Expression<Func<UserRole, bool>> predicate);

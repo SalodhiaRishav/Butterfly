@@ -2,8 +2,8 @@
 {
     public enum CaseReferenceType
     {
-        ABCD,
-        EFGH,
-        JKLM
+        Abcd,
+        Efgh,
+        Jklm
     }
 }

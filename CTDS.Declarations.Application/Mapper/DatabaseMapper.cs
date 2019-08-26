@@ -11,7 +11,7 @@ namespace CTDS.Declarations.Application.Mapper
     using CTDS.Declarations.Contracts.DeclarationDTO;
     public class DatabaseMapper
     {
-        readonly private IMapper mapper;
+        readonly private IMapper Mapper;
         public DatabaseMapper()
         {
             MapperConfiguration config = new MapperConfiguration(cfg =>
@@ -20,45 +20,45 @@ namespace CTDS.Declarations.Application.Mapper
                 cfg.CreateMap<Declaration, DeclarationDto>().ReverseMap();
 
             });
-            mapper = config.CreateMapper();
+            Mapper = config.CreateMapper();
         }
 
         public DeclarationDto DeclarationToDto(Declaration declaration)
         {
-            return mapper.Map<DeclarationDto>(declaration);
+            return Mapper.Map<DeclarationDto>(declaration);
         }
 
         public Declaration DtoToDeclaration(DeclarationDto declarationDto)
         {
-            return mapper.Map<Declaration>(declarationDto);
+            return Mapper.Map<Declaration>(declarationDto);
         }
 
         public DropDownDto DropDownToDto(DropDown dropDown)
         {
-            return mapper.Map<DropDownDto>(dropDown);
+            return Mapper.Map<DropDownDto>(dropDown);
         }
 
         public IEnumerable<DropDownDto> DropDownListToDtoList(IEnumerable<DropDown> dropDown)
         {
-            return mapper.Map<IEnumerable<DropDownDto>>(dropDown);
+            return Mapper.Map<IEnumerable<DropDownDto>>(dropDown);
         }
 
         public IEnumerable<DropDown> DtoListToDropDownList(IEnumerable<DropDown> dropDownDto)
         {
-            return mapper.Map<IEnumerable<DropDown>>(dropDownDto);
+            return Mapper.Map<IEnumerable<DropDown>>(dropDownDto);
         }
         public IEnumerable<DeclarationDto> DeclarationListToDtoList(IEnumerable<Declaration> declaration)
         {
-            return mapper.Map<IEnumerable<DeclarationDto>>(declaration);
+            return Mapper.Map<IEnumerable<DeclarationDto>>(declaration);
         }
 
         public IEnumerable<ReferenceDto> ReferenceListToDtoList(IEnumerable<ReferenceTable> reference)
         {
-            return mapper.Map<IEnumerable<ReferenceDto>>(reference);
+            return Mapper.Map<IEnumerable<ReferenceDto>>(reference);
         }
         public ReferenceTable DtoToReferenceModel(ReferenceDto reference)
         {
-            return mapper.Map<ReferenceTable>(reference);
+            return Mapper.Map<ReferenceTable>(reference);
         }
     }
 }

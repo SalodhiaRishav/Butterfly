@@ -13,7 +13,6 @@
     public class UserRoleRepository : IUserRoleRepository
     {
         private readonly CTDSContext CTDSContext;
-
         private readonly DbSet<UserRole> DbSet;
 
         public UserRoleRepository()
@@ -88,11 +87,11 @@
             }
         }
 
-        public UserRole FindById(int Id)
+        public UserRole FindById(int id)
         {
             try
             {
-                return DbSet.Find(Id);
+                return DbSet.Find(id);
             }
             catch (Exception exception)
             {

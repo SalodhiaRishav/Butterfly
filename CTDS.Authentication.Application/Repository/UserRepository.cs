@@ -13,7 +13,6 @@
     public class UserRepository : IUserRepository
     {
         private readonly CTDSContext CTDSContext;
-
         private readonly DbSet<User> DbSet;
 
         public UserRepository()
@@ -104,11 +103,11 @@
             }
         }
 
-        public User FindById(int Id)
+        public User FindById(int id)
         {
             try
             {
-                return DbSet.Find(Id);
+                return DbSet.Find(id);
             }
             catch (Exception exception)
             {

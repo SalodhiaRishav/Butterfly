@@ -19,32 +19,32 @@
     [AuthFilter(RoleName = "User")]
     public class AddDeclarationService : Service
     {
-        private readonly DeclarationBll declarationBll;
+        private readonly DeclarationBll DeclarationBll;
        
         public AddDeclarationService()
         {
-            declarationBll = new DeclarationBll();
+            DeclarationBll = new DeclarationBll();
         }
-        public OperationResponse<bool> POST(AddDeclaration NewDeclaration)
+        public OperationResponse<bool> Post(AddDeclaration newDeclaration)
         {
             OperationResponse<bool> response = new OperationResponse<bool>();
             try
             {
-                var declaration = NewDeclaration.declaration;
+                var declaration = newDeclaration.Declaration;
                 DeclarationValidator obj = new DeclarationValidator();
                 ValidationResult result = obj.Validate(declaration);
                 if (result.IsValid)
                 {
-                    var data = declarationBll.AddDeclaration(declaration);
+                    var data = DeclarationBll.AddDeclaration(declaration);
                     var id = data;
                     ReferenceDto reference = new ReferenceDto();
-                    for (int i = 0; i < NewDeclaration.referenceData.Length; i++)
+                    for (int i = 0; i < newDeclaration.ReferenceData.Length; i++)
                     {
                         reference.DeclarationId = data;
-                        reference.InvoiceDate = NewDeclaration.referenceData[i].InvoiceDate;
-                        reference.Reference = NewDeclaration.referenceData[i].Reference;
-                        reference.Type = NewDeclaration.referenceData[i].Type;
-                        declarationBll.AddReference(reference);
+                        reference.InvoiceDate = newDeclaration.ReferenceData[i].InvoiceDate;
+                        reference.Reference = newDeclaration.ReferenceData[i].Reference;
+                        reference.Type = newDeclaration.ReferenceData[i].Type;
+                        DeclarationBll.AddReference(reference);
                     }
                     response.OnSuccess(true, "Declaration Successfully added!");
                     return response;

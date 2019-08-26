@@ -92,7 +92,7 @@
             OperationResponse<CaseDto> operationResponse = new OperationResponse<CaseDto>();
             try
             {
-                CaseDto caseDto = this.CaseBusinessLogic.GetCaseById(request.caseId);
+                CaseDto caseDto = this.CaseBusinessLogic.GetCaseById(request.CaseId);
                 if (caseDto != null)
                 {
                     operationResponse.OnSuccess(caseDto, "Fetched successfully");
@@ -118,7 +118,7 @@
             OperationResponse<CaseDto> operationResponse = new OperationResponse<CaseDto>();
             try
             {
-                this.CaseBusinessLogic.DeleteCaseById(request.caseId);
+                this.CaseBusinessLogic.DeleteCaseById(request.CaseId);
                 operationResponse.OnSuccess(null, "Deleted successfully");
                 return operationResponse;
             }

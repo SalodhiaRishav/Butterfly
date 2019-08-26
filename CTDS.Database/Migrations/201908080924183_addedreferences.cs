@@ -3,7 +3,7 @@ namespace CTDS.Database.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addedreferences : DbMigration
+    public partial class Addedreferences : DbMigration
     {
         public override void Up()
         {

@@ -7,9 +7,9 @@ namespace CTDS.Database.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class newdeclarationmodel : IMigrationMetadata
+    public sealed partial class Newdeclarationmodel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(newdeclarationmodel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Newdeclarationmodel));
         
         string IMigrationMetadata.Id
         {

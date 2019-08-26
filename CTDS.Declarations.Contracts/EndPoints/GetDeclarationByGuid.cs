@@ -6,6 +6,6 @@
     [Route("/getdeclarationbyguid/{guid}","GET")]
     public class GetDeclarationByGuid
     {
-        public Guid guid { get; set; }
+        public Guid Guid { get; set; }
     }
 }

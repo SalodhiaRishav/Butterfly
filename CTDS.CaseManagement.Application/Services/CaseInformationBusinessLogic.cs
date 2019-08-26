@@ -25,10 +25,10 @@
                 {
                     return null;
                 }
-                CaseInformation CaseInformation = CaseInformationMapper.DtoToModel(caseInformationDto);
-                CaseInformation.CaseId = caseId;
-                CaseInformation = this.CaseInformationRepository.Add(CaseInformation);
-                return this.CaseInformationMapper.ModelToDto(CaseInformation);
+                CaseInformation caseInformation = CaseInformationMapper.DtoToModel(caseInformationDto);
+                caseInformation.CaseId = caseId;
+                caseInformation = this.CaseInformationRepository.Add(caseInformation);
+                return this.CaseInformationMapper.ModelToDto(caseInformation);
             }
             catch (Exception exception)
             {
@@ -43,8 +43,8 @@
                 List<CaseInformation> caseInformationList = this.CaseInformationRepository.Find(c => c.CaseId == caseId);
                 if (caseInformationList.Count != 0)
                 {
-                    CaseInformation CaseInformation = caseInformationList.First();
-                    return this.CaseInformationMapper.ModelToDto(CaseInformation);
+                    CaseInformation caseInformation = caseInformationList.First();
+                    return this.CaseInformationMapper.ModelToDto(caseInformation);
                 }
                 else
                 {
@@ -64,8 +64,8 @@
                 List<CaseInformation> caseInformationList = this.CaseInformationRepository.Find(c => c.CaseId == caseId);
                 if (caseInformationList.Count != 0)
                 {
-                    CaseInformation CaseInformation = caseInformationList.First();
-                    this.CaseInformationRepository.Delete(CaseInformation);
+                    CaseInformation caseInformation = caseInformationList.First();
+                    this.CaseInformationRepository.Delete(caseInformation);
                 }
             }
             catch (Exception exception)
@@ -82,9 +82,9 @@
                 {
                     return null;
                 }
-                CaseInformation CaseInformation = this.CaseInformationMapper.DtoToModel(caseInformationDto);
-                CaseInformation = this.CaseInformationRepository.Update(CaseInformation);
-                return this.CaseInformationMapper.ModelToDto(CaseInformation);
+                CaseInformation caseInformation = this.CaseInformationMapper.DtoToModel(caseInformationDto);
+                caseInformation = this.CaseInformationRepository.Update(caseInformation);
+                return this.CaseInformationMapper.ModelToDto(caseInformation);
             }
             catch (Exception exception)
             {

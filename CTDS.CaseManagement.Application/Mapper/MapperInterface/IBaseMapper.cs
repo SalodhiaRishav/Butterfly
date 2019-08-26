@@ -2,11 +2,11 @@
 {
     using System.Collections.Generic;
 
-    public interface IBaseMapper<Entity, EntityDto>
+    public interface IBaseMapper<TEntity, TEntityDto>
     {
-        EntityDto ModelToDto(Entity entity);
-        Entity DtoToModel(EntityDto entityDto);
-        List<EntityDto> ModelListToDtoList(List<Entity> entities);
-        List<Entity> DtoListToModelList(List<EntityDto> entityDtos);
+        TEntityDto ModelToDto(TEntity entity);
+        TEntity DtoToModel(TEntityDto entityDto);
+        List<TEntityDto> ModelListToDtoList(List<TEntity> entities);
+        List<TEntity> DtoListToModelList(List<TEntityDto> entityDtos);
     }
 }

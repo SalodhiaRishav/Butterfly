@@ -10,17 +10,17 @@ namespace CTDS.Declarations.Application.Services
     using CTDS.Declarations.Application.Repository;
     public class DeclarationBll
     {
-        private readonly DeclarationDal declarationDal;
+        private readonly DeclarationDal DeclarationDal;
         public DeclarationBll()
         {
-            declarationDal = new DeclarationDal();
+            DeclarationDal = new DeclarationDal();
         }
 
         public Guid AddDeclaration(DeclarationDto declarationDto)
         {
             try
             {
-                return declarationDal.AddDeclaration(declarationDto);
+                return DeclarationDal.AddDeclaration(declarationDto);
             }
             catch (Exception)
             {
@@ -32,7 +32,7 @@ namespace CTDS.Declarations.Application.Services
         {
             try
             {
-                return declarationDal.GetDeclarationById(id);
+                return DeclarationDal.GetDeclarationById(id);
             }
             catch (Exception)
             {
@@ -44,7 +44,7 @@ namespace CTDS.Declarations.Application.Services
         {
             try
             {
-                return declarationDal.GetAllDeclarations();
+                return DeclarationDal.GetAllDeclarations();
             }
             catch (Exception)
             {
@@ -56,7 +56,7 @@ namespace CTDS.Declarations.Application.Services
         {
             try
             {
-                return declarationDal.EditDeclaration(declarationDto);
+                return DeclarationDal.EditDeclaration(declarationDto);
             }
             catch(Exception)
             {
@@ -68,7 +68,7 @@ namespace CTDS.Declarations.Application.Services
         {
             try
             {
-                declarationDal.AddReference(reference);
+                DeclarationDal.AddReference(reference);
             }
             catch (Exception)
             {
@@ -80,7 +80,7 @@ namespace CTDS.Declarations.Application.Services
         {
             try
             {
-                return declarationDal.GetReferenceData(id);
+                return DeclarationDal.GetReferenceData(id);
             }
             catch(Exception)
             {

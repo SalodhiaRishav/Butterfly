@@ -1,36 +1,36 @@
 ﻿namespace CTDS.Authentication.Application.Services
 {
+    using CTDS.Authentication.Application.Repository.Interfaces;
+    using CTDS.Authentication.Contracts.Dto;
+    using CTDS.Authentication.Contracts.Interfaces;
     using CTDS.Database.Models.Authentication;
     using Microsoft.IdentityModel.Tokens;
     using System;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Security.Claims;
     using System.Security.Cryptography;
-    using CTDS.Authentication.Contracts.Dto;
-    using CTDS.Authentication.Contracts.Interfaces;
-    using CTDS.Authentication.Application.Repository.Interfaces;
-    using System.Configuration;
-    using System.Collections.Specialized;
 
     public class TokenBusinessLogic : ITokenBusinessLogic
     {
         private readonly IRoleBusinessLogic RoleBusinessLogic;
-        private readonly ITokenRepository _tokenRepository;
-        private readonly IUserRepository _userRepository;
-        private NameValueCollection tokenConfiguration;
-        private readonly string secretKey = System.Configuration.ConfigurationManager.AppSettings["secret"];
-        private readonly string tokenIssuerName = ConfigurationManager.AppSettings["issuerName"];
-        private readonly double accessTokenExpirationTimeInMinutes = double.Parse(ConfigurationManager.AppSettings["accessTokenExpirationTimeInMinute"]);
-        private readonly double refreshTokenExpirationTimeInMinutes = double.Parse(ConfigurationManager.AppSettings["refreshTokenExpirationTimeInMinute"]);
+        private readonly ITokenRepository TokenRepository;
+        private readonly IUserRepository UserRepository;
+        private readonly  NameValueCollection TokenConfiguratio;
+        private readonly string SecretKey = System.Configuration.ConfigurationManager.AppSettings["secret"];
+        private readonly string TokenIssuerName = ConfigurationManager.AppSettings["issuerName"];
+        private readonly double AccessTokenExpirationTimeInMinutes = double.Parse(ConfigurationManager.AppSettings["accessTokenExpirationTimeInMinute"]);
+        private readonly double RefreshTokenExpirationTimeInMinutes = double.Parse(ConfigurationManager.AppSettings["refreshTokenExpirationTimeInMinute"]);
 
         public TokenBusinessLogic(IRoleBusinessLogic roleBusinessLogic,ITokenRepository tokenRepository,IUserRepository userRepository)
         {
             RoleBusinessLogic = roleBusinessLogic;
-            _tokenRepository = tokenRepository;
-            _userRepository = userRepository;
-            tokenConfiguration= ConfigurationManager.GetSection("tokenConfig") as NameValueCollection;
+            TokenRepository = tokenRepository;
+            UserRepository = userRepository;
+            TokenConfiguratio= ConfigurationManager.GetSection("tokenConfig") as NameValueCollection;
         }
 
         public JwtTokenData CreateJwtTokens(User user)
@@ -48,7 +48,7 @@
         }
         private (string AccessToken, IEnumerable<Claim> Claims) GenerateAccessToken(User user)
         {
-            byte[] key = Convert.FromBase64String(secretKey);
+            byte[] key = Convert.FromBase64String(SecretKey);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             List<Claim> claims = new List<Claim>();
 
@@ -60,10 +60,10 @@
             }
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
-                Issuer = tokenIssuerName,
+                Issuer = TokenIssuerName,
                 NotBefore = DateTime.UtcNow,
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(accessTokenExpirationTimeInMinutes),
+                Expires = DateTime.UtcNow.AddMinutes(AccessTokenExpirationTimeInMinutes),
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256Signature)
             };
@@ -84,7 +84,7 @@
 
         private (string RefreshTokenValue, string RefreshTokenSerial) GenerateRefreshToken(User user)
         {
-            byte[] key = Convert.FromBase64String(secretKey);
+            byte[] key = Convert.FromBase64String(SecretKey);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
             var refreshTokenSerial = this.CreateCryptographicallySecureGuid().ToString().Replace("-", "");
             List<Claim> claims = new List<Claim>();
@@ -92,10 +92,10 @@
 
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
-                Issuer = tokenIssuerName,
+                Issuer = TokenIssuerName,
                 NotBefore = DateTime.UtcNow,
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(refreshTokenExpirationTimeInMinutes),
+                Expires = DateTime.UtcNow.AddMinutes(RefreshTokenExpirationTimeInMinutes),
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha256Signature)
             };
@@ -115,9 +115,9 @@
             userToken.AccessTokenHash = accessToken;
             userToken.RefreshTokenIdHash = refreshTokenSerialNumber;
             userToken.RefreshTokenIdHashSource = null;
-            userToken.RefreshTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(refreshTokenExpirationTimeInMinutes);
-            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(accessTokenExpirationTimeInMinutes);
-            _tokenRepository.Add(userToken);
+            userToken.RefreshTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(RefreshTokenExpirationTimeInMinutes);
+            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(AccessTokenExpirationTimeInMinutes);
+            TokenRepository.Add(userToken);
         }
 
         private ClaimsPrincipal GetPrincipalForRefreshingToken(string token)
@@ -129,7 +129,7 @@
                 if (jwtToken == null)
                     return null;
 
-                byte[] key = Convert.FromBase64String(secretKey);
+                byte[] key = Convert.FromBase64String(SecretKey);
                
                 TokenValidationParameters parameters = new TokenValidationParameters()
                 {
@@ -150,9 +150,9 @@
             }
         }
 
-        public string RefreshToken(string RefreshTokenSerialId)
+        public string RefreshToken(string refreshTokenSerialId)
         {
-            var tokenList =_tokenRepository.Find(ut => ut.RefreshTokenIdHash == RefreshTokenSerialId).ToList();
+            var tokenList =TokenRepository.Find(ut => ut.RefreshTokenIdHash == refreshTokenSerialId).ToList();
             if (tokenList.Count == 0)
             {
                 return null;
@@ -172,8 +172,8 @@
             }
             var accessToken = GenerateAccessToken(user).AccessToken;
             userToken.AccessTokenHash = accessToken;
-            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(accessTokenExpirationTimeInMinutes);
-            _tokenRepository.Update(userToken);
+            userToken.AccessTokenExpiresDateTime = DateTimeOffset.UtcNow.AddMinutes(AccessTokenExpirationTimeInMinutes);
+            TokenRepository.Update(userToken);
             return userToken.AccessTokenHash;
         }
 
@@ -191,7 +191,7 @@
                     return null;
                 }
                 var email = identity.FindFirst(ClaimTypes.Email).Value;
-                var userList = _userRepository.Find(u => u.Email == email).ToList();
+                var userList = UserRepository.Find(u => u.Email == email).ToList();
                 if (userList.Count == 0)
                 {
                     return null;
@@ -206,18 +206,18 @@
 
         private void DeleteExpiredTokens()
         {
-            var expiredTokenList = _tokenRepository.Find(uToken => uToken.RefreshTokenExpiresDateTime <= DateTime.UtcNow);
+            var expiredTokenList = TokenRepository.Find(uToken => uToken.RefreshTokenExpiresDateTime <= DateTime.UtcNow);
             foreach (var token in expiredTokenList)
             {
-               _tokenRepository.Delete(token);
+               TokenRepository.Delete(token);
             }
         }
 
         public void DeleteToken(string token)
         {
-            var delTokenList = _tokenRepository.Find(t => t.AccessTokenHash == token);
+            var delTokenList = TokenRepository.Find(t => t.AccessTokenHash == token);
 
-            _tokenRepository.Delete(delTokenList.First());
+            TokenRepository.Delete(delTokenList.First());
         }
     }
 }

@@ -10,11 +10,11 @@
     public class AddDropDownItemService : Service
     {
     
-        public OperationResponse<bool> POST(AddDropDownItem NewItem)
+        public OperationResponse<bool> Post(AddDropDownItem newItem)
         {
             OperationResponse<bool> response = new OperationResponse<bool>();
             DropDownBll dropDownBll = new DropDownBll();
-            var newitem = NewItem.AddItem;
+            var newitem = newItem.AddItem;
             try
             {
                 bool data = dropDownBll.AddNewItem(newitem);

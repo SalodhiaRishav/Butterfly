@@ -12,11 +12,11 @@ namespace CTDS.Declarations.Application.Repository
     using CTDS.Declarations.Application.Mapper;
     public class DropDownDal
     {
-        private readonly DatabaseMapper mapper;
+        private readonly DatabaseMapper Mapper;
         public DropDownDal()
         {
 
-            mapper = new DatabaseMapper();
+            Mapper = new DatabaseMapper();
         }
 
         public bool AddNewItem (DropDownDto newItem)
@@ -51,7 +51,7 @@ namespace CTDS.Declarations.Application.Repository
                 using (var context = new CTDSContext())
                 {
                     var items = context.DropDown.Where(d => d.Type.Equals(listType)).ToList();
-                    dropDownList = mapper.DropDownListToDtoList(items);
+                    dropDownList = Mapper.DropDownListToDtoList(items);
                 }
                 return dropDownList;
             }

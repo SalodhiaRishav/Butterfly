@@ -10,17 +10,17 @@ namespace CTDS.Declarations.Application.Services
     using CTDS.Declarations.Application.Repository;
     public class DropDownBll
     {
-        DropDownDal dropDownDal;
+        DropDownDal DropDownDal;
         public DropDownBll()
         {
-           dropDownDal= new DropDownDal();
+           DropDownDal= new DropDownDal();
         }
 
         public bool AddNewItem(DropDownDto newitem)
         {
             try
             {
-                return dropDownDal.AddNewItem(newitem);
+                return DropDownDal.AddNewItem(newitem);
             }
             catch(Exception e)
             {
@@ -32,7 +32,7 @@ namespace CTDS.Declarations.Application.Services
         {
             try
             {
-                return dropDownDal.GetAllDropDownItems(listType);
+                return DropDownDal.GetAllDropDownItems(listType);
             }
             catch (Exception)
             {

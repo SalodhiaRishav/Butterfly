@@ -6,7 +6,7 @@
     [Route("/newdeclaration","POST")]
     public class AddDeclaration
     {
-        public DeclarationDto declaration { get; set; } 
-        public ReferenceDto[] referenceData { get; set; }
+        public DeclarationDto Declaration { get; set; } 
+        public ReferenceDto[] ReferenceData { get; set; }
     }
 }

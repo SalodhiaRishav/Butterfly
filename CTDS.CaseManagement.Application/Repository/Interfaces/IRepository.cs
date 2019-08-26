@@ -10,7 +10,7 @@
         T Add(T entity);
         void Delete(T entity);
         T Update(T entity);
-        T FindById(int Id);
+        T FindById(int id);
         void AddRange(IEnumerable<T> entityList);
         void DeleteRange(IEnumerable<T> entityList);
         List<T> Find(Expression<Func<T, bool>> predicate);

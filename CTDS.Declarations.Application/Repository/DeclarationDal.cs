@@ -14,10 +14,10 @@ namespace CTDS.Declarations.Application.Repository
 
     public class DeclarationDal
     {
-        private readonly DatabaseMapper mapper;
+        private readonly DatabaseMapper Mapper;
         public DeclarationDal()
         {
-            mapper = new DatabaseMapper();
+            Mapper = new DatabaseMapper();
         }
 
         public Guid AddDeclaration(DeclarationDto declarationDto)
@@ -28,7 +28,7 @@ namespace CTDS.Declarations.Application.Repository
             {
                 using(var context = new CTDSContext())
                 {
-                    var declaration = mapper.DtoToDeclaration(declarationDto);
+                    var declaration = Mapper.DtoToDeclaration(declarationDto);
                     var newDeclaration = context.Declaration.Add(declaration);
                     context.SaveChanges();
 
@@ -51,7 +51,7 @@ namespace CTDS.Declarations.Application.Repository
                 using(var context = new CTDSContext())
                 {
                     var declaration = context.Declaration.Find(id);
-                    declarationDto = mapper.DeclarationToDto(declaration);
+                    declarationDto = Mapper.DeclarationToDto(declaration);
                 }
                 return declarationDto;
             }
@@ -68,7 +68,7 @@ namespace CTDS.Declarations.Application.Repository
                 using(var context = new CTDSContext())
                 {
                     var declarationList = context.Declaration.ToList();
-                    declarationDtoList = mapper.DeclarationListToDtoList(declarationList);
+                    declarationDtoList = Mapper.DeclarationListToDtoList(declarationList);
                 }
                 return declarationDtoList;
             }
@@ -83,12 +83,12 @@ namespace CTDS.Declarations.Application.Repository
             bool response;
             try
             {
-                using (var _context = new CTDSContext())
+                using (var context = new CTDSContext())
                 {
                     //_context.Declaration.Log = s => { System.Diagnostics.Debug.WriteLine(s); };
-                    var declaration = mapper.DtoToDeclaration(declarationDto);
-                    _context.Declaration.AddOrUpdate(declaration);
-                    _context.SaveChanges();
+                    var declaration = Mapper.DtoToDeclaration(declarationDto);
+                    context.Declaration.AddOrUpdate(declaration);
+                    context.SaveChanges();
                     response = true;
                 }
                 return response;
@@ -106,7 +106,7 @@ namespace CTDS.Declarations.Application.Repository
             {
                 using(var context = new CTDSContext())
                 {
-                    var data = mapper.DtoToReferenceModel(reference);
+                    var data = Mapper.DtoToReferenceModel(reference);
                     context.Reference.AddOrUpdate(d => d.ReferenceId,data);
                     context.SaveChanges();
                 }
@@ -125,7 +125,7 @@ namespace CTDS.Declarations.Application.Repository
                 using(var context = new CTDSContext())
                 {
                     var data = context.Reference.Where(x => x.DeclarationId == id).ToList();
-                    refData = mapper.ReferenceListToDtoList(data);
+                    refData = Mapper.ReferenceListToDtoList(data);
                 }
                 return refData;
             }

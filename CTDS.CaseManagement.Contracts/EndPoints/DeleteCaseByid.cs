@@ -6,6 +6,6 @@
     [Route("/casemanagement/{caseId}", "DELETE")]
     public class DeleteCaseById
     {
-        public Guid caseId { get; set; }
+        public Guid CaseId { get; set; }
     }
 }

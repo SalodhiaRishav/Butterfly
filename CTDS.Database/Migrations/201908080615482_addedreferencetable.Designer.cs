@@ -7,9 +7,9 @@ namespace CTDS.Database.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addedreferencetable : IMigrationMetadata
+    public sealed partial class Addedreferencetable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedreferencetable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Addedreferencetable));
         
         string IMigrationMetadata.Id
         {

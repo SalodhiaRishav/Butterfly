@@ -12,11 +12,11 @@
     
     public class TokenService : Service
     {
-        private readonly ITokenBusinessLogic _tokenBusinessLogic;
+        private readonly ITokenBusinessLogic TokenBusinessLogic;
 
         public TokenService(ITokenBusinessLogic tokenBusinessLogic)
         {
-            _tokenBusinessLogic = tokenBusinessLogic;
+            TokenBusinessLogic = tokenBusinessLogic;
            
         }
         public OperationResponse<RefreshTokenResult> Post(RefreshAccessToken request)
@@ -34,7 +34,7 @@
                     return result;
                 }
 
-                var accessToken = _tokenBusinessLogic.RefreshToken(refreshTokenSerial);
+                var accessToken = TokenBusinessLogic.RefreshToken(refreshTokenSerial);
                 if (accessToken == null)
                 {
                     Log.Error("Access Token is Empty");
@@ -57,7 +57,7 @@
         {
             OperationResponse<bool> result = new OperationResponse<bool>();
             var token = HttpContext.Current.Request.Headers.Get("Authorization");
-            _tokenBusinessLogic.DeleteToken(token);
+            TokenBusinessLogic.DeleteToken(token);
             result.OnSuccess(true, "logged out");
             return result;
 
