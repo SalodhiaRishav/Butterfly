@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace CTDS.Database.Configurations.Declaration
 {
-    using CTDS.Database.Models.Declarations;
+    using System;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
+
+    using CTDS.Database.Models.Declarations;
+   
 
     public class ReferenceConfig : EntityTypeConfiguration<ReferenceTable>
     {
