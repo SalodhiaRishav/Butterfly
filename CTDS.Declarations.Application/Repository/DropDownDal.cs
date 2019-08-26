@@ -7,14 +7,15 @@
     using CTDS.Database.Context;
     using CTDS.Database.Models.Declarations;
     using CTDS.Declarations.Application.Mapper;
+    using CTDS.Declarations.Application.Mapper.Interface;
+    using CTDS.Declarations.Application.Repository.Interface;
     using CTDS.Declarations.Contracts.DeclarationDTO;
-    public class DropDownDal
+    public class DropDownDal : IDropDownDal
     {
-        private readonly DatabaseMapper Mapper;
-        public DropDownDal()
+        private readonly IDatabaseMapper Mapper;
+        public DropDownDal(IDatabaseMapper mapper)
         {
-
-            Mapper = new DatabaseMapper();
+            Mapper = mapper;
         }
 
         public bool AddNewItem (DropDownDto newItem)

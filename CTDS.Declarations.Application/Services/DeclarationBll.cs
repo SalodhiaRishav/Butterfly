@@ -5,12 +5,15 @@
 
     using CTDS.Declarations.Application.Repository;
     using CTDS.Declarations.Contracts.DeclarationDTO;
-    public class DeclarationBll
+    using CTDS.Declarations.Contracts.Interface;
+    using CTDS.Declarations.Application.Repository.Interface;
+
+    public class DeclarationBll : IDeclarationBll
     {
-        private readonly DeclarationDal DeclarationDal;
-        public DeclarationBll()
+        private readonly IDeclarationDal DeclarationDal;
+        public DeclarationBll(IDeclarationDal declarationDal)
         {
-            DeclarationDal = new DeclarationDal();
+            DeclarationDal = declarationDal;
         }
 
         public Guid AddDeclaration(DeclarationDto declarationDto)

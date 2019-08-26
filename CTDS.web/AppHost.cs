@@ -1,6 +1,6 @@
 ﻿namespace CTDS.web
 {
-    using CTDS.web.CaseManagement;    
+    using CTDS.web.CaseManagement;
     using CTDS.CaseManagement.Application.Services;
     using CTDS.CaseManagement.Application.Repository;
     using CTDS.Authentication.Application.Repository;
@@ -11,6 +11,11 @@
     using CTDS.CaseManagement.Application.Mapper.MapperInterface;
     using CTDS.Authentication.Contracts.Interfaces;
     using CTDS.Authentication.Application.Services;
+    using CTDS.Declarations.Application.Mapper.Interface;
+    using CTDS.Declarations.Application.Mapper;
+    using CTDS.Declarations.Application.Repository;
+    using CTDS.Declarations.Application.Repository.Interface;
+    using CTDS.Declarations.Application.Services;
 
     using Serilog;
     using Funq;
@@ -18,6 +23,7 @@
     using ServiceStack.ServiceInterface.Cors;
     using ServiceStack.Text;
     using ServiceStack.WebHost.Endpoints;
+    using CTDS.Declarations.Contracts.Interface;
 
     public class AppHost : AppHostBase
     {
@@ -41,40 +47,103 @@
             container.Register<ICaseStatusRepository>(new CaseStatusRepository());
             container.Register<IClientRepository>(new ClientRepository());
             container.Register<INotesRepository>(new NotesRepository());
+            container.Register<IDeclarationDal>(c => 
+                new DeclarationDal(
+                    c.Resolve<IDatabaseMapper>()
+                    )
+                );
+            container.Register<IDropDownDal>(c => 
+                new DropDownDal(
+                    c.Resolve<IDatabaseMapper>()
+                    )
+                );
 
             container.Register<IClientMapper>(new ClientMapper());
             container.Register<ICaseInformationMapper>(new CaseInformationMapper());
             container.Register<ICaseStatusMapper>(new CaseStatusMapper());
             container.Register<ICaseReferenceMapper>(new CaseReferenceMapper());
             container.Register<INotesMapper>(new NotesMapper());
+            container.Register<IDatabaseMapper>(new DatabaseMapper());
 
+            container.Register<IRoleBusinessLogic>(c =>
+                new RoleBusinessLogic(
+                    c.Resolve<IUserRoleRepository>(),
+                    c.Resolve<IRoleRepository>()
+                    )
+            );
 
-            container.Register<IUserBusinessLogic>(new UserBusinessLogic(new UserRepository(),
-                new TokenBusinessLogic(new RoleBusinessLogic(new UserRoleRepository(),new RoleRepository()),
-                new TokenRepository(),
-                new UserRepository())));
+            container.Register<ITokenBusinessLogic>(c =>
+                new TokenBusinessLogic(
+                    c.Resolve<IRoleBusinessLogic>(),
+                    c.Resolve<ITokenRepository>(),
+                    c.Resolve<IUserRepository>()
+                    )
+                );
 
-            container.Register<IRoleBusinessLogic>(new RoleBusinessLogic(new UserRoleRepository(), new RoleRepository()));
-            container.Register<ITokenBusinessLogic>(new TokenBusinessLogic(new RoleBusinessLogic(new UserRoleRepository(), new RoleRepository()),
-                new TokenRepository(),
-                new UserRepository()));
-            container.Register<IClientBusinessLogic>(new ClientBusinessLogic(new ClientRepository(), new ClientMapper()));
-            container.Register<ICaseInformationBusinessLogic>(new CaseInformationBusinessLogic(
-                new CaseInformationRepository(), new CaseInformationMapper()));
-            container.Register<ICaseStatusBusinessLogic>(new CaseStatusBusinessLogic(new CaseStatusRepository(),
-                new CaseStatusMapper()));
-            container.Register<INotesBusinessLogic>(new NotesBusinessLogic(new NotesRepository(), new NotesMapper()));
-            container.Register<ICaseReferenceBusinessLogic>(new CaseReferenceBusinessLogic(new CaseReferenceRepository(),
-                new CaseReferenceMapper()));
+            container.Register<IUserBusinessLogic>(c =>
+                new UserBusinessLogic(
+                    c.Resolve<IUserRepository>(),
+                    c.Resolve<ITokenBusinessLogic>()
+                )
+            );
 
-            container.Register<ICaseBusinessLogic>(new CaseBusinessLogic(
-                new ClientBusinessLogic(new ClientRepository(), new ClientMapper()),
-                new CaseInformationBusinessLogic(new CaseInformationRepository(), new CaseInformationMapper()),
-                new CaseStatusBusinessLogic(new CaseStatusRepository(), new CaseStatusMapper()),
-                new NotesBusinessLogic(new NotesRepository(), new NotesMapper()),
-                new CaseReferenceBusinessLogic(new CaseReferenceRepository(), new CaseReferenceMapper()),
-                new CaseRepository()
-                ));
+            container.Register<IClientBusinessLogic>(c =>
+                new ClientBusinessLogic(
+                    c.Resolve<IClientRepository>(),
+                    c.Resolve<IClientMapper>()
+                    )
+            );
+
+            container.Register<ICaseInformationBusinessLogic>(c=>
+                new CaseInformationBusinessLogic(
+                    c.Resolve<ICaseInformationRepository>(),
+                    c.Resolve<ICaseInformationMapper>()
+                    )
+            );
+
+            container.Register<ICaseStatusBusinessLogic>(c=>
+                new CaseStatusBusinessLogic(
+                    c.Resolve<ICaseStatusRepository>(),
+                    c.Resolve<ICaseStatusMapper>()
+                    )
+            );
+
+            container.Register<INotesBusinessLogic>(c => 
+                new NotesBusinessLogic(
+                    c.Resolve<INotesRepository>(),
+                    c.Resolve<INotesMapper>()
+                    )
+                );
+
+            container.Register<ICaseReferenceBusinessLogic>(c => 
+                new CaseReferenceBusinessLogic(
+                    c.Resolve<ICaseReferenceRepository>(),
+                    c.Resolve<ICaseReferenceMapper>()
+                    )
+                );
+
+            container.Register<ICaseBusinessLogic>(c=>
+                new CaseBusinessLogic(
+                    c.Resolve<IClientBusinessLogic>(),
+                    c.Resolve<ICaseInformationBusinessLogic>(),
+                    c.Resolve<ICaseStatusBusinessLogic>(),
+                    c.Resolve<INotesBusinessLogic>(),
+                    c.Resolve<ICaseReferenceBusinessLogic>(),
+                    c.Resolve<ICaseRepository>()
+                    )
+                );
+
+            container.Register<IDeclarationBll>(c => 
+                new DeclarationBll(
+                    c.Resolve<IDeclarationDal>()
+                    )
+                );
+
+            container.Register<IDropDownBll>(c => 
+                new DropDownBll(
+                    c.Resolve<IDropDownDal>()
+                    )
+            );
 
             Plugins.Add(new CorsFeature());
             RequestFilters.Add((httpReq, httpRes, requestDto) =>

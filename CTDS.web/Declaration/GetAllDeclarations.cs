@@ -8,6 +8,7 @@
     using CTDS.Declarations.Contracts.EndPoints;
     using CTDS.web.Authentication.Filters;
     using CTDS.web.CommonResponse;
+    using CTDS.Declarations.Contracts.Interface;
 
     using Serilog;
     using ServiceStack.ServiceInterface;
@@ -15,10 +16,10 @@
     [AuthFilter(RoleName = "User")]
     public class GetAllDeclarations : Service
     {
-        private readonly DeclarationBll DeclarationBll;
-        public GetAllDeclarations()
+        private readonly IDeclarationBll DeclarationBll;
+        public GetAllDeclarations(IDeclarationBll declarationBll)
         {
-            DeclarationBll = new DeclarationBll();
+            DeclarationBll = declarationBll;
         }
 
         public OperationResponse<IEnumerable<DeclarationDto>> Get(GetAllDeclaration  request)

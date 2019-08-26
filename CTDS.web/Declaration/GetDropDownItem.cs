@@ -8,16 +8,17 @@
     using CTDS.Declarations.Contracts.EndPoints;
     using CTDS.web.CommonResponse;
     using CTDS.web.Authentication.Filters;
+    using CTDS.Declarations.Contracts.Interface;
 
     using Serilog;
     using ServiceStack.ServiceInterface;
 
     public class GetDropDownItem : Service
     {
-        private readonly DropDownBll DropDownBll;
-        public GetDropDownItem()
+        private readonly IDropDownBll DropDownBll;
+        public GetDropDownItem(IDropDownBll dropDownBll)
         {
-            DropDownBll = new DropDownBll();
+            DropDownBll = dropDownBll;
         }
 
         [AuthFilter(RoleName = "User")]

@@ -102,7 +102,6 @@
     <Compile Include="EndPoints\GetStatusTypes.cs" />
     <Compile Include="Enums\CaseReferenceType.cs" />
     <Compile Include="Enums\CaseStatusType.cs" />
-    <Compile Include="Enums\Country.cs" />
     <Compile Include="Enums\IdentifierType.cs" />
     <Compile Include="Enums\PriorityType.cs" />
     <Compile Include="Interfaces\ICaseBusinessLogic.cs" />

@@ -9,6 +9,7 @@
     using CTDS.Declarations.Contracts.Validation;
     using CTDS.web.CommonResponse;
     using CTDS.web.Authentication.Filters;
+    using CTDS.Declarations.Contracts.Interface;
 
     using FluentValidation.Results;
     using Serilog;   
@@ -17,10 +18,10 @@
     [AuthFilter(RoleName = "User")]
     public class EditDeclarationService : Service
     {
-        private readonly DeclarationBll DeclarationBll;
-        public EditDeclarationService()
+        private readonly IDeclarationBll DeclarationBll;
+        public EditDeclarationService(IDeclarationBll declarationBll)
         {
-            DeclarationBll = new DeclarationBll();
+            DeclarationBll = declarationBll;
         }
         public OperationResponse<bool> Post(EditDeclaration editDeclaration)
         {
