@@ -4,7 +4,6 @@
 
     using CTDS.CaseManagement.Contracts.Enums;
    
-
     public class Client : BaseModel
     {
         public string  ClientIdentifier { get; set; }

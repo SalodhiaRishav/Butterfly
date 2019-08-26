@@ -5,7 +5,6 @@
 
     using CTDS.Database.Models.CaseManagement;
    
-
     class CaseStatusConfigurations : EntityTypeConfiguration<CaseStatus>
     {
         public CaseStatusConfigurations()

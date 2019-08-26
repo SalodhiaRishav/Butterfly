@@ -1,7 +1,9 @@
 ﻿namespace CTDS.Declarations.Contracts.EndPoints
 {
-    using ServiceStack.ServiceHost;
     using System;
+
+    using ServiceStack.ServiceHost;
+    
 
     [Route("/getdeclarationbyguid/{guid}","GET")]
     public class GetDeclarationByGuid

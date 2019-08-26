@@ -80,7 +80,6 @@
     <Compile Include="EndPoints\GetAllDeclaration.cs" />
     <Compile Include="EndPoints\GetDeclarationByGuid.cs" />
     <Compile Include="EndPoints\GetDropDownItems.cs" />
-    <Compile Include="Enums\ReferenceType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

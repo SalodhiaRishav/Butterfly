@@ -1,7 +1,8 @@
 ﻿namespace CTDS.Declarations.Contracts.EndPoints
-{
-    using ServiceStack.ServiceHost;
+{  
     using CTDS.Declarations.Contracts.DeclarationDTO;
+
+    using ServiceStack.ServiceHost;
 
     [Route("/updatedeclaration","POST")]
     public class EditDeclaration
