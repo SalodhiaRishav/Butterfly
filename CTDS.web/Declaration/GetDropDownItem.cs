@@ -1,8 +1,8 @@
 ﻿namespace CTDS.web.Declaration
 {    
     using System;
-    
     using System.Collections.Generic;
+
     using CTDS.Declarations.Application.Services;
     using CTDS.Declarations.Contracts.DeclarationDTO;
     using CTDS.Declarations.Contracts.EndPoints;
