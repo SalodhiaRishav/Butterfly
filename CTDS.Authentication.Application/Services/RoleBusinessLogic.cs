@@ -1,11 +1,13 @@
 ﻿namespace CTDS.Authentication.Application.Services
 {
-    using AutoMapper;
+    using System.Collections.Generic;
+
     using CTDS.Authentication.Application.Repository.Interfaces;
     using CTDS.Authentication.Contracts.Dto;
     using CTDS.Authentication.Contracts.Interfaces;
     using CTDS.Database.Models.Authentication;
-    using System.Collections.Generic;
+   
+    using AutoMapper;
 
     public class RoleBusinessLogic : IRoleBusinessLogic
     {

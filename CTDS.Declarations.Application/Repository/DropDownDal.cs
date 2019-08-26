@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CTDS.Declarations.Application.Repository
+﻿namespace CTDS.Declarations.Application.Repository
 {
-    using CTDS.Declarations.Contracts.DeclarationDTO;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     using CTDS.Database.Context;
     using CTDS.Database.Models.Declarations;
     using CTDS.Declarations.Application.Mapper;
+    using CTDS.Declarations.Contracts.DeclarationDTO;
     public class DropDownDal
     {
         private readonly DatabaseMapper mapper;

@@ -1,19 +1,21 @@
 ﻿namespace CTDS.Authentication.Application.Services
 {
-    using CTDS.Database.Models.Authentication;
-    using Microsoft.IdentityModel.Tokens;
     using System;
     using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Security.Claims;
     using System.Security.Cryptography;
-    using CTDS.Authentication.Contracts.Dto;
-    using CTDS.Authentication.Contracts.Interfaces;
-    using CTDS.Authentication.Application.Repository.Interfaces;
     using System.Configuration;
     using System.Collections.Specialized;
 
+    using CTDS.Database.Models.Authentication;
+    using CTDS.Authentication.Contracts.Dto;
+    using CTDS.Authentication.Contracts.Interfaces;
+    using CTDS.Authentication.Application.Repository.Interfaces;
+
+    using Microsoft.IdentityModel.Tokens;
+       
     public class TokenBusinessLogic : ITokenBusinessLogic
     {
         private readonly IRoleBusinessLogic RoleBusinessLogic;

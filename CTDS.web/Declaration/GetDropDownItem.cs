@@ -1,20 +1,16 @@
 ﻿namespace CTDS.web.Declaration
-{
-    
+{    
     using System;
     
-
     using System.Collections.Generic;
     using CTDS.Declarations.Application.Services;
     using CTDS.Declarations.Contracts.DeclarationDTO;
     using CTDS.Declarations.Contracts.EndPoints;
     using CTDS.web.CommonResponse;
+    using CTDS.web.Authentication.Filters;
 
     using Serilog;
     using ServiceStack.ServiceInterface;
-
-
-    using CTDS.web.Authentication.Filters;
 
     public class GetDropDownItem : Service
     {

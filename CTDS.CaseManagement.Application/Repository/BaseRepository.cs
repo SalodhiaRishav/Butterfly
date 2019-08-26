@@ -4,10 +4,11 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
-    using CTDS.Database.Models;
-    using CTDS.Database.Context;
     using System.Linq.Expressions;
     using System.Data.Entity.Migrations;
+
+    using CTDS.Database.Models;
+    using CTDS.Database.Context;   
     using CTDS.CaseManagement.Application.Repository.Interfaces;
 
     public class BaseRepository<T> : IRepository<T> where T : BaseModel

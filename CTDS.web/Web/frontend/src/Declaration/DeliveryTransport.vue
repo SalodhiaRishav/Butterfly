@@ -41,7 +41,7 @@
     </b-form-group>
     <b-form-group label="*Mode of transport at the border(25):">
       <b-form-select
-        v-model="declaration.modeOfTransPort"
+        v-model="declaration.modeOfTransport"
         :options="ModeOfTransport"
         required
       ></b-form-select>

@@ -1,7 +1,9 @@
 ﻿namespace CTDS.CaseManagement.Contracts.EndPoints
 {
-    using CTDS.CaseManagement.Contracts.Dto;
     using ServiceStack.ServiceHost;
+
+    using CTDS.CaseManagement.Contracts.Dto;
+  
 
     [Route("/casemanagement", "PUT")]
     public class EditCase

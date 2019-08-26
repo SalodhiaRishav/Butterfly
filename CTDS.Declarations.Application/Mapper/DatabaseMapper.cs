@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CTDS.Declarations.Application.Mapper
+﻿namespace CTDS.Declarations.Application.Mapper
 {
-    using AutoMapper;
+    using System.Collections.Generic;
+   
     using CTDS.Database.Models.Declarations;
     using CTDS.Declarations.Contracts.DeclarationDTO;
+
+    using AutoMapper;
     public class DatabaseMapper
     {
         readonly private IMapper mapper;

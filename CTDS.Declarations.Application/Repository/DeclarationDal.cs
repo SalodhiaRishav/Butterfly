@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace CTDS.Declarations.Application.Repository
 {
-    using CTDS.Database.Models.Declarations;
-    using CTDS.Declarations.Application.Mapper;
-    using CTDS.Declarations.Contracts.DeclarationDTO;
-    using CTDS.Database.Context;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Data.Entity.Migrations;
 
+    using CTDS.Database.Context;
+    using CTDS.Declarations.Application.Mapper;
+    using CTDS.Declarations.Contracts.DeclarationDTO;
+   
     public class DeclarationDal
     {
         private readonly DatabaseMapper mapper;

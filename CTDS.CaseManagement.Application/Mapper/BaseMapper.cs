@@ -1,8 +1,10 @@
 ﻿namespace CTDS.CaseManagement.Application.Mapper
 {
     using System.Collections.Generic;
-    using AutoMapper;
+    
     using CTDS.CaseManagement.Application.Mapper.MapperInterface;
+
+    using AutoMapper;
 
     public class BaseMapper<Entity,EntityDto>:IBaseMapper<Entity,EntityDto>
     {

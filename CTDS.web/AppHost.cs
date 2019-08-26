@@ -1,11 +1,6 @@
 ﻿namespace CTDS.web
 {
-    using CTDS.web.CaseManagement;
-    using Funq;
-    using ServiceStack;
-    using ServiceStack.ServiceInterface.Cors;
-    using ServiceStack.Text;
-    using ServiceStack.WebHost.Endpoints;
+    using CTDS.web.CaseManagement;    
     using CTDS.CaseManagement.Application.Services;
     using CTDS.CaseManagement.Application.Repository;
     using CTDS.Authentication.Application.Repository;
@@ -16,7 +11,13 @@
     using CTDS.CaseManagement.Application.Mapper.MapperInterface;
     using CTDS.Authentication.Contracts.Interfaces;
     using CTDS.Authentication.Application.Services;
+
     using Serilog;
+    using Funq;
+    using ServiceStack;
+    using ServiceStack.ServiceInterface.Cors;
+    using ServiceStack.Text;
+    using ServiceStack.WebHost.Endpoints;
 
     public class AppHost : AppHostBase
     {

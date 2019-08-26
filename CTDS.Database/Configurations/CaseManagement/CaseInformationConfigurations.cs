@@ -1,8 +1,10 @@
 ﻿namespace CTDS.Database.Configurations.CaseManagement
 {
-    using CTDS.Database.Models.CaseManagement;
     using System.Data.Entity.ModelConfiguration;
     using System.ComponentModel.DataAnnotations.Schema;
+
+    using CTDS.Database.Models.CaseManagement;
+   
 
     class CaseInformationConfigurations : EntityTypeConfiguration<CaseInformation>
     {

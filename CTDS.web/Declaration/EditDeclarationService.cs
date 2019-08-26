@@ -8,10 +8,10 @@
     using CTDS.Declarations.Contracts.EndPoints;
     using CTDS.Declarations.Contracts.Validation;
     using CTDS.web.CommonResponse;
+    using CTDS.web.Authentication.Filters;
 
     using FluentValidation.Results;
-    using Serilog;
-    using CTDS.web.Authentication.Filters;
+    using Serilog;   
     using ServiceStack.ServiceInterface;
 
     [AuthFilter(RoleName = "User")]

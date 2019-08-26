@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace CTDS.CaseManagement.Contracts.Dto
+﻿namespace CTDS.CaseManagement.Contracts.Dto
 {
+    using System;
+
     public class BaseDto
     {
         public Guid Id { get; set; }

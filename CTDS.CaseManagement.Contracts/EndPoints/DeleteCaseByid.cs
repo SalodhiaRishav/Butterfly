@@ -1,7 +1,9 @@
 ﻿namespace CTDS.CaseManagement.Contracts.EndPoints
 {
-    using ServiceStack.ServiceHost;
     using System;
+
+    using ServiceStack.ServiceHost;
+    
 
     [Route("/casemanagement/{caseId}", "DELETE")]
     public class DeleteCaseById

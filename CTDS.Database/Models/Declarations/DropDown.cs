@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CTDS.Database.Models.Declarations
+﻿namespace CTDS.Database.Models.Declarations
 {
+    using System;
     public class DropDown
     {
         public Guid Id { get; set; }

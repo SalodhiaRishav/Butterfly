@@ -1,8 +1,9 @@
 ﻿namespace CTDS.Database.Models.CaseManagement
 {
-    using CTDS.CaseManagement.Contracts.Enums;
     using System;
 
+    using CTDS.CaseManagement.Contracts.Enums;
+    
     public class CaseReference : BaseModel
     {
         public CaseReferenceType Type { get; set; }

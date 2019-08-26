@@ -1,14 +1,15 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Serilog;
-using Serilog.Context;
-using ServiceStack.ServiceHost;
-using ServiceStack.ServiceInterface;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-
-namespace CTDS.web.Authentication.Filters
+﻿namespace CTDS.web.Authentication.Filters
 {
+    using System;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Security.Claims;
+
+    using Microsoft.IdentityModel.Tokens;
+    using Serilog;
+    using Serilog.Context;
+    using ServiceStack.ServiceHost;
+    using ServiceStack.ServiceInterface;
+    
     public class AuthFilter : RequestFilterAttribute
     {
         public string RoleName { get; set; }

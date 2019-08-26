@@ -1,8 +1,10 @@
 ﻿namespace CTDS.CaseManagement.Contracts.Interfaces
 {
-    using CTDS.CaseManagement.Contracts.Dto;
     using System;
     using System.Collections.Generic;
+
+    using CTDS.CaseManagement.Contracts.Dto;
+    
 
     public interface ICaseBusinessLogic
     {

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CTDS.Declarations.Contracts.Validation
+﻿namespace CTDS.Declarations.Contracts.Validation
 {
-    using FluentValidation;
     using CTDS.Declarations.Contracts.DeclarationDTO;
+
+    using FluentValidation;
     public class DeclarationValidator : AbstractValidator<DeclarationDto>
     {
         public DeclarationValidator()

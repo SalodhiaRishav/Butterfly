@@ -1,6 +1,7 @@
 ﻿namespace CTDS.CaseManagement.Contracts.Validators
 {
     using CTDS.CaseManagement.Contracts.Dto;
+
     using FluentValidation;
 
     public class NotesValidator : AbstractValidator<NotesDto>

@@ -1,13 +1,14 @@
 ﻿namespace CTDS.CaseManagement.Application.Services
 {
-    using CTDS.CaseManagement.Application.Repository.Interfaces;
-    using CTDS.CaseManagement.Application.Mapper.MapperInterface;
-    using CTDS.CaseManagement.Contracts.Dto;
-    using CTDS.CaseManagement.Contracts.Interfaces;
-    using CTDS.Database.Models.CaseManagement;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using CTDS.CaseManagement.Application.Repository.Interfaces;
+    using CTDS.CaseManagement.Contracts.Dto;
+    using CTDS.CaseManagement.Contracts.Interfaces;
+    using CTDS.Database.Models.CaseManagement;
+    
 
     public class CaseBusinessLogic : ICaseBusinessLogic
     {

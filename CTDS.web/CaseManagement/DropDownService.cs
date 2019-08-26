@@ -1,10 +1,13 @@
 ﻿namespace CTDS.web.CaseManagement
 {
+    using System;
+
     using CTDS.CaseManagement.Contracts.EndPoints;
     using CTDS.CaseManagement.Contracts.Enums;
     using CTDS.web.CommonResponse;
+
     using ServiceStack.ServiceInterface;
-    using System;
+    
 
     public class DropDownService : Service
     {

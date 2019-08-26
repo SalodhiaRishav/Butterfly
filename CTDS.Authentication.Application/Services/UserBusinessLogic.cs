@@ -1,15 +1,17 @@
 ﻿namespace CTDS.Authentication.Application.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     using CTDS.Authentication.Application.Repository.Interfaces;
     using CTDS.Authentication.Contracts.Dto;
     using CTDS.Authentication.Contracts.EndPoints;
     using CTDS.Authentication.Contracts.Interfaces;
     using CTDS.Database.Models.Authentication;
-    using ServiceStack.ServiceHost;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
+    using ServiceStack.ServiceHost;
+    
     public class UserBusinessLogic : IUserBusinessLogic
     {
         private readonly IUserRepository _userRepository;

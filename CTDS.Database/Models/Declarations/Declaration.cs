@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace CTDS.Database.Models.Declarations
+﻿namespace CTDS.Database.Models.Declarations
 {
+    using System;
+    using System.Collections.Generic;
     public class Declaration
     {
         public Guid DeclarationId { get; set; }

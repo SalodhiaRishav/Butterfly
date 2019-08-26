@@ -9,12 +9,12 @@
     using CTDS.Declarations.Contracts.EndPoints;
     using CTDS.Declarations.Contracts.Validation;
     using CTDS.web.CommonResponse;
+    using CTDS.web.Authentication.Filters;
 
     using FluentValidation.Results;
     using Serilog;
     using ServiceStack.ServiceInterface;
-    using System.Configuration;
-    using CTDS.web.Authentication.Filters;
+   
 
     [AuthFilter(RoleName = "User")]
     public class AddDeclarationService : Service

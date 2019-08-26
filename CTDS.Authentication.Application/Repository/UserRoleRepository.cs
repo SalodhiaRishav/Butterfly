@@ -6,6 +6,7 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Linq.Expressions;
+
     using CTDS.Authentication.Application.Repository.Interfaces;
     using CTDS.Database.Context;
     using CTDS.Database.Models.Authentication;

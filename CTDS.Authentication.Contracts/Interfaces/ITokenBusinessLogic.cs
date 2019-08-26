@@ -1,14 +1,7 @@
-﻿using CTDS.Authentication.Contracts.Dto;
-using CTDS.Database.Models.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CTDS.Authentication.Contracts.Interfaces
+﻿namespace CTDS.Authentication.Contracts.Interfaces
 {
+    using CTDS.Authentication.Contracts.Dto;
+    using CTDS.Database.Models.Authentication;
     public interface ITokenBusinessLogic
     {
         JwtTokenData CreateJwtTokens(User user);

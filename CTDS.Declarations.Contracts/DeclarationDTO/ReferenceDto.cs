@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CTDS.Declarations.Contracts.DeclarationDTO
+﻿namespace CTDS.Declarations.Contracts.DeclarationDTO
 {
+    using System;
     public class ReferenceDto
     {
         public Guid ReferenceId { get; set; }

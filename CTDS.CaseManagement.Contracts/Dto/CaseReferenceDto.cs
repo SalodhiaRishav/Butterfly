@@ -1,7 +1,9 @@
 ﻿namespace CTDS.CaseManagement.Contracts.Dto
 {
-    using CTDS.CaseManagement.Contracts.Enums;
     using System;
+
+    using CTDS.CaseManagement.Contracts.Enums;
+
 
     public class CaseReferenceDto : BaseDto
     {

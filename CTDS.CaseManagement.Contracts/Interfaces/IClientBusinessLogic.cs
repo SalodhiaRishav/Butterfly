@@ -1,8 +1,9 @@
 ﻿namespace CTDS.CaseManagement.Contracts.Interfaces
 {
-    using CTDS.CaseManagement.Contracts.Dto;
     using System;
 
+    using CTDS.CaseManagement.Contracts.Dto;
+  
     public interface IClientBusinessLogic
     {
         ClientDto AddNewClient(ClientDto clientDto, Guid caseId);
