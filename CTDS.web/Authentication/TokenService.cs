@@ -42,7 +42,7 @@
                     return result;
                 }
                 result.OnSuccess(new RefreshTokenResult() { AccessToken = accessToken },
-                    "new token recieved successfully");
+                    "new token received successfully");
                 return result;
             }
             catch(Exception e)
@@ -53,10 +53,8 @@
                 
             }
         }
-        public OperationResponse<bool> GET(LogoutUser request)
+        public OperationResponse<bool> Get(LogoutUser request)
         {
-            // var token = req.Headers.Get("Authorization");
-
             OperationResponse<bool> result = new OperationResponse<bool>();
             var token = HttpContext.Current.Request.Headers.Get("Authorization");
             _tokenBusinessLogic.DeleteToken(token);

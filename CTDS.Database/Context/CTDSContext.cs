@@ -1,5 +1,4 @@
-﻿
-namespace CTDS.Database.Context
+﻿namespace CTDS.Database.Context
 {
     using System.Data.Entity;
 
