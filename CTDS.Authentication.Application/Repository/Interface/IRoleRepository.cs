@@ -12,7 +12,7 @@
         Role Add(Role entity);
         void Delete(Role entity);
         Role Update(Role entity);
-        Role FindById(int Id);
+        Role FindById(int id);
         void AddRange(IEnumerable<Role> entityList);
         void DeleteRange(IEnumerable<Role> entityList);
         List<Role> Find(Expression<Func<Role, bool>> predicate);

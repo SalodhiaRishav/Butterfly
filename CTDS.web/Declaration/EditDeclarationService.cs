@@ -17,32 +17,32 @@
     [AuthFilter(RoleName = "User")]
     public class EditDeclarationService : Service
     {
-        private readonly DeclarationBll declarationBll;
+        private readonly DeclarationBll DeclarationBll;
         public EditDeclarationService()
         {
-            declarationBll = new DeclarationBll();
+            DeclarationBll = new DeclarationBll();
         }
-        public OperationResponse<bool> POST(EditDeclaration editDeclaration)
+        public OperationResponse<bool> Post(EditDeclaration editDeclaration)
         {
             OperationResponse<bool> response = new OperationResponse<bool>();
             try
             {               
-                var newDeclaration = editDeclaration.declaration;
+                var newDeclaration = editDeclaration.Declaration;
                 DeclarationValidator obj = new DeclarationValidator();
                 ValidationResult result = obj.Validate(newDeclaration);
                 if (result.IsValid)
                 {
-                    var data = declarationBll.EditDeclaration(newDeclaration);
+                    var data = DeclarationBll.EditDeclaration(newDeclaration);
                     
                     ReferenceDto reference = new ReferenceDto();
-                    for (int i = 0; i < editDeclaration.referenceData.Length; i++)
+                    for (int i = 0; i < editDeclaration.ReferenceData.Length; i++)
                     {
                         reference.DeclarationId = newDeclaration.DeclarationId;
-                        reference.ReferenceId = editDeclaration.referenceData[i].ReferenceId;
-                        reference.InvoiceDate = editDeclaration.referenceData[i].InvoiceDate;
-                        reference.Reference = editDeclaration.referenceData[i].Reference;
-                        reference.Type = editDeclaration.referenceData[i].Type;
-                        declarationBll.AddReference(reference);
+                        reference.ReferenceId = editDeclaration.ReferenceData[i].ReferenceId;
+                        reference.InvoiceDate = editDeclaration.ReferenceData[i].InvoiceDate;
+                        reference.Reference = editDeclaration.ReferenceData[i].Reference;
+                        reference.Type = editDeclaration.ReferenceData[i].Type;
+                        DeclarationBll.AddReference(reference);
                     }
                     response.OnSuccess(data, "Record Successfully Updated");
                     return response;

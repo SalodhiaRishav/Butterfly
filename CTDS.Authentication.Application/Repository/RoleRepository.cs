@@ -14,7 +14,6 @@
     public class RoleRepository : IRoleRepository
     {
         private readonly CTDSContext CTDSContext;
-
         private readonly DbSet<Role> DbSet;
 
         public RoleRepository()
@@ -89,11 +88,11 @@
             }
         }
 
-        public Role FindById(int Id)
+        public Role FindById(int id)
         {
             try
             {
-                return DbSet.Find(Id);
+                return DbSet.Find(id);
             }
             catch (Exception exception)
             {

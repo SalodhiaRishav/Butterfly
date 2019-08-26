@@ -7,17 +7,17 @@
     using CTDS.Declarations.Contracts.DeclarationDTO;
     public class DeclarationBll
     {
-        private readonly DeclarationDal declarationDal;
+        private readonly DeclarationDal DeclarationDal;
         public DeclarationBll()
         {
-            declarationDal = new DeclarationDal();
+            DeclarationDal = new DeclarationDal();
         }
 
         public Guid AddDeclaration(DeclarationDto declarationDto)
         {
             try
             {
-                return declarationDal.AddDeclaration(declarationDto);
+                return DeclarationDal.AddDeclaration(declarationDto);
             }
             catch (Exception)
             {
@@ -29,7 +29,7 @@
         {
             try
             {
-                return declarationDal.GetDeclarationById(id);
+                return DeclarationDal.GetDeclarationById(id);
             }
             catch (Exception)
             {
@@ -41,7 +41,7 @@
         {
             try
             {
-                return declarationDal.GetAllDeclarations();
+                return DeclarationDal.GetAllDeclarations();
             }
             catch (Exception)
             {
@@ -53,7 +53,7 @@
         {
             try
             {
-                return declarationDal.EditDeclaration(declarationDto);
+                return DeclarationDal.EditDeclaration(declarationDto);
             }
             catch(Exception)
             {
@@ -65,7 +65,7 @@
         {
             try
             {
-                declarationDal.AddReference(reference);
+                DeclarationDal.AddReference(reference);
             }
             catch (Exception)
             {
@@ -77,7 +77,7 @@
         {
             try
             {
-                return declarationDal.GetReferenceData(id);
+                return DeclarationDal.GetReferenceData(id);
             }
             catch(Exception)
             {

@@ -6,7 +6,7 @@
 
     using AutoMapper;
 
-    public class BaseMapper<Entity,EntityDto>:IBaseMapper<Entity,EntityDto>
+    public class BaseMapper<TEntity,TEntityDto>:IBaseMapper<TEntity,TEntityDto>
     {
         private readonly IMapper Mapper;
 
@@ -14,29 +14,29 @@
         {
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Entity, EntityDto>().ReverseMap();
+                cfg.CreateMap<TEntity, TEntityDto>().ReverseMap();
             });
             Mapper = config.CreateMapper();
         }
 
-        public EntityDto ModelToDto(Entity entity)
+        public TEntityDto ModelToDto(TEntity entity)
         {
-            return Mapper.Map<EntityDto>(entity);
+            return Mapper.Map<TEntityDto>(entity);
         }
 
-        public Entity DtoToModel(EntityDto entityDto)
+        public TEntity DtoToModel(TEntityDto entityDto)
         {
-            return Mapper.Map<Entity>(entityDto);
+            return Mapper.Map<TEntity>(entityDto);
         }
 
-        public List<EntityDto> ModelListToDtoList(List<Entity> entities)
+        public List<TEntityDto> ModelListToDtoList(List<TEntity> entities)
         {
-            return Mapper.Map<List<EntityDto>>(entities);
+            return Mapper.Map<List<TEntityDto>>(entities);
         }
 
-        public List<Entity> DtoListToModelList(List<EntityDto> entityDtos)
+        public List<TEntity> DtoListToModelList(List<TEntityDto> entityDtos)
         {
-            return Mapper.Map<List<Entity>>(entityDtos);
+            return Mapper.Map<List<TEntity>>(entityDtos);
         }
     }
 }

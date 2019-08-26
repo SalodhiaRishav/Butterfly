@@ -1,5 +1,8 @@
 ﻿namespace CTDS.Authentication.Application.Repository
 {
+    using CTDS.Authentication.Application.Repository.Interfaces;
+    using CTDS.Database.Context;
+    using CTDS.Database.Models.Authentication;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -14,7 +17,6 @@
     public class TokenRepository : ITokenRepository
     {
         private readonly CTDSContext CTDSContext;
-
         private readonly DbSet<Token> DbSet;
 
         public TokenRepository()
@@ -106,13 +108,13 @@
             }
         }
 
-        public Token FindById(int Id)
+        public Token FindById(int id)
         {
             try
             {
                 using (var context = new CTDSContext())
                 {
-                    return context.UserToken.Find(Id);
+                    return context.UserToken.Find(id);
                 }
             }
             catch (Exception exception)

@@ -7,9 +7,9 @@ namespace CTDS.Database.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class addedrefreshtoken : IMigrationMetadata
+    public sealed partial class Addedrefreshtoken : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addedrefreshtoken));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Addedrefreshtoken));
         
         string IMigrationMetadata.Id
         {

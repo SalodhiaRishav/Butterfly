@@ -14,20 +14,20 @@
 
     public class GetDropDownItem : Service
     {
-        private readonly DropDownBll dropDownBll;
+        private readonly DropDownBll DropDownBll;
         public GetDropDownItem()
         {
-            dropDownBll = new DropDownBll();
+            DropDownBll = new DropDownBll();
         }
 
         [AuthFilter(RoleName = "User")]
-        public OperationResponse<IEnumerable<DropDownDto>> GET(GetDropDownItems ListType )
+        public OperationResponse<IEnumerable<DropDownDto>> Get(GetDropDownItems request )
         {
             OperationResponse<IEnumerable<DropDownDto>> response = new OperationResponse<IEnumerable<DropDownDto>>();
             try
             {
-                var listType = ListType.ListType;           
-                var data = dropDownBll.GetDropDownItems(listType);
+                var listType = request.ListType;           
+                var data = DropDownBll.GetDropDownItems(listType);
                 response.OnSuccess(data, "Drop Items Fetched Successfully");
                 return response;
             }

@@ -13,7 +13,7 @@
     public class AuthFilter : RequestFilterAttribute
     {
         public string RoleName { get; set; }
-        private static string secret = System.Configuration.ConfigurationManager.AppSettings["secret"];
+        private static string _secret = System.Configuration.ConfigurationManager.AppSettings["secret"];
         public override void Execute(IHttpRequest req, IHttpResponse res, object requestDto)
         {
             string token = req.Headers.Get("Authorization");
@@ -100,7 +100,7 @@
                 }
                 var tempTime = jwtToken.ValidFrom - jwtToken.ValidTo;
                 var temptime = DateTime.UtcNow.Ticks;
-                byte[] key = Convert.FromBase64String(secret);
+                byte[] key = Convert.FromBase64String(_secret);
 
                 TokenValidationParameters parameters = new TokenValidationParameters()
                 {

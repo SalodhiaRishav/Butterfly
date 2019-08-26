@@ -96,11 +96,11 @@
             }
         }
 
-        public T FindById(int Id)
+        public T FindById(int id)
         {
             try
             {
-                return DbSet.Find(Id);
+                return DbSet.Find(id);
             }
             catch (Exception exception)
             {

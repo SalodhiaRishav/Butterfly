@@ -3,7 +3,7 @@ namespace CTDS.Database.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class newdeclarationmodel : DbMigration
+    public partial class Newdeclarationmodel : DbMigration
     {
         public override void Up()
         {

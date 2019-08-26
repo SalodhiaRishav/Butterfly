@@ -2,8 +2,8 @@
 {
     public enum IdentifierType
     {
-        EORI,
-        TIN,
-        CNR
+        Eori,
+        Tin,
+        Cnr
     }
 }

@@ -12,7 +12,7 @@
         User Add(User entity);
         void Delete(User entity);
         User Update(User entity);
-        User FindById(int Id);
+        User FindById(int id);
         void AddRange(IEnumerable<User> entityList);
         void DeleteRange(IEnumerable<User> entityList);
         List<User> Find(Expression<Func<User, bool>> predicate);

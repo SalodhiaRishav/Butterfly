@@ -15,18 +15,18 @@
     [AuthFilter(RoleName = "User")]
     public class GetAllDeclarations : Service
     {
-        private readonly DeclarationBll declarationBll;
+        private readonly DeclarationBll DeclarationBll;
         public GetAllDeclarations()
         {
-            declarationBll = new DeclarationBll();
+            DeclarationBll = new DeclarationBll();
         }
 
-        public OperationResponse<IEnumerable<DeclarationDto>> GET(GetAllDeclaration  Request)
+        public OperationResponse<IEnumerable<DeclarationDto>> Get(GetAllDeclaration  request)
         {
             OperationResponse<IEnumerable<DeclarationDto>> response = new OperationResponse<IEnumerable<DeclarationDto>>();
             try
             {
-                var data = declarationBll.GetAllDeclaration();
+                var data = DeclarationBll.GetAllDeclaration();
                 response.OnSuccess(data, "Declarations Fecthed Successfully");
                 return response;
             }

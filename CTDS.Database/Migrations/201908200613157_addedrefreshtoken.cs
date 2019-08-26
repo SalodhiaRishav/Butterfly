@@ -3,7 +3,7 @@ namespace CTDS.Database.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addedrefreshtoken : DbMigration
+    public partial class Addedrefreshtoken : DbMigration
     {
         public override void Up()
         {

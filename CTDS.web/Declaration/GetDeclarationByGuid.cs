@@ -12,21 +12,21 @@
 
     public class GetDeclarationByGuid : Service
     {
-        private readonly DeclarationBll declarationBll;
+        private readonly DeclarationBll DeclarationBll;
         public GetDeclarationByGuid()
         {
-            declarationBll = new DeclarationBll();
+            DeclarationBll = new DeclarationBll();
         }
 
         [AuthFilter(RoleName = "User")]
-        public OperationResponse<DeclarationData> GET(CTDS.Declarations.Contracts.EndPoints.GetDeclarationByGuid guid)
+        public OperationResponse<DeclarationData> Get(CTDS.Declarations.Contracts.EndPoints.GetDeclarationByGuid guid)
         {
             OperationResponse<DeclarationData> response = new OperationResponse<DeclarationData>();
             try
             {
-                var id = guid.guid;
-                var declarationData = declarationBll.GetDeclarationById(id);
-                var referenceData = declarationBll.GetReferenceData(id);
+                var id = guid.Guid;
+                var declarationData = DeclarationBll.GetDeclarationById(id);
+                var referenceData = DeclarationBll.GetReferenceData(id);
                 DeclarationData data = new DeclarationData();
                 data.Declaration = declarationData;
                 data.ReferenceData = referenceData;

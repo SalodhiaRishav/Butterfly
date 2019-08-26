@@ -8,6 +8,6 @@
     [Route("/casemanagement/{caseId}", "GET")]
     public class GetCaseById 
     {
-       public Guid caseId { get; set; }
+       public Guid CaseId { get; set; }
     }
 }
