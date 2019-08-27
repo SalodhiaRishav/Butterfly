@@ -6,16 +6,17 @@
     using CTDS.Declarations.Contracts.DeclarationDTO;
     using CTDS.web.CommonResponse;   
     using CTDS.web.Authentication.Filters;
+    using CTDS.Declarations.Contracts.Interface;
 
     using Serilog;
     using ServiceStack.ServiceInterface;
 
     public class GetDeclarationByGuid : Service
     {
-        private readonly DeclarationBll DeclarationBll;
-        public GetDeclarationByGuid()
+        private readonly IDeclarationBll DeclarationBll;
+        public GetDeclarationByGuid(IDeclarationBll declarationBll)
         {
-            DeclarationBll = new DeclarationBll();
+            DeclarationBll = declarationBll;
         }
 
         [AuthFilter(RoleName = "User")]

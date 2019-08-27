@@ -73,6 +73,8 @@
     <Compile Include="DeclarationDTO\DeclarationDto.cs" />
     <Compile Include="DeclarationDTO\DropDownDto.cs" />
     <Compile Include="DeclarationDTO\ReferenceDto.cs" />
+    <Compile Include="Interface\IDeclarationBll.cs" />
+    <Compile Include="Interface\IDropDownBll.cs" />
     <Compile Include="Validation\DeclarationValidator.cs" />
     <Compile Include="EndPoints\AddDeclaration.cs" />
     <Compile Include="EndPoints\EditDeclaration.cs" />
@@ -81,9 +83,7 @@
     <Compile Include="EndPoints\GetDropDownItems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

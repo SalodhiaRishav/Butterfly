@@ -1,6 +1,4 @@
-﻿
-
-namespace CTDS.Declarations.Application.Repository
+﻿namespace CTDS.Declarations.Application.Repository
 {
     using System;
     using System.Collections.Generic;
@@ -10,13 +8,15 @@ namespace CTDS.Declarations.Application.Repository
     using CTDS.Database.Context;
     using CTDS.Declarations.Application.Mapper;
     using CTDS.Declarations.Contracts.DeclarationDTO;
-   
-    public class DeclarationDal
+    using CTDS.Declarations.Application.Repository.Interface;
+    using CTDS.Declarations.Application.Mapper.Interface;
+
+    public class DeclarationDal : IDeclarationDal
     {
-        private readonly DatabaseMapper Mapper;
-        public DeclarationDal()
+        private readonly IDatabaseMapper Mapper;
+        public DeclarationDal(IDatabaseMapper mapper)
         {
-            Mapper = new DatabaseMapper();
+            Mapper = mapper;
         }
 
         public Guid AddDeclaration(DeclarationDto declarationDto)

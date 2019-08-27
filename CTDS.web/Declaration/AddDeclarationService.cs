@@ -10,20 +10,20 @@
     using CTDS.Declarations.Contracts.Validation;
     using CTDS.web.CommonResponse;
     using CTDS.web.Authentication.Filters;
+    using CTDS.Declarations.Contracts.Interface;
 
     using FluentValidation.Results;
     using Serilog;
     using ServiceStack.ServiceInterface;
-   
 
     [AuthFilter(RoleName = "User")]
     public class AddDeclarationService : Service
     {
-        private readonly DeclarationBll DeclarationBll;
+        private readonly IDeclarationBll DeclarationBll;
        
-        public AddDeclarationService()
+        public AddDeclarationService(IDeclarationBll declarationBll)
         {
-            DeclarationBll = new DeclarationBll();
+            DeclarationBll = declarationBll;
         }
         public OperationResponse<bool> Post(AddDeclaration newDeclaration)
         {

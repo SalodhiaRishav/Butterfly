@@ -5,12 +5,15 @@
 
     using CTDS.Declarations.Application.Repository;
     using CTDS.Declarations.Contracts.DeclarationDTO;
-    public class DropDownBll
+    using CTDS.Declarations.Contracts.Interface;
+    using CTDS.Declarations.Application.Repository.Interface;
+
+    public class DropDownBll : IDropDownBll
     {
-        DropDownDal DropDownDal;
-        public DropDownBll()
+        private readonly IDropDownDal DropDownDal;
+        public DropDownBll(IDropDownDal dropDownDal)
         {
-           DropDownDal= new DropDownDal();
+            DropDownDal = dropDownDal;
         }
 
         

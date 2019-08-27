@@ -204,7 +204,7 @@
             try
             {
                 CaseDto caseDto = this.CaseBusinessLogic.EditCase(client.CaseId,client, caseInformation, notes, caseStatus, references);
-                operationResponse.OnSuccess(caseDto, "Added successfully");
+                operationResponse.OnSuccess(caseDto, "Saved successfully");
                 return operationResponse;
             }
             catch (Exception e)

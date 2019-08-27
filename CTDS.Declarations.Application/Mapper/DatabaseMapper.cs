@@ -4,9 +4,11 @@
    
     using CTDS.Database.Models.Declarations;
     using CTDS.Declarations.Contracts.DeclarationDTO;
+    using CTDS.Declarations.Application.Mapper.Interface;
 
     using AutoMapper;
-    public class DatabaseMapper
+
+    public class DatabaseMapper : IDatabaseMapper
     {
         readonly private IMapper Mapper;
         public DatabaseMapper()
