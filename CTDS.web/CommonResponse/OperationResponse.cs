@@ -1,4 +1,4 @@
-﻿namespace CTDS.web.CommonResponse
+﻿namespace CTDS.Web.CommonResponse
 {
     using System.Net;
     using System;

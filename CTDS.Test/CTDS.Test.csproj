@@ -122,9 +122,9 @@
       <Project>{eed1b013-cc0c-47cb-9f2c-76eb92cd8dc7}</Project>
       <Name>CTDS.Declarations.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CTDS.web\CTDS.web.csproj">
+    <ProjectReference Include="..\CTDS.Web\CTDS.Web.csproj">
       <Project>{e3c72044-c981-4926-a367-5713f7046111}</Project>
-      <Name>CTDS.web</Name>
+      <Name>CTDS.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

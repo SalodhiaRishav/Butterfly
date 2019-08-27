@@ -1,4 +1,4 @@
-﻿namespace CTDS.web.CaseManagement
+﻿namespace CTDS.Web.CaseManagement
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@
     using CTDS.CaseManagement.Contracts.EndPoints;
     using CTDS.CaseManagement.Contracts.Interfaces;
     using CTDS.CaseManagement.Contracts.Validators;
-    using CTDS.web.CommonResponse;     
-    using CTDS.web.Authentication.Filters;
+    using CTDS.Web.CommonResponse;     
+    using CTDS.Web.Authentication.Filters;
 
     using FluentValidation.Results;
     using ServiceStack.ServiceInterface;

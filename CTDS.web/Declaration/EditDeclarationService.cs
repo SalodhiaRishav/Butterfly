@@ -1,4 +1,4 @@
-﻿namespace CTDS.web.Declaration
+﻿namespace CTDS.Web.Declaration
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@
     using CTDS.Declarations.Contracts.DeclarationDTO;
     using CTDS.Declarations.Contracts.EndPoints;
     using CTDS.Declarations.Contracts.Validation;
-    using CTDS.web.CommonResponse;
-    using CTDS.web.Authentication.Filters;
+    using CTDS.Web.CommonResponse;
+    using CTDS.Web.Authentication.Filters;
     using CTDS.Declarations.Contracts.Interface;
 
     using FluentValidation.Results;

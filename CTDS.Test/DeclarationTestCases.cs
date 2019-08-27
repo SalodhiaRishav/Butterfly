@@ -5,7 +5,7 @@ namespace CTDS.Test
      
     using CTDS.Declarations.Application.Services;
     using CTDS.Declarations.Contracts.EndPoints;
-    using CTDS.web.Declaration;
+    using CTDS.Web.Declaration;
 
     using Moq;
     using NUnit.Framework;

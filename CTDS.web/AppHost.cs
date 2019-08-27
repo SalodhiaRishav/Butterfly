@@ -1,6 +1,6 @@
-﻿namespace CTDS.web
+﻿namespace CTDS.Web
 {
-    using CTDS.web.CaseManagement;
+    using CTDS.Web.CaseManagement;
     using CTDS.CaseManagement.Application.Services;
     using CTDS.CaseManagement.Application.Repository;
     using CTDS.Authentication.Application.Repository;
@@ -28,7 +28,7 @@
 
     public class AppHost : AppHostBase
     {
-        public AppHost() : base("CTDS.web", typeof(CaseManagementService).Assembly) { }
+        public AppHost() : base("CTDS.Web", typeof(CaseManagementService).Assembly) { }
         public override void Configure(Container container)
         {
             Log.Logger = new LoggerConfiguration()

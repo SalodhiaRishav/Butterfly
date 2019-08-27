@@ -21,8 +21,7 @@
         private readonly IRoleBusinessLogic RoleBusinessLogic;
         private readonly ITokenRepository TokenRepository;
         private readonly IUserRepository UserRepository;
-        private readonly  NameValueCollection TokenConfiguratio;
-        private readonly string SecretKey = System.Configuration.ConfigurationManager.AppSettings["secret"];
+        private readonly string SecretKey = ConfigurationManager.AppSettings["secret"];
         private readonly string TokenIssuerName = ConfigurationManager.AppSettings["issuerName"];
         private readonly double AccessTokenExpirationTimeInMinutes = double.Parse(ConfigurationManager.AppSettings["accessTokenExpirationTimeInMinute"]);
         private readonly double RefreshTokenExpirationTimeInMinutes = double.Parse(ConfigurationManager.AppSettings["refreshTokenExpirationTimeInMinute"]);
@@ -32,7 +31,6 @@
             RoleBusinessLogic = roleBusinessLogic;
             TokenRepository = tokenRepository;
             UserRepository = userRepository;
-            TokenConfiguratio= ConfigurationManager.GetSection("tokenConfig") as NameValueCollection;
         }
 
         public JwtTokenData CreateJwtTokens(User user)

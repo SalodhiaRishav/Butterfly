@@ -1,9 +1,9 @@
-﻿namespace CTDS.web.Authentication
+﻿namespace CTDS.Web.Authentication
 {
     using System;
 
     using CTDS.Authentication.Contracts.EndPoints;
-    using CTDS.web.CommonResponse;
+    using CTDS.Web.CommonResponse;
     using CTDS.Authentication.Contracts.Interfaces;
     using CTDS.Authentication.Contracts.Dto;
    

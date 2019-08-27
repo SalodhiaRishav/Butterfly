@@ -1,11 +1,11 @@
-﻿namespace CTDS.web.Authentication
+﻿namespace CTDS.Web.Authentication
 {
     using System;
     using System.Web;
 
     using CTDS.Authentication.Contracts.EndPoints;
     using CTDS.Authentication.Contracts.Interfaces;
-    using CTDS.web.CommonResponse;
+    using CTDS.Web.CommonResponse;
 
     using Serilog;
     using ServiceStack.ServiceInterface;

@@ -1,11 +1,11 @@
-﻿namespace CTDS.web.Declaration
+﻿namespace CTDS.Web.Declaration
 {  
     using System;
 
     using CTDS.Declarations.Application.Services;
     using CTDS.Declarations.Contracts.DeclarationDTO;
-    using CTDS.web.CommonResponse;   
-    using CTDS.web.Authentication.Filters;
+    using CTDS.Web.CommonResponse;   
+    using CTDS.Web.Authentication.Filters;
     using CTDS.Declarations.Contracts.Interface;
 
     using Serilog;

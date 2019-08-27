@@ -1,10 +1,10 @@
-﻿namespace CTDS.web.CaseManagement
+﻿namespace CTDS.Web.CaseManagement
 {
     using System;
 
     using CTDS.CaseManagement.Contracts.EndPoints;
     using CTDS.CaseManagement.Contracts.Enums;
-    using CTDS.web.CommonResponse;
+    using CTDS.Web.CommonResponse;
 
     using ServiceStack.ServiceInterface;
     

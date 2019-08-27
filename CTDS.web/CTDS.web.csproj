@@ -12,8 +12,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CTDS.web</RootNamespace>
-    <AssemblyName>CTDS.web</AssemblyName>
+    <RootNamespace>CTDS.Web</RootNamespace>
+    <AssemblyName>CTDS.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -132,8 +132,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\CTDS.web.dll" />
-    <Content Include="bin\CTDS.web.pdb" />
+    <Content Include="bin\CTDS.Web.dll" />
+    <Content Include="bin\CTDS.Web.pdb" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\roslyn\csc.exe" />
@@ -156,9 +156,9 @@
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
     <Content Include="Default.html" />
     <Content Include="Global.asax" />
-    <Content Include="obj\Debug\CTDS.web.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\CTDS.web.dll" />
-    <Content Include="obj\Debug\CTDS.web.pdb" />
+    <Content Include="obj\Debug\CTDS.Web.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\CTDS.Web.dll" />
+    <Content Include="obj\Debug\CTDS.Web.pdb" />
     <Content Include="Web.config" />
     <Content Include="Web\frontend\.gitignore" />
     <Content Include="Web\frontend\dist\build.js" />
