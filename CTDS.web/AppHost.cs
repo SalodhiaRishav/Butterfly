@@ -16,6 +16,8 @@
     using CTDS.Declarations.Application.Repository;
     using CTDS.Declarations.Application.Repository.Interface;
     using CTDS.Declarations.Application.Services;
+    using CTDS.Declarations.Contracts.Interface;
+
 
     using Serilog;
     using Funq;
@@ -23,7 +25,6 @@
     using ServiceStack.ServiceInterface.Cors;
     using ServiceStack.Text;
     using ServiceStack.WebHost.Endpoints;
-    using CTDS.Declarations.Contracts.Interface;
 
     public class AppHost : AppHostBase
     {
