@@ -1,11 +1,14 @@
-﻿namespace CTDS.Test
+﻿
+namespace CTDS.Test
 {
+    using System;
+     
     using CTDS.Declarations.Application.Services;
     using CTDS.Declarations.Contracts.EndPoints;
     using CTDS.web.Declaration;
+
     using Moq;
     using NUnit.Framework;
-    using System;
 
     [TestFixture]
     public class DeclarationTestCases
@@ -13,8 +16,10 @@
         [Test]
         public void should_return_success_true()
         {
-            AddDeclarationService addDeclaration = new AddDeclarationService();
-            var declarationBll = new Mock<DeclarationBll>();
+            //IDeclarationBll declarationBll = new IDeclarationBll();
+           var declarationBll = new Mock<DeclarationBll>();
+            AddDeclarationService addDeclaration = new AddDeclarationService(declarationBll.Object);
+            
             //arrange
             AddDeclaration newDeclaration = new AddDeclaration();
             newDeclaration.Declaration = new Declarations.Contracts.DeclarationDTO.DeclarationDto();
@@ -38,8 +43,8 @@
         [Test]
         public void should_return_success_false()
         {
-            AddDeclarationService addDeclaration = new AddDeclarationService();
             var declarationBll = new Mock<DeclarationBll>();
+            AddDeclarationService addDeclaration = new AddDeclarationService(declarationBll.Object);
             //arrange
             AddDeclaration newDeclaration = new AddDeclaration();
             newDeclaration.Declaration = null;

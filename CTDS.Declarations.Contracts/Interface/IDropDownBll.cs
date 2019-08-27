@@ -7,7 +7,6 @@
 
     public interface IDropDownBll
     {
-        bool AddNewItem(DropDownDto newitem);
         IEnumerable<DropDownDto> GetDropDownItems(String listType);
     }
 }
