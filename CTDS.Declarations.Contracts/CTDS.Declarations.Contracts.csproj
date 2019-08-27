@@ -75,7 +75,6 @@
     <Compile Include="DeclarationDTO\ReferenceDto.cs" />
     <Compile Include="Validation\DeclarationValidator.cs" />
     <Compile Include="EndPoints\AddDeclaration.cs" />
-    <Compile Include="EndPoints\AddDropDownItem.cs" />
     <Compile Include="EndPoints\EditDeclaration.cs" />
     <Compile Include="EndPoints\GetAllDeclaration.cs" />
     <Compile Include="EndPoints\GetDeclarationByGuid.cs" />

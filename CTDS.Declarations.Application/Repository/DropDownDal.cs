@@ -15,31 +15,7 @@
         {
 
             Mapper = new DatabaseMapper();
-        }
-
-        public bool AddNewItem (DropDownDto newItem)
-        {
-            try
-            {
-                using (var context = new CTDSContext())
-                {
-                    var item = new DropDown();
-                    item.Id = newItem.Id;
-                    item.Key = newItem.Key;
-                    item.Type = newItem.Type;
-                    item.Value = newItem.Value;
-                    context.DropDown.Add(item);
-                    context.SaveChanges();
-                }
-                return true;
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-
-           
-        }
+        }        
 
         public IEnumerable<DropDownDto> GetAllDropDownItems(String listType)
         {

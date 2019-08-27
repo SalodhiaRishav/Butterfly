@@ -13,17 +13,7 @@
            DropDownDal= new DropDownDal();
         }
 
-        public bool AddNewItem(DropDownDto newitem)
-        {
-            try
-            {
-                return DropDownDal.AddNewItem(newitem);
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-        }
+        
 
         public IEnumerable<DropDownDto> GetDropDownItems(String listType)
         {
