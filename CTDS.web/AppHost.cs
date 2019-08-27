@@ -3,14 +3,14 @@
     using CTDS.Web.CaseManagement;
     using CTDS.CaseManagement.Application.Services;
     using CTDS.CaseManagement.Application.Repository;
-    using CTDS.Authentication.Application.Repository;
+    using CTDS.Security.Application.Repository;
     using CTDS.CaseManagement.Contracts.Interfaces;
     using CTDS.CaseManagement.Application.Mapper;
     using CTDS.CaseManagement.Application.Repository.Interfaces;
-    using CTDS.Authentication.Application.Repository.Interfaces;
+    using CTDS.Security.Application.Repository.Interfaces;
     using CTDS.CaseManagement.Application.Mapper.MapperInterface;
-    using CTDS.Authentication.Contracts.Interfaces;
-    using CTDS.Authentication.Application.Services;
+    using CTDS.Security.Contracts.Interfaces;
+    using CTDS.Security.Application.Services;
     using CTDS.Declarations.Application.Mapper.Interface;
     using CTDS.Declarations.Application.Mapper;
     using CTDS.Declarations.Application.Repository;

@@ -94,13 +94,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CTDS.Authentication.Application\CTDS.Authentication.Application.csproj">
+    <ProjectReference Include="..\CTDS.Security.Application\CTDS.Security.Application.csproj">
       <Project>{93b88ebd-a978-4030-a2a4-55952eb21935}</Project>
-      <Name>CTDS.Authentication.Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CTDS.Authentication.Contracts\CTDS.Authentication.Contracts.csproj">
-      <Project>{2909a22c-1456-427f-8407-5b16ca285a7c}</Project>
-      <Name>CTDS.Authentication.Contracts</Name>
+      <Name>CTDS.Security.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\CTDS.CaseManagement.Application\CTDS.CaseManagement.Application.csproj">
       <Project>{bc9f5252-d0cc-4e11-bdc0-93aba792f245}</Project>

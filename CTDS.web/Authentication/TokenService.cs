@@ -3,8 +3,8 @@
     using System;
     using System.Web;
 
-    using CTDS.Authentication.Contracts.EndPoints;
-    using CTDS.Authentication.Contracts.Interfaces;
+    using CTDS.Security.Contracts.EndPoints;
+    using CTDS.Security.Contracts.Interfaces;
     using CTDS.Web.CommonResponse;
 
     using Serilog;

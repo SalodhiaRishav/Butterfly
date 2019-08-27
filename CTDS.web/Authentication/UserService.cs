@@ -2,10 +2,10 @@
 {
     using System;
 
-    using CTDS.Authentication.Contracts.EndPoints;
+    using CTDS.Security.Contracts.EndPoints;
     using CTDS.Web.CommonResponse;
-    using CTDS.Authentication.Contracts.Interfaces;
-    using CTDS.Authentication.Contracts.Dto;
+    using CTDS.Security.Contracts.Interfaces;
+    using CTDS.Security.Contracts.Dto;
    
     using Serilog;
     using ServiceStack.ServiceInterface;

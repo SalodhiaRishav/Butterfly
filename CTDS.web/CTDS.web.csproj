@@ -14830,13 +14830,9 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CTDS.Authentication.Application\CTDS.Authentication.Application.csproj">
+    <ProjectReference Include="..\CTDS.Security.Application\CTDS.Security.Application.csproj">
       <Project>{93b88ebd-a978-4030-a2a4-55952eb21935}</Project>
-      <Name>CTDS.Authentication.Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CTDS.Authentication.Contracts\CTDS.Authentication.Contracts.csproj">
-      <Project>{2909a22c-1456-427f-8407-5b16ca285a7c}</Project>
-      <Name>CTDS.Authentication.Contracts</Name>
+      <Name>CTDS.Security.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\CTDS.CaseManagement.Application\CTDS.CaseManagement.Application.csproj">
       <Project>{bc9f5252-d0cc-4e11-bdc0-93aba792f245}</Project>
@@ -14853,6 +14849,10 @@
     <ProjectReference Include="..\CTDS.Declarations.Contracts\CTDS.Declarations.Contracts.csproj">
       <Project>{eed1b013-cc0c-47cb-9f2c-76eb92cd8dc7}</Project>
       <Name>CTDS.Declarations.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CTDS.Security.Contracts\CTDS.Security.Contracts.csproj">
+      <Project>{2909a22c-1456-427f-8407-5b16ca285a7c}</Project>
+      <Name>CTDS.Security.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
