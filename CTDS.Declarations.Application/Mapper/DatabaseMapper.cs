@@ -15,7 +15,6 @@
         {
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<DropDown, DropDownDto>().ReverseMap();
                 cfg.CreateMap<Declaration, DeclarationDto>().ReverseMap();
 
             });
@@ -32,20 +31,6 @@
             return Mapper.Map<Declaration>(declarationDto);
         }
 
-        public DropDownDto DropDownToDto(DropDown dropDown)
-        {
-            return Mapper.Map<DropDownDto>(dropDown);
-        }
-
-        public IEnumerable<DropDownDto> DropDownListToDtoList(IEnumerable<DropDown> dropDown)
-        {
-            return Mapper.Map<IEnumerable<DropDownDto>>(dropDown);
-        }
-
-        public IEnumerable<DropDown> DtoListToDropDownList(IEnumerable<DropDown> dropDownDto)
-        {
-            return Mapper.Map<IEnumerable<DropDown>>(dropDownDto);
-        }
         public IEnumerable<DeclarationDto> DeclarationListToDtoList(IEnumerable<Declaration> declaration)
         {
             return Mapper.Map<IEnumerable<DeclarationDto>>(declaration);

@@ -1,4 +1,7 @@
-﻿namespace CTDS.Web
+﻿
+using CTDS.Common.Repository;
+
+namespace CTDS.Web
 {
     using CTDS.Web.CaseManagement;
     using CTDS.CaseManagement.Application.Services;
@@ -17,7 +20,7 @@
     using CTDS.Declarations.Application.Repository.Interface;
     using CTDS.Declarations.Application.Services;
     using CTDS.Declarations.Contracts.Interface;
-
+    using CTDS.Common.Mapper;
 
     using Serilog;
     using Funq;
@@ -25,6 +28,7 @@
     using ServiceStack.ServiceInterface.Cors;
     using ServiceStack.Text;
     using ServiceStack.WebHost.Endpoints;
+    using CTDS.Common.Interface;
 
     public class AppHost : AppHostBase
     {
@@ -53,10 +57,10 @@
                     c.Resolve<IDatabaseMapper>()
                     )
                 );
-            container.Register<IDropDownDal>(c => 
-                new DropDownDal(
-                    c.Resolve<IDatabaseMapper>()
-                    )
+            container.Register<IMasterDataRepository>(c => 
+                    new MasterDataRepository(
+                        c.Resolve<IMasterDataMapper>()
+                        )
                 );
 
             container.Register<IClientMapper>(new ClientMapper());
@@ -65,6 +69,7 @@
             container.Register<ICaseReferenceMapper>(new CaseReferenceMapper());
             container.Register<INotesMapper>(new NotesMapper());
             container.Register<IDatabaseMapper>(new DatabaseMapper());
+            container.Register<IMasterDataMapper>(new MasterDataMapper());
 
             container.Register<IRoleBusinessLogic>(c =>
                 new RoleBusinessLogic(
@@ -140,10 +145,10 @@
                     )
                 );
 
-            container.Register<IDropDownBll>(c => 
-                new DropDownBll(
-                    c.Resolve<IDropDownDal>()
-                    )
+            container.Register<IMasterDataBll>(c =>
+                new MasterDataBll(
+                    c.Resolve<IMasterDataRepository>()
+                )
             );
 
             Plugins.Add(new CorsFeature());

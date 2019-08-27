@@ -71,16 +71,13 @@
   <ItemGroup>
     <Compile Include="DeclarationDTO\DeclarationData.cs" />
     <Compile Include="DeclarationDTO\DeclarationDto.cs" />
-    <Compile Include="DeclarationDTO\DropDownDto.cs" />
     <Compile Include="DeclarationDTO\ReferenceDto.cs" />
     <Compile Include="Interface\IDeclarationBll.cs" />
-    <Compile Include="Interface\IDropDownBll.cs" />
     <Compile Include="Validation\DeclarationValidator.cs" />
     <Compile Include="EndPoints\AddDeclaration.cs" />
     <Compile Include="EndPoints\EditDeclaration.cs" />
     <Compile Include="EndPoints\GetAllDeclaration.cs" />
     <Compile Include="EndPoints\GetDeclarationByGuid.cs" />
-    <Compile Include="EndPoints\GetDropDownItems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

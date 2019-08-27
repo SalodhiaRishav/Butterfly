@@ -59,11 +59,8 @@
     <Compile Include="Mapper\Interface\IDatabaseMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DeclarationDal.cs" />
-    <Compile Include="Repository\DropDownDal.cs" />
-    <Compile Include="Repository\Interface\IDropDownDal.cs" />
     <Compile Include="Repository\Interface\IDeclarationDal.cs" />
     <Compile Include="Services\DeclarationBll.cs" />
-    <Compile Include="Services\DropDownBll.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

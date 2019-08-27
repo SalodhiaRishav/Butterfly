@@ -1,7 +1,7 @@
-﻿namespace CTDS.Declarations.Contracts.DeclarationDTO
+﻿namespace CTDS.Database.Models.Common
 {
     using System;
-    public class DropDownDto
+    public class MasterData
     {
         public Guid Id { get; set; }
         public String Type { get; set; }

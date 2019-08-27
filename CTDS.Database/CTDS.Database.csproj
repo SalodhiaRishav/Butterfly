@@ -80,8 +80,8 @@
     <Compile Include="Configurations\CaseManagement\ClientConfigurations.cs" />
     <Compile Include="Configurations\CaseManagement\NotesConfigurations.cs" />
     <Compile Include="Configurations\Declaration\DeclarationConfig.cs" />
-    <Compile Include="Configurations\Declaration\DropDownConfig.cs" />
     <Compile Include="Configurations\Declaration\ReferenceConfig.cs" />
+    <Compile Include="Configurations\MasterData\MasterDataConfig.cs" />
     <Compile Include="Context\CTDSContext.cs" />
     <Compile Include="Migrations\201907310759157_CTDS-version1.0.0.cs" />
     <Compile Include="Migrations\201907310759157_CTDS-version1.0.0.Designer.cs">
@@ -139,6 +139,14 @@
     <Compile Include="Migrations\201908200613157_addedrefreshtoken.Designer.cs">
       <DependentUpon>201908200613157_addedrefreshtoken.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908271105120_temp.cs" />
+    <Compile Include="Migrations\201908271105120_temp.Designer.cs">
+      <DependentUpon>201908271105120_temp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908271132260_removeddropdown.cs" />
+    <Compile Include="Migrations\201908271132260_removeddropdown.Designer.cs">
+      <DependentUpon>201908271132260_removeddropdown.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Authentication\Role.cs" />
     <Compile Include="Models\Authentication\User.cs" />
@@ -151,8 +159,8 @@
     <Compile Include="Models\CaseManagement\CaseStatus.cs" />
     <Compile Include="Models\CaseManagement\Client.cs" />
     <Compile Include="Models\CaseManagement\Notes.cs" />
+    <Compile Include="Models\Common\MasterData.cs" />
     <Compile Include="Models\Declarations\Declaration.cs" />
-    <Compile Include="Models\Declarations\DropDown.cs" />
     <Compile Include="Models\Declarations\ReferenceTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -203,6 +211,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908200613157_addedrefreshtoken.resx">
       <DependentUpon>201908200613157_addedrefreshtoken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908271105120_temp.resx">
+      <DependentUpon>201908271105120_temp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908271132260_removeddropdown.resx">
+      <DependentUpon>201908271132260_removeddropdown.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

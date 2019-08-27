@@ -1,16 +1,14 @@
-﻿
-
-namespace CTDS.Database.Configurations.Declaration
+﻿namespace CTDS.Database.Configurations.MasterData
 {
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
 
-    using CTDS.Database.Models.Declarations;
+    using CTDS.Database.Models.Common;
 
-    public class DropDownConfig : EntityTypeConfiguration<DropDown>
+    public class MasterDataConfig : EntityTypeConfiguration<MasterData>
     {
-        public DropDownConfig()
+        public MasterDataConfig()
         {
             this.HasKey<Guid>(d => d.Id);
             this.Property(d => d.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
