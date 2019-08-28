@@ -9,6 +9,7 @@
        public ClientValidator()
         {
             RuleFor(client => client.ClientIdentifier).CheckEmpty().CheckNull();
+            RuleFor(client => client.IdentifierType).NotNull();
             RuleFor(client => client.Name).MaximumLength(30);
             RuleFor(client => client.Address).MaximumLength(100);
             RuleFor(client => client.PostalCode).MaximumLength(50);

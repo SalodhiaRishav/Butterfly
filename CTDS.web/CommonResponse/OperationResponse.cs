@@ -24,7 +24,7 @@
             this.Message = message;
             this.Data = data;
             this.Status = HttpStatusCode.OK;
-            this.Error.Add("No error");
+            this.Error = null;
             this.Success = true;
         }
 

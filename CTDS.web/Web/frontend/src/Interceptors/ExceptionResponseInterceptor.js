@@ -1,9 +1,8 @@
-import HttpClient from "./../Utils/HttpRequestWrapper";
-import store from "./../store/store";
+import httpClient from "./../Utils/HttpRequestWrapper";
 import router from "./../router/index";
 
 export default function exceptionResponse() {
-  HttpClient.http.interceptors.response.use(
+  httpClient.http.interceptors.response.use(
     function(response) {
       if (isTokenExpired(response)) {
         return new Promise((resolve, reject) => {
@@ -42,19 +41,24 @@ const errorHandler = error => {
 const refreshToken = () => {
   return new Promise((resolve, reject) => {
     const refreshTokenSerial = sessionStorage.getItem("refreshTokenId");
-    store
-      .dispatch("getNewToken", refreshTokenSerial)
-      .then(response => {
-        if (response) {
-          sessionStorage.setItem("accessToken", response);
-          resolve({ isTokenRefreshed: true, token: response });
-        }
-      })
-      .catch(error => {
-        reject(error);
+        const resource="/refreshtoken";
+        let postData = {
+          refreshTokenSerialId: refreshTokenSerial
+        };
+        httpClient
+          .post(resource, postData)
+          .then(myresponse => {
+            if (myresponse.data.success === true) {
+              resolve(myresponse.data.data.accessToken);
+            } else {
+              reject(myresponse.data.message);
+            }
+          })
+          .catch(error => {
+            reject(error);
+          });
       });
-  });
-};
+    }
 
 const isTokenExpired = response => {
   if (response.data === "token expired") {

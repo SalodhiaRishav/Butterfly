@@ -49,7 +49,6 @@
           </b-alert>
       </b-col>
     </b-row>
-   
   </div>
 </template>
 

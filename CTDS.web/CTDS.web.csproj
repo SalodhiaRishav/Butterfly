@@ -9926,7 +9926,7 @@
     <Compile Include="Authentication\TokenService.cs" />
     <Compile Include="Authentication\UserService.cs" />
     <Compile Include="CaseManagement\CaseManagementService.cs" />
-    <Compile Include="CaseManagement\DropDownService.cs" />
+    <Compile Include="CaseManagement\CaseMasterDataService.cs" />
     <Compile Include="CommonResponse\OperationResponse.cs" />
     <Compile Include="Declaration\AddDeclarationService.cs" />
     <Compile Include="Declaration\EditDeclarationService.cs" />
