@@ -91,7 +91,7 @@ export default {
     convertDate(date) {
       return new Date(date.match(/\d+/)[0] * 1).toString().substring(4, 16);
     },
-    someFunction: function(row) {
+    getDeclaration: function(row) {
       // this.$store.dispatch("setDeclrationIdToEdit",row.BaseID);
 
       this.$router.push(`/editdeclaration/${row.BaseID}`);
