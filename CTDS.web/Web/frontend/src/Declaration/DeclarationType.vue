@@ -1,9 +1,6 @@
 <template>
   <b-form
-    style="padding:10px; background:#F2F2F2;"
-    @submit="onSubmit"
-    @reset="onReset"
-    v-if="show"
+    class="pd-10 form-bg-color"  
   >
     <p class="block-heading">Declaration type</p>
     <b-form-group label="*Message Name">
@@ -38,20 +35,6 @@ export default {
   props: {
     declaration: Object
   },
-
-  data() {
-    return {
-      messageName: "",
-      declarationType1: "",
-      declarationType2: "",
-      dropDown: [{ text: "<Please Select>", value: "" }, "1", "2", "3", "4"],
-      show: true,
-      declarationType1List: [],
-      declarationType2List: [],
-      messageNameList: []
-    };
-  },
-
   mounted() {
     console.log(this.declaration);
     this.getDeclarationType1();
@@ -120,25 +103,5 @@ export default {
 </script>
 
 <style>
-.block-heading {
-  margin: -10px -10px 0px -10px;
-  color: white;
-  background: #666;
-  padding: 3px;
-}
-.pd-rt-0 {
-  padding-right: 0px;
-}
-.pd-rt-27 {
-  padding-right: 27px;
-}
-.pd-lf-0 {
-  padding-left: 0px;
-}
-.pd-lf-27 {
-  padding-left: 27px;
-}
-.border-rt {
-  border-right: 1px solid #908787;
-}
+@import url('./Style/DeclarationStyle.css');
 </style>

@@ -6,7 +6,7 @@
         <b-card-header
           header-tag="header"
           header-text-variant="white"
-          class="p-1"
+          class="pd-rt"
         >
           <h1 class="dashboardHeading">Dashboard</h1>
         </b-card-header>

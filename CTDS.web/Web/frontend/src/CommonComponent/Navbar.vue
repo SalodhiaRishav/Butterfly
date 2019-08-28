@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar class="mynavbar" type="dark">
+    <b-navbar class="nav-bg-color nav-overide" type="dark">
       <b-navbar-nav>
         <router-link to="/home" active-class="active" tag="b-nav-item"
           >Home</router-link
@@ -20,7 +20,7 @@
         </b-nav-item-dropdown>
         
       </b-navbar-nav>
-      <button class="btn-style" right v-on:click="logout">Logout</button>
+      <button class="btn-style" style="float:right;" right v-on:click="logout">Logout</button>
     </b-navbar>
      
   </div>

@@ -1,5 +1,8 @@
-.mynavbar{
+.nav-bg-color{
     background-color:#6A54A6;
+}
+.nav-overide{
+    justify-content: space-between !important;
 }
 .btn-style{
     background: transparent;

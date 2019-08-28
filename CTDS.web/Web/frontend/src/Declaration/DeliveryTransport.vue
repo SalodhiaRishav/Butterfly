@@ -1,9 +1,5 @@
 <template>
-  <b-form
-    style="padding:10px; background:#F2F2F2 ;"
-    @submit="onSubmit"
-    @reset="onReset"
-    v-if="show"
+  <b-form class="pd-10 form-bg-color"
   >
     <div>
       <p class="block-heading">Delivery and transport</p>
@@ -69,18 +65,6 @@ import httpClient from "./../Utils/HttpRequestWrapper";
 export default {
   props: {
     declaration: Object
-  },
-  data() {
-    return {
-      TermsOfDelivery: [],
-      deliveryPlace: "",
-      countryList: [],
-      LocationOfGoods: [],
-      ModeOfTransport: [],
-      SupervisingCustomsOffice: [],
-      dropDown: [{ text: "<Please select>", value: null }, "1", "2", "3", "4"],
-      show: true
-    };
   },
   mounted() {
   this.getTermsOfDelivery();
@@ -199,25 +183,5 @@ export default {
 </script>
 
 <style>
-.block-heading {
-  margin: -10px -10px 0px -10px;
-  color: white;
-  background: #929397;
-  padding: 3px;
-}
-.pd-rt-0 {
-  padding-right: 0px;
-}
-.pd-rt-27 {
-  padding-right: 27px;
-}
-.pd-lf-0 {
-  padding-left: 0px;
-}
-.pd-lf-27 {
-  padding-left: 27px;
-}
-.border-rt {
-  border-right: 1px solid #908787;
-}
+@import url('./Style/DeclarationStyle.css');
 </style>

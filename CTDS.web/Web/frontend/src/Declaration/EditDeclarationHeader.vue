@@ -70,15 +70,6 @@ export default {
     };
   },
   methods: {
-    onSubmit(evt) {
-      //   evt.preventDefault();
-      //   alert(JSON.stringify(this.form));
-      //some code here
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      // Reset our form values
-    },
     onSave() {
     const url="/updatedeclaration";
       httpClient.post(url,
@@ -112,25 +103,5 @@ export default {
 </script>
 
 <style>
-.block-heading {
-  margin: -10px -10px 0px -10px;
-  color: white;
-  background: #aaa69d;
-  padding: 3px;
-}
-.pd-rt-0 {
-  padding-right: 0px;
-}
-.pd-rt-27 {
-  padding-right: 27px;
-}
-.pd-lf-0 {
-  padding-left: 0px;
-}
-.pd-lf-27 {
-  padding-left: 27px;
-}
-.border-rt {
-  border-right: 1px solid #908787;
-}
+@import url('./Style/DeclarationStyle.css');
 </style>

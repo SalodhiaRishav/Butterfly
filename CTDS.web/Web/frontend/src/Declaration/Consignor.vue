@@ -1,10 +1,6 @@
 <template>
   <div>
-    <b-form
-      style="padding:10px; background:#F2F2F2;"
-      @submit="onSubmit"
-      @reset="onReset"
-      v-if="show"
+    <b-form class="pd-10 form-bg-color"
     >
       <p class="block-heading">Consignor/exporter</p>
       <b-form-group label="*Name:">
@@ -56,18 +52,6 @@ export default {
   props: {
     declaration: Object
   },
-  data() {
-    return {
-      consignorName: "",
-      consignorAddress1: "",
-      consignorAddress2: "",
-      consignorPostalCode: "",
-      consignorCity: "",
-      consignorCountry: "",
-      show: true,
-      countryList: []
-    };
-  },
   mounted() {
    this.getCountries();
   },
@@ -93,32 +77,10 @@ export default {
       })
       .catch(error => console.log(error));
     },
-    onReset() {},
-    onSubmit() {}
   }
 };
 </script>
 
 <style>
-.block-heading {
-  margin: -10px -10px 0px -10px;
-  color: white;
-  background: #929397;
-  padding: 3px;
-}
-.pd-rt-0 {
-  padding-right: 0px;
-}
-.pd-rt-27 {
-  padding-right: 27px;
-}
-.pd-lf-0 {
-  padding-left: 0px;
-}
-.pd-lf-27 {
-  padding-left: 27px;
-}
-.border-rt {
-  border-right: 1px solid #908787;
-}
+@import url('./Style/DeclarationStyle.css');
 </style>

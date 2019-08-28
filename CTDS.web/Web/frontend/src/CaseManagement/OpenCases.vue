@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div style="font-family:monospace !important">
       <b-table
         striped
         hover

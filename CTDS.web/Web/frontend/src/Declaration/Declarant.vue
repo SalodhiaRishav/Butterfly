@@ -1,9 +1,5 @@
 <template>
-  <b-form
-    style="padding:10px; background:#F2F2F2;"
-    @submit="onSubmit"
-    @reset="onReset"
-    v-if="show"
+  <b-form class="pd-10 form-bg-color"
   >
     <p class="block-heading">Declarant</p>
 
@@ -60,21 +56,7 @@ import httpClient from "./../Utils/HttpRequestWrapper";
 export default {
   props: {
     declaration: Object
-  },
-  data() {
-    return {
-      orgNumber: "",
-      declarantName: "",
-      declarantAddress1: "",
-      declarantAddress2: "",
-      declarantPostalCode: "",
-      declarantCity: "",
-      Country: [],
-      declarantContactPerson: "",
-      dropDown: [{ text: "<Please select>", value: null }, "1", "2", "3", "4"],
-      show: true
-    };
-  },
+  },  
   mounted() {
   this.getCountries();
   },
@@ -96,48 +78,10 @@ export default {
       })
       .catch(error => console.log(error));
     },
-    onSubmit(evt) {
-      //   evt.preventDefault();
-      //   alert(JSON.stringify(this.form));
-      //some code here
-    },
-    onReset(evt) {
-      evt.preventDefault();
-      // Reset our form values
-      this.form.email = "";
-      this.form.name = "";
-      this.form.food = null;
-      this.form.checked = [];
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
-    }
   }
 };
 </script>
 
 <style>
-.block-heading {
-  margin: -10px -10px 0px -10px;
-  color: white;
-  background: #929397;
-  padding: 3px;
-}
-.pd-rt-0 {
-  padding-right: 0px;
-}
-.pd-rt-27 {
-  padding-right: 27px;
-}
-.pd-lf-0 {
-  padding-left: 0px;
-}
-.pd-lf-27 {
-  padding-left: 27px;
-}
-.border-rt {
-  border-right: 1px solid #908787;
-}
+@import url('./Style/DeclarationStyle.css');
 </style>
