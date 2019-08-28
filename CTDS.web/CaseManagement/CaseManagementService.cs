@@ -36,43 +36,45 @@
             NotesDto notes = request.CaseDto.Notes;
             CaseStatusDto caseStatus = request.CaseDto.CaseStatus;
             List<CaseReferenceDto> references = request.CaseDto.References;
+            List<string> errors = new List<string>();
 
             ValidationResult validationResult = clientValidator.Validate(client);
             if (!validationResult.IsValid)
             {
-                List<string> errors = new List<string>();
+               ;
                 foreach (var error in validationResult.Errors)
                 {
                     errors.Add(error.ErrorMessage);
                 }
-                operationResponse.OnError("Invalid client data", errors);
-                return operationResponse;
+               
             }
 
             validationResult = caseInformationValidator.Validate(caseInformation);
             if (!validationResult.IsValid)
             {
-                List<string> errors = new List<string>();
+              
                 foreach (var error in validationResult.Errors)
                 {
                     errors.Add(error.ErrorMessage);
                 }
-                operationResponse.OnError("Invalid case-information data", errors);
-                return operationResponse;
             }
 
             validationResult = notesValidator.Validate(notes);
             if (!validationResult.IsValid)
             {
-                List<string> errors = new List<string>();
+               
                 foreach (var error in validationResult.Errors)
                 {
                     errors.Add(error.ErrorMessage);
                 }
-                operationResponse.OnError("Invalid case-information data", errors);
-                return operationResponse;
             }
 
+            if (errors.Count != 0)
+            {
+                operationResponse.OnError("Invalid input data", errors);
+                return operationResponse;
+            }
+           
             try
             {
                 CaseDto caseDto = this.CaseBusinessLogic.AddNewCase(client, caseInformation, notes, caseStatus, references);

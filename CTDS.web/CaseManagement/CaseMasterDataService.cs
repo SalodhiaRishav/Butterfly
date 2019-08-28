@@ -9,7 +9,7 @@
     using ServiceStack.ServiceInterface;
     
 
-    public class DropDownService : Service
+    public class CaseMasterDataService : Service
     {
         public OperationResponse<Array> Get(GetPriorityTypes request)
         {

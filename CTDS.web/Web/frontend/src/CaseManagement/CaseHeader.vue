@@ -118,6 +118,7 @@ export default {
         notes: this.$store.getters.notesForm
       };
       const resource = "/casemanagement";
+      console.log(caseDto);
       httpClient
         .post(resource, { caseDto: caseDto })
         .then(res => {
@@ -133,6 +134,7 @@ export default {
             this.alertVariant = "success";
             this.showDismissibleAlert = true;
           } else {
+            console.log(res);
             this.dismissCountDown = 5;
             this.alertMessage = res.data.message;
             this.alertVariant = "danger";
