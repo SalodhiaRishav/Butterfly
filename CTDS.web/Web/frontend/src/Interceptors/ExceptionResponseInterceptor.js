@@ -5,24 +5,21 @@ import router from "./../router/index";
 export default function exceptionResponse() {
   HttpClient.http.interceptors.response.use(
     function(response) {
-            if (isTokenExpired(response)) {
-                return new Promise((resolve,reject)=>{
-                refreshToken()
-                  .then(res => {
-                   if(res.isTokenRefreshed)
-                   {
-                       resolve({data:"token refreshed"});
-                   }
-                 })
-                .catch(err => {
-                    reject(err);
-                })
-            })
-            }
-              else
-              {
-               return response;
+      if (isTokenExpired(response)) {
+        return new Promise((resolve, reject) => {
+          refreshToken()
+            .then(res => {
+              if (res.isTokenRefreshed) {
+                resolve({ data: "token refreshed" });
               }
+            })
+            .catch(err => {
+              reject(err);
+            });
+        });
+      } else {
+        return response;
+      }
     },
     function(error) {
       errorHandler(error);
@@ -43,20 +40,20 @@ const errorHandler = error => {
 };
 
 const refreshToken = () => {
-    return new Promise((resolve,reject)=>{
-        const refreshTokenSerial = sessionStorage.getItem("refreshTokenId")
-        store
-        .dispatch("getNewToken", refreshTokenSerial)
-        .then(myresponse => {
-          if (myresponse) {
-            sessionStorage.setItem("accessToken",myresponse)
-            resolve({ isTokenRefreshed: true,token:myresponse});
-          }
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+  return new Promise((resolve, reject) => {
+    const refreshTokenSerial = sessionStorage.getItem("refreshTokenId");
+    store
+      .dispatch("getNewToken", refreshTokenSerial)
+      .then(myresponse => {
+        if (myresponse) {
+          sessionStorage.setItem("accessToken", myresponse);
+          resolve({ isTokenRefreshed: true, token: myresponse });
+        }
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
 };
 
 const isTokenExpired = response => {

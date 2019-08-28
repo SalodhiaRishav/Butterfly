@@ -18,11 +18,11 @@
             >Create new declaration</router-link
           >
         </b-nav-item-dropdown>
-        
       </b-navbar-nav>
-      <button class="btn-style" style="float:right;" right v-on:click="logout">Logout</button>
+      <button class="btn-style" style="float:right;" right v-on:click="logout">
+        Logout
+      </button>
     </b-navbar>
-     
   </div>
 </template>
 
@@ -31,27 +31,26 @@ import HttpClient from "./../Utils/HttpRequestWrapper";
 
 export default {
   methods: {
-    logout(){
-      var endpoint = "logout" 
-        const token = sessionStorage.getItem("accessToken");
-        HttpClient.get(endpoint)
-          .then((response)=>{
-          if(response){
+    logout() {
+      var endpoint = "logout";
+      const token = sessionStorage.getItem("accessToken");
+      HttpClient.get(endpoint)
+        .then(response => {
+          if (response) {
             sessionStorage.removeItem("accessToken");
             sessionStorage.removeItem("refreshTokenId");
             this.$router.push("/login");
             alert("logged out!");
           }
         })
-        .catch((error)=>{
+        .catch(error => {
           console.log(error);
-        });       
-      },
-  },
+        });
+    }
+  }
 };
 </script>
 
 <style>
 @import url(./styles/NavbarStyle.css);
-
 </style>

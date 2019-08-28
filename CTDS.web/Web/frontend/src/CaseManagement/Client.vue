@@ -122,52 +122,50 @@ export default {
   },
   methods: {
     getCountries: function() {
-        const resource = "/getdropdownitems/countries";
-        httpClient
-          .get(resource)
-          .then(response => {
-          if(response.data === "token refreshed")
-          {
+      const resource = "/getdropdownitems/countries";
+      httpClient
+        .get(resource)
+        .then(response => {
+          if (response.data === "token refreshed") {
             this.getCountries();
             return;
           }
-            if (response.data.success === true) {
-              let countries = response.data.data;
-              let countriesNames = [];
+          if (response.data.success === true) {
+            let countries = response.data.data;
+            let countriesNames = [];
             if (countries !== null) {
-                for (let i = 0; i < countries.length; ++i) {
-                  countriesNames.push(countries[i].value);
-                }
-                this.countries = countriesNames;
-            } else {
-              alert(response.data.message);
-            }         
-          }
-          })
-          .catch(error =>{
-            alert(error);
-          })
-    },
-    getIdentiferTypes: function() {
-        const resource = "identifiertypes";
-        httpClient
-          .get(resource)
-          .then(response => {
-          if(response.data === "token refreshed")
-          {
-            this.getIdentiferTypes();
-            return;
-          }
-            if (response.data.success === true) {
-             this.identifierTypes = response.data.data;
-             this.identifierFetched = true;
+              for (let i = 0; i < countries.length; ++i) {
+                countriesNames.push(countries[i].value);
+              }
+              this.countries = countriesNames;
             } else {
               alert(response.data.message);
             }
-          })
-          .catch(error => {
-              alert(error);
-          });
+          }
+        })
+        .catch(error => {
+          alert(error);
+        });
+    },
+    getIdentiferTypes: function() {
+      const resource = "identifiertypes";
+      httpClient
+        .get(resource)
+        .then(response => {
+          if (response.data === "token refreshed") {
+            this.getIdentiferTypes();
+            return;
+          }
+          if (response.data.success === true) {
+            this.identifierTypes = response.data.data;
+            this.identifierFetched = true;
+          } else {
+            alert(response.data.message);
+          }
+        })
+        .catch(error => {
+          alert(error);
+        });
     }
   }
 };

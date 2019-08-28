@@ -1,6 +1,5 @@
 <template>
-  <b-form class="pd-10 form-bg-color"
-  >
+  <b-form class="pd-10 form-bg-color">
     <p class="block-heading">Consignee</p>
 
     <b-form-group label="Org. number:">
@@ -70,50 +69,47 @@ export default {
     declaration: Object
   },
   mounted() {
-      this.getDefferedPayment();
-      this.getCountries();
+    this.getDefferedPayment();
+    this.getCountries();
   },
   methods: {
-    getDefferedPayment(){
-      const url="/getdropdownitems/DefferedPayment";
+    getDefferedPayment() {
+      const url = "/getdropdownitems/DefferedPayment";
       console.log("testing payment");
       httpClient
-      .get(url)
-      .then(response => {
-        console.log("data fethec defferedpayment");
-        console.log(response);
-        console.log("testing");
-        if(response.data=="token refreshed")
-        {
-          this.getDefferedPayment();
-          return ;
-        }
-        if (response.data) {
-          this.defferedPayment = response.data.data.map(x => {
-            return { text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+        .get(url)
+        .then(response => {
+          console.log("data fethec defferedpayment");
+          console.log(response);
+          console.log("testing");
+          if (response.data == "token refreshed") {
+            this.getDefferedPayment();
+            return;
+          }
+          if (response.data) {
+            this.defferedPayment = response.data.data.map(x => {
+              return { text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
     },
 
-    getCountries(){
-      const url="/getdropdownitems/Countries";
-       httpClient
-      .get(url)
-      .then(response => {
-        
-        if (response.data) {
-        if(response.data=="token refreshed")
-        {
-          this.getCountries();
-        }
-          this.countryList = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+    getCountries() {
+      const url = "/getdropdownitems/Countries";
+      httpClient
+        .get(url)
+        .then(response => {
+          if (response.data) {
+            if (response.data == "token refreshed") {
+              this.getCountries();
+            }
+            this.countryList = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
     },
 
     onSubmit(evt) {
@@ -129,5 +125,5 @@ export default {
 </script>
 
 <style>
-@import url('./Style/DeclarationStyle.css');
+@import url("./Style/DeclarationStyle.css");
 </style>

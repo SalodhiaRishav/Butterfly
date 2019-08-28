@@ -1,7 +1,6 @@
 <template>
   <div>
-    <b-form class="pd-10 form-bg-color"     
-    >
+    <b-form class="pd-10 form-bg-color">
       <p class="block-heading">Value details</p>
       <b-form-group label="freight, outward NDK">
         <b-form-input v-model="declaration.freight" required></b-form-input>
@@ -117,11 +116,11 @@ export default {
         //  this.referenceData.reference = this.references;
         this.resetReferenceForm();
       }
-    },
+    }
   }
 };
 </script>
 
 <style>
-@import url('./Style/DeclarationStyle.css');
+@import url("./Style/DeclarationStyle.css");
 </style>

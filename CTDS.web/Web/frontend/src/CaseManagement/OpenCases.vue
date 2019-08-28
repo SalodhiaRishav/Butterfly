@@ -105,11 +105,11 @@ export default {
     },
     getAllCases: function() {
       const resource = "/casemanagement";
-      httpClient.get(resource)
+      httpClient
+        .get(resource)
         .then(response => {
-          console.log('token token'+response);
-          if(response.data === "token refreshed")
-          {
+          console.log("token token" + response);
+          if (response.data === "token refreshed") {
             this.getAllCases();
             return;
           }

@@ -28,25 +28,24 @@ export default {
   },
   methods: {
     getCasePriorityTypes: function() {
-        const resource = "/prioritytypes";
-        httpClient
-          .get(resource)
-          .then(response => {
-          if(response.data === "token refreshed")
-          {
+      const resource = "/prioritytypes";
+      httpClient
+        .get(resource)
+        .then(response => {
+          if (response.data === "token refreshed") {
             this.getPriorityTypes();
             return;
           }
-            if (response.data.success === true) {
-              this.priorityTypes = response.data.data;
-              this.priorityTypesFetched = true;
-            } else {
-              alert(response.data.message);
-            }
-          })
-          .catch(error => {
-              alert(error);
-          });
+          if (response.data.success === true) {
+            this.priorityTypes = response.data.data;
+            this.priorityTypesFetched = true;
+          } else {
+            alert(response.data.message);
+          }
+        })
+        .catch(error => {
+          alert(error);
+        });
     }
   }
 };

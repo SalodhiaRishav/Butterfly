@@ -75,25 +75,24 @@ export default {
   },
   methods: {
     getCaseReferenceTypes: function() {
-        const resource = "/referencetypes";
-        httpClient
-          .get(resource)
-          .then(response => {
-            if(response.data === "token refreshed")
-            {
-              this.getCaseReferenceTypes();
-              return;
-            }
-            if (response.data.success === true) {
-              this.referenceTypes = response.data.data;
-              this.referenceTypesFetched = true;
-            } else {
-              alert(response.data.message);
-            }
-          })
-          .catch(error => {
-            alert(error);
-          });
+      const resource = "/referencetypes";
+      httpClient
+        .get(resource)
+        .then(response => {
+          if (response.data === "token refreshed") {
+            this.getCaseReferenceTypes();
+            return;
+          }
+          if (response.data.success === true) {
+            this.referenceTypes = response.data.data;
+            this.referenceTypesFetched = true;
+          } else {
+            alert(response.data.message);
+          }
+        })
+        .catch(error => {
+          alert(error);
+        });
     },
     deleteReference(index) {
       this.references.splice(index, 1);

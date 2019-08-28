@@ -73,42 +73,42 @@ export default {
       errorList: [],   
       };
   },
-   created() {
-   this.resetCaseData();
+  created() {
+    this.resetCaseData();
   },
   methods: {
-    resetCaseData(){
-  let caseInformation= {
-    id: "",
-    caseId: "",
-    description: "",
-    messageFromClient: "",
-    priority: null,
-    createdOn: "",
-    modifiedOn: ""
-  };
-  let statusForm ={
-    status: null
-  };
-  let references= [];
-  let notesForm = {
-    notesByCpa: ""
-  };
-  let clientDetails = {
-    clientIdentifier: "",
-    identifierType: null,
-    name: "",
-    address: "",
-    postalCode: "",
-    city: "",
-    country: null,
-    email: ""
-  }
-      this.$store.dispatch("setClientDetails",clientDetails);
-      this.$store.dispatch("setCaseInformation",caseInformation);
-      this.$store.dispatch("setStatusForm",statusForm);
-      this.$store.dispatch("setNotesForm",notesForm);
-      this.$store.dispatch("setReferences",references);
+    resetCaseData() {
+      let caseInformation = {
+        id: "",
+        caseId: "",
+        description: "",
+        messageFromClient: "",
+        priority: null,
+        createdOn: "",
+        modifiedOn: ""
+      };
+      let statusForm = {
+        status: null
+      };
+      let references = [];
+      let notesForm = {
+        notesByCpa: ""
+      };
+      let clientDetails = {
+        clientIdentifier: "",
+        identifierType: null,
+        name: "",
+        address: "",
+        postalCode: "",
+        city: "",
+        country: null,
+        email: ""
+      };
+      this.$store.dispatch("setClientDetails", clientDetails);
+      this.$store.dispatch("setCaseInformation", caseInformation);
+      this.$store.dispatch("setStatusForm", statusForm);
+      this.$store.dispatch("setNotesForm", notesForm);
+      this.$store.dispatch("setReferences", references);
     },
     convertDate(someDate) {
       return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
@@ -124,12 +124,11 @@ export default {
         caseInformation: this.$store.getters.caseInformation,
         notes: this.$store.getters.notesForm
       };
-      const resource="/casemanagement";
+      const resource = "/casemanagement";
       httpClient
         .post(resource, { caseDto: caseDto })
         .then(res => {
-          if(res.data === "token refreshed")
-          {
+          if (res.data === "token refreshed") {
             this.submitAll();
             return;
           }

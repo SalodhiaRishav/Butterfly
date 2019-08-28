@@ -27,26 +27,25 @@ export default {
     };
   },
   methods: {
-   getCaseStatusTypes: function() {
-        const resource = "/statustypes";
-        httpClient
-          .get(resource)
-          .then(response => {
-          if(response.data === "token refreshed")
-          {
+    getCaseStatusTypes: function() {
+      const resource = "/statustypes";
+      httpClient
+        .get(resource)
+        .then(response => {
+          if (response.data === "token refreshed") {
             this.getCaseStatusTypes();
             return;
           }
-            if (response.data.success === true) {
-              this.statusTypes = response.data.data;
-              this.statusTypesFetched = true;
-            } else {
-              alert(response.data.message);
-            }
-          })
-          .catch(error => {
-            alert(error);
-          });
+          if (response.data.success === true) {
+            this.statusTypes = response.data.data;
+            this.statusTypesFetched = true;
+          } else {
+            alert(response.data.message);
+          }
+        })
+        .catch(error => {
+          alert(error);
+        });
     }
   }
 };

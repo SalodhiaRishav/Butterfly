@@ -79,15 +79,14 @@ export default {
       console.log(this.referenceData.reference);
       debugger;
       //todo: send reference table data
-      const url="/newdeclaration";
+      const url = "/newdeclaration";
       httpClient
         .post(url, {
           declaration: this.declaration,
           referenceData: this.referenceData.reference
         })
         .then(response => {
-          if(response === "token refreshed")
-          {
+          if (response === "token refreshed") {
             this.onSave();
           }
           if (response.data.success === true) {
@@ -108,5 +107,5 @@ export default {
 </script>
 
 <style>
-@import url('./Style/DeclarationStyle.css');
+@import url("./Style/DeclarationStyle.css");
 </style>

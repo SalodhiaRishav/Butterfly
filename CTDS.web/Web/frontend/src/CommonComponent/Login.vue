@@ -55,17 +55,21 @@ export default {
         email: this.email,
         password: this.password
       };
-      httpClient.post(resource, loginData)
+      httpClient
+        .post(resource, loginData)
         .then(response => {
           console.log(response);
-          if (response.data.success === true)
-          {
-            sessionStorage.setItem("accessToken",response.data.data.accessToken);
-            sessionStorage.setItem("refreshTokenId",response.data.data.refreshTokenSerial);
+          if (response.data.success === true) {
+            sessionStorage.setItem(
+              "accessToken",
+              response.data.data.accessToken
+            );
+            sessionStorage.setItem(
+              "refreshTokenId",
+              response.data.data.refreshTokenSerial
+            );
             this.$router.push("/home");
-          } 
-          else
-            {
+          } else {
             alert(response.data.message);
           }
         })

@@ -3,7 +3,7 @@ namespace CTDS.Database.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class removeddropdown : DbMigration
+    public partial class RemovedDropDown : DbMigration
     {
         public override void Up()
         {

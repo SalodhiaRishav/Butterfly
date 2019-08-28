@@ -1,7 +1,10 @@
 <template>
   <div>
-     <appNavbar></appNavbar>
-    <editdeclarationheader :declaration="declaration" :referenceData="referenceData"></editdeclarationheader>
+    <appNavbar></appNavbar>
+    <editdeclarationheader
+      :declaration="declaration"
+      :referenceData="referenceData"
+    ></editdeclarationheader>
     <b-tabs card style="color:black; background-color:#E6E6E6">
       <b-tab title="Header" active>
         <div style="padding-top:10px; padding-right:0px; padding-left:0px">
@@ -52,9 +55,9 @@ import Consignee from "./Consignee";
 import Declarant from "./Declarant";
 import Delivery from "./DeliveryTransport";
 import ValueDetails from "./ValueDetails";
-import appNavbar from './../CommonComponent/Navbar.vue'
+import appNavbar from "./../CommonComponent/Navbar.vue";
 import httpClient from "./../Utils/HttpRequestWrapper";
-import { constants } from 'crypto';
+import { constants } from "crypto";
 // import axios from 'axios';
 
 export default {
@@ -69,7 +72,7 @@ export default {
     appNavbar
   },
   mounted() {
-  this.getDeclarationById();
+    this.getDeclarationById();
   },
   data() {
     return {
@@ -120,27 +123,25 @@ export default {
   },
 
   methods: {
-    getDeclarationById()
-    {
-    //  var guid = this.$store.getters.declrationIdToEdit;
-    var guid=this.$route.params.id;
+    getDeclarationById() {
+      //  var guid = this.$store.getters.declrationIdToEdit;
+      var guid = this.$route.params.id;
       httpClient
-      .get(`/getdeclarationbyguid/${guid}`)
-      .then(response => {
-        if(response.data === "token refreshed")
-        {
-          this.getDeclarationById();
-        }
-        if (response.data.data)
-          this.declaration = response.data.data.declaration;
-        this.referenceData.reference = response.data.data.referenceData;
-      })
-      .catch(e => console.log(e));
-    },
+        .get(`/getdeclarationbyguid/${guid}`)
+        .then(response => {
+          if (response.data === "token refreshed") {
+            this.getDeclarationById();
+          }
+          if (response.data.data)
+            this.declaration = response.data.data.declaration;
+          this.referenceData.reference = response.data.data.referenceData;
+        })
+        .catch(e => console.log(e));
+    }
   }
 };
 </script>
 
 <style>
-@import url('./Style/DeclarationStyle.css');
+@import url("./Style/DeclarationStyle.css");
 </style>
