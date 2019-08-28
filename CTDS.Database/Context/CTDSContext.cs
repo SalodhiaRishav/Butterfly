@@ -1,4 +1,5 @@
-﻿namespace CTDS.Database.Context
+﻿
+namespace CTDS.Database.Context
 {
     using System.Data.Entity;
 
@@ -7,6 +8,8 @@
     using CTDS.Database.Models.CaseManagement;
     using CTDS.Database.Configurations.CaseManagement;
     using CTDS.Database.Models.Authentication;
+    using CTDS.Database.Models.Common;
+    using CTDS.Database.Configurations.MasterData;
 
     public class CTDSContext : DbContext
     {
@@ -15,7 +18,6 @@
 
         }
         public DbSet<Declaration> Declaration { get; set; }
-        public DbSet<DropDown> DropDown { get; set; }
         public DbSet<Case> Case { get; set; }
         public DbSet<CaseInformation> CaseInformation {get; set;}
         public DbSet<CaseReference> CaseReference { get; set; }
@@ -28,11 +30,12 @@
         public DbSet<Token> UserToken { get; set; }
         public DbSet<Role> Role { get; set; }
 
+        public DbSet<MasterData> MasterData { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //Configure Column
             modelBuilder.Configurations.Add(new DeclarationConfig());
-            modelBuilder.Configurations.Add(new DropDownConfig());
             modelBuilder.Configurations.Add(new CaseConfigurations());
             modelBuilder.Configurations.Add(new CaseInformationConfigurations());
             modelBuilder.Configurations.Add(new CaseReferenceConfigurations());
@@ -40,6 +43,7 @@
             modelBuilder.Configurations.Add(new ClientConfigurations());
             modelBuilder.Configurations.Add(new NotesConfigurations());
             modelBuilder.Configurations.Add(new ReferenceConfig());
+            modelBuilder.Configurations.Add(new MasterDataConfig());
 
 
         }

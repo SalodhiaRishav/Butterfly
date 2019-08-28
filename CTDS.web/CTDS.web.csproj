@@ -9932,10 +9932,10 @@
     <Compile Include="Declaration\EditDeclarationService.cs" />
     <Compile Include="Declaration\GetAllDeclarations.cs" />
     <Compile Include="Declaration\GetDeclarationByGuid.cs" />
-    <Compile Include="Declaration\GetDropDownItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MasterData\GetMasterData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -14830,6 +14830,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CTDS.Common\CTDS.Common.csproj">
+      <Project>{0d87b9bc-3d6e-427c-8df6-83aa9310889e}</Project>
+      <Name>CTDS.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CTDS.Security.Application\CTDS.Security.Application.csproj">
       <Project>{93b88ebd-a978-4030-a2a4-55952eb21935}</Project>
       <Name>CTDS.Security.Application</Name>

@@ -1,10 +1,11 @@
-﻿namespace CTDS.Declarations.Contracts.EndPoints
+﻿namespace CTDS.Common.EndPoints
 {
     using System;
 
     using ServiceStack.ServiceHost;
+
     [Route("/getdropdownitems/{ListType}","GET")]
-    public class GetDropDownItems
+    public class GetMasterData
     {
         public String ListType { get; set; } 
     }

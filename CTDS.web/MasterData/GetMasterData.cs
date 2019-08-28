@@ -1,4 +1,7 @@
-﻿namespace CTDS.Web.Declaration
+﻿using CTDS.Common.Dto;
+using CTDS.Common.Interface;
+
+namespace CTDS.Web.MasterData
 {    
     using System;
     using System.Collections.Generic;
@@ -13,22 +16,22 @@
     using Serilog;
     using ServiceStack.ServiceInterface;
 
-    public class GetDropDownItem : Service
+    public class GetMasterData : Service
     {
-        private readonly IDropDownBll DropDownBll;
-        public GetDropDownItem(IDropDownBll dropDownBll)
+        private readonly IMasterDataBll MasterDataBll;
+        public GetMasterData(IMasterDataBll masterDataBll)
         {
-            DropDownBll = dropDownBll;
+            MasterDataBll = masterDataBll;
         }
 
-        [AuthFilter(RoleName = "User")]
-        public OperationResponse<IEnumerable<DropDownDto>> Get(GetDropDownItems request )
+     
+        public OperationResponse<IEnumerable<MasterDataDto>> Get(Common.EndPoints.GetMasterData request )
         {
-            OperationResponse<IEnumerable<DropDownDto>> response = new OperationResponse<IEnumerable<DropDownDto>>();
+            OperationResponse<IEnumerable<MasterDataDto>> response = new OperationResponse<IEnumerable<MasterDataDto>>();
             try
             {
                 var listType = request.ListType;           
-                var data = DropDownBll.GetDropDownItems(listType);
+                var data = MasterDataBll.GetMasterData(listType);
                 response.OnSuccess(data, "Drop Items Fetched Successfully");
                 return response;
             }
