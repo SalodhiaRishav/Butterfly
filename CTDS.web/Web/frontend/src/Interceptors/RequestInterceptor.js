@@ -1,12 +1,12 @@
 import HttpClient from "./../Utils/HttpRequestWrapper";
 
-export default function someFunction() {
+export default function updateHeader() {
   HttpClient.http.interceptors.request.use(
-    function(config) {
-      let finalConfig = applyToken(config);
-      return finalConfig;
+    (oldConfig) => {
+      let newConfig = applyToken(oldConfig);
+      return newConfig;
     },
-    function(error) {
+    (error) => {
       return Promise.reject(error);
     }
   );

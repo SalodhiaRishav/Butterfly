@@ -33,6 +33,14 @@ export default {
   props: {
     declaration: Object
   },
+  data(){
+    return {
+      messageNameList:[],
+      declarationType2List: [],
+      declarationType1List :[],
+
+    }
+  },
   mounted() {
     console.log(this.declaration);
     this.getDeclarationType1();

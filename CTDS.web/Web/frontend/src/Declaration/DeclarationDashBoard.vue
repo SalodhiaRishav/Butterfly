@@ -9,7 +9,7 @@
           :items="declarations"
           :current-page="currentPage"
           :per-page="perPage"
-          @row-clicked="someFunction"
+          @row-clicked="getDeclaration"
         ></b-table>
       </div>
       <b-row>

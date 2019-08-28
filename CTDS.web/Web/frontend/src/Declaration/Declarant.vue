@@ -56,6 +56,11 @@ export default {
   props: {
     declaration: Object
   },
+  data(){
+    return{
+      Country:[],
+    }
+  },
   mounted() {
     this.getCountries();
   },

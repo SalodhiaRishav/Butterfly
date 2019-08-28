@@ -65,22 +65,31 @@ export default {
   props: {
     declaration: Object
   },
+  data() {
+    return {
+      TermsOfDelivery: [],
+      countryList:[],
+      LocationOfGoods:[],
+      SupervisingCustomsOffice:[],
+      ModeOfTransport: [],
+    }
+  },
   mounted() {
     this.getTermsOfDelivery();
     this.getCountries();
     this.getLocationOfGoods();
-    this.getSupervisingCustomOfiice();
+    this.getSupervisingCustomOffice();
     this.getModeOfTransport();
   },
 
   methods: {
-    getSupervisingCustomOfiice() {
+    getSupervisingCustomOffice() {
       const url = "/getdropdownitems/SupervisingCustomOfiice";
       httpClient
         .get(url)
         .then(response => {
           if (response.data === "token refreshed") {
-            this.getSupervisingCustomOfiice();
+            this.getSupervisingCustomOffice();
             return;
           }
           if (response.data) {

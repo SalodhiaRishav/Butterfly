@@ -68,6 +68,12 @@ export default {
   props: {
     declaration: Object
   },
+  data(){
+    return{
+      defferedPayment:[],
+      countryList:[]
+    }
+  },
   mounted() {
     this.getDefferedPayment();
     this.getCountries();
@@ -79,8 +85,7 @@ export default {
       httpClient
         .get(url)
         .then(response => {
-          console.log("data fethec defferedpayment");
-          console.log(response);
+          console.log(response.data);
           console.log("testing");
           if (response.data == "token refreshed") {
             this.getDefferedPayment();

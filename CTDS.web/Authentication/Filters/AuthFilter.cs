@@ -28,8 +28,7 @@
             {
                 bool isAuthenticated = ValidateToken(token,RoleName);
                 if (!isAuthenticated)
-                {
-                   
+                {                   
                     LogContext.PushProperty("Method", System.Reflection.MethodBase.GetCurrentMethod().Name);
                     Log.ForContext<AuthFilter>().Error("Forbidden");
                     Log.Error("Forbidden ");
@@ -78,12 +77,13 @@
             catch (SecurityTokenExpiredException exception)
             {
                 Log.Error(exception.Message);
-                throw exception;
+                throw;
             }
             catch (Exception e)
             {
                 Log.Error(e.Message);
-                return false;
+                throw;
+            
             }
 
         }
