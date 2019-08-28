@@ -27,24 +27,29 @@
         </div>
       </b-col>
       <b-col>
-        <button @click="submitAll">Submit</button>
+        <b-button
+            pill
+            @click="submitAll()"
+            >Save</b-button
+          > <br> <br>
+         <b-button v-b-modal.error-modal pill v-show="isError">Issues</b-button>
+          <b-modal id="error-modal">
+            <li v-for="(error, index) in errorList" :key="index">
+              {{ error }}
+            </li>
+          </b-modal>
+           <b-alert
+            :variant="alertVariant"
+            :show="dismissCountDown"
+            @dismissed="dismissCountDown = 0"
+            @dismiss-count-down="countDownChanged"
+            dismissible
+          >
+            {{ alertMessage }}
+          </b-alert>
       </b-col>
     </b-row>
-    <b-row>
-      <b-col> </b-col>
-      <b-col> </b-col>
-      <b-col>
-        <b-alert
-          :variant="alertVariant"
-          :show="dismissCountDown"
-          @dismissed="dismissCountDown = 0"
-          @dismiss-count-down="countDownChanged"
-          dismissible
-        >
-          {{ alertMessage }}
-        </b-alert>
-      </b-col>
-    </b-row>
+   
   </div>
 </template>
 
@@ -63,8 +68,10 @@ export default {
       showDismissibleAlert: false,
       alertVariant: "",
       alertMessage: "",
-      createdDate: ""
-    };
+      createdDate: "",
+      isError:false, 
+      errorList: [],   
+      };
   },
    created() {
    this.resetCaseData();
@@ -130,21 +137,18 @@ export default {
             this.caseIdentifier = "KGH-19-" + res.data.data.caseId;
             this.createdDate = this.convertDate(res.data.data.createdOn);
             this.dismissCountDown = 5;
-            this.alertMessage = res.data.message;
+            this.alertMessage = "Case Saved!";
             this.alertVariant = "success";
             this.showDismissibleAlert = true;
+            this.isError = false;
           } else {
-            this.dismissCountDown = 5;
-            this.alertMessage = res.data.message;
-            this.alertVariant = "danger";
-            this.showDismissibleAlert = true;
+            
+            this.isError = true;
+            this.errorList = res.data.error;
           }
         })
-        .catch(error => {
-          this.dismissCountDown = 5;
-          this.alertMessage = error;
-          this.alertVariant = "danger";
-          this.showDismissibleAlert = true;
+        .catch(error => {         
+            console.log(error);
         });
     }
   },
