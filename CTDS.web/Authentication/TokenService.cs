@@ -54,12 +54,22 @@
             }
         }
         public OperationResponse<bool> Get(LogoutUser request)
-        {
+        { 
+          
             OperationResponse<bool> result = new OperationResponse<bool>();
-            var token = HttpContext.Current.Request.Headers.Get("Authorization");
-            TokenBusinessLogic.DeleteToken(token);
-            result.OnSuccess(true, "logged out");
-            return result;
+            try
+            {
+                var token = HttpContext.Current.Request.Headers.Get("Authorization");
+                TokenBusinessLogic.DeleteToken(token);
+                result.OnSuccess(true, "logged out");
+                return result;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message + " " + e.StackTrace);
+                result.OnException("token deletion failed");
+                return result;
+            }
 
         }
     }

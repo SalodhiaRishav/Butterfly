@@ -44,10 +44,10 @@ const refreshToken = () => {
     const refreshTokenSerial = sessionStorage.getItem("refreshTokenId");
     store
       .dispatch("getNewToken", refreshTokenSerial)
-      .then(myresponse => {
-        if (myresponse) {
-          sessionStorage.setItem("accessToken", myresponse);
-          resolve({ isTokenRefreshed: true, token: myresponse });
+      .then(response => {
+        if (response) {
+          sessionStorage.setItem("accessToken", response);
+          resolve({ isTokenRefreshed: true, token: response });
         }
       })
       .catch(error => {

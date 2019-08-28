@@ -77,6 +77,7 @@
             }
             catch (SecurityTokenExpiredException exception)
             {
+                Log.Error(exception.Message);
                 throw exception;
             }
             catch (Exception e)

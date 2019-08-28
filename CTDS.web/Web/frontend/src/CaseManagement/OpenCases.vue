@@ -149,7 +149,7 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          alert(error);
+          //alert(error);
         });
     }
   }

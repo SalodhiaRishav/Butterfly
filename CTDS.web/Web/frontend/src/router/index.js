@@ -15,62 +15,107 @@ const router = new Router({
     {
       path: "/login",
       name: "login",
-      component: Login
+      component: Login,
+      beforeEnter:(to, from, next)=>{
+        const user = sessionStorage.getItem("accessToken");
+        if(user != null){
+          next('/home');
+        }
+        else{
+          next();
+        }
+      }
     },
     {
       path: "/declarationform",
       name: "DeclarationForm",
-      component: DeclarationForm
+      component: DeclarationForm,
+      beforeEnter:(to, from, next)=>{
+        const user = sessionStorage.getItem("accessToken");
+        if(user == null){
+          next('/login')
+        }
+        else{
+          next();
+        }
+      }
     },
     {
       path: "/declarationdashboard",
       name: "DeclarationDashboard",
-      component: DeclarationDashBoard
+      component: DeclarationDashBoard,
+      beforeEnter:(to, from, next)=>{
+        const user = sessionStorage.getItem("accessToken");
+        if(user == null){
+          next('/login')
+        }
+        else{
+          next();
+        }
+      }
     },
     {
       path: "/editdeclaration/:id",
       name: "EditDeclaration",
-      component: EditDeclaration
+      component: EditDeclaration,
+      beforeEnter:(to, from, next)=>{
+        const user = sessionStorage.getItem("accessToken");
+        if(user == null){
+          next('/login')
+        }
+        else{
+          next();
+        }
+      }
     },
     {
       path: "/newcase",
       name: "NewCase",
-      component: AddNewCase
+      component: AddNewCase,
+      beforeEnter:(to, from, next)=>{
+        const user = sessionStorage.getItem("accessToken");
+        if(user == null){
+          next('/login')
+        }
+        else{
+          next();
+        }
+      }
     },
     {
       path: "/home",
       name: "Dashboard",
-      component: Dashboard
+      component: Dashboard,
+      beforeEnter:(to, from, next)=>{
+        const user = sessionStorage.getItem("accessToken");
+        if(user == null){
+          next('/login')
+        }
+        else{
+          next();
+        }
+      }
     },
     {
       path: "/editcase",
       name: "EditCase",
-      component: EditCase
+      component: EditCase,
+      beforeEnter:(to, from, next)=>{
+        const user = sessionStorage.getItem("accessToken");
+        if(user == null){
+          next('/login')
+        }
+        else{
+          next();
+        }
+      }
     },
     {
       path: "/default.html",
       name: "Default",
-      component: Login
+      component: Login,
     }
   ],
   mode: "history"
-});
-router.beforeEach((to, from, next) => {
-  const user = sessionStorage.getItem("accessToken");
-  if (
-    to.fullPath === "/home" ||
-    to.fullPath === "/declarationform" ||
-    to.fullPath === "/newcase"
-  ) {
-    if (user == null) {
-      next("/login");
-    }
-  }
-  if (to.fullPath === "/" || to.fullPath === "/login") {
-    if (user != null) {
-      next("/home");
-    }
-  }
-  next();
 });
 export default router;
