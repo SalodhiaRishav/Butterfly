@@ -82,8 +82,7 @@ export default {
       httpClient
         .put(resource, { caseDto: caseDto })
         .then(res => {
-           if(res.data === "token refreshed")
-          {
+          if (res.data === "token refreshed") {
             this.EditCase();
             return;
           }

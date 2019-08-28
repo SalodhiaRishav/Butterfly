@@ -1,6 +1,5 @@
 <template>
-  <b-form class="pd-10 form-bg-color"
-  >
+  <b-form class="pd-10 form-bg-color">
     <div>
       <p class="block-heading">Delivery and transport</p>
     </div>
@@ -67,108 +66,103 @@ export default {
     declaration: Object
   },
   mounted() {
-  this.getTermsOfDelivery();
-  this.getCountries();
-  this.getLocationOfGoods();
-  this.getSupervisingCustomOfiice();
-  this.getModeOfTransport();
+    this.getTermsOfDelivery();
+    this.getCountries();
+    this.getLocationOfGoods();
+    this.getSupervisingCustomOfiice();
+    this.getModeOfTransport();
   },
-  
+
   methods: {
-    getSupervisingCustomOfiice(){
-      const url="/getdropdownitems/SupervisingCustomOfiice";
-       httpClient
-      .get(url)
-      .then(response => {
-        if(response.data === "token refreshed")
-          {
+    getSupervisingCustomOfiice() {
+      const url = "/getdropdownitems/SupervisingCustomOfiice";
+      httpClient
+        .get(url)
+        .then(response => {
+          if (response.data === "token refreshed") {
             this.getSupervisingCustomOfiice();
             return;
           }
-        if (response.data) {
-          //  console.log(response.data.data);
-          this.SupervisingCustomsOffice = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+          if (response.data) {
+            //  console.log(response.data.data);
+            this.SupervisingCustomsOffice = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
     },
-    getModeOfTransport(){
-      const url="/getdropdownitems/ModeOfTransport";
+    getModeOfTransport() {
+      const url = "/getdropdownitems/ModeOfTransport";
       httpClient
-      .get(url)
-      .then(response => {
-        if(response.data === "token refreshed")
-          {
+        .get(url)
+        .then(response => {
+          if (response.data === "token refreshed") {
             this.getModeOfTransport();
             return;
           }
-        if (response.data) {
-          // console.log(response.data.data);
-          this.ModeOfTransport = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+          if (response.data) {
+            // console.log(response.data.data);
+            this.ModeOfTransport = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
     },
-    getLocationOfGoods(){
-      const url="/getdropdownitems/LocationOfGoods";
+    getLocationOfGoods() {
+      const url = "/getdropdownitems/LocationOfGoods";
       httpClient
-      .get(url)
-      .then(response => {
-        if(response.data === "token refreshed")
-          {
+        .get(url)
+        .then(response => {
+          if (response.data === "token refreshed") {
             this.getLocationOfGoods();
             return;
           }
-        if (response.data) {
-          // console.log(response.data.data);
-          this.LocationOfGoods = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+          if (response.data) {
+            // console.log(response.data.data);
+            this.LocationOfGoods = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
     },
-    getCountries(){
-      const url="/getdropdownitems/Countries";
+    getCountries() {
+      const url = "/getdropdownitems/Countries";
       httpClient
-      .get(url)
-      .then(response => {
-        if(response.data === "token refreshed")
-          {
+        .get(url)
+        .then(response => {
+          if (response.data === "token refreshed") {
             this.getCountries();
             return;
           }
-        if (response.data) {
-          // console.log(response.data.data);
-          this.countryList = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+          if (response.data) {
+            // console.log(response.data.data);
+            this.countryList = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
     },
-    getTermsOfDelivery(){
-      const url="/getdropdownitems/TermsOfDelivery";
+    getTermsOfDelivery() {
+      const url = "/getdropdownitems/TermsOfDelivery";
       httpClient
-      .get(url)
-      .then(response => {
-        if(response.data === "token refreshed")
-          {
+        .get(url)
+        .then(response => {
+          if (response.data === "token refreshed") {
             this.getTermsOfDelivery();
             return;
           }
-        if (response.data) {
-          console.log(response.data.data);
-          this.TermsOfDelivery = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+          if (response.data) {
+            console.log(response.data.data);
+            this.TermsOfDelivery = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
     },
     onSubmit(evt) {
       //   evt.preventDefault();
@@ -183,5 +177,5 @@ export default {
 </script>
 
 <style>
-@import url('./Style/DeclarationStyle.css');
+@import url("./Style/DeclarationStyle.css");
 </style>

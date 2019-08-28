@@ -1,7 +1,6 @@
 <template>
   <div>
-    <b-form class="pd-10 form-bg-color"
-    >
+    <b-form class="pd-10 form-bg-color">
       <p class="block-heading">Consignor/exporter</p>
       <b-form-group label="*Name:">
         <b-form-input
@@ -53,34 +52,33 @@ export default {
     declaration: Object
   },
   mounted() {
-   this.getCountries();
+    this.getCountries();
   },
   methods: {
-    getCountries(){
-      const url="/getdropdownitems/Countries";
+    getCountries() {
+      const url = "/getdropdownitems/Countries";
       httpClient
-      .get(url)
-      .then(response => {
-        console.log("data fethec consigner countries");
-        console.log(response);
-        console.log("testing");
-        if(response.data=="token refreshed")
-        {
-          this.getCountries();
-          return ;
-        }
-        if (response.data) {
-          this.countryList = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
-    },
+        .get(url)
+        .then(response => {
+          console.log("data fethec consigner countries");
+          console.log(response);
+          console.log("testing");
+          if (response.data == "token refreshed") {
+            this.getCountries();
+            return;
+          }
+          if (response.data) {
+            this.countryList = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
+    }
   }
 };
 </script>
 
 <style>
-@import url('./Style/DeclarationStyle.css');
+@import url("./Style/DeclarationStyle.css");
 </style>

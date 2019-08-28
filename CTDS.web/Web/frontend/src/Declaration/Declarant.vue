@@ -1,6 +1,5 @@
 <template>
-  <b-form class="pd-10 form-bg-color"
-  >
+  <b-form class="pd-10 form-bg-color">
     <p class="block-heading">Declarant</p>
 
     <b-form-group label="*Org. number">
@@ -56,32 +55,31 @@ import httpClient from "./../Utils/HttpRequestWrapper";
 export default {
   props: {
     declaration: Object
-  },  
+  },
   mounted() {
-  this.getCountries();
+    this.getCountries();
   },
   methods: {
-    getCountries(){
-      const url="/getdropdownitems/Countries";
-       httpClient
-      .get(url)
-      .then(response => {
-        if(response.data=="token refreshed")
-        {
-          this.getCountries();
-        }
-        if (response.data) {
-          this.Country = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
-    },
+    getCountries() {
+      const url = "/getdropdownitems/Countries";
+      httpClient
+        .get(url)
+        .then(response => {
+          if (response.data == "token refreshed") {
+            this.getCountries();
+          }
+          if (response.data) {
+            this.Country = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
+    }
   }
 };
 </script>
 
 <style>
-@import url('./Style/DeclarationStyle.css');
+@import url("./Style/DeclarationStyle.css");
 </style>

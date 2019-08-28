@@ -1,7 +1,5 @@
 <template>
-  <b-form
-    class="pd-10 form-bg-color"  
-  >
+  <b-form class="pd-10 form-bg-color">
     <p class="block-heading">Declaration type</p>
     <b-form-group label="*Message Name">
       <b-form-select
@@ -42,59 +40,56 @@ export default {
     this.getMessageNames();
   },
   methods: {
-    getMessageNames(){
-      const url="/getdropdownitems/MessageName";
+    getMessageNames() {
+      const url = "/getdropdownitems/MessageName";
       httpClient
-      .get(url)
-      .then(response => {
-        if(response.data === "token refreshed")
-        {
-          this.getDeclarationType1();
-          return;
-        }
-        if (response.data) {          
-          this.messageNameList = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+        .get(url)
+        .then(response => {
+          if (response.data === "token refreshed") {
+            this.getDeclarationType1();
+            return;
+          }
+          if (response.data) {
+            this.messageNameList = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
     },
-    getDeclarationType2(){    
-      const url="/getdropdownitems/DeclarationType2";
+    getDeclarationType2() {
+      const url = "/getdropdownitems/DeclarationType2";
       httpClient
-      .get(url)
-      .then(response => {
-        if(response.data === "token refreshed")
-        {
-          this.getDeclarationType1();
-          return;
-        }
-        if (response.data) {
-          this.declarationType2List = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+        .get(url)
+        .then(response => {
+          if (response.data === "token refreshed") {
+            this.getDeclarationType1();
+            return;
+          }
+          if (response.data) {
+            this.declarationType2List = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
     },
-    getDeclarationType1(){
-      const url="/getdropdownitems/DeclarationType1";
+    getDeclarationType1() {
+      const url = "/getdropdownitems/DeclarationType1";
       httpClient
-      .get(url)
-      .then(response => {
-        if(response.data === "token refreshed")
-        {
-          this.getDeclarationType1();
-          return;
-        }
-        if (response.data) {
-          this.declarationType1List = response.data.data.map(x => {
-            return { value: x.key, text: x.value };
-          });
-        }
-      })
-      .catch(error => console.log(error));
+        .get(url)
+        .then(response => {
+          if (response.data === "token refreshed") {
+            this.getDeclarationType1();
+            return;
+          }
+          if (response.data) {
+            this.declarationType1List = response.data.data.map(x => {
+              return { value: x.key, text: x.value };
+            });
+          }
+        })
+        .catch(error => console.log(error));
     },
     onSubmit() {},
     onReset() {}
@@ -103,5 +98,5 @@ export default {
 </script>
 
 <style>
-@import url('./Style/DeclarationStyle.css');
+@import url("./Style/DeclarationStyle.css");
 </style>
