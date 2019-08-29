@@ -28,7 +28,7 @@
       </b-col>
       <b-col>
         <b-button pill
-                  @click="editCase()">Edit</b-button>
+                  @click="editCase">Edit</b-button>
       </b-col>
     </b-row>
     <b-row>
@@ -56,7 +56,7 @@
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
 
-export default {
+  export default {
   data() {
     return {
       dismissCountDown: 0,
@@ -67,7 +67,7 @@ export default {
       errorList: [],   
     };
   },
-  methods: {
+    methods: {
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },

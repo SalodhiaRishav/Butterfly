@@ -69,7 +69,7 @@ const router = new Router({
       }
     },
     {
-      path: "/newcase",
+      path: "/case",
       name: "NewCase",
       component: AddNewCase,
       beforeEnter:(to, from, next)=>{
@@ -97,7 +97,7 @@ const router = new Router({
       }
     },
     {
-      path: "/editcase",
+      path: "/case/:id",
       name: "EditCase",
       component: EditCase,
       beforeEnter:(to, from, next)=>{

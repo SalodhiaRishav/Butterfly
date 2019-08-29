@@ -6,7 +6,7 @@
           >Home</router-link
         >
         <b-nav-item-dropdown text="Case management" right>
-          <router-link to="/newcase" active-class="active" tag="b-dropdown-item"
+          <router-link to="/case" active-class="active" tag="b-dropdown-item"
             >Create new case</router-link
           >
         </b-nav-item-dropdown>
