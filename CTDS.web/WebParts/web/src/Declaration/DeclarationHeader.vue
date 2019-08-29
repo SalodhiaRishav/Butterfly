@@ -1,5 +1,5 @@
 <template>
-  <b-card style="background-color:#666; border-radius:0px" text-variant="white">
+  <b-card class="header-bg-color border-radius-0" text-variant="white">
     <b-card-text>
       <b-row>
         <b-col class="border-rt">
@@ -85,8 +85,10 @@ export default {
           if (response === "token refreshed") {
             this.onSave();
           }
+          console.log(response.data)
           if (response.data.success === true) {
             this.isError = false;
+            console.log("Success");
             this.alertVariant = "success";
             this.alertMessage = "declaration saved!";
             this.dismissCountDown = 2;
@@ -96,9 +98,9 @@ export default {
             this.isError = true;
           }
         })
-        .catch(error => {
+        .catch((error)=>{
           console.log(error);
-        })
+        });
     }
   }
 };

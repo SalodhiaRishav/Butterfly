@@ -16,6 +16,12 @@
 .pd-lf-27 {
     padding-left: 27px;
   }
+ .pd-top-10{
+  padding-top:10px;
+ } 
+ .pd-top-14{
+   padding-top:14px;
+ }
 .border-rt {
     border-right: 1px solid #908787;
   }
@@ -24,4 +30,19 @@
 }
 .form-bg-color{
     background:#F2F2F2;
+}
+.header-bg-color{
+  background:#666;
+}
+.border-radius-0{
+  border-radius:0px;
+}
+.bg-color-e6{
+  background-color:#E6E6E6;
+}
+.bg-f2{
+  background:#F2F2F2;
+}
+.color-black{
+  color:black;
 }

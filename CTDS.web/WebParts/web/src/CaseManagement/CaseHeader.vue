@@ -54,7 +54,7 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
-import Navbar from "./../commonComponent/Navbar";
+import Navbar from "./../commonComponent/Navigationbar";
 
 export default {
     components: {

@@ -1,5 +1,5 @@
 <template>
-  <b-card style="background-color:#666; border-radius:0px" text-variant="white">
+  <b-card class="header-bg-color border-radius" text-variant="white">
     <b-card-text>
       <b-row>
         <b-col class="border-rt">

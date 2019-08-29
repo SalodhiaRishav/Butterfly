@@ -28,7 +28,7 @@
         </b-col>
       </b-row>
     </b-form>
-    <div role="tablist" style="padding:10px; background:#F2F2F2;">
+    <div role="tablist" class="pd-10 bg-f2">
       <p class="block-heading">References</p>
       <b-table hover :items="referenceData.reference" :fields="fields">
         <template slot="#" slot-scope="data">

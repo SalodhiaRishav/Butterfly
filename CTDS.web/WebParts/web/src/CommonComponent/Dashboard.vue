@@ -26,7 +26,7 @@
 <script>
 import OpenCases from "./../caseManagement/OpenCases.vue";
 import DeclarationDashBoard from "./../declaration/DeclarationDashBoard.vue";
-import Navbar from "./Navbar.vue";
+import Navbar from "./Navigationbar.vue";
 
 export default {
   components: {

@@ -27,13 +27,14 @@
 </template>
 
 <script>
-import httpClient from "./../utils/httpRequestWrapper";
+import HttpClient from "./../utils/httpRequestWrapper";
 
 export default {
   methods: {
     logout() {
       var endpoint = "/logout";
-      httpClient.get(endpoint)
+      const token = sessionStorage.getItem("accessToken");
+      HttpClient.get(endpoint)
         .then(response => {
           if (response) {
             sessionStorage.removeItem("accessToken");
@@ -51,5 +52,5 @@ export default {
 </script>
 
 <style>
-@import url(./styles/navbarStyle.css);
+@import url(./styles/NavbarStyle.css);
 </style>

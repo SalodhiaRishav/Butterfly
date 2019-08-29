@@ -49,11 +49,8 @@ const refreshToken = () => {
           .post(resource, postData)
           .then(response => {
             if (response.data.success === true) {
-              sessionStorage.setItem(
-                "accessToken",
-                response.data.data.accessToken
-              );
-              resolve({ isTokenRefreshed:true });
+              sessionStorage.setItem("accessToken",response.data.data.accessToken)
+              resolve({isTokenRefreshed: true});
             } else {
               reject(response.data.message);
             }
