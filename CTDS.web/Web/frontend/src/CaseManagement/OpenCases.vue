@@ -108,7 +108,7 @@ export default {
       httpClient
         .get(resource)
         .then(response => {
-          console.log("token token" + response);
+          console.log("token token" + response.data);
           if (response.data === "token refreshed") {
             this.getAllCases();
             return;

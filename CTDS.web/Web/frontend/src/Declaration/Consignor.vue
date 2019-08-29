@@ -85,5 +85,5 @@ export default {
 </script>
 
 <style>
-@import url("./Style/DeclarationStyle.css");
+@import url("./Style/declarationStyle.css");
 </style>

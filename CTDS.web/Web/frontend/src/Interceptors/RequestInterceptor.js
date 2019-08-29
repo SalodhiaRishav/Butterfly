@@ -21,7 +21,7 @@ const applyToken = config => {
 };
 
 const checkValidEndpointForAddingHeader = url => {
-  if (url === "loginRequest") {
+  if (url === "checkuser") {
     return false;
   }
   return true;

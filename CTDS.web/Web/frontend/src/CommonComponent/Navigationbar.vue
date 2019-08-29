@@ -32,7 +32,7 @@ import HttpClient from "./../Utils/HttpRequestWrapper";
 export default {
   methods: {
     logout() {
-      var endpoint = "logout";
+      var endpoint = "/logout";
       const token = sessionStorage.getItem("accessToken");
       HttpClient.get(endpoint)
         .then(response => {

@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     onSave() {
-      console.log(this.referenceData.reference);
+      console.log(this.declaration);
       debugger;
       //todo: send reference table data
       const url = "/newdeclaration";
@@ -89,6 +89,7 @@ export default {
           if (response === "token refreshed") {
             this.onSave();
           }
+          console.log(response.data)
           if (response.data.success === true) {
             this.isError = false;
             console.log("Success");
@@ -100,6 +101,9 @@ export default {
             this.errorList = response.data.error;
             this.isError = true;
           }
+        })
+        .catch((error)=>{
+          console.log(error);
         });
     }
   }

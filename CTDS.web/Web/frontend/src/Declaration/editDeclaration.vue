@@ -55,7 +55,7 @@ import Consignee from "./Consignee";
 import Declarant from "./Declarant";
 import Delivery from "./DeliveryTransport";
 import ValueDetails from "./ValueDetails";
-import appNavbar from "./../CommonComponent/Navbar.vue";
+import appNavbar from "./../CommonComponent/Navigationbar.vue";
 import httpClient from "./../Utils/HttpRequestWrapper";
 import { constants } from "crypto";
 // import axios from 'axios';
