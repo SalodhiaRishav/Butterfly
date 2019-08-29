@@ -148,7 +148,7 @@ export default {
         });
     },
     getIdentiferTypes: function() {
-      const resource = "identifiertypes";
+      const resource = "/identifiertypes";
       httpClient
         .get(resource)
         .then(response => {

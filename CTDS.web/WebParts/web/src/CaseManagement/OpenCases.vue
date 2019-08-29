@@ -101,14 +101,14 @@ export default {
       if (caseToEdit !== null) {
         this.$store.dispatch("setCase", caseToEdit);
       }
-      this.$router.push("/editcase");
+      const url = `/case/${caseToEdit.id}`;
+      this.$router.push(url);
     },
     getAllCases: function() {
       const resource = "/casemanagement";
       httpClient
         .get(resource)
         .then(response => {
-          console.log("token token" + response.data);
           if (response.data === "token refreshed") {
             this.getAllCases();
             return;

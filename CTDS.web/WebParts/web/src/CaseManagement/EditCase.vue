@@ -25,7 +25,7 @@ import CaseManagementBody from "./CaseManagementBody.vue";
 import EditCaseHeader from "./EditCaseHeader.vue";
 import Navbar from "./../commonComponent/Navigationbar";
 
-export default {
+  export default {
   components: {
     appEditCaseHeader: EditCaseHeader,
     appCaseManagementBody: CaseManagementBody,
