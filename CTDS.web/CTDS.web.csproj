@@ -156,7 +156,7 @@
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
     <Content Include="Default.html" />
     <Content Include="Global.asax" />
-    <Content Include="obj\Debug\CTDS.Web.csproj.FileListAbsolute.txt" />
+    <!-- <Content Include="obj\Debug\CTDS.Web.csproj.FileListAbsolute.txt" /> -->
     <Content Include="obj\Debug\CTDS.Web.dll" />
     <Content Include="obj\Debug\CTDS.Web.pdb" />
     <Content Include="Web.config" />
