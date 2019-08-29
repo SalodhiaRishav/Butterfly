@@ -250,10 +250,10 @@
     <Content Include="WebParts\web\src\caseManagement\CasePriorityDropDown.vue" />
     <Content Include="WebParts\web\src\caseManagement\CaseStatusDropDown.vue" />
     <Content Include="WebParts\web\src\commonComponent\Login.vue" />
-    <Content Include="WebParts\web\dist\build.js.map" />
     <Content Include="WebParts\web\src\declaration\EditDeclaration.vue" />
     <Content Include="WebParts\web\src\declaration\EditDeclarationHeader.vue" />
     <Content Include="WebParts\web\src\commonComponent\Navigationbar.vue" />
+    <Content Include="WebParts\web\dist\build.js.map" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

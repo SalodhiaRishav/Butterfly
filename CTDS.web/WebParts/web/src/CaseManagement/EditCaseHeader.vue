@@ -27,20 +27,22 @@
         </div>
       </b-col>
       <b-col>
-        <b-button pill
-                  @click="editCase">Edit</b-button>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col> </b-col>
-      <b-col> </b-col>
-      <b-col>
-        <b-button v-b-modal.error-modal pill v-show="isError">Issues</b-button>
+        <div style="float : right; cursor:pointer;">
+          <font-awesome-icon icon="save" @click="editCase" />
+        </div>
+        <br />
+        <br />
         <b-modal id="error-modal">
           <li v-for="(error, index) in errorList" :key="index">
             {{ error }}
           </li>
         </b-modal>
+        <div style="float : right; cursor:pointer;">
+          <font-awesome-icon icon="bug" v-b-modal.error-modal v-show="isError" />
+        </div>
+        <br />
+        <br />
+        <br />
         <b-alert :variant="alertVariant"
                  :show="dismissCountDown"
                  @dismissed="dismissCountDown = 0"
@@ -89,6 +91,7 @@ import httpClient from "./../utils/httpRequestWrapper";
       httpClient
         .put(resource, { caseDto: caseDto })
         .then(res => {
+          console.log(res);
           if (res.data === "token refreshed") {
             this.EditCase();
             return;
