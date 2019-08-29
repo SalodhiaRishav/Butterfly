@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: {
@@ -38,11 +38,9 @@ export default {
       messageNameList:[],
       declarationType2List: [],
       declarationType1List :[],
-
     }
   },
   mounted() {
-    console.log(this.declaration);
     this.getDeclarationType1();
     this.getDeclarationType2();
     this.getMessageNames();
@@ -54,7 +52,7 @@ export default {
         .get(url)
         .then(response => {
           if (response.data === "token refreshed") {
-            this.getDeclarationType1();
+            this.getMessageNames();
             return;
           }
           if (response.data) {
@@ -71,7 +69,7 @@ export default {
         .get(url)
         .then(response => {
           if (response.data === "token refreshed") {
-            this.getDeclarationType1();
+            this.getDeclarationType2();
             return;
           }
           if (response.data) {
@@ -99,12 +97,10 @@ export default {
         })
         .catch(error => console.log(error));
     },
-    onSubmit() {},
-    onReset() {}
   }
 };
 </script>
 
 <style>
-@import url("./Style/DeclarationStyle.css");
+@import url("./style/declarationStyle.css");
 </style>

@@ -7,18 +7,12 @@
 </template>
 
 <script>
-import Navbar from "./CommonComponent/Navbar.vue";
-import Dashboard from "./CommonComponent/Dashboard.vue";
 
 export default {
-  name: "app",
-  components: {
-    appNavbar: Navbar,
-    appDashboard: Dashboard
-  }
+  name: "app"
 };
 </script>
 
 <style>
-@import url(./GlobalStyle.css);
+@import url(./globalStyle.css);
 </style>

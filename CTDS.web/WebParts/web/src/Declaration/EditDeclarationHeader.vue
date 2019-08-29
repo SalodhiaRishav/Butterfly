@@ -55,8 +55,7 @@
   </b-card>
 </template>
 <script>
-//import declarationform from './DeclarationForm';
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: {
@@ -86,10 +85,8 @@ export default {
           if (response.data === "token refreshed") {
             this.onSave();
           }
-          console.log("Success");
           if (response.data.success == true) {
             this.isError = false;
-            console.log("Success");
             this.alertVariant = "success";
             this.alertMessage = "declaration saved!";
             this.dismissCountDown = 2;
@@ -106,5 +103,5 @@ export default {
 </script>
 
 <style>
-@import url("./Style/DeclarationStyle.css");
+@import url("./style/declarationStyle.css");
 </style>

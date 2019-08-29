@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: {
@@ -65,9 +65,6 @@ export default {
       httpClient
         .get(url)
         .then(response => {
-          console.log("data fethec consigner countries");
-          console.log(response);
-          console.log("testing");
           if (response.data == "token refreshed") {
             this.getCountries();
             return;
@@ -85,5 +82,5 @@ export default {
 </script>
 
 <style>
-@import url("./Style/DeclarationStyle.css");
+@import url("./style/declarationStyle.css");
 </style>

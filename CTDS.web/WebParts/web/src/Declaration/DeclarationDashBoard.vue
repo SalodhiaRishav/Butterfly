@@ -27,8 +27,7 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
-import appNavbar from "./../CommonComponent/Navbar";
+import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   mounted() {
@@ -92,8 +91,6 @@ export default {
       return new Date(date.match(/\d+/)[0] * 1).toString().substring(4, 16);
     },
     getDeclaration: function(row) {
-      // this.$store.dispatch("setDeclrationIdToEdit",row.BaseID);
-
       this.$router.push(`/editdeclaration/${row.BaseID}`);
     },
     getAllDeclaration: function() {

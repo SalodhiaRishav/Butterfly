@@ -23,7 +23,7 @@
             >
               <b-form-select
                 id="statusInput"
-                v-model="statusForm.status"
+                v-model="caseStatus.status"
                 :options="statusTypes"
                 required
               ></b-form-select>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   mounted() {
@@ -46,7 +46,7 @@ export default {
     return {
       statusTypes: [],
       statusTypesFetched: false,
-      statusForm: this.$store.getters.statusForm
+      caseStatus: this.$store.getters.caseStatus
     };
   },
   methods: {

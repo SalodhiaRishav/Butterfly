@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   mounted() {
@@ -118,7 +118,6 @@ export default {
           this.$store.dispatch("setReferences", []);
           this.references = this.$store.getters.references;
         }
-        console.log(this.references);
         this.references.push(newReferenceDetails);
         this.resetReferenceForm();
       }

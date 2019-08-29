@@ -29,7 +29,7 @@
       <b-col>
         <b-button
             pill
-            @click="submitAll()"
+            @click="addNewCase()"
             >Save</b-button
           > <br> <br>
          <b-button v-b-modal.error-modal pill v-show="isError">Issues</b-button>
@@ -53,12 +53,12 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
-import appNavbar from "./../CommonComponent/Navbar";
+import httpClient from "./../utils/httpRequestWrapper";
+import Navbar from "./../commonComponent/Navbar";
 
 export default {
-  components: {
-    appNavbar
+    components: {
+      appNavbar: Navbar
   },
   data() {
     return {
@@ -86,11 +86,11 @@ export default {
         createdOn: "",
         modifiedOn: ""
       };
-      let statusForm = {
+      let caseStatus = {
         status: null
       };
       let references = [];
-      let notesForm = {
+      let notes = {
         notesByCpa: ""
       };
       let clientDetails = {
@@ -105,8 +105,8 @@ export default {
       };
       this.$store.dispatch("setClientDetails", clientDetails);
       this.$store.dispatch("setCaseInformation", caseInformation);
-      this.$store.dispatch("setStatusForm", statusForm);
-      this.$store.dispatch("setNotesForm", notesForm);
+      this.$store.dispatch("setCaseStatus", caseStatus);
+      this.$store.dispatch("set", notes);
       this.$store.dispatch("setReferences", references);
     },
     convertDate(someDate) {
@@ -115,20 +115,20 @@ export default {
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },
-    submitAll() {
+    addNewCase() {
       const caseDto = {
         client: this.$store.getters.clientDetails,
-        caseStatus: this.$store.getters.statusForm,
+        caseStatus: this.$store.getters.caseStatus,
         references: this.$store.getters.references,
         caseInformation: this.$store.getters.caseInformation,
-        notes: this.$store.getters.notesForm
+        notes: this.$store.getters.notes
       };
       const resource = "/casemanagement";
       httpClient
         .post(resource, { caseDto: caseDto })
         .then(res => {
           if (res.data === "token refreshed") {
-            this.submitAll();
+            this.addNewCase();
             return;
           }
           if (res.data.success === true) {
@@ -140,7 +140,6 @@ export default {
             this.showDismissibleAlert = true;
             this.isError = false;
           } else {
-            
             this.isError = true;
             this.errorList = res.data.error;
           }
@@ -152,7 +151,7 @@ export default {
   },
   computed: {
     status: function() {
-      return this.$store.getters.statusForm.status;
+      return this.$store.getters.caseStatus.status;
     },
     priority: function() {
       return this.$store.getters.caseInformation.priority;
@@ -162,5 +161,5 @@ export default {
 </script>
 
 <style scoped>
-@import url(./styles/CaseHeaderStyle.css);
+@import url(./styles/caseHeaderStyle.css);
 </style>

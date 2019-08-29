@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 import CaseStatusDropDown from "./CaseStatusDropDown.vue";
 import CasePriorityDropDown from "./CasePriorityDropDown.vue";
 
@@ -95,11 +95,11 @@ export default {
       return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
     },
     editCase: function(row) {
-      const foundCase = this.allCases.find(function(element) {
+      const caseToEdit = this.allCases.find(function(element) {
         return element.id === row.id;
       });
-      if (foundCase !== null) {
-        this.$store.dispatch("setCaseToEdit", foundCase);
+      if (caseToEdit !== null) {
+        this.$store.dispatch("setCase", caseToEdit);
       }
       this.$router.push("/editcase");
     },
@@ -149,7 +149,6 @@ export default {
         })
         .catch(error => {
           console.log(error);
-          //alert(error);
         });
     }
   }

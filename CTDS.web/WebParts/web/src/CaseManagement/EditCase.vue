@@ -23,17 +23,17 @@
 <script>
 import CaseManagementBody from "./CaseManagementBody.vue";
 import EditCaseHeader from "./EditCaseHeader.vue";
-import appNavbar from "./../CommonComponent/Navbar";
+import Navbar from "./../commonComponent/Navbar";
 
 export default {
   components: {
     appEditCaseHeader: EditCaseHeader,
     appCaseManagementBody: CaseManagementBody,
-    appNavbar
+    appNavbar: Navbar
   }
 };
 </script>
 
 <style scoped>
-@import url(./styles/CaseManagementHeaderStyle.css);
+@import url(./styles/caseBody.css);
 </style>

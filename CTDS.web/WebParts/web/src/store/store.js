@@ -1,11 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import CaseManagement from "./modules/CaseManagement";
+import caseManagement from "./modules/caseManagement";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    CaseManagement,
+    caseManagement,
   }
 });

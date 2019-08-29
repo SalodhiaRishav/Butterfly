@@ -22,7 +22,7 @@
             >
               <b-form-textarea
                 id="notesByCpaInput"
-                v-model="notesForm.notesByCpa"
+                v-model="notes.notesByCpa"
               ></b-form-textarea>
             </b-form-group>
           </b-form>
@@ -36,7 +36,7 @@
 export default {
   data() {
     return {
-      notesForm: this.$store.getters.notesForm
+      notes: this.$store.getters.notes
     };
   }
 };

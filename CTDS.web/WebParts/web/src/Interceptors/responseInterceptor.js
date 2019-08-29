@@ -1,14 +1,14 @@
-import httpClient from "./../Utils/HttpRequestWrapper";
-import router from "./../router/index";
+import httpClient from "../utils/httpRequestWrapper";
+import router from "../router/index";
 
-export default function exceptionResponse() {
+export default function responseInteceptorSetup() {
   httpClient.http.interceptors.response.use(
     (response) => {
       if (isTokenExpired(response)) {
         return new Promise((resolve, reject) => {
           refreshToken()
             .then(response => {
-              if (response.isTokenRefreshed) {
+              if (response.isTokenRefreshed === true) {
                 resolve({ data: "token refreshed" });
               }
             })
@@ -49,7 +49,11 @@ const refreshToken = () => {
           .post(resource, postData)
           .then(response => {
             if (response.data.success === true) {
-              resolve(response.data.data.accessToken);
+              sessionStorage.setItem(
+                "accessToken",
+                response.data.data.accessToken
+              );
+              resolve({ isTokenRefreshed:true });
             } else {
               reject(response.data.message);
             }

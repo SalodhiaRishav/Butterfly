@@ -3,7 +3,7 @@
     <b-form>
       <b-form-select
         id="statusInput"
-        v-model="statusForm.status"
+        v-model="caseStatus.status"
         :options="statusTypes"
         required
       ></b-form-select>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: ["defaultValue"],
@@ -23,7 +23,7 @@ export default {
     return {
       statusTypes: [],
       statusTypesFetched: false,
-      statusForm: { status: this.defaultValue }
+      caseStatus: { status: this.defaultValue }
     };
   },
   methods: {

@@ -1,7 +1,7 @@
-import HttpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 
-export default function updateHeader() {
-  HttpClient.http.interceptors.request.use(
+export default function requestInterceptorSetup() {
+  httpClient.http.interceptors.request.use(
     (oldConfig) => {
       let newConfig = applyToken(oldConfig);
       return newConfig;
@@ -21,7 +21,7 @@ const applyToken = config => {
 };
 
 const checkValidEndpointForAddingHeader = url => {
-  if (url === "loginRequest") {
+  if (url === "checkuser") {
     return false;
   }
   return true;

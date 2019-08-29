@@ -1,10 +1,10 @@
 <template>
   <div>
-    <appNavbar></appNavbar>
-    <editdeclarationheader
+    <Navbar></Navbar>
+    <EditDeclarationHeader
       :declaration="declaration"
       :referenceData="referenceData"
-    ></editdeclarationheader>
+    ></EditDeclarationHeader>
     <b-tabs card style="color:black; background-color:#E6E6E6;">
       <b-tab title="Header" active>
         <div style="padding-top:10px; padding-right:0px; padding-left:0px">
@@ -48,17 +48,15 @@
 <script>
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-import editdeclarationheader from "./EditDeclarationHeader";
+import EditDeclarationHeader from "./EditDeclarationHeader";
 import DeclarationType from "./DeclarationType";
 import Consignor from "./Consignor";
 import Consignee from "./Consignee";
 import Declarant from "./Declarant";
 import Delivery from "./DeliveryTransport";
 import ValueDetails from "./ValueDetails";
-import appNavbar from "./../CommonComponent/Navbar.vue";
-import httpClient from "./../Utils/HttpRequestWrapper";
-import { constants } from "crypto";
-// import axios from 'axios';
+import Navbar from "./../commonComponent/Navbar.vue";
+import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   components: {
@@ -68,8 +66,8 @@ export default {
     Declarant,
     Delivery,
     ValueDetails,
-    editdeclarationheader,
-    appNavbar
+    EditDeclarationHeader,
+    Navbar
   },
   mounted() {
     this.getDeclarationById();
@@ -124,7 +122,6 @@ export default {
 
   methods: {
     getDeclarationById() {
-      //  var guid = this.$store.getters.declrationIdToEdit;
       var guid = this.$route.params.id;
       httpClient
         .get(`/getdeclarationbyguid/${guid}`)
@@ -143,5 +140,5 @@ export default {
 </script>
 
 <style>
-@import url("./Style/DeclarationStyle.css");
+@import url("./style/declarationStyle.css");
 </style>

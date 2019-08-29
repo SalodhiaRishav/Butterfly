@@ -27,20 +27,25 @@
         </div>
       </b-col>
       <b-col>
-        <button @click="EditCase">Edit</button>
+        <b-button pill
+                  @click="editCase()">Edit</b-button>
       </b-col>
     </b-row>
     <b-row>
       <b-col> </b-col>
       <b-col> </b-col>
       <b-col>
-        <b-alert
-          :variant="alertVariant"
-          :show="dismissCountDown"
-          @dismissed="dismissCountDown = 0"
-          @dismiss-count-down="countDownChanged"
-          dismissible
-        >
+        <b-button v-b-modal.error-modal pill v-show="isError">Issues</b-button>
+        <b-modal id="error-modal">
+          <li v-for="(error, index) in errorList" :key="index">
+            {{ error }}
+          </li>
+        </b-modal>
+        <b-alert :variant="alertVariant"
+                 :show="dismissCountDown"
+                 @dismissed="dismissCountDown = 0"
+                 @dismiss-count-down="countDownChanged"
+                 dismissible>
           {{ alertMessage }}
         </b-alert>
       </b-col>
@@ -49,7 +54,7 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   data() {
@@ -57,7 +62,9 @@ export default {
       dismissCountDown: 0,
       showDismissibleAlert: false,
       alertVariant: "",
-      alertMessage: ""
+      alertMessage: "",
+       isError:false, 
+      errorList: [],   
     };
   },
   methods: {
@@ -67,16 +74,16 @@ export default {
     convertDate(someDate) {
       return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
     },
-    EditCase() {
+    editCase() {
       const caseDto = {
-        id: this.$store.getters.caseToEdit.id,
+        id: this.$store.getters.case.id,
         client: this.$store.getters.clientDetails,
-        caseStatus: this.$store.getters.statusForm,
+        caseStatus: this.$store.getters.caseStatus,
         references: this.$store.getters.references,
         caseInformation: this.$store.getters.caseInformation,
-        notes: this.$store.getters.notesForm,
-        createdOn: this.$store.getters.caseToEdit.createdOn,
-        modifiedOn: this.$store.getters.caseToEdit.modifiedOn
+        notes: this.$store.getters.notes,
+        createdOn: this.$store.getters.case.createdOn,
+        modifiedOn: this.$store.getters.case.modifiedOn
       };
       const resource = "/casemanagement";
       httpClient
@@ -91,7 +98,10 @@ export default {
             this.alertMessage = res.data.message;
             this.alertVariant = "success";
             this.showDismissibleAlert = true;
+            this.isError = false
           } else {
+            this.isError = true;
+            this.errorList = res.data.error;
             this.dismissCountDown = 5;
             this.alertMessage = res.data.message;
             this.alertVariant = "danger";
@@ -108,21 +118,21 @@ export default {
   },
   computed: {
     caseId: function() {
-      return this.$store.getters.caseToEdit.caseId;
+      return this.$store.getters.case.caseId;
     },
     status: function() {
-      return this.$store.getters.statusForm.status;
+      return this.$store.getters.caseStatus.status;
     },
     priority: function() {
       return this.$store.getters.caseInformation.priority;
     },
     createdDate: function() {
-      return this.convertDate(this.$store.getters.caseToEdit.createdOn);
+      return this.convertDate(this.$store.getters.case.createdOn);
     }
   }
 };
 </script>
 
 <style scoped>
-@import url(./styles/CaseHeaderStyle.css);
+@import url(./styles/caseHeaderStyle.css);
 </style>

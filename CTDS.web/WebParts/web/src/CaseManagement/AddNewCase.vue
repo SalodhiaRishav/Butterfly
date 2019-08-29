@@ -23,11 +23,11 @@
 <script>
 import CaseManagementBody from "./CaseManagementBody.vue";
 import CaseHeader from "./CaseHeader.vue";
-import appNavbar from "./../CommonComponent/Navbar";
+import Navbar from "./../commonComponent/Navbar";
 
 export default {
   components: {
-    appNavbar,
+    appNavbar:Navbar,
     appCaseHeader: CaseHeader,
     appCaseManagementBody: CaseManagementBody
   }
@@ -35,5 +35,5 @@ export default {
 </script>
 
 <style scoped>
-@import url(./styles/CaseManagementHeaderStyle.css);
+@import url(./styles/caseBody.css);
 </style>

@@ -85,7 +85,6 @@ export default {
   },
   computed: {
     referenceTypes: () => {
-      // console.log(this.references)
       return [{ text: "Select", value: null }, "1234", "2345", "34567"];
     }
   },
@@ -111,9 +110,7 @@ export default {
           invoiceDate: this.referenceForm.invoiceDate,
           reference: this.referenceForm.reference
         };
-        //  console.log(this.referenceData.reference);
         this.referenceData.reference.push(newReferenceDetails);
-        //  this.referenceData.reference = this.references;
         this.resetReferenceForm();
       }
     }
@@ -122,5 +119,5 @@ export default {
 </script>
 
 <style>
-@import url("./Style/DeclarationStyle.css");
+@import url("./style/declarationStyle.css");
 </style>

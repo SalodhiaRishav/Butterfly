@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: {
@@ -93,7 +93,6 @@ export default {
             return;
           }
           if (response.data) {
-            //  console.log(response.data.data);
             this.SupervisingCustomsOffice = response.data.data.map(x => {
               return { value: x.key, text: x.value };
             });
@@ -111,7 +110,6 @@ export default {
             return;
           }
           if (response.data) {
-            // console.log(response.data.data);
             this.ModeOfTransport = response.data.data.map(x => {
               return { value: x.key, text: x.value };
             });
@@ -129,7 +127,6 @@ export default {
             return;
           }
           if (response.data) {
-            // console.log(response.data.data);
             this.LocationOfGoods = response.data.data.map(x => {
               return { value: x.key, text: x.value };
             });
@@ -147,7 +144,6 @@ export default {
             return;
           }
           if (response.data) {
-            // console.log(response.data.data);
             this.countryList = response.data.data.map(x => {
               return { value: x.key, text: x.value };
             });
@@ -173,18 +169,10 @@ export default {
         })
         .catch(error => console.log(error));
     },
-    onSubmit(evt) {
-      //   evt.preventDefault();
-      //   alert(JSON.stringify(this.form));
-      //some code here
-    },
-    onReset(evt) {
-      // Reset our form values
-    }
   }
 };
 </script>
 
 <style>
-@import url("./Style/DeclarationStyle.css");
+@import url("./style/declarationStyle.css");
 </style>

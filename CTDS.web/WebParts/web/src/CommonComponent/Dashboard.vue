@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import OpenCases from "./../CaseManagement/OpenCases.vue";
-import DeclarationDashBoard from "./../Declaration/DeclarationDashBoard.vue";
+import OpenCases from "./../caseManagement/OpenCases.vue";
+import DeclarationDashBoard from "./../declaration/DeclarationDashBoard.vue";
 import Navbar from "./Navbar.vue";
 
 export default {
@@ -38,5 +38,5 @@ export default {
 </script>
 
 <style>
-@import url("./styles/DashboardStyle.css");
+@import url("./styles/dashboardStyle.css");
 </style>

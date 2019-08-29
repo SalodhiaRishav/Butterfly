@@ -62,73 +62,64 @@
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 
-export default {
-  props: {
-    declaration: Object
-  },
-  data(){
-    return{
-      defferedPayment:[],
-      countryList:[]
-    }
-  },
-  mounted() {
-    this.getDefferedPayment();
-    this.getCountries();
-  },
-  methods: {
-    getDefferedPayment() {
-      const url = "/getdropdownitems/DefferedPayment";
-      console.log("testing payment");
-      httpClient
-        .get(url)
-        .then(response => {
-          console.log(response.data);
-          console.log("testing");
-          if (response.data == "token refreshed") {
-            this.getDefferedPayment();
-            return;
-          }
-          if (response.data) {
-            this.defferedPayment = response.data.data.map(x => {
-              return { text: x.value };
-            });
-          }
-        })
-        .catch(error => console.log(error));
+  export default {
+    props: {
+      declaration: Object
     },
-
-    getCountries() {
-      const url = "/getdropdownitems/Countries";
-      httpClient
-        .get(url)
-        .then(response => {
-          if (response.data) {
+    data() {
+      return {
+        defferedPayment: [],
+        countryList: []
+      }
+    },
+    mounted() {
+      this.getDefferedPayment();
+      this.getCountries();
+    },
+    methods: {
+      getDefferedPayment() {
+        const url = "/getdropdownitems/DefferedPayment";
+        httpClient
+          .get(url)
+          .then(response => {
+            console.log(response.data);
+            console.log("testing");
             if (response.data == "token refreshed") {
-              this.getCountries();
+              this.getDefferedPayment();
+              return;
             }
-            this.countryList = response.data.data.map(x => {
-              return { value: x.key, text: x.value };
-            });
-          }
-        })
-        .catch(error => console.log(error));
-    },
-
-    onSubmit(evt) {
-      //   evt.preventDefault();
-      //   alert(JSON.stringify(this.form));
-      //some code here
-    },
-    onReset(evt) {
-      //add some code here
+            if (response.data) {
+              this.defferedPayment = response.data.data.map(x => {
+                return { text: x.value };
+              });
+            }
+          })
+          .catch(error => console.log(error));
+      },
+      getCountries() {
+        const url = "/getdropdownitems/Countries";
+        httpClient
+          .get(url)
+          .then(response => {
+            if (response.data) {
+              if (response.data == "token refreshed") {
+                this.getCountries();
+              }
+              this.countryList = response.data.data.map(x => {
+                return { value: x.key, text: x.value };
+              });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
     }
-  }
-};
+ };
 </script>
 
 <style>
-@import url("./Style/DeclarationStyle.css");
+@import url("./style/declarationStyle.css");
 </style>

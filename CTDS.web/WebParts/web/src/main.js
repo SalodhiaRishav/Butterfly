@@ -3,8 +3,8 @@ import App from './App.vue';
 import store from "./store/store";
 import BootstrapVue from 'bootstrap-vue';
 import router from './router/index.js';
-import requestInterceptor from './Interceptors/RequestInterceptor';
-import responseInterceptor from './Interceptors/ExceptionResponseInterceptor';
+import requestInterceptor from './interceptors/requestInterceptor';
+import responseInterceptor from './interceptors/responseInterceptor';
 
 Vue.use(BootstrapVue)
 Vue.use(router)

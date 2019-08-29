@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Login</h2>
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="loginUser">
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -9,11 +9,7 @@
           v-model="email"
           name="email"
           class="form-control"
-          :class="{ 'is-invalid': submitted && !email }"
         />
-        <div v-show="submitted && !email" class="invalid-feedback">
-          email is required
-        </div>
       </div>
       <div class="form-group">
         <label htmlFor="password">Password</label>
@@ -22,22 +18,17 @@
           v-model="password"
           name="password"
           class="form-control"
-          :class="{ 'is-invalid': submitted && !password }"
         />
-        <div v-show="submitted && !password" class="invalid-feedback">
-          Password is required
-        </div>
       </div>
       <div class="form-group">
         <button class="btn btn-primary">Login</button>
       </div>
-      <!-- <div v-if="error" class="alert alert-danger">{{error}}</div> -->
     </form>
   </div>
 </template>
 
 <script>
-import httpClient from "./../Utils/HttpRequestWrapper";
+import httpClient from "./../utils/httpRequestWrapper";
 export default {
   data() {
     return {
@@ -49,7 +40,7 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    loginUser() {
       const resource = "/checkuser";
       const loginData = {
         email: this.email,
@@ -58,7 +49,6 @@ export default {
       httpClient
         .post(resource, loginData)
         .then(response => {
-          console.log(response);
           if (response.data.success === true) {
             sessionStorage.setItem(
               "accessToken",
@@ -80,5 +70,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
