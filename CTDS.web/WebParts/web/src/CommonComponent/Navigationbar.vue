@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import HttpClient from "./../Utils/HttpRequestWrapper";
+import HttpClient from "./../utils/httpRequestWrapper";
 
 export default {
   methods: {

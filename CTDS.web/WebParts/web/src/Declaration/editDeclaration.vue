@@ -5,9 +5,9 @@
       :declaration="declaration"
       :referenceData="referenceData"
     ></EditDeclarationHeader>
-    <b-tabs card style="color:black; background-color:#E6E6E6;">
+    <b-tabs card class="color-black bg-color-e6">
       <b-tab title="Header" active>
-        <div style="padding-top:10px; padding-right:0px; padding-left:0px">
+        <div class ="pd-top-10 pd-rt-0 pd-lf-0">
           <b-row>
             <b-col cols="3" class="pd-lf-27">
               <!-- Declaration type -->
@@ -22,7 +22,7 @@
               <Consignee :declaration="declaration"></Consignee>
             </b-col>
           </b-row>
-          <b-row style="padding-top:14px">
+          <b-row class="pd-top-14">
             <b-col cols="4" class="pd-lf-27">
               <!-- Declarant -->
               <Declarant :declaration="declaration"></Declarant>
@@ -55,7 +55,7 @@ import Consignee from "./Consignee";
 import Declarant from "./Declarant";
 import Delivery from "./DeliveryTransport";
 import ValueDetails from "./ValueDetails";
-import Navbar from "./../commonComponent/Navbar.vue";
+import Navbar from "./../commonComponent/Navigationbar.vue";
 import httpClient from "./../utils/httpRequestWrapper";
 
 export default {

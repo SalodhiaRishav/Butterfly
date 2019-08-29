@@ -23,7 +23,7 @@
 <script>
 import CaseManagementBody from "./CaseManagementBody.vue";
 import CaseHeader from "./CaseHeader.vue";
-import Navbar from "./../commonComponent/Navbar";
+import Navbar from "./../commonComponent/Navigationbar";
 
 export default {
   components: {

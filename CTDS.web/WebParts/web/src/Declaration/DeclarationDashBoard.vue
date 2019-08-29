@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div style="font-family:monospace !important">
+      <div class="font-mono">
         <b-table
           striped
           hover
@@ -29,7 +29,7 @@
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
 
-export default {
+export default { 
   mounted() {
     this.getAllDeclaration();
   },
