@@ -74,6 +74,7 @@ export default {
   data() {
     return {
       showReferenceForm: false,
+      dropDown:["1","2","3"],
       fields: ["type", "invoiceDate", "reference", "#"],
       references: [],
       referenceForm: {
