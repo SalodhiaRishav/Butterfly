@@ -147,10 +147,6 @@
     <Compile Include="Migrations\201908271132260_removeddropdown.Designer.cs">
       <DependentUpon>201908271132260_removeddropdown.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201908280631306_mychanges.cs" />
-    <Compile Include="Migrations\201908280631306_mychanges.Designer.cs">
-      <DependentUpon>201908280631306_mychanges.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Authentication\Role.cs" />
     <Compile Include="Models\Authentication\User.cs" />
@@ -221,9 +217,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908271132260_removeddropdown.resx">
       <DependentUpon>201908271132260_removeddropdown.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908280631306_mychanges.resx">
-      <DependentUpon>201908280631306_mychanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

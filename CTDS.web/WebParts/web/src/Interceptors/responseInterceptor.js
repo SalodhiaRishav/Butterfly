@@ -35,6 +35,8 @@ const errorHandler = error => {
     return;
   } else if (500 === error.response.status) {
     alert("internal server error,redirecting to login");
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("refreshTokenId");
     router.push("/login");
     return;
   }
