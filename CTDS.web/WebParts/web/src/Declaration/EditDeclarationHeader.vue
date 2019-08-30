@@ -4,21 +4,12 @@
       <b-row>
         <b-col class="border-rt">
           <p>NO Import</p>
-          <b-button v-b-modal.error-modal v-show="isError">Issues</b-button>
           <b-modal id="error-modal">
             <li v-for="(error, index) in errorList" :key="index">
               {{ error }}
             </li>
           </b-modal>
-          <b-alert
-            :variant="alertVariant"
-            :show="dismissCountDown"
-            @dismissed="dismissCountDown = 0"
-            @dismiss-count-down="countDownChanged"
-            dismissible
-          >
-            {{ alertMessage }}
-          </b-alert>
+         
         </b-col>
         <b-col class="border-rt">
           Declaration ID: <br />
@@ -37,18 +28,31 @@
           <p>--</p>
         </b-col>
         <b-col>
-          <b-button
-            style="float:right; margin-right:17px"
-            pill
-            @click="onSave()"
-            >Edit</b-button
-          >
           Declaration status <br />
           <p>--</p>
           Customs response <br />
           <p>--</p>
           Taxation data<br />
           <p>--</p>
+        </b-col>
+        <b-col>
+          <div style="float : right; cursor:pointer;">
+            <font-awesome-icon icon="save" @click="onSave" />
+          </div>
+          <br />
+          <br />
+          <div style="float : right; cursor:pointer;">
+            <font-awesome-icon icon="bug" v-b-modal.error-modal v-show="isError" />
+          </div>
+          <br />
+          <br />
+          <b-alert :variant="alertVariant"
+                   :show="dismissCountDown"
+                   @dismissed="dismissCountDown = 0"
+                   @dismiss-count-down="countDownChanged"
+                   dismissible>
+            {{ alertMessage }}
+          </b-alert>
         </b-col>
       </b-row>
     </b-card-text>

@@ -1,29 +1,41 @@
 <template>
-  <div>
-    <h2>Login</h2>
+  <div class="wrapper">
+     <div id="formContent">
+    <h2 id="LoginHeading">Login</h2>
+    <div>
+      <img src="http://www.todaywalkins.com/Comp_images/NagarroSoftware.png" id="icon" alt="User Icon" />
+    </div>
     <form @submit.prevent="loginUser">
-      <div class="form-group">
-        <label for="email">Email</label>
+      <div>
+       <font-awesome-icon icon="envelope" />
         <input
           type="email"
           v-model="email"
           name="email"
+          placeholder="Email"
           class="form-control"
         />
-      </div>
-      <div class="form-group">
-        <label htmlFor="password">Password</label>
+        </div>
+        <div v-show="submitted && !email" class="invalid-feedback">
+          email is required
+        </div>
+        <div>
+         <font-awesome-icon icon="key" /> 
         <input
           type="password"
           v-model="password"
           name="password"
+          placeholder="Password"
           class="form-control"
         />
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary">Login</button>
-      </div>
+        </div>
+        <div v-show="submitted && !password" class="invalid-feedback">
+          Password is required
+        </div>
+        <br>
+        <button id="login">Login</button>
     </form>
+  </div>
   </div>
 </template>
 
@@ -70,3 +82,7 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+@import url("./styles/loginStyle.css");
+</style>

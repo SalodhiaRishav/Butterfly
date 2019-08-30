@@ -27,26 +27,34 @@
         </div>
       </b-col>
       <b-col>
-        <b-button
-            pill
-            @click="addNewCase()"
-            >Save</b-button
-          > <br> <br>
-         <b-button v-b-modal.error-modal pill v-show="isError">Issues</b-button>
-          <b-modal id="error-modal">
-            <li v-for="(error, index) in errorList" :key="index">
-              {{ error }}
-            </li>
-          </b-modal>
-           <b-alert
-            :variant="alertVariant"
-            :show="dismissCountDown"
-            @dismissed="dismissCountDown = 0"
-            @dismiss-count-down="countDownChanged"
-            dismissible
-          >
-            {{ alertMessage }}
-          </b-alert>
+        <div style="float : right; cursor: pointer;">
+          <font-awesome-icon icon="save" @click="addNewCase()" />
+        </div>
+        <br />
+        <br />
+        <b-modal id="error-modal">
+          <li v-for="(error, index) in errorList" :key="index">
+            {{ error }}
+          </li>
+        </b-modal>
+        <div style="float : right; cursor:pointer;">
+          <font-awesome-icon icon="bug" v-b-modal.error-modal v-show="isError" />
+        </div>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col> </b-col>
+      <b-col> </b-col>
+      <b-col>
+        <b-alert
+          :variant="alertVariant"
+          :show="dismissCountDown"
+          @dismissed="dismissCountDown = 0"
+          @dismiss-count-down="countDownChanged"
+          dismissible
+        >
+          {{ alertMessage }}
+        </b-alert>
       </b-col>
     </b-row>
   </div>

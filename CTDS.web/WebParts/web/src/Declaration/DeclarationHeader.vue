@@ -4,7 +4,6 @@
       <b-row>
         <b-col class="border-rt">
           <p>NO Import</p>
-          <b-button v-b-modal.error-modal v-show="isError">Issues</b-button>
           <b-modal id="error-modal">
             <li v-for="(error, index) in errorList" :key="index">
               {{ error }}
@@ -37,18 +36,22 @@
           <p>--</p>
         </b-col>
         <b-col>
-          <b-button
-            style="float:right; margin-right:17px"
-            pill
-            @click="onSave()"
-            >Save</b-button
-          >
           Declaration status <br />
           <p>--</p>
           Customs response <br />
           <p>--</p>
           Taxation data<br />
           <p>--</p>
+        </b-col>
+        <b-col>
+          <div style="float : right; cursor:pointer;">
+          <font-awesome-icon icon="save" @click="onSave"/>
+          </div>
+          <br/>
+          <br/>
+          <div style="float : right; cursor:pointer;">
+          <font-awesome-icon icon="bug" v-b-modal.error-modal v-show="isError"/>
+          </div>
         </b-col>
       </b-row>
     </b-card-text>
