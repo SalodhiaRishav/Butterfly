@@ -156,12 +156,11 @@
     <Content Include="bin\roslyn\VBCSCompiler.exe" />
     <Content Include="Default.html" />
     <Content Include="Global.asax" />
-    <!-- <Content Include="obj\Debug\CTDS.Web.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\CTDS.Web.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\CTDS.Web.dll" />
-    <Content Include="obj\Debug\CTDS.Web.pdb" /> -->
+    <Content Include="obj\Debug\CTDS.Web.pdb" />
     <Content Include="Web.config" />
     <Content Include="WebParts\web\.gitignore" />
-    <Content Include="WebParts\web\dist\build.js" />
     <Content Include="WebParts\web\index.html" />
     <Content Include="WebParts\web\src\assets\logo.png" />
     <Content Include="WebParts\web\src\caseManagement\styles\caseHeaderStyle.css" />
@@ -209,11 +208,11 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <!-- <Content Include="obj\Debug\build.force" />
+    <Content Include="obj\Debug\build.force" />
     <Content Include="obj\Debug\Butterfly.web.csproj.CopyComplete" />
     <Content Include="obj\Debug\Butterfly.web.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Debug\Butterfly.web.csprojAssemblyReference.cache" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" /> -->
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -253,9 +252,10 @@
     <Content Include="WebParts\web\src\declaration\EditDeclaration.vue" />
     <Content Include="WebParts\web\src\declaration\EditDeclarationHeader.vue" />
     <Content Include="WebParts\web\src\commonComponent\Navigationbar.vue" />
-    <Content Include="WebParts\web\dist\build.js.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="WebParts\web\dist\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>

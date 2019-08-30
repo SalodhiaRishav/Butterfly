@@ -7,6 +7,7 @@ import Dashboard from "./../commonComponent/Dashboard.vue";
 import DeclarationDashBoard from "./../declaration/DeclarationDashBoard.vue";
 import EditDeclaration from "./../declaration/EditDeclaration.vue";
 import Login from "./../commonComponent/Login.vue";
+import Unauthorize from './../commonComponent/Unauthorize.vue';
 
 Vue.use(Router);
 
@@ -114,6 +115,11 @@ const router = new Router({
       path: "/default.html",
       name: "Default",
       component: Login,
+    },
+    {
+      path:"/unauthorize",
+      name:"unauthorize",
+      component: Unauthorize
     }
   ],
   mode: "history"
