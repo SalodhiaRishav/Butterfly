@@ -1,20 +1,23 @@
 <template>
   <div>
     <b-form class="pd-10 form-bg-color">
-      <p class="block-heading">Consignor/exporter</p>
-      <b-form-group label="*Name:">
+      <p class="block-heading">{{language.lang.consignor}}</p>
+      <b-form-group>
+        <label> {{language.lang.name}} </label>
         <b-form-input
           v-model="declaration.consignorName"
           required
         ></b-form-input>
       </b-form-group>
-      <b-form-group label="*Address1:">
+      <b-form-group>
+        <label> {{language.lang.address1}}
         <b-form-input
           v-model="declaration.consignorAddress1"
           required
         ></b-form-input>
       </b-form-group>
-      <b-form-group label="*Address2:">
+      <b-form-group >
+        <label>{{language.lang.address2}}</label>
         <b-form-input
           v-model="declaration.consignorAddress2"
           required
@@ -22,17 +25,17 @@
       </b-form-group>
       <b-row>
         <b-col>
-          *postal code
+          {{language.lang.postalCode}}
           <b-form-input
             v-model="declaration.consignorPostalCode"
           ></b-form-input>
         </b-col>
         <b-col>
-          *City
+          {{language.lang.city}}
           <b-form-input v-model="declaration.consignorCity"></b-form-input>
         </b-col>
         <b-col>
-          Country
+          {{language.lang.country}}
           <b-form-select
             v-model="declaration.consignorCountry"
             :options="countryList"
@@ -46,10 +49,12 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
+import allLanguages from './../utils/languageSwitch';
 
 export default {
   props: {
-    declaration: Object
+    declaration: Object,
+    language: Object
   },
   data() {
     return{

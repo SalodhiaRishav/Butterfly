@@ -1,11 +1,11 @@
 <template>
   <b-form class="pd-10 form-bg-color">
     <div>
-      <p class="block-heading">Delivery and transport</p>
+      <p class="block-heading">{{language.lang.deliveryAndTransport}}</p>
     </div>
     <b-row>
       <b-col>
-        *Terms of delivery
+        {{language.lang.termsOfDelivery}}
         <b-form-select
           v-model="declaration.termsOfDelivery"
           :options="TermsOfDelivery"
@@ -13,42 +13,47 @@
         ></b-form-select>
       </b-col>
       <b-col>
-        *Delivery place(20:2)
+        *{{language.lang.deliveryPlace}}
         <b-form-input
           v-model="declaration.deliveryPlace"
           required
         ></b-form-input>
       </b-col>
     </b-row>
-    <b-form-group label="*Country of dispatch/export">
+    <b-form-group>
+      {{language.lang.countryOfDispatch}}
       <b-form-select
         v-model="declaration.countryOfDispatch"
         :options="countryList"
         required
       ></b-form-select>
     </b-form-group>
-    <b-form-group label="*Nationality of transport at border(21):">
+    <b-form-group >
+      {{language.lang.nationalityOfTransportAtBorder}}(21)
       <b-form-select
         v-model="declaration.nationalityOfTransport"
         :options="countryList"
         required
       ></b-form-select>
     </b-form-group>
-    <b-form-group label="*Mode of transport at the border(25):">
+    <b-form-group>
+      {{language.lang.modeOfTransportAtBorder}}(25)
       <b-form-select
         v-model="declaration.modeOfTransport"
         :options="ModeOfTransport"
         required
       ></b-form-select>
     </b-form-group>
-    <b-form-group label="*Location of goods(30):">
+    <b-form-group>
+      {{language.lang.locationOfGoods}}(30)
       <b-form-select
         v-model="declaration.locationOfGoods"
         :options="LocationOfGoods"
         required
       ></b-form-select>
     </b-form-group>
-    <b-form-group label="*Supervising customs office:">
+    <b-form-group>
+      {{language.lang.supervisingCustomOffice}}
       <b-form-select
         v-model="declaration.supervisingCustomOffice"
         :options="SupervisingCustomsOffice"
@@ -60,10 +65,12 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
+import allLanguages from './../utils/languageSwitch';
 
 export default {
   props: {
-    declaration: Object
+    declaration: Object,
+    language: Object
   },
   data() {
     return {

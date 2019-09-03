@@ -3,52 +3,65 @@
     <b-navbar class="nav-bg-color nav-overide" type="dark">
       <b-navbar-nav>
         <router-link to="/home" active-class="active" tag="b-nav-item"
-          >Home</router-link
+          >{{language.lang.home}}</router-link
         >
-        <b-nav-item-dropdown text="Case management" right>
+        <b-nav-item-dropdown :text="language.lang.caseManagement" right>
           <router-link to="/case" active-class="active" tag="b-dropdown-item"
-            >Create new case</router-link
+            >{{language.lang.createNewCase}}</router-link
           >
         </b-nav-item-dropdown>
-        <b-nav-item-dropdown text="Declarations" right>
+        <b-nav-item-dropdown :text="language.lang.declaration" right>
           <router-link
             to="/declarationform"
             active-class="active"
             tag="b-dropdown-item"
-            >Create new declaration</router-link
+            >{{language.lang.createNewDeclaration}}</router-link
           >
         </b-nav-item-dropdown>
       </b-navbar-nav>
-      <button class="btn-style" style="float:right;" right v-on:click="logout">
-        Logout
+     
+      <div class="row">
+      <div class="col-sm-7">
+       <b-form-select @change="changeLanguage()" v-model="selected" :options="languages"></b-form-select>
+      </div>
+      <div class="col-sm-5">
+      <button class="btn-style" style="padding-top:7px" v-on:click="logout">
+        {{language.lang.logout}}
       </button>
+      </div>
+      </div>
     </b-navbar>
   </div>
 </template>
 
 <script>
 import HttpClient from "./../utils/httpRequestWrapper";
+import allLanguages from './../utils/languageSwitch';
 import englishCaseManagementLabels from "./../caseManagement/utils/caseManagementLabel.en";
 import swedishCaseManagementLabels from "./../caseManagement/utils/caseManagementLabel.sw"
 
 export default {
-  mounted(){
-    this.language="swedish"
-    if(this.language === "english")
-    {
-      this.$store.dispatch("setCaseManagementLabels",englishCaseManagementLabels);
-    }
-    else if(this.language === "swedish")
-    {
-      this.$store.dispatch("setCaseManagementLabels",swedishCaseManagementLabels);
-    }
-  },
-   data() {
+  // props:{
+  //   language: Object,
+  // },
+  data(){
     return {
-      language: "",
-    };
+      selected:'en',
+      languages:[{value:'en',text:'english'},{value:'se',text:'swedish'}],
+      language:{
+        lang:allLanguages.lang.en.form
+      },
+    }
   },
-  methods: {
+  created(){
+    this.$emit('updateLanguage',this.language);
+  },
+  methods: {   
+     changeLanguage(){
+       var t = allLanguages.lang[this.selected];
+       this.language.lang = t.form;
+      this.$emit('updateLanguage',this.language)
+    },
     logout() {
       var endpoint = "/logout";
       const token = sessionStorage.getItem("accessToken");

@@ -3,7 +3,7 @@
     <b-card-text>
       <b-row>
         <b-col class="border-rt">
-          <p>NO Import</p>
+          <p>NO {{language.lang.import}}</p>
           <b-modal id="error-modal">
             <li v-for="(error, index) in errorList" :key="index">
               {{ error }}
@@ -12,7 +12,7 @@
          
         </b-col>
         <b-col class="border-rt">
-          Declaration ID: <br />
+          {{language.lang.declaration}} ID: <br />
           <p>CD - {{ declaration.declarationId.toString().substring(0, 5) }}</p>
           LRN <br />
           <p>--</p>
@@ -20,19 +20,19 @@
           <p>--</p>
         </b-col>
         <b-col class="border-rt">
-          Total # of packages<br />
+          {{language.lang.totalNumberOfPackages}}<br />
           <p>--</p>
-          Total # of items <br />
+          {{language.lang.totalNumberOfItems}} <br />
           <p>--</p>
-          Total Gross Mass<br />
+          {{language.lang.totalGrossMass}}<br />
           <p>--</p>
         </b-col>
         <b-col>
-          Declaration status <br />
+          {{language.lang.declarationStatus}} <br />
           <p>--</p>
-          Customs response <br />
+          {{language.lang.customResponse}} <br />
           <p>--</p>
-          Taxation data<br />
+          {{language.lang.taxationDate}}<br />
           <p>--</p>
         </b-col>
         <b-col>
@@ -64,7 +64,8 @@ import httpClient from "./../utils/httpRequestWrapper";
 export default {
   props: {
     declaration: Object,
-    referenceData: Object
+    referenceData: Object,
+    language:Object,
   },
   data() {
     return {

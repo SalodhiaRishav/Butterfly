@@ -1,6 +1,6 @@
 <template>
   <div>
-    <appNavbar></appNavbar>
+    <appNavbar @updateLanguage="lang => language=lang"></appNavbar>
     <b-card no-body>
       <div class="dashboardHeader">
         <b-card-header
@@ -8,14 +8,14 @@
           header-text-variant="white"
           class="pd-rt"
         >
-          <h1 class="dashboardHeading">Dashboard</h1>
+          <h1 class="dashboardHeading">{{language.lang.dashboard}}</h1>
         </b-card-header>
       </div>
       <b-tabs card>
-        <b-tab title="OpenCases" active>
+        <b-tab :title="language.lang.openCases" active>
           <appOpenCases></appOpenCases>
         </b-tab>
-        <b-tab title="Declarations" active>
+        <b-tab :title="language.lang.declaration" active>
           <appDeclarationDashBoard></appDeclarationDashBoard>
         </b-tab>
       </b-tabs>
@@ -33,6 +33,13 @@ export default {
     appDeclarationDashBoard: DeclarationDashBoard,
     appOpenCases: OpenCases,
     appNavbar: Navbar
+  },
+  data(){
+    return{
+      language:{
+        lang:{}
+      }
+    }
   }
 };
 </script>
