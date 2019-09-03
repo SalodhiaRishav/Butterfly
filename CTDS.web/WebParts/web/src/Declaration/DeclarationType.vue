@@ -1,14 +1,16 @@
 <template>
   <b-form class="pd-10 form-bg-color">
-    <p class="block-heading">Declaration type</p>
-    <b-form-group label="*Message Name">
+    <p class="block-heading">{{language.lang.declarationType}}</p>
+    <b-form-group>
+      <label>{{language.lang.messageName}}</label>
       <b-form-select
         v-model="declaration.messageName"
         :options="messageNameList"
         required
       ></b-form-select>
     </b-form-group>
-    <b-form-group label="Declaration Type(1:1):">
+    <b-form-group>
+      <label>{{language.lang.declarationType1}}</label>
       <b-form-select
         v-model="declaration.declarationType1"
         :options="declarationType1List"
@@ -16,7 +18,8 @@
         >{{ newDeclarationType1 }}</b-form-select
       >
     </b-form-group>
-    <b-form-group label="Declaration Type(1:2):">
+    <b-form-group>
+      <label>{{language.lang.declarationType2}}
       <b-form-select
         v-model="declaration.declarationType2"
         :options="declarationType2List"
@@ -28,18 +31,34 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
+import allLanguages from './../utils/languageSwitch';
 
 export default {
   props: {
-    declaration: Object
+    declaration: Object,
+    language:Object,
   },
   data(){
     return {
       messageNameList:[],
       declarationType2List: [],
       declarationType1List :[],
+      lan:allLanguages.lang.en.englishForm,
     }
   },
+  // watch:{
+  //   language: {
+  //     handler(val){
+  //       if(val.lang === "se"){
+  //           this.lan = allLanguages.lang.se.swedishForm;
+  //       }
+  //       else{
+  //         this.lan = allLanguages.lang.en.englishForm;
+  //       }
+  //       console.log(val.lang);
+  //     },
+  //     deep:true, 
+  //   },  
   mounted() {
     this.getDeclarationType1();
     this.getDeclarationType2();

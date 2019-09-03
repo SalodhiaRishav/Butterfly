@@ -1,26 +1,30 @@
 <template>
   <b-form class="pd-10 form-bg-color">
-    <p class="block-heading">Consignee</p>
+    <p class="block-heading">{{language.lang.consignee}}</p>
 
-    <b-form-group label="Org. number:">
+    <b-form-group>
+      <label>{{language.lang.orgNumber}} </label>
       <b-form-input
         v-model="declaration.consigneeOrganisationNumber"
         required
       ></b-form-input>
     </b-form-group>
 
-    <b-form-group label="Name">
+    <b-form-group>
+      <label>{{language.lang.name}} </label>
       <b-form-input v-model="declaration.consigneeName" required></b-form-input>
     </b-form-group>
 
-    <b-form-group label="Address 1">
+    <b-form-group>
+      <label>{{language.lang.address1}}</label>
       <b-form-input
         v-model="declaration.consigneeAddress1"
         required
       ></b-form-input>
     </b-form-group>
 
-    <b-form-group label="Address 2">
+    <b-form-group>
+      <label>{{language.lang.address2}}</label>
       <b-form-input
         v-model="declaration.consigneeAddress2"
         required
@@ -28,15 +32,15 @@
     </b-form-group>
     <b-row>
       <b-col>
-        *postal code
+        {{language.lang.postalCode}}
         <b-form-input v-model="declaration.consigneePostalCode"></b-form-input>
       </b-col>
       <b-col>
-        *City
+        {{language.lang.city}}
         <b-form-input v-model="declaration.consigneeCity"></b-form-input>
       </b-col>
       <b-col>
-        Country
+        {{language.lang.country}}
         <b-form-select
           v-model="declaration.consigneeCountry"
           :options="countryList"
@@ -44,14 +48,16 @@
         ></b-form-select>
       </b-col>
     </b-row>
-    <b-form-group label="Customs credit number(48)">
+    <b-form-group>
+      <label>{{language.lang.customCreditNumber}}(48)</label>
       <b-form-input
         v-model="declaration.customCreditNumber"
         required
       ></b-form-input>
     </b-form-group>
 
-    <b-form-group label="Deffered payment(48)">
+    <b-form-group>
+      <label>{{language.lang.defferredPayment}}(48)</label>
       <b-form-select
         v-model="declaration.defferedPayment"
         :options="defferedPayment"
@@ -63,15 +69,17 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
+import allLanguages from './../utils/languageSwitch';
 
-  export default {
+export default {
     props: {
-      declaration: Object
+      declaration: Object,
+      language: Object
     },
     data() {
       return {
         defferedPayment: [],
-        countryList: []
+        countryList: [],
       }
     },
     mounted() {

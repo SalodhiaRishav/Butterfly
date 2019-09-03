@@ -3,7 +3,7 @@
     <b-card-text>
       <b-row>
         <b-col class="border-rt">
-          <p>NO Import</p>
+          <p>NO {{language.lang.import}}</p>
           <b-modal id="error-modal">
             <li v-for="(error, index) in errorList" :key="index">
               {{ error }}
@@ -20,7 +20,7 @@
           </b-alert>
         </b-col>
         <b-col class="border-rt">
-          Declaration ID: <br />
+          {{language.lang.declaration}} ID: <br />
           <p>--</p>
           LRN <br />
           <p>--</p>
@@ -28,19 +28,19 @@
           <p>--</p>
         </b-col>
         <b-col class="border-rt">
-          Total # of packages<br />
+          {{language.lang.totalNumberOfPackages}}<br />
           <p>--</p>
-          Total # of items <br />
+          {{language.lang.totalNumberOfItems}} <br />
           <p>--</p>
-          Total Gross Mass<br />
+          {{language.lang.totalGrossMass}}<br />
           <p>--</p>
         </b-col>
         <b-col>
-          Declaration status <br />
+          {{language.lang.declarationStatus}} <br />
           <p>--</p>
-          Customs response <br />
+          {{language.lang.customResponse}} <br />
           <p>--</p>
-          Taxation data<br />
+          {{language.lang.taxationDate}}<br />
           <p>--</p>
         </b-col>
         <b-col>
@@ -52,6 +52,7 @@
           <div style="float : right; cursor:pointer;">
           <font-awesome-icon icon="bug" v-b-modal.error-modal v-show="isError"/>
           </div>
+            <br/>
         </b-col>
       </b-row>
     </b-card-text>
@@ -60,11 +61,13 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
+import allLanguages from './../utils/languageSwitch';
 
 export default {
   props: {
     declaration: Object,
-    referenceData: Object
+    referenceData: Object,
+    language:Object
   },
   data() {
     return {
@@ -73,7 +76,7 @@ export default {
       alertVariant: "",
       alertMessage: "",
       isError: false,
-      errorList: []
+      errorList: [],
     };
   },
   methods: {
