@@ -55,7 +55,7 @@ export default {
       }
       else
       {
-       this.selected=localStorage.getItem("selectedLanguage");
+       localStorage.setItem("selectedLanguage",this.selected);
       }
       this.$emit('updateLanguage',this.language);
       this.$store.dispatch("setCaseManagementLabels",caseManagementLabels.lang[this.selected])
