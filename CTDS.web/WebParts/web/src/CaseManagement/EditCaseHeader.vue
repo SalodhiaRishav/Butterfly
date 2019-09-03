@@ -6,23 +6,23 @@
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">Case ID</div>
+          <div class="fieldName">{{labels.caseId}}</div>
           <div class="fieldAnswer">KGH-19-{{ caseId }}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">Created Date</div>
+          <div class="fieldName">{{labels.createdDate}}</div>
           <div>{{ createdDate }}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">Priority</div>
+          <div class="fieldName">{{labels.priority}}</div>
           <div>{{ priority }}</div>
         </div>
         <div class="field">
-          <div class="fieldName">Status</div>
+          <div class="fieldName">{{labels.status}}</div>
           <div>{{ status }}</div>
         </div>
       </b-col>
@@ -91,9 +91,8 @@ import httpClient from "./../utils/httpRequestWrapper";
       httpClient
         .put(resource, { caseDto: caseDto })
         .then(res => {
-          console.log(res);
           if (res.data === "token refreshed") {
-            this.EditCase();
+            this.editCase();
             return;
           }
           if (res.data.success === true) {
@@ -131,7 +130,10 @@ import httpClient from "./../utils/httpRequestWrapper";
     },
     createdDate: function() {
       return this.convertDate(this.$store.getters.case.createdOn);
-    }
+    },
+    labels: function() {
+      return this.$store.getters.caseManagementLabels;
+    },
   }
 };
 </script>

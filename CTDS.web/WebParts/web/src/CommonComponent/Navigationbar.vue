@@ -28,8 +28,26 @@
 
 <script>
 import HttpClient from "./../utils/httpRequestWrapper";
+import englishCaseManagementLabels from "./../caseManagement/utils/caseManagementLabel.en";
+import swedishCaseManagementLabels from "./../caseManagement/utils/caseManagementLabel.sw"
 
 export default {
+  mounted(){
+    this.language="swedish"
+    if(this.language === "english")
+    {
+      this.$store.dispatch("setCaseManagementLabels",englishCaseManagementLabels);
+    }
+    else if(this.language === "swedish")
+    {
+      this.$store.dispatch("setCaseManagementLabels",swedishCaseManagementLabels);
+    }
+  },
+   data() {
+    return {
+      language: "",
+    };
+  },
   methods: {
     logout() {
       var endpoint = "/logout";

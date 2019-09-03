@@ -4,7 +4,7 @@
       <div class="componentHeader">
         <b-card-header
           header-tag="header"
-          header="References"
+          :header="labels.references"
           header-text-variant="white"
           v-b-toggle.accordion-references
           class="p-1"
@@ -20,21 +20,21 @@
             </template>
           </b-table>
           <b-table fixed :fields="fields">
-            <template slot="HEAD_identity" slot-scope="data">
+            <template :slot="headIdentityLabel" slot-scope="data">
               <b-form-input
                 id="identityInput"
                 :placeholder="data.label"
                 v-model="referenceForm.identity"
               ></b-form-input>
             </template>
-            <template slot="HEAD_type" v-if="referenceTypesFetched">
+            <template :slot="headTypeLabel" v-if="referenceTypesFetched">
               <b-form-select
                 id="referenceTypeInput"
                 :options="referenceTypes"
                 v-model="referenceForm.type"
               ></b-form-select>
             </template>
-            <template slot="HEAD_comment" slot-scope="data">
+            <template :slot="headCommentLabel" slot-scope="data">
               <b-form-input
                 id="commentInput"
                 :placeholder="data.label"
@@ -56,6 +56,13 @@
 import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
+  props:["labels"],
+  computed: {
+      headIdentityLabel: function(){return `HEAD_identity`},
+      headCommentLabel: function(){return `HEAD_comment`},
+      headTypeLabel:function(){return `HEAD_type`},
+      fields: function(){return ["type", "identity", "comment", "#"]},
+  },
   mounted() {
     this.getCaseReferenceTypes();
   },
@@ -64,7 +71,6 @@ export default {
       referenceTypes: [],
       referenceTypesFetched: false,
       showReferenceForm: false,
-      fields: ["type", "identity", "comment", "#"],
       references: this.$store.getters.references,
       referenceForm: {
         type: null,

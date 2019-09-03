@@ -5,7 +5,7 @@
         <div class="componentHeader">
           <b-card-header
             header-tag="header"
-            header="Client"
+            :header="labels.client"
             header-text-variant="white"
             v-b-toggle.accordion-client
             class="p-1"
@@ -19,7 +19,7 @@
               <div v-if="identifierFetched">
                 <b-form-group
                   id="clientIdentifier"
-                  label="Client Identifier"
+                  :label="labels.clientIdentifier"
                   label-for="clientIdentifierInput"
                 >
                   <b-form-input
@@ -31,7 +31,7 @@
               </div>
               <b-form-group
                 id="identifierType"
-                label="Identifier Type"
+                :label="labels.identifierType"
                 label-for="identifierTypeInput"
               >
                 <b-form-radio-group
@@ -39,7 +39,7 @@
                   :options="identifierTypes"
                 ></b-form-radio-group>
               </b-form-group>
-              <b-form-group id="name" label="Name" label-for="nameInput">
+              <b-form-group id="name" :label="labels.name" label-for="nameInput">
                 <b-form-input
                   id="nameInput"
                   v-model="clientDetails.name"
@@ -48,7 +48,7 @@
               </b-form-group>
               <b-form-group
                 id="address"
-                label="Address"
+                :label="labels.address"
                 label-for="addressInput"
               >
                 <b-form-input
@@ -59,7 +59,7 @@
               </b-form-group>
               <b-form-group
                 id="postalCode"
-                label="Postal Code"
+                :label="labels.postalCode"
                 label-for="postalCodeInput"
               >
                 <b-form-input
@@ -68,7 +68,7 @@
                   required
                 ></b-form-input>
               </b-form-group>
-              <b-form-group id="city" label="City" label-for="cityInput">
+              <b-form-group id="city" :label="labels.city" label-for="cityInput">
                 <b-form-input
                   id="cityInput"
                   v-model="clientDetails.city"
@@ -78,7 +78,7 @@
 
               <b-form-group
                 id="country"
-                label="Country"
+                :label="labels.country"
                 label-for="countryInput"
               >
                 <b-form-select
@@ -89,7 +89,7 @@
                 ></b-form-select>
               </b-form-group>
 
-              <b-form-group id="email" label="E-mail" label-for="emailInput">
+              <b-form-group id="email" :label="labels.email" label-for="emailInput">
                 <b-form-input
                   id="emailInput"
                   v-model="clientDetails.email"
@@ -108,6 +108,7 @@
 import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
+  props: ['labels'],
   mounted() {
     this.getIdentiferTypes();
     this.getCountries();

@@ -4,7 +4,7 @@
       <div class="componentHeader">
         <b-card-header
           header-tag="header"
-          header="Case Status"
+          :header="labels.caseStatus"
           header-text-variant="white"
           v-b-toggle.accordion-caseStatus
           class="p-1"
@@ -17,7 +17,7 @@
           <b-form>
             <b-form-group
               id="status"
-              label="Status"
+              :label="labels.status"
               label-for="statusInput"
               v-if="statusTypesFetched"
             >
@@ -39,6 +39,7 @@
 import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
+  props:["labels"],
   mounted() {
     this.getCaseStatusTypes();
   },

@@ -5,7 +5,7 @@
         <div class="componentHeader">
           <b-card-header
             header-tag="header"
-            header="Case Information"
+            :header="labels.caseInformation"
             header-text-variant="white"
             v-b-toggle.accordion-caseInfomation
             class="p-1"
@@ -18,7 +18,7 @@
             <b-form>
               <b-form-group
                 id="description"
-                label="Description"
+                :label="labels.description"
                 label-for="descriptionInput"
               >
                 <b-form-textarea
@@ -28,7 +28,7 @@
               </b-form-group>
               <b-form-group
                 id="messageFromClient"
-                label="Messsage from client"
+                :label="labels.messageFromClient"
                 label-for="messageFromClientInput"
               >
                 <b-form-textarea
@@ -39,7 +39,7 @@
               <div v-if="priorityFetched">
                 <b-form-group
                   id="priority"
-                  label="Priority"
+                  :label="labels.priority"
                   label-for="priorityInput"
                 >
                   <b-form-select
@@ -61,6 +61,7 @@
 import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
+  props:["labels"],
   mounted() {
     this.getPriorityTypes();
   },

@@ -6,23 +6,23 @@
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">Case ID</div>
+          <div class="fieldName">{{labels.caseId}}</div>
           <div class="fieldAnswer">{{ caseIdentifier }}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">Created Date</div>
+          <div class="fieldName">{{labels.createdDate}}</div>
           <div>{{ createdDate }}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">Priority</div>
+          <div class="fieldName">{{labels.priority}}</div>
           <div>{{ priority }}</div>
         </div>
         <div class="field">
-          <div class="fieldName">Status</div>
+          <div class="fieldName">{{labels.status}}</div>
           <div>{{ status }}</div>
         </div>
       </b-col>
@@ -114,7 +114,7 @@ export default {
       this.$store.dispatch("setClientDetails", clientDetails);
       this.$store.dispatch("setCaseInformation", caseInformation);
       this.$store.dispatch("setCaseStatus", caseStatus);
-      this.$store.dispatch("set", notes);
+      this.$store.dispatch("setNotes", notes);
       this.$store.dispatch("setReferences", references);
     },
     convertDate(someDate) {
@@ -158,6 +158,9 @@ export default {
     }
   },
   computed: {
+    labels: function() {
+      return this.$store.getters.caseManagementLabels;
+    },
     status: function() {
       return this.$store.getters.caseStatus.status;
     },

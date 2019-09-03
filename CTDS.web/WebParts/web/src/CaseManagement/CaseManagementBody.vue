@@ -1,11 +1,11 @@
 <template>
   <div>
     <b-card-group columns>
-      <appClient></appClient>
-      <appCaseInformation></appCaseInformation>
-      <appReferences></appReferences>
-      <appNotes></appNotes>
-      <appCaseStatus></appCaseStatus>
+      <appClient :labels="labels"></appClient>
+      <appCaseInformation :labels="labels"></appCaseInformation>
+      <appReferences :labels="labels"></appReferences>
+      <appNotes :labels="labels"></appNotes>
+      <appCaseStatus :labels="labels"></appCaseStatus>
     </b-card-group>
   </div>
 </template>
@@ -17,6 +17,11 @@ import CaseStatus from "./CaseStatus.vue";
 import CaseInformation from "./CaseInformation.vue";
 import Notes from "./Notes.vue";
 export default {
+  computed: {
+    labels: function() {
+      return this.$store.getters.caseManagementLabels;
+    },
+  },
   components: {
     appClient: Client,
     appCaseInformation: CaseInformation,

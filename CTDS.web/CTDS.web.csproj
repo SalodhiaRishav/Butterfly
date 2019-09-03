@@ -165,6 +165,8 @@
     <Content Include="WebParts\web\src\assets\logo.png" />
     <Content Include="WebParts\web\src\caseManagement\styles\caseHeaderStyle.css" />
     <Content Include="WebParts\web\src\caseManagement\styles\caseBody.css" />
+    <Content Include="WebParts\web\src\caseManagement\utils\caseManagementLabel.en.js" />
+    <Content Include="WebParts\web\src\caseManagement\utils\caseManagementLabel.sw.js" />
     <Content Include="WebParts\web\src\commonComponent\styles\dashboardStyle.css" />
     <Content Include="WebParts\web\src\commonComponent\styles\loginStyle.css" />
     <Content Include="WebParts\web\src\commonComponent\styles\navbarStyle.css" />

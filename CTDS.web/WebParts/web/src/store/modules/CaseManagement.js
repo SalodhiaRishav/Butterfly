@@ -1,4 +1,5 @@
 const state = {
+  caseManagementLabels:null,
   case:null,
   caseInformation: {
     id: "",
@@ -29,6 +30,9 @@ const state = {
 };
 
 const getters = {
+  caseManagementLabels:state => {
+    return state.caseManagementLabels
+  },
   case: state => {
     return state.case;
   },
@@ -50,6 +54,9 @@ const getters = {
 };
 
 const mutations = {
+  setCaseManagementLabels:(state,caseManagementLabels) => {
+    state.caseManagementLabels = caseManagementLabels;
+  },
   setCase: (state, someCase) => {
     state.case = someCase
   },
@@ -71,6 +78,9 @@ const mutations = {
 };
 
 const actions = {
+  setCaseManagementLabels:(context,caseManagementLabels) => {
+    context.commit("setCaseManagementLabels",caseManagementLabels);
+  },
   setCase: (context, someCase) => {
     context.commit("setClientDetails", someCase.client);
     context.commit("setCaseInformation", someCase.caseInformation);

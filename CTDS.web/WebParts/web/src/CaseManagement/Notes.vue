@@ -4,7 +4,7 @@
       <div class="componentHeader">
         <b-card-header
           header-tag="header"
-          header="Notes"
+          :header="labels.notes"
           header-text-variant="white"
           v-b-toggle.accordion-notes
           class="p-1"
@@ -17,7 +17,7 @@
           <b-form>
             <b-form-group
               id="notesByCpa"
-              label="Notes by CPA"
+              :label="labels.notesByCPA"
               label-for="notesByCpaInput"
             >
               <b-form-textarea
@@ -34,6 +34,7 @@
 
 <script>
 export default {
+  props:["labels"],
   data() {
     return {
       notes: this.$store.getters.notes
