@@ -37,8 +37,7 @@
 <script>
 import HttpClient from "./../utils/httpRequestWrapper";
 import allLanguages from './../utils/languageSwitch';
-import englishCaseManagementLabels from "./../caseManagement/utils/caseManagementLabel.en";
-import swedishCaseManagementLabels from "./../caseManagement/utils/caseManagementLabel.sw"
+import caseManagementLabels from "./../caseManagement/utils/caseManagementLabels";
 
 export default {
   // props:{
@@ -55,12 +54,14 @@ export default {
   },
   created(){
     this.$emit('updateLanguage',this.language);
+      this.$store.dispatch("setCaseManagementLabels",caseManagementLabels.lang.en)
   },
   methods: {   
      changeLanguage(){
        var t = allLanguages.lang[this.selected];
        this.language.lang = t.form;
       this.$emit('updateLanguage',this.language)
+      this.$store.dispatch("setCaseManagementLabels",caseManagementLabels.lang[this.selected])
     },
     logout() {
       var endpoint = "/logout";
@@ -72,6 +73,7 @@ export default {
             sessionStorage.removeItem("refreshTokenId");
             this.$router.push("/login");
             alert("logged out!");
+          
           }
         })
         .catch(error => {
