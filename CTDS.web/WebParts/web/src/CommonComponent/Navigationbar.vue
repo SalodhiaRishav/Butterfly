@@ -43,21 +43,32 @@ export default {
   // props:{
   //   language: Object,
   // },
+  computed:{
+    language:function(){
+        return {lang:allLanguages.lang[this.selected].form};
+      },
+  },
+  mounted(){ 
+      if(localStorage.getItem("selectedLanguage"))
+      {
+        this.selected=localStorage.getItem("selectedLanguage");
+      }
+      else
+      {
+       this.selected=localStorage.getItem("selectedLanguage");
+      }
+      this.$emit('updateLanguage',this.language);
+      this.$store.dispatch("setCaseManagementLabels",caseManagementLabels.lang[this.selected])
+    },
   data(){
     return {
-      selected:'en',
+      selected:"en",
       languages:[{value:'en',text:'english'},{value:'se',text:'swedish'}],
-      language:{
-        lang:allLanguages.lang.en.form
-      },
     }
-  },
-  created(){
-    this.$emit('updateLanguage',this.language);
-      this.$store.dispatch("setCaseManagementLabels",caseManagementLabels.lang.en)
   },
   methods: {   
      changeLanguage(){
+       localStorage.setItem("selectedLanguage",this.selected);
        var t = allLanguages.lang[this.selected];
        this.language.lang = t.form;
       this.$emit('updateLanguage',this.language)
