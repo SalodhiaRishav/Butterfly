@@ -9,7 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faEnvelope,faKey,faSave,faEdit, faBug } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { dom } from '@fortawesome/fontawesome-svg-core'
- 
+
 dom.watch()
 library.add(faEnvelope,faKey,faSave,faEdit,faBug)
 Vue.component('font-awesome-icon', FontAwesomeIcon)

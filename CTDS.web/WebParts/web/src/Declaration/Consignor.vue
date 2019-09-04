@@ -10,7 +10,7 @@
         ></b-form-input>
       </b-form-group>
       <b-form-group>
-        <label> {{language.lang.address1}}
+        <label> {{language.lang.address1}}</label>
         <b-form-input
           v-model="declaration.consignorAddress1"
           required

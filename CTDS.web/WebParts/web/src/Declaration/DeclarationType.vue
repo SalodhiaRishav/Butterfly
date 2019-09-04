@@ -19,7 +19,7 @@
       >
     </b-form-group>
     <b-form-group>
-      <label>{{language.lang.declarationType2}}
+      <label>{{language.lang.declarationType2}}</label>
       <b-form-select
         v-model="declaration.declarationType2"
         :options="declarationType2List"

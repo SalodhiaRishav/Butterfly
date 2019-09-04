@@ -1,20 +1,22 @@
 <template>
-<div class="row">
-    <div>
-        <!-- code for topnav -->
-    </div>    
-   <div> 
-    <!-- code for side nav -->
-   </div>
-   <div>
-       <!-- code for information box and graphs !-->
-   </div>
+<div>
+    <b-row >
+        <b-col>
+            <appNavigationbar></appNavigationbar>
+        </b-col>
+    </b-row>    
+        <appSideBar></appSideBar> 
 </div>
 
 </template>
 <script>
+import SideBar from "./SideBar";
+import Navigationbar from "./Navigationbar";
 export default {
-    
+    components:{
+        appSideBar:SideBar,
+        appNavigationbar:Navigationbar
+    }
 }
 </script>
 <style scoped>

@@ -129,7 +129,17 @@
 
                 foreach (var @case in cases)
                 {
-                    caseDtos.Add(this.GetCaseById(@case.Id));
+                    CaseDto caseDto = new CaseDto();
+                    caseDto.CaseId = @case.CaseId;
+                    caseDto.Id = @case.Id;
+                    caseDto.ModifiedOn = @case.ModifiedOn;
+                    caseDto.CreatedOn = @case.CreatedOn;
+                    caseDto.Client = ClientBusinessLogic.GetClientByCaseId(@case.Id);
+                    caseDto.CaseInformation = CaseInformationBusinessLogic.GetCaseInformationByCaseId(@case.Id);
+                    caseDto.CaseStatus = CaseStatusBusinessLogic.GetCaseStatusByCaseId(@case.Id);
+                    caseDto.Notes = NotesBusinessLogic.GetNotesByCaseId(@case.Id);
+                    caseDto.References = CaseReferenceBusinessLogic.GetCaseReferencesByCaseId(@case.Id);
+                    caseDtos.Add(caseDto);
                 }
                 return caseDtos;
 
