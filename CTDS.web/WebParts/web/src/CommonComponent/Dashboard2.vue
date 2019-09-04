@@ -1,5 +1,13 @@
 <template>
 <div>
+    <b-row >
+        <b-col>
+            <appNavigationbar></appNavigationbar>
+        </b-col>
+    </b-row>    
+        <appSideBar></appSideBar> 
+</div>
+<div>
     <div >
         <!-- code for topnav -->
         <p> top nav </p>
@@ -22,8 +30,13 @@
 
 </template>
 <script>
+import SideBar from "./SideBar";
+import Navigationbar from "./Navigationbar";
 export default {
-    
+    components:{
+        appSideBar:SideBar,
+        appNavigationbar:Navigationbar
+    }
 }
 </script>
 <style scoped>
