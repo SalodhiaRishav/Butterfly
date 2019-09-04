@@ -8,6 +8,7 @@ import DeclarationDashBoard from "./../declaration/DeclarationDashBoard.vue";
 import EditDeclaration from "./../declaration/EditDeclaration.vue";
 import Login from "./../commonComponent/Login.vue";
 import Unauthorize from './../commonComponent/Unauthorize.vue';
+import Dashboard2 from './../commonComponent/Dashboard2.vue'
 
 Vue.use(Router);
 
@@ -26,6 +27,11 @@ const router = new Router({
           next();
         }
       }
+    },
+    {
+      path:'/dash2',
+      name:"Dashboard2.0",
+      component: Dashboard2,
     },
     {
       path: "/declarationform",
