@@ -1,7 +1,4 @@
-﻿
-using CTDS.Common.Repository;
-
-namespace CTDS.Web
+﻿namespace CTDS.Web
 {
     using CTDS.Web.CaseManagement;
     using CTDS.CaseManagement.Application.Services;
@@ -21,6 +18,7 @@ namespace CTDS.Web
     using CTDS.Declarations.Application.Services;
     using CTDS.Declarations.Contracts.Interface;
     using CTDS.Common.Mapper;
+    using CTDS.Common.Repository;
 
     using Serilog;
     using Funq;

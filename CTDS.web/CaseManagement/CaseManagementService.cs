@@ -14,7 +14,7 @@
     using ServiceStack.ServiceInterface;
     using Serilog;
 
-    [AuthFilter(RoleName = "User")]
+    //[AuthFilter(RoleName = "User")]
     public class CaseManagementService : Service
     {
         private readonly ICaseBusinessLogic CaseBusinessLogic;
@@ -130,6 +130,16 @@
                 operationResponse.OnException(e.Message);
                 return operationResponse;
             }
+        }
+
+        public int Get(GetCaseCount request)
+        {
+            return CaseBusinessLogic.GetCaseCount();
+        }
+
+        public Dictionary<string,int> Get(GetFilteredCaseCount request)
+        {
+            return CaseBusinessLogic.GetFilteredCaseCount();
         }
 
         public OperationResponse<List<CaseDto>> Get(GetAllCases request)
