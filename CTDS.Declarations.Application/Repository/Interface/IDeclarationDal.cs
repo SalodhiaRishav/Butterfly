@@ -13,5 +13,8 @@
         bool EditDeclaration(DeclarationDto declarationDto);
         void AddReference(ReferenceDto reference);
         IEnumerable<ReferenceDto> GetReferenceData(Guid id);
+        int GetCount();
+        int GetCountForLastSevenDays();
+        bool SendToCustom(DeclarationDto declaration);
     }
 }

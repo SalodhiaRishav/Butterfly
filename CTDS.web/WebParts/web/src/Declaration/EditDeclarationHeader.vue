@@ -40,6 +40,10 @@
             <font-awesome-icon icon="save" @click="onSave" />
           </div>
           <br />
+          <div style="float : right; cursor:pointer;">
+            <font-awesome-icon icon="paper-plane" @click="sendToCustom" />
+          </div>
+          <br />
           <br />
           <div style="float : right; cursor:pointer;">
             <font-awesome-icon icon="bug" v-b-modal.error-modal v-show="isError" />
@@ -94,6 +98,30 @@ export default {
             this.isError = false;
             this.alertVariant = "success";
             this.alertMessage = "declaration saved!";
+            this.dismissCountDown = 2;
+          } else {
+            console.log("error :", response.data.error);
+            this.errorList = response.data.error;
+            this.isError = true;
+          }
+          console.log(response.data.data);
+        });
+    },
+    sendToCustom() {
+      const url = "/sendtocustom";
+      httpClient
+        .post(url, {
+          declaration: this.declaration,
+          referenceData: this.referenceData.reference
+        })
+        .then(response => {
+          if (response.data === "token refreshed") {
+            this.onSave();
+          }
+          if (response.data.success == true) {
+            this.isError = false;
+            this.alertVariant = "success";
+            this.alertMessage = "declaration send to custom!";
             this.dismissCountDown = 2;
           } else {
             console.log("error :", response.data.error);

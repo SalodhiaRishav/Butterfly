@@ -7,6 +7,7 @@
         public Guid DeclarationId { get; set; }
         public String ConsigneeName { get; set; }
         public String ConsigneeOrganisationNumber { get; set; }
+        public string Status { get; set; }
         public String ConsigneeAddress1 { get; set; }
         public String ConsigneeAddress2 { get; set; }
         public String ConsigneePostalCode { get; set; }

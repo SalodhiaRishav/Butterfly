@@ -53,13 +53,13 @@ export default {
   },
   methods: {
     loginUser() {
-      const resource = "/checkuser";
+      const url = "/checkuser";
       const loginData = {
         email: this.email,
         password: this.password
       };
       httpClient
-        .post(resource, loginData)
+        .post(url, loginData)
         .then(response => {
           if (response.data.success === true) {
             sessionStorage.setItem(

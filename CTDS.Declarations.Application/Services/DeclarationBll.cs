@@ -87,5 +87,80 @@
                 throw;
             }
         }
+        public int GetCount()
+        {
+            try
+            {
+                return DeclarationDal.GetCount();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int GetCountForLastSevenDays()
+        {
+            try
+            {
+                return DeclarationDal.GetCountForLastSevenDays();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public bool SendToCustom(DeclarationDto declaration)
+        {
+            try
+            {
+                if(declaration.MessageName == "FU" && declaration.Amount != "")
+                {
+                    declaration.Status = "Cleared";
+                }
+                else if(declaration.Amount == "")
+                {
+                    declaration.Status = "Rejected";
+                }
+                else
+                {
+                    declaration.Status = "Processing";
+                }
+                return DeclarationDal.SendToCustom(declaration);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public StatusDto GetStatusCount()
+        {
+            try
+            {
+                var declarations = DeclarationDal.GetAllDeclarations();
+                var statusDto = new StatusDto();
+                foreach(var declaration in declarations)
+                {
+                    if(declaration.Status == "Rejected")
+                    {
+                        statusDto.Rejected++;
+                    }
+                    else if(declaration.Status == "Cleared")
+                    {
+                        statusDto.Cleared++;
+                    }
+                    else
+                    {
+                        statusDto.Processing++;
+                    }
+                }
+                return statusDto;
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
