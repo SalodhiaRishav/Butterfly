@@ -251,6 +251,22 @@
                 return operationResponse;
             }
         }
+        public OperationResponse<int> GET(GetCaseCountInLastSevenDays req)
+        {
+            OperationResponse<int> response = new OperationResponse<int>();
+            try
+            {
+                var data = CaseBusinessLogic.GetCountOfSevenDays();
+                response.OnSuccess(data, "Success");
+                return response;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message + " " + e.StackTrace);
+                response.OnException("Req Failed at server side");
+                return response;
+            }
+        }
 
     }
 }

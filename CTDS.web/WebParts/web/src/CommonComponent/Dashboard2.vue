@@ -128,10 +128,10 @@ export default {
       httpClient
         .get(url)
         .then(response => {
-          if (response.data) {
-            this.caseCount = response.data;
+          if (response.data.success === true) {
+            this.caseCount = response.data.data;
           } else {
-            console.log(response.data);
+            console.log(response.data.message);
           }
         })
         .catch(error => console.log(error));

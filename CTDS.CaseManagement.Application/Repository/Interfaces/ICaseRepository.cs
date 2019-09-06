@@ -6,7 +6,8 @@
     public interface ICaseRepository:IRepository<Case>
     {
         int FindCaseCount();
-
+        int FindCasesInLastSevenDays();
         Dictionary<string,int> FindFilteredCaseCount();
+        
     }
 }

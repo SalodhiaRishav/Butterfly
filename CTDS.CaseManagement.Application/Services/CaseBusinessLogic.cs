@@ -189,5 +189,16 @@
                 throw exception;
             }
         }
+        public int GetCountOfSevenDays()
+        {
+            try
+            {
+                return CaseRepository.FindCasesInLastSevenDays();
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -59,6 +59,18 @@
                 throw exception;
             }
         }
+        public int FindCasesInLastSevenDays()
+        {
+            DateTime date = DateTime.Now.AddDays(-7);
+            try
+            {
+                return CTDSContext.Case.Where(c => c.CreatedOn >= date).Count();
+            }
+            catch(Exception e)
+            {
+                throw;
+            }
+        }
 
     }
 }
