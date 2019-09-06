@@ -138,7 +138,14 @@
             try
             {
                 int data = CaseBusinessLogic.GetCaseCount();
-                response.OnSuccess(data, "Fetched successfully");
+                if(data == 0)
+                {
+                    response.OnSuccess(data, " No Cases ");
+                }
+                else
+                {
+                    response.OnSuccess(data, "Fetched successfully");
+                }
                 return response;
             }
             catch(Exception e)
@@ -154,8 +161,15 @@
             OperationResponse<Dictionary<string, int>> response = new OperationResponse<Dictionary<string, int>>();
             try
             {
-                Dictionary<string, int> data = CaseBusinessLogic.GetFilteredCaseCount(); ;
-                response.OnSuccess(data, "Fetched successfully");
+                Dictionary<string, int> data = CaseBusinessLogic.GetFilteredCaseCount();
+                if(data == null)
+                {
+                    response.OnSuccess(data, " No cases ");
+                }
+                else
+                {
+                    response.OnSuccess(data, "Fetched successfully");
+                }
                 return response;
             }
             catch(Exception e)
