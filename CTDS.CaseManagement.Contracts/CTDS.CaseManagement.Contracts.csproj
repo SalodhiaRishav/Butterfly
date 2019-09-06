@@ -97,6 +97,7 @@
     <Compile Include="EndPoints\GetAllCases.cs" />
     <Compile Include="EndPoints\GetCaseById.cs" />
     <Compile Include="EndPoints\GetCaseCount.cs" />
+    <Compile Include="EndPoints\GetCaseCountInLastSevenDays.cs" />
     <Compile Include="EndPoints\GetFilteredCaseCount.cs" />
     <Compile Include="EndPoints\GetPriorityTypes.cs" />
     <Compile Include="EndPoints\GetCaseReferenceTypes.cs" />

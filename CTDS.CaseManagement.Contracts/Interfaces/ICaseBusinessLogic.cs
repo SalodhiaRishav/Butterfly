@@ -17,5 +17,6 @@
         int GetCaseCount();
 
         Dictionary<string,int> GetFilteredCaseCount();
+        int GetCountOfSevenDays();
     }
 }

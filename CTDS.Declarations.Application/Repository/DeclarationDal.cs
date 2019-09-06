@@ -157,7 +157,7 @@
             {
                 using(var context = new CTDSContext())
                 {
-                    count = context.Declaration.Where(x => x.CreatedOn > date).Count();
+                    count = context.Declaration.Where(x => x.CreatedOn >= date).Count();
                 }
                 return count;
             }
