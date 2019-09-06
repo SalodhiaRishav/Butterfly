@@ -14,7 +14,7 @@
     using ServiceStack.ServiceInterface;
     using Serilog;
 
-    //[AuthFilter(RoleName = "User")]
+    [AuthFilter(RoleName = "User")]
     public class CaseManagementService : Service
     {
         private readonly ICaseBusinessLogic CaseBusinessLogic;
@@ -77,7 +77,7 @@
            
             try
             {
-                CaseDto caseDto = this.CaseBusinessLogic.AddNewCase(client, caseInformation, notes, caseStatus, references);
+                CaseDto caseDto = CaseBusinessLogic.AddNewCase(client, caseInformation, notes, caseStatus, references);
                 operationResponse.OnSuccess(caseDto, "Added successfully");
                 return operationResponse;
             }
@@ -94,7 +94,7 @@
             OperationResponse<CaseDto> operationResponse = new OperationResponse<CaseDto>();
             try
             {
-                CaseDto caseDto = this.CaseBusinessLogic.GetCaseById(request.CaseId);
+                CaseDto caseDto = CaseBusinessLogic.GetCaseById(request.CaseId);
                 if (caseDto != null)
                 {
                     operationResponse.OnSuccess(caseDto, "Fetched successfully");
@@ -120,7 +120,7 @@
             OperationResponse<CaseDto> operationResponse = new OperationResponse<CaseDto>();
             try
             {
-                this.CaseBusinessLogic.DeleteCaseById(request.CaseId);
+                CaseBusinessLogic.DeleteCaseById(request.CaseId);
                 operationResponse.OnSuccess(null, "Deleted successfully");
                 return operationResponse;
             }
@@ -132,14 +132,39 @@
             }
         }
 
-        public int Get(GetCaseCount request)
+        public OperationResponse<int> Get(GetCaseCount request)
         {
-            return CaseBusinessLogic.GetCaseCount();
+            OperationResponse<int> response = new OperationResponse<int>();
+            try
+            {
+                int data = CaseBusinessLogic.GetCaseCount();
+                response.OnSuccess(data, "Fetched successfully");
+                return response;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message + " " + e.StackTrace);
+                response.OnException("Server side failed");
+                return response;
+            }
         }
 
-        public Dictionary<string,int> Get(GetFilteredCaseCount request)
+        public OperationResponse<Dictionary<string, int>> Get(GetFilteredCaseCount request)
         {
-            return CaseBusinessLogic.GetFilteredCaseCount();
+            OperationResponse<Dictionary<string, int>> response = new OperationResponse<Dictionary<string, int>>();
+            try
+            {
+                Dictionary<string, int> data = CaseBusinessLogic.GetFilteredCaseCount(); ;
+                response.OnSuccess(data, "Fetched successfully");
+                return response;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message + " " + e.StackTrace);
+                response.OnException("Server side failed");
+                return response;
+            }
+           
         }
 
         public OperationResponse<List<CaseDto>> Get(GetAllCases request)
@@ -147,7 +172,7 @@
             OperationResponse<List<CaseDto>> operationResponse = new OperationResponse<List<CaseDto>>();
             try
             {
-                List<CaseDto> caseDtos=this.CaseBusinessLogic.GetAllCases();
+                List<CaseDto> caseDtos = CaseBusinessLogic.GetAllCases();
                 if(caseDtos==null)
                 {
                     operationResponse.OnError("No Case found", null);

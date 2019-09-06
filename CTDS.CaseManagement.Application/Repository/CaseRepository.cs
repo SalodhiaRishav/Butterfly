@@ -8,11 +8,6 @@
     using CTDS.Database.Context;
     using CTDS.Database.Models.CaseManagement;
 
-    public class FilterCaseCountResult
-    {
-       
-
-    }
     public class CaseRepository : BaseRepository<Case>, ICaseRepository
     {
 
