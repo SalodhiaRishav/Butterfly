@@ -116,12 +116,22 @@
             }
         }
 
+        public int GetCaseCount()
+        {
+            return CaseRepository.FindCaseCount();
+        }
+
+        public Dictionary<string,int> GetFilteredCaseCount()
+        {
+            return CaseRepository.FindFilteredCaseCount();
+        }
+
         public List<CaseDto> GetAllCases()
         {
             List<CaseDto> caseDtos = new List<CaseDto>();
             try
             {
-                List<Case> cases = this.CaseRepository.List;
+                List<Case> cases = CaseRepository.List;
                 if (cases.Count == 0)
                 {
                     return null;
