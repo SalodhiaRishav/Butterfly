@@ -133,5 +133,58 @@
                 throw;
             }
         }
+        public int GetCount()
+        {
+            int count = 0;
+            try
+            {
+                using(var context = new CTDSContext())
+               {
+                    count = context.Declaration.Count(); 
+               }
+                return count;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public int GetCountForLastSevenDays()
+        {
+            int count = 0;
+            DateTime date = DateTime.Now.AddDays(-7);
+            try
+            {
+                using(var context = new CTDSContext())
+                {
+                    count = context.Declaration.Where(x => x.CreatedOn > date).Count();
+                }
+                return count;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public bool SendToCustom(DeclarationDto declarationDto)
+        {
+            bool result = false;
+            try
+            {
+                using (var context = new CTDSContext())
+                {
+                    var declaration = Mapper.DtoToDeclaration(declarationDto);
+                    context.Declaration.AddOrUpdate(declaration);
+                    context.SaveChanges();
+                    result = true;
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
