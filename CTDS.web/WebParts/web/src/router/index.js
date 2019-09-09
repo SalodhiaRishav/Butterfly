@@ -32,6 +32,15 @@ const router = new Router({
       path:'/dash2',
       name:"Dashboard2.0",
       component: Dashboard2,
+      beforeEnter:(to, from, next)=>{
+        const user = sessionStorage.getItem("accessToken");
+        if(user == null){
+          next('/login')
+        }
+        else{
+          next();
+        }
+      }
     },
     {
       path: "/declarationform",

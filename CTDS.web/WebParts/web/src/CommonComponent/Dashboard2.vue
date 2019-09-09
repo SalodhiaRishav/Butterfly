@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="background-color:#eee; height:100vh">
-      <appNavigationbar></appNavigationbar>
+      <appNavigationbar :onDash2="onDash2"></appNavigationbar>
       <div class="row">
         <div class="col-sm-3">
           <appSideBar></appSideBar>
@@ -11,45 +11,39 @@
             <div
               v-b-tooltip.hover
               title="cases in last 7 days 2"
-              class="col-sm-3 box"
-              style="line-height:33px"
+              class="col-sm-3 box box-green"
             >
               <span
                 class="heading"
-                style="font-family:'Source Sans Pro', sans-serif; font-size:50px; font-weight:900"
               >{{caseCount}}</span>
               <br />
               <div>
                 <span
-                  class="count"
-                  style="font-family:'Source Sans Pro', sans-serif; font-size:30px; font-weight:500"
+                  class="counter"
                 >Cases</span>
               </div>
             </div>
             <div
               v-b-tooltip.hover
               :title="declarationTitle"
-              class="col-sm-3 box"
-              style="line-height:33px; margin-left:30px; background: linear-gradient(to right, rgb(52, 181, 229), rgb(46, 132, 224));"
+              class="col-sm-3 box box-blue margin-left-30"
             >
               <span
                 class="heading"
-                style="font-family:'Source Sans Pro', sans-serif; font-size:50px; font-weight:900"
               >{{declarationCount}}</span>
               <br />
               <div>
                 <span
                   class="count"
-                  style="font-family:'Source Sans Pro', sans-serif; font-size:30px; font-weight:500"
                 >Declaration</span>
               </div>
             </div>
           </div>
           <div class="row" style="margin-top:20px;">
-            <div class="col-sm-5 box" style="background:white">
+            <div class="col-sm-5 box box-white">
               <h1 style="color:black">Graph 1</h1>
             </div>
-            <div class="col-sm-5 box" style="background: white; margin-left:22px">
+            <div class="col-sm-5 box box-white margin-left-22">
               <h1 style="color:black">Graph 2</h1>
             </div>
           </div>
@@ -72,7 +66,8 @@ export default {
     return {
       declarationCount: 0,
       declarationTitle: "",
-      caseCount: 0
+      caseCount: 0,
+      onDash2:true,
     };
   },
   created() {

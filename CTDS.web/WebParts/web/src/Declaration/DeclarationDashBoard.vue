@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>
       <div class="font-mono">
         <b-table
           striped
@@ -16,13 +15,12 @@
         <b-col md="6" class="my-1">
           <b-pagination
             v-model="currentPage"
-            :total-rows="3"
+            :total-rows="totalRows"
             :per-page="perPage"
             class="my-0"
           ></b-pagination>
         </b-col>
       </b-row>
-    </div>
   </div>
 </template>
 
@@ -37,7 +35,8 @@ export default {
     return {
       declarations: [],
       currentPage: 1,
-      perPage: 5,
+      totalRows:0,
+      perPage: 3,
       fields: [
         {
           key: "ID",
@@ -113,7 +112,7 @@ export default {
                 Country: response.data.data[i].country,
                 Procedure: response.data.data[i].procedure,
                 Type: response.data.data[i].messageName,
-                Status: "Processing",
+                Status: response.data.data[i].status,
                 CustomResponse: " ",
                 User: " ",
                 TaxationDate: " ",
@@ -124,6 +123,7 @@ export default {
               declaration.push(obj);
             }
             this.declarations = declaration;
+            this.totalRows = this.declarations.length;
           } else {
             alert(response.data.message);
           }
