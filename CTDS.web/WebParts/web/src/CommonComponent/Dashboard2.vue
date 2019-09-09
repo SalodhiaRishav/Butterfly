@@ -10,7 +10,7 @@
           <div class="row">
             <div
               v-b-tooltip.hover
-              title="cases in last 7 days 2"
+              :title="caseTitle"
               class="col-sm-3 box"
               style="line-height:33px"
             >
@@ -62,6 +62,8 @@
 import SideBar from "./SideBar";
 import Navigationbar from "./Navigationbar";
 import httpClient from "./../utils/httpRequestWrapper";
+import { EROFS } from 'constants';
+import { constants } from 'crypto';
 
 export default {
   components: {
@@ -70,14 +72,16 @@ export default {
   },
   data() {
     return {
+      caseCount: 0,
       declarationCount: 0,
       declarationTitle: "",
-      caseCount: 0
+      caseTitle: ""
     };
   },
   created() {
     this.getDeclarationCount();
-    this.getDeclarationsinLastSevenDays();
+    this.getCasesInLastSevenDays();
+    this.getDeclarationsInLastSevenDays();
     this.getStatusCount();
     this.getCaseCount();
   },
@@ -97,14 +101,34 @@ export default {
           console.log(error);
         });
     },
-    getDeclarationsinLastSevenDays() {
+    getCasesInLastSevenDays()
+    {
+        const url = "/casesinsevendays";
+        httpClient
+        .get(url)
+        .then(response => {
+            if(response.data.success === true)
+            {
+                this.caseTitle = `${response.data.data} Cases Created in Last Seven Days`;
+            }
+            else
+            {
+                console.log(response.data.message);
+            }
+        })
+        .catch(error => console.log(error));
+    },
+    getDeclarationsInLastSevenDays() {
       const url = "/declarationsinsevendays";
       httpClient
         .get(url)
         .then(response => {
-          if (response.data.success === true) {
-            this.declarationTitle = `Declarations Created in Last seven days ${response.data.data}`;
-          } else {
+          if (response.data.success === true)
+          {
+             this.declarationTitle = `${response.data.data} Declarations Created in Last seven days `;
+          }
+          else
+          {
             console.log(response.data.message);
           }
         })
