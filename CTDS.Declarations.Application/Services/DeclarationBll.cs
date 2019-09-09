@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
 
-    using CTDS.Declarations.Application.Repository;
     using CTDS.Declarations.Contracts.DeclarationDTO;
     using CTDS.Declarations.Contracts.Interface;
     using CTDS.Declarations.Application.Repository.Interface;

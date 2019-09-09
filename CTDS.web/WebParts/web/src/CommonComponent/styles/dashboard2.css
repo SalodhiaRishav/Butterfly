@@ -1,17 +1,37 @@
 .box{
     background: white;
-    color:white;
-    background: linear-gradient(to right, rgb(102, 229, 181), rgb(41, 224, 105));
+    color:white;  
     padding: 37px 8px 37px 19px;
     border-radius: .375rem;
     border: none;
-    font-family: 'Roboto';
     margin-top:15px;
     box-shadow: 0 2px 3px 0 rgba(52,56,85,.25);
+    line-height:33px;
+}
+.box-green{
+    background: linear-gradient(to right, rgb(102, 229, 181), rgb(41, 224, 105));
+}
+.box-blue{
+    background: linear-gradient(to right, rgb(52, 181, 229), rgb(46, 132, 224));
+}
+.box-white{
+    background:white;
+}
+.margin-left-30{
+    margin-left:30px;
+}
+.margin-left-22{
+    margin-left:22px;
 }
 .heading{
     font-size:30px;
+    font-family:'Source Sans Pro', sans-serif; 
+    font-size:50px; 
+    font-weight:900;
 }
-.count{
+.counter{
     font-size:49px;
+    font-family:'Source Sans Pro', sans-serif; 
+    font-size:30px; 
+    font-weight:500;
 }

@@ -28,7 +28,6 @@ export default function responseInteceptorSetup() {
 
 const errorHandler = error => {
   if (401 === error.response.status) {
-    alert("Unauthorized access,redirecting to login");
     sessionStorage.removeItem("accessToken");
     sessionStorage.removeItem("refreshToken");
     router.push("/unauthorize");

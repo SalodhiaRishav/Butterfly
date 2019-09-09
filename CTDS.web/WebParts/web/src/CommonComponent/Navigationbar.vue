@@ -5,12 +5,12 @@
         <router-link to="/home" active-class="active" tag="b-nav-item"
           >{{language.lang.home}}</router-link
         >
-        <b-nav-item-dropdown :text="language.lang.caseManagement" right>
+        <b-nav-item-dropdown :text="language.lang.caseManagement" v-show="!onDash2" right>
           <router-link to="/case" active-class="active" tag="b-dropdown-item"
             >{{language.lang.createNewCase}}</router-link
           >
         </b-nav-item-dropdown>
-        <b-nav-item-dropdown :text="language.lang.declaration" right>
+        <b-nav-item-dropdown :text="language.lang.declaration" v-show="!onDash2" right>
           <router-link
             to="/declarationform"
             active-class="active"
@@ -19,10 +19,9 @@
           >
         </b-nav-item-dropdown>
       </b-navbar-nav>
-     
       <div class="row">
       <div class="col-sm-7">
-       <b-form-select @change="changeLanguage()" v-model="selected" :options="languages"></b-form-select>
+       <b-form-select style="background-color: #6a54a6; color: #a89bcb;" @change="changeLanguage()" v-model="selected" :options="languages"></b-form-select>
       </div>
       <div class="col-sm-5">
       <button class="btn-style" style="padding-top:7px" v-on:click="logout">
@@ -40,9 +39,9 @@ import allLanguages from './../utils/languageSwitch';
 import caseManagementLabels from "./../caseManagement/utils/caseManagementLabels";
 
 export default {
-  // props:{
-  //   language: Object,
-  // },
+  props:{
+    onDash2: Boolean,
+  },
   computed:{
     language:function(){
         return {lang:allLanguages.lang[this.selected].form};
