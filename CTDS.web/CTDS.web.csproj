@@ -168,8 +168,10 @@
     <Content Include="WebParts\web\src\caseManagement\utils\caseManagementLabel.en.js" />
     <Content Include="WebParts\web\src\caseManagement\utils\caseManagementLabel.sw.js" />
     <Content Include="WebParts\web\src\caseManagement\utils\caseManagementLabels.js" />
+    <Content Include="WebParts\web\src\commonComponent\styles\barGraphStyle.css" />
     <Content Include="WebParts\web\src\commonComponent\styles\dashboard2.css" />
     <Content Include="WebParts\web\src\commonComponent\styles\dashboardStyle.css" />
+    <Content Include="WebParts\web\src\commonComponent\styles\groupedBarGraphStyle.css" />
     <Content Include="WebParts\web\src\commonComponent\styles\loginStyle.css" />
     <Content Include="WebParts\web\src\commonComponent\styles\navbarStyle.css" />
     <Content Include="WebParts\web\src\commonComponent\styles\sideBarStyle.css" />
@@ -268,6 +270,12 @@
     <Content Include="WebParts\web\src\commonComponent\SideBar.vue" />
     <Content Include="WebParts\web\src\commonComponent\SideBarLink.vue" />
     <Content Include="WebParts\web\src\commonComponent\Unauthorize.vue" />
+    <Content Include="WebParts\web\src\commonComponent\BarChart.vue" />
+    <Content Include="WebParts\web\src\commonComponent\BarChecker.vue" />
+    <Content Include="WebParts\web\src\commonComponent\BarGraph.vue" />
+    <Content Include="WebParts\web\src\commonComponent\CaseBarChart.vue" />
+    <Content Include="WebParts\web\src\commonComponent\GroupedBarGraph.vue" />
+    <Content Include="WebParts\web\src\commonComponent\GroupedBarGraphChecker.vue" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="WebParts\web\dist\" />
