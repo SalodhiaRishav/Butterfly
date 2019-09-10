@@ -24,9 +24,10 @@
     <b-row>
       <b-col md="6" class="my-1">
         <b-pagination
-          v-model="currentPage"
-          :total-rows="totalRows"
+         v-model="currentPage"
+         :total-rows="totalRows"
           :per-page="perPage"
+          @change="getNewData"
           class="my-0"
         ></b-pagination>
       </b-col>
@@ -45,7 +46,7 @@ export default {
     appCasePriorityDropDown: CasePriorityDropDown
   },
   mounted() {
-    this.getAllCases();
+    this.getAllCases(1);
   },
   data() {
     return {
@@ -91,6 +92,10 @@ export default {
     };
   },
   methods: {
+    getNewData(val){
+      this.currentPage = parseInt(val);
+      this.getAllCases(val);
+    },
     convertDate(someDate) {
       return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
     },
@@ -104,13 +109,14 @@ export default {
       const url = `/case/${caseToEdit.id}`;
       this.$router.push(url);
     },
-    getAllCases: function() {
-      const resource = "/casemanagement";
+    getAllCases: function(val) {
+      const url = "/casemanagement";
+      const index = parseInt(val);
       httpClient
-        .get(resource)
+        .get(url,index)
         .then(response => {
           if (response.data === "token refreshed") {
-            this.getAllCases();
+            this.getAllCases(index);
             return;
           }
           if (response.data.success === true) {
@@ -144,7 +150,8 @@ export default {
               openCase.push(obj);
             }
             this.openCases = openCase;
-            this.totalRows = this.openCases.length;
+            if(this.openCases.length!=0)
+              this.totalRows = this.currentPage*this.perPage + 1;
           }
         })
         .catch(error => {

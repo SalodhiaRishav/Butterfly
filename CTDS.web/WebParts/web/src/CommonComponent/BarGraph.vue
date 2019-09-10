@@ -1,13 +1,14 @@
 <template>
   <svg :width="svgWidth" :height="svgHeight"> 
     <text :x="titlePositionX" :y="titlePositionY" :fill="titleColor" transform="translate(100,0)" font-size="24px">{{chartTitle}}</text>
-    <g transform = "translate(100,100)">
+    <g v-if="flag" transform = "translate(100,100)">
     </g>
   </svg>
 </template>
 
 <script>
 import * as d3 from 'd3';
+
 export default {
     props:{
         svgHeight : {
@@ -28,7 +29,6 @@ export default {
         },
         chartData : {
             type:Array,
-            default:[]
         },
         yAxisHeading : {
             type:String,
@@ -56,18 +56,29 @@ export default {
       xAxisHeadingFontColor:"Black",
       yAxisHeadingFontSize:16,
       yAxisHeadingFontColor:"Black",
+      flag:false,
+      yAxisScale:0,
     };
   },
   mounted() {
+    this.flag=true;
      this.createBarGraph(this.chartData);
       },
+ watch:{
+    chartData:{
+      handler(val){
+        this.flag=true;
+        this.createBarGraph(val);
+      },
+       deep:true,
+    },  
+  },
   methods: {
-
    createScales(data){
        const xScale = d3.scaleBand().range([0, this.width]).padding(0.6);
        const yScale = d3.scaleLinear().range([this.height, 0]);
        xScale.domain(data.map(function(d) { return d.label; }));
-       yScale.domain([0, 100]);
+       yScale.domain([0, this.yAxisScale]);
        return {xScale:xScale,yScale:yScale}
    },
    createXAxis(xScale,xAxisHeading)
@@ -97,7 +108,7 @@ export default {
          .call(d3.axisLeft(yScale).tickFormat(function(d){
              return  d;
          })
-         .ticks(10))
+         .ticks(this.yAxisScale))
          .append("text")
          .attr("transform", "rotate(-90)")
          .attr("y", 6)
@@ -121,6 +132,8 @@ export default {
          .attr("height",function(d){return (height - scales.yScale(d.value));} );
    },
    createBarGraph(data){
+     var valueArray = data.map(x => {return x.value});
+     this.yAxisScale = d3.max(valueArray) + 2;
       const scales=this.createScales(data);
       this.createXAxis(scales.xScale,this.xAxisHeading);
       this.createYAxis(scales.yScale,this.yAxisHeading);

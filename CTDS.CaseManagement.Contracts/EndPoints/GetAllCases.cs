@@ -5,5 +5,6 @@
     [Route("/casemanagement", "GET")]
     public class GetAllCases
     {
+        public int data { get; set; }
     }
 }
