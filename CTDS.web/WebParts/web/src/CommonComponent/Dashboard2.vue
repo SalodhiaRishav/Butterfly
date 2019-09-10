@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="background-color:#eee; height:100vh">
+    <div style="background-color:#eee;">
       <appNavigationbar :onDash2="onDash2"></appNavigationbar>
       <div class="row">
         <div class="col-sm-3">
@@ -41,12 +41,12 @@
             </div>
           </div>
           <div class="row" style="margin-top:20px;">
-            <div class="col-sm-5 box box-white">
-              <h1 style="color:black">Graph 1</h1>
+            <div class="col-sm-9 box box-white">
+              <appBarGraph style="color:black" chartTitle="Declarations vs Status" xAxisHeading="Status" yAxisHeading="No Of Declarations" :chartData="chartData"></appBarGraph>
             </div>
-            <div class="col-sm-5 box box-white margin-left-22">
+            <!-- <div class="col-sm-5 box box-white margin-left-22">
               <h1 style="color:black">Graph 2</h1>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -57,20 +57,38 @@
 import SideBar from "./SideBar";
 import Navigationbar from "./Navigationbar";
 import httpClient from "./../utils/httpRequestWrapper";
-import { EROFS } from 'constants';
-import { constants } from 'crypto';
+import BarGraph from "./BarGraph";
 
 export default {
   components: {
     appSideBar: SideBar,
-    appNavigationbar: Navigationbar
+    appNavigationbar: Navigationbar,
+     appBarGraph:BarGraph
   },
   data() {
     return {
       caseCount: 0,
       declarationCount: 0,
       declarationTitle: "",
-      caseTitle: ""
+      caseCount: 0,
+      onDash2:true,
+      chartData:[    
+                {
+                    "label": "Processing",
+                    "value": 0,
+                    "barColor":"blue"
+                },
+                {
+                    "label": "Cleared",
+                    "value": 0,
+                    "barColor":"green"
+                },
+                {
+                    "label": "Rejected",
+                    "value": 0,
+                    "barColor":"red"
+                },
+            ]
     };
   },
   created() {
@@ -135,7 +153,11 @@ export default {
         .get(url)
         .then(response => {
           if (response.data.success === true) {
-            console.log(response.data.data);
+            // console.log(this.chartData);
+            this.chartData[0].value=response.data.data.processing;
+            this.chartData[1].value=response.data.data.cleared;
+            this.chartData[2].value=response.data.data.rejected;
+            console.log(this.chartData);
           } else {
             console.log(response.data.message);
           }

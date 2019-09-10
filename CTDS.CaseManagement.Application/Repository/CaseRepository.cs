@@ -71,6 +71,18 @@
                 throw;
             }
         }
+        public List<Case> GetCases(int index)
+        {
+            try
+            {
+                int maxRows = 3;
+                return CTDSContext.Case.OrderBy(x => x.CaseId).Skip((index - 1) * maxRows).Take(3).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
     }
 }

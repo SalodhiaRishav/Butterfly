@@ -2,16 +2,23 @@ import axios from "axios";
 
 export default {
   http: axios,
-  get(resource) {
-    return axios.get(resource);
+  get(url,param) {
+    if(arguments.length === 1)
+      return axios.get(url);
+    else{
+        return axios.get(url, {
+          params: {
+            data : param
+        }})
+    }
+  }, 
+  post(url, payload) {
+    return axios.post(url, payload);
   },
-  post(resource, payload) {
-    return axios.post(resource, payload);
+  put(url, payload) {
+    return axios.put(url, payload);
   },
-  put(resource, payload) {
-    return axios.put(resource, payload);
-  },
-  delete(resource, payload) {
-    return axios.delete(resource, payload);
+  delete(url, payload) {
+    return axios.delete(url, payload);
   }
 };

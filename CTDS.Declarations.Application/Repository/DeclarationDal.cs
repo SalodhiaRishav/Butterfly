@@ -59,12 +59,30 @@
                 throw;
             }
         }
-        public IEnumerable<DeclarationDto> GetAllDeclarations()
+        public IEnumerable<DeclarationDto> GetAllDeclarations(int index)
         {
             IEnumerable<DeclarationDto> declarationDtoList;
             try
             {
                 using(var context = new CTDSContext())
+                {
+                    int maxRows = 3;
+                    var declarationList = context.Declaration.OrderBy(x => x.DeclarationId).Skip((index - 1)*maxRows).Take(maxRows).ToList();
+                    declarationDtoList = Mapper.DeclarationListToDtoList(declarationList);
+                }
+                return declarationDtoList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public IEnumerable<DeclarationDto> GetAllDeclarations()
+        {
+            IEnumerable<DeclarationDto> declarationDtoList;
+            try
+            {
+                using (var context = new CTDSContext())
                 {
                     var declarationList = context.Declaration.ToList();
                     declarationDtoList = Mapper.DeclarationListToDtoList(declarationList);
@@ -76,6 +94,7 @@
                 throw;
             }
         }
+
 
         public bool EditDeclaration(DeclarationDto declarationDto)
         {

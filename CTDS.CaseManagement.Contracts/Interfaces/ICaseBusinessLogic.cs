@@ -11,7 +11,9 @@
         CaseDto AddNewCase(ClientDto clientDto, CaseInformationDto caseInformationDto, NotesDto notesDto, CaseStatusDto caseStatusDto, List<CaseReferenceDto> referencesDto);
         CaseDto GetCaseById(Guid caseId);
         void DeleteCaseById(Guid caseId);
-        List<CaseDto> GetAllCases();
+        //List<CaseDto> GetAllCases();
+        List<CaseDto> GetAllCases(int index);
+
         CaseDto EditCase(Guid caseId, ClientDto clientDto, CaseInformationDto caseInformationDto, NotesDto notesDto, CaseStatusDto caseStatusDto, List<CaseReferenceDto> caseReferenceDtos);
 
         int GetCaseCount();

@@ -17,6 +17,7 @@
             v-model="currentPage"
             :total-rows="totalRows"
             :per-page="perPage"
+            @change="getNewData"
             class="my-0"
           ></b-pagination>
         </b-col>
@@ -29,14 +30,14 @@ import httpClient from "./../utils/httpRequestWrapper";
 
 export default { 
   mounted() {
-    this.getAllDeclaration();
+    this.getAllDeclaration(1);
   },
   data() {
     return {
       declarations: [],
       currentPage: 1,
-      totalRows:0,
-      perPage: 3,
+      totalRows:1,
+      perPage:3,
       fields: [
         {
           key: "ID",
@@ -86,19 +87,24 @@ export default {
     };
   },
   methods: {
+    getNewData(val){
+      this.currentPage = parseInt(val);
+      this.getAllDeclaration(val);
+    },
     convertDate(date) {
       return new Date(date.match(/\d+/)[0] * 1).toString().substring(4, 16);
     },
     getDeclaration: function(row) {
       this.$router.push(`/editdeclaration/${row.BaseID}`);
     },
-    getAllDeclaration: function() {
+    getAllDeclaration: function(val) {
       const url = "/getalldeclaration";
+      const index = parseInt(val);
       httpClient
-        .get(url)
+        .get(url,index)
         .then(response => {
           if (response.data === "token refreshed") {
-            this.getAllDeclaration();
+            this.getAllDeclaration(index);
           }
           if (response.data.success === true) {
             let declaration = [];
@@ -123,7 +129,8 @@ export default {
               declaration.push(obj);
             }
             this.declarations = declaration;
-            this.totalRows = this.declarations.length;
+            if(this.declarations.length!=0)
+              this.totalRows = this.currentPage*this.perPage+1;
           } else {
             alert(response.data.message);
           }

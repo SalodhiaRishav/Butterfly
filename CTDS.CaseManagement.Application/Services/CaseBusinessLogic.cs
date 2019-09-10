@@ -126,17 +126,16 @@
             return CaseRepository.FindFilteredCaseCount();
         }
 
-        public List<CaseDto> GetAllCases()
+        public List<CaseDto> GetAllCases(int index)
         {
             List<CaseDto> caseDtos = new List<CaseDto>();
             try
             {
-                List<Case> cases = CaseRepository.List;
+                List<Case> cases = CaseRepository.GetCases(index);
                 if (cases.Count == 0)
                 {
                     return null;
                 }
-
                 foreach (var @case in cases)
                 {
                     CaseDto caseDto = new CaseDto();

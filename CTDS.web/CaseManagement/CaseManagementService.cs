@@ -186,7 +186,8 @@
             OperationResponse<List<CaseDto>> operationResponse = new OperationResponse<List<CaseDto>>();
             try
             {
-                List<CaseDto> caseDtos = CaseBusinessLogic.GetAllCases();
+
+                List<CaseDto> caseDtos = CaseBusinessLogic.GetAllCases(request.data);
                 if(caseDtos==null)
                 {
                     operationResponse.OnError("No Case found", null);
