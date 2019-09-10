@@ -12,7 +12,8 @@ import Dashboard2 from './../commonComponent/Dashboard2.vue';
 import CaseBarChart from './../commonComponent/CaseBarChart.vue';
 import BarGraph from './../commonComponent/BarGraph.vue';
 import BarChecker from './../commonComponent/BarChecker.vue';
-// import GroupedBarChart from './../commonComponent/GroupedBarChart.vue';
+import GroupedBarGraph from './../commonComponent/GroupedBarGraph.vue';
+import GroupedBarGraphChecker from './../commonComponent/GroupedBarGraphChecker.vue';
 
 
 Vue.use(Router);
@@ -160,6 +161,16 @@ const router = new Router({
       path:"/barchecker", //temporary route
       name:"BarChecker",
       component: BarChecker
+    },
+    {
+      path:"/groupbargraph", //temporary route
+      name:"Group Bar Graph",
+      component: GroupedBarGraph
+    },
+    {
+      path:"/groupedbargraphchecker", //temporary route
+      name:"Group Bar Graph Checker",
+      component: GroupedBarGraphChecker
     }
   ],
   mode: "history"
