@@ -24,8 +24,8 @@
     <b-row>
       <b-col md="6" class="my-1">
         <b-pagination
-         v-model="currentPage"
-         :total-rows="totalRows"
+          v-model="currentPage"
+          :total-rows="totalRows"
           :per-page="perPage"
           @change="getNewData"
           class="my-0"
@@ -92,7 +92,7 @@ export default {
     };
   },
   methods: {
-    getNewData(val){
+    getNewData(val) {
       this.currentPage = parseInt(val);
       this.getAllCases(val);
     },
@@ -113,7 +113,7 @@ export default {
       const url = "/casemanagement";
       const index = parseInt(val);
       httpClient
-        .get(url,index)
+        .get(url, index)
         .then(response => {
           if (response.data === "token refreshed") {
             this.getAllCases(index);
@@ -150,8 +150,8 @@ export default {
               openCase.push(obj);
             }
             this.openCases = openCase;
-            if(this.openCases.length!=0)
-              this.totalRows = this.currentPage*this.perPage + 1;
+            if (this.openCases.length != 0)
+              this.totalRows = this.currentPage * this.perPage + 1;
           }
         })
         .catch(error => {

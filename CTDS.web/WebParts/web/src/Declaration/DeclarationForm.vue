@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar @updateLanguage="lang => language=lang"></Navbar>
+    <Navbar @updateLanguage="lang => (language = lang)"></Navbar>
     <DeclarationHeader
       :declaration="declaration"
       :referenceData="referenceData"
@@ -8,29 +8,44 @@
     ></DeclarationHeader>
     <b-tabs card class="color-black bg-color-e6">
       <b-tab :title="language.lang.header" active>
-        <div class ="pd-top-10 pd-rt-0 pd-lf-0">
+        <div class="pd-top-10 pd-rt-0 pd-lf-0">
           <b-row>
             <b-col cols="3" class="pd-lf-27">
               <!-- Declaration type -->
-              <DeclarationType :declaration="declaration" :language="language"></DeclarationType>
+              <DeclarationType
+                :declaration="declaration"
+                :language="language"
+              ></DeclarationType>
             </b-col>
             <b-col cols="5" class="pd-lf-0">
               <!-- consignor-->
-              <Consignor :declaration="declaration" :language="language"></Consignor>
+              <Consignor
+                :declaration="declaration"
+                :language="language"
+              ></Consignor>
             </b-col>
             <b-col class="pd-lf-0 pd-rt-27">
               <!-- Consignee -->
-              <Consignee :declaration="declaration" :language="language"></Consignee>
+              <Consignee
+                :declaration="declaration"
+                :language="language"
+              ></Consignee>
             </b-col>
           </b-row>
           <b-row class="pd-top-14">
             <b-col cols="4" class="pd-lf-27">
               <!-- Declarant -->
-              <Declarant :declaration="declaration" :language="language"></Declarant>
+              <Declarant
+                :declaration="declaration"
+                :language="language"
+              ></Declarant>
             </b-col>
             <b-col cols="3" class="pd-lf-0">
               <!-- Delivery and transport -->
-              <Delivery :declaration="declaration" :language="language"></Delivery>
+              <Delivery
+                :declaration="declaration"
+                :language="language"
+              ></Delivery>
             </b-col>
             <b-col col="5" class="pd-lf-0 pd-rt-27">
               <!-- Value Details -->
@@ -58,7 +73,7 @@ import Declarant from "./Declarant";
 import Delivery from "./DeliveryTransport";
 import ValueDetails from "./ValueDetails";
 import Navbar from "./../commonComponent/Navigationbar";
-import allLanguages from './../utils/languageSwitch';
+import allLanguages from "./../utils/languageSwitch";
 
 export default {
   components: {
@@ -115,14 +130,14 @@ export default {
       referenceData: {
         reference: []
       },
-      language:{
-        lang:{}
-      },
+      language: {
+        lang: {}
+      }
     };
-  },
+  }
 };
 </script>
 
 <style>
-  @import url(./style/declarationStyle.css);
+@import url(./style/declarationStyle.css);
 </style>

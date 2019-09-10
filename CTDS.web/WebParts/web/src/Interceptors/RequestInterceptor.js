@@ -2,11 +2,11 @@ import httpClient from "./../utils/httpRequestWrapper";
 
 export default function requestInterceptorSetup() {
   httpClient.http.interceptors.request.use(
-    (oldConfig) => {
+    oldConfig => {
       let newConfig = applyToken(oldConfig);
       return newConfig;
     },
-    (error) => {
+    error => {
       return Promise.reject(error);
     }
   );

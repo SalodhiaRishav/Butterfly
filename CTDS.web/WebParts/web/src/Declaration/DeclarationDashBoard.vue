@@ -1,34 +1,34 @@
 <template>
   <div>
-      <div class="font-mono">
-        <b-table
-          striped
-          hover
-          :fields="fields"
-          :items="declarations"
-          :current-page="currentPage"
+    <div class="font-mono">
+      <b-table
+        striped
+        hover
+        :fields="fields"
+        :items="declarations"
+        :current-page="currentPage"
+        :per-page="perPage"
+        @row-clicked="getDeclaration"
+      ></b-table>
+    </div>
+    <b-row>
+      <b-col md="6" class="my-1">
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="totalRows"
           :per-page="perPage"
-          @row-clicked="getDeclaration"
-        ></b-table>
-      </div>
-      <b-row>
-        <b-col md="6" class="my-1">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="totalRows"
-            :per-page="perPage"
-            @change="getNewData"
-            class="my-0"
-          ></b-pagination>
-        </b-col>
-      </b-row>
+          @change="getNewData"
+          class="my-0"
+        ></b-pagination>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
 
-export default { 
+export default {
   mounted() {
     this.getAllDeclaration(1);
   },
@@ -36,8 +36,8 @@ export default {
     return {
       declarations: [],
       currentPage: 1,
-      totalRows:1,
-      perPage:3,
+      totalRows: 1,
+      perPage: 3,
       fields: [
         {
           key: "ID",
@@ -87,7 +87,7 @@ export default {
     };
   },
   methods: {
-    getNewData(val){
+    getNewData(val) {
       this.currentPage = parseInt(val);
       this.getAllDeclaration(val);
     },
@@ -101,7 +101,7 @@ export default {
       const url = "/getalldeclaration";
       const index = parseInt(val);
       httpClient
-        .get(url,index)
+        .get(url, index)
         .then(response => {
           if (response.data === "token refreshed") {
             this.getAllDeclaration(index);
@@ -129,8 +129,8 @@ export default {
               declaration.push(obj);
             }
             this.declarations = declaration;
-            if(this.declarations.length!=0)
-              this.totalRows = this.currentPage*this.perPage+1;
+            if (this.declarations.length != 0)
+              this.totalRows = this.currentPage * this.perPage + 1;
           } else {
             alert(response.data.message);
           }

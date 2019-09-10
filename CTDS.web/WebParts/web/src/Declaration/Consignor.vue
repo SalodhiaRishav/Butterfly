@@ -1,23 +1,23 @@
 <template>
   <div>
     <b-form class="pd-10 form-bg-color">
-      <p class="block-heading">{{language.lang.consignor}}</p>
+      <p class="block-heading">{{ language.lang.consignor }}</p>
       <b-form-group>
-        <label> {{language.lang.name}} </label>
+        <label> {{ language.lang.name }} </label>
         <b-form-input
           v-model="declaration.consignorName"
           required
         ></b-form-input>
       </b-form-group>
       <b-form-group>
-        <label> {{language.lang.address1}}</label>
+        <label> {{ language.lang.address1 }}</label>
         <b-form-input
           v-model="declaration.consignorAddress1"
           required
         ></b-form-input>
       </b-form-group>
-      <b-form-group >
-        <label>{{language.lang.address2}}</label>
+      <b-form-group>
+        <label>{{ language.lang.address2 }}</label>
         <b-form-input
           v-model="declaration.consignorAddress2"
           required
@@ -25,17 +25,17 @@
       </b-form-group>
       <b-row>
         <b-col>
-          {{language.lang.postalCode}}
+          {{ language.lang.postalCode }}
           <b-form-input
             v-model="declaration.consignorPostalCode"
           ></b-form-input>
         </b-col>
         <b-col>
-          {{language.lang.city}}
+          {{ language.lang.city }}
           <b-form-input v-model="declaration.consignorCity"></b-form-input>
         </b-col>
         <b-col>
-          {{language.lang.country}}
+          {{ language.lang.country }}
           <b-form-select
             v-model="declaration.consignorCountry"
             :options="countryList"
@@ -49,7 +49,7 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
-import allLanguages from './../utils/languageSwitch';
+import allLanguages from "./../utils/languageSwitch";
 
 export default {
   props: {
@@ -57,9 +57,9 @@ export default {
     language: Object
   },
   data() {
-    return{
-      countryList: [],
-    }
+    return {
+      countryList: []
+    };
   },
   mounted() {
     this.getCountries();

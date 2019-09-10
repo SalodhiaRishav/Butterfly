@@ -6,23 +6,23 @@
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">{{labels.caseId}}</div>
+          <div class="fieldName">{{ labels.caseId }}</div>
           <div class="fieldAnswer">{{ caseIdentifier }}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">{{labels.createdDate}}</div>
+          <div class="fieldName">{{ labels.createdDate }}</div>
           <div>{{ createdDate }}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">{{labels.priority}}</div>
+          <div class="fieldName">{{ labels.priority }}</div>
           <div>{{ priority }}</div>
         </div>
         <div class="field">
-          <div class="fieldName">{{labels.status}}</div>
+          <div class="fieldName">{{ labels.status }}</div>
           <div>{{ status }}</div>
         </div>
       </b-col>
@@ -38,7 +38,11 @@
           </li>
         </b-modal>
         <div style="float : right; cursor:pointer;">
-          <font-awesome-icon icon="bug" v-b-modal.error-modal v-show="isError" />
+          <font-awesome-icon
+            icon="bug"
+            v-b-modal.error-modal
+            v-show="isError"
+          />
         </div>
       </b-col>
     </b-row>
@@ -65,8 +69,8 @@ import httpClient from "./../utils/httpRequestWrapper";
 import Navbar from "./../commonComponent/Navigationbar";
 
 export default {
-    components: {
-      appNavbar: Navbar
+  components: {
+    appNavbar: Navbar
   },
   data() {
     return {
@@ -76,9 +80,9 @@ export default {
       alertVariant: "",
       alertMessage: "",
       createdDate: "",
-      isError:false, 
-      errorList: [],   
-      };
+      isError: false,
+      errorList: []
+    };
   },
   created() {
     this.resetCaseData();
@@ -152,8 +156,8 @@ export default {
             this.errorList = res.data.error;
           }
         })
-        .catch(error => {         
-            console.log(error);
+        .catch(error => {
+          console.log(error);
         });
     }
   },

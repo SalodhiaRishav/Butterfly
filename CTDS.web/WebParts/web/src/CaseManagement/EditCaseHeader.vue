@@ -6,23 +6,23 @@
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">{{labels.caseId}}</div>
+          <div class="fieldName">{{ labels.caseId }}</div>
           <div class="fieldAnswer">KGH-19-{{ caseId }}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">{{labels.createdDate}}</div>
+          <div class="fieldName">{{ labels.createdDate }}</div>
           <div>{{ createdDate }}</div>
         </div>
       </b-col>
       <b-col class="leftBorder">
         <div class="field">
-          <div class="fieldName">{{labels.priority}}</div>
+          <div class="fieldName">{{ labels.priority }}</div>
           <div>{{ priority }}</div>
         </div>
         <div class="field">
-          <div class="fieldName">{{labels.status}}</div>
+          <div class="fieldName">{{ labels.status }}</div>
           <div>{{ status }}</div>
         </div>
       </b-col>
@@ -38,16 +38,22 @@
           </li>
         </b-modal>
         <div style="float : right; cursor:pointer;">
-          <font-awesome-icon icon="bug" v-b-modal.error-modal v-show="isError" />
+          <font-awesome-icon
+            icon="bug"
+            v-b-modal.error-modal
+            v-show="isError"
+          />
         </div>
         <br />
         <br />
         <br />
-        <b-alert :variant="alertVariant"
-                 :show="dismissCountDown"
-                 @dismissed="dismissCountDown = 0"
-                 @dismiss-count-down="countDownChanged"
-                 dismissible>
+        <b-alert
+          :variant="alertVariant"
+          :show="dismissCountDown"
+          @dismissed="dismissCountDown = 0"
+          @dismiss-count-down="countDownChanged"
+          dismissible
+        >
           {{ alertMessage }}
         </b-alert>
       </b-col>
@@ -58,18 +64,18 @@
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
 
-  export default {
+export default {
   data() {
     return {
       dismissCountDown: 0,
       showDismissibleAlert: false,
       alertVariant: "",
       alertMessage: "",
-       isError:false, 
-      errorList: [],   
+      isError: false,
+      errorList: []
     };
   },
-    methods: {
+  methods: {
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },
@@ -100,7 +106,7 @@ import httpClient from "./../utils/httpRequestWrapper";
             this.alertMessage = res.data.message;
             this.alertVariant = "success";
             this.showDismissibleAlert = true;
-            this.isError = false
+            this.isError = false;
           } else {
             this.isError = true;
             this.errorList = res.data.error;
@@ -133,7 +139,7 @@ import httpClient from "./../utils/httpRequestWrapper";
     },
     labels: function() {
       return this.$store.getters.caseManagementLabels;
-    },
+    }
   }
 };
 </script>

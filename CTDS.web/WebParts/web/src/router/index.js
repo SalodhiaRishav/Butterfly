@@ -7,14 +7,13 @@ import Dashboard from "./../commonComponent/Dashboard.vue";
 import DeclarationDashBoard from "./../declaration/DeclarationDashBoard.vue";
 import EditDeclaration from "./../declaration/EditDeclaration.vue";
 import Login from "./../commonComponent/Login.vue";
-import Unauthorize from './../commonComponent/Unauthorize.vue';
-import Dashboard2 from './../commonComponent/Dashboard2.vue';
-import CaseBarChart from './../commonComponent/CaseBarChart.vue';
-import BarGraph from './../commonComponent/BarGraph.vue';
-import BarChecker from './../commonComponent/BarChecker.vue';
-import GroupedBarGraph from './../commonComponent/GroupedBarGraph.vue';
-import GroupedBarGraphChecker from './../commonComponent/GroupedBarGraphChecker.vue';
-
+import Unauthorize from "./../commonComponent/Unauthorize.vue";
+import Dashboard2 from "./../commonComponent/Dashboard2.vue";
+import CaseBarChart from "./../commonComponent/CaseBarChart.vue";
+import BarGraph from "./../commonComponent/BarGraph.vue";
+import BarChecker from "./../commonComponent/BarChecker.vue";
+import GroupedBarGraph from "./../commonComponent/GroupedBarGraph.vue";
+import GroupedBarGraphChecker from "./../commonComponent/GroupedBarGraphChecker.vue";
 
 Vue.use(Router);
 
@@ -24,26 +23,24 @@ const router = new Router({
       path: "/login",
       name: "login",
       component: Login,
-      beforeEnter:(to, from, next)=>{
+      beforeEnter: (to, from, next) => {
         const user = sessionStorage.getItem("accessToken");
-        if(user != null){
-          next('/home');
-        }
-        else{
+        if (user != null) {
+          next("/home");
+        } else {
           next();
         }
       }
     },
     {
-      path:'/dash2',
-      name:"Dashboard2.0",
+      path: "/dash2",
+      name: "Dashboard2.0",
       component: Dashboard2,
-      beforeEnter:(to, from, next)=>{
+      beforeEnter: (to, from, next) => {
         const user = sessionStorage.getItem("accessToken");
-        if(user == null){
-          next('/login')
-        }
-        else{
+        if (user == null) {
+          next("/login");
+        } else {
           next();
         }
       }
@@ -52,12 +49,11 @@ const router = new Router({
       path: "/declarationform",
       name: "DeclarationForm",
       component: DeclarationForm,
-      beforeEnter:(to, from, next)=>{
+      beforeEnter: (to, from, next) => {
         const user = sessionStorage.getItem("accessToken");
-        if(user == null){
-          next('/login')
-        }
-        else{
+        if (user == null) {
+          next("/login");
+        } else {
           next();
         }
       }
@@ -66,12 +62,11 @@ const router = new Router({
       path: "/declarationdashboard",
       name: "DeclarationDashboard",
       component: DeclarationDashBoard,
-      beforeEnter:(to, from, next)=>{
+      beforeEnter: (to, from, next) => {
         const user = sessionStorage.getItem("accessToken");
-        if(user == null){
-          next('/login')
-        }
-        else{
+        if (user == null) {
+          next("/login");
+        } else {
           next();
         }
       }
@@ -80,12 +75,11 @@ const router = new Router({
       path: "/editdeclaration/:id",
       name: "EditDeclaration",
       component: EditDeclaration,
-      beforeEnter:(to, from, next)=>{
+      beforeEnter: (to, from, next) => {
         const user = sessionStorage.getItem("accessToken");
-        if(user == null){
-          next('/login')
-        }
-        else{
+        if (user == null) {
+          next("/login");
+        } else {
           next();
         }
       }
@@ -94,12 +88,11 @@ const router = new Router({
       path: "/case",
       name: "NewCase",
       component: AddNewCase,
-      beforeEnter:(to, from, next)=>{
+      beforeEnter: (to, from, next) => {
         const user = sessionStorage.getItem("accessToken");
-        if(user == null){
-          next('/login')
-        }
-        else{
+        if (user == null) {
+          next("/login");
+        } else {
           next();
         }
       }
@@ -108,12 +101,11 @@ const router = new Router({
       path: "/home",
       name: "Dashboard",
       component: Dashboard,
-      beforeEnter:(to, from, next)=>{
+      beforeEnter: (to, from, next) => {
         const user = sessionStorage.getItem("accessToken");
-        if(user == null){
-          next('/login')
-        }
-        else{
+        if (user == null) {
+          next("/login");
+        } else {
           next();
         }
       }
@@ -122,12 +114,11 @@ const router = new Router({
       path: "/case/:id",
       name: "EditCase",
       component: EditCase,
-      beforeEnter:(to, from, next)=>{
+      beforeEnter: (to, from, next) => {
         const user = sessionStorage.getItem("accessToken");
-        if(user == null){
-          next('/login')
-        }
-        else{
+        if (user == null) {
+          next("/login");
+        } else {
           next();
         }
       }
@@ -135,41 +126,41 @@ const router = new Router({
     {
       path: "/default.html",
       name: "Default",
-      component: Login,
+      component: Login
     },
     {
-      path:"/unauthorize",
-      name:"unauthorize",
+      path: "/unauthorize",
+      name: "unauthorize",
       component: Unauthorize
     },
     {
-      path:"/dashboard", //temporary route
-      name:"dashboard2.0",
+      path: "/dashboard", //temporary route
+      name: "dashboard2.0",
       component: Dashboard2
     },
     {
-      path:"/barchart", //temporary route
-      name:"barchart",
+      path: "/barchart", //temporary route
+      name: "barchart",
       component: CaseBarChart
     },
     {
-      path:"/bargraph", //temporary route
-      name:"BarGraph",
+      path: "/bargraph", //temporary route
+      name: "BarGraph",
       component: BarGraph
     },
     {
-      path:"/barchecker", //temporary route
-      name:"BarChecker",
+      path: "/barchecker", //temporary route
+      name: "BarChecker",
       component: BarChecker
     },
     {
-      path:"/groupbargraph", //temporary route
-      name:"Group Bar Graph",
+      path: "/groupbargraph", //temporary route
+      name: "Group Bar Graph",
       component: GroupedBarGraph
     },
     {
-      path:"/groupedbargraphchecker", //temporary route
-      name:"Group Bar Graph Checker",
+      path: "/groupedbargraphchecker", //temporary route
+      name: "Group Bar Graph Checker",
       component: GroupedBarGraphChecker
     }
   ],

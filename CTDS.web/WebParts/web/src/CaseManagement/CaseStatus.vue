@@ -39,7 +39,7 @@
 import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
-  props:["labels"],
+  props: ["labels"],
   mounted() {
     this.getCaseStatusTypes();
   },

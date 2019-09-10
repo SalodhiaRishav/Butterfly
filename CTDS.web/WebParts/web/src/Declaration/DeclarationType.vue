@@ -1,8 +1,8 @@
 <template>
   <b-form class="pd-10 form-bg-color">
-    <p class="block-heading">{{language.lang.declarationType}}</p>
+    <p class="block-heading">{{ language.lang.declarationType }}</p>
     <b-form-group>
-      <label>{{language.lang.messageName}}</label>
+      <label>{{ language.lang.messageName }}</label>
       <b-form-select
         v-model="declaration.messageName"
         :options="messageNameList"
@@ -10,7 +10,7 @@
       ></b-form-select>
     </b-form-group>
     <b-form-group>
-      <label>{{language.lang.declarationType1}}</label>
+      <label>{{ language.lang.declarationType1 }}</label>
       <b-form-select
         v-model="declaration.declarationType1"
         :options="declarationType1List"
@@ -19,7 +19,7 @@
       >
     </b-form-group>
     <b-form-group>
-      <label>{{language.lang.declarationType2}}</label>
+      <label>{{ language.lang.declarationType2 }}</label>
       <b-form-select
         v-model="declaration.declarationType2"
         :options="declarationType2List"
@@ -31,20 +31,20 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
-import allLanguages from './../utils/languageSwitch';
+import allLanguages from "./../utils/languageSwitch";
 
 export default {
   props: {
     declaration: Object,
-    language:Object,
+    language: Object
   },
-  data(){
+  data() {
     return {
-      messageNameList:[],
+      messageNameList: [],
       declarationType2List: [],
-      declarationType1List :[],
-      lan:allLanguages.lang.en.englishForm,
-    }
+      declarationType1List: [],
+      lan: allLanguages.lang.en.englishForm
+    };
   },
   // watch:{
   //   language: {
@@ -57,8 +57,8 @@ export default {
   //       }
   //       console.log(val.lang);
   //     },
-  //     deep:true, 
-  //   },  
+  //     deep:true,
+  //   },
   mounted() {
     this.getDeclarationType1();
     this.getDeclarationType2();
@@ -115,7 +115,7 @@ export default {
           }
         })
         .catch(error => console.log(error));
-    },
+    }
   }
 };
 </script>

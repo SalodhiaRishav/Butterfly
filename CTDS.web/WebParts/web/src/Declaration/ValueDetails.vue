@@ -1,26 +1,26 @@
 <template>
   <div>
     <b-form class="pd-10 form-bg-color">
-      <p class="block-heading">{{language.lang.valueDetails}}</p>
+      <p class="block-heading">{{ language.lang.valueDetails }}</p>
       <b-form-group>
-        <label>{{language.lang.freightOutwardNDK}} </label>
+        <label>{{ language.lang.freightOutwardNDK }} </label>
         <b-form-input v-model="declaration.freight" required></b-form-input>
       </b-form-group>
-      {{language.lang.totalInvoiceAmount}} <br />
+      {{ language.lang.totalInvoiceAmount }} <br />
       <b-row>
         <b-col>
-          {{language.lang.amount}}<br />
+          {{ language.lang.amount }}<br />
           <b-form-input v-model="declaration.amount" required></b-form-input>
         </b-col>
         <b-col>
-          {{language.lang.currency}} <br />
+          {{ language.lang.currency }} <br />
           <b-form-select
             v-model="declaration.currency"
             :options="dropDown"
           ></b-form-select>
         </b-col>
         <b-col>
-          {{language.lang.rate}} <br />
+          {{ language.lang.rate }} <br />
           <b-form-input
             v-model="declaration.rate"
             :options="dropDown"
@@ -30,7 +30,7 @@
       </b-row>
     </b-form>
     <div role="tablist" class="pd-10 bg-f2">
-      <p class="block-heading">{{language.lang.references}}</p>
+      <p class="block-heading">{{ language.lang.references }}</p>
       <b-table hover :items="referenceData.reference" :fields="fields">
         <template slot="#" slot-scope="data">
           <button @click="deleteReference(data.index)">Delete</button>
@@ -61,31 +61,31 @@
           {{&nbsp;}}
         </template>
       </b-table>
-      <b-button @click="addNewReference">{{language.lang.add}}</b-button>
+      <b-button @click="addNewReference">{{ language.lang.add }}</b-button>
     </div>
   </div>
 </template>
 
 <script>
-import allLanguages from './../utils/languageSwitch';
+import allLanguages from "./../utils/languageSwitch";
 
 export default {
   props: {
     declaration: Object,
     referenceData: Object,
-    language : Object
+    language: Object
   },
   data() {
     return {
       showReferenceForm: false,
-      dropDown:["1","2","3"],
+      dropDown: ["1", "2", "3"],
       references: [],
       referenceForm: {
         reference: "",
         invoiceDate: "",
         type: null
       },
-      fields: ["type","invoiceDate", "reference", "#"],
+      fields: ["type", "invoiceDate", "reference", "#"]
     };
   },
   computed: {
@@ -93,7 +93,7 @@ export default {
       return [{ text: "Select", value: null }, "1234", "2345", "34567"];
     }
   },
-  
+
   methods: {
     deleteReference(index) {
       this.references.splice(index, 1);

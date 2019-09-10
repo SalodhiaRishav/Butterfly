@@ -39,7 +39,11 @@
                   :options="identifierTypes"
                 ></b-form-radio-group>
               </b-form-group>
-              <b-form-group id="name" :label="labels.name" label-for="nameInput">
+              <b-form-group
+                id="name"
+                :label="labels.name"
+                label-for="nameInput"
+              >
                 <b-form-input
                   id="nameInput"
                   v-model="clientDetails.name"
@@ -68,7 +72,11 @@
                   required
                 ></b-form-input>
               </b-form-group>
-              <b-form-group id="city" :label="labels.city" label-for="cityInput">
+              <b-form-group
+                id="city"
+                :label="labels.city"
+                label-for="cityInput"
+              >
                 <b-form-input
                   id="cityInput"
                   v-model="clientDetails.city"
@@ -89,7 +97,11 @@
                 ></b-form-select>
               </b-form-group>
 
-              <b-form-group id="email" :label="labels.email" label-for="emailInput">
+              <b-form-group
+                id="email"
+                :label="labels.email"
+                label-for="emailInput"
+              >
                 <b-form-input
                   id="emailInput"
                   v-model="clientDetails.email"
@@ -108,7 +120,7 @@
 import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
-  props: ['labels'],
+  props: ["labels"],
   mounted() {
     this.getIdentiferTypes();
     this.getCountries();

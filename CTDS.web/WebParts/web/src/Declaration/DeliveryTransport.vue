@@ -1,11 +1,11 @@
 <template>
   <b-form class="pd-10 form-bg-color">
     <div>
-      <p class="block-heading">{{language.lang.deliveryAndTransport}}</p>
+      <p class="block-heading">{{ language.lang.deliveryAndTransport }}</p>
     </div>
     <b-row>
       <b-col>
-        {{language.lang.termsOfDelivery}}
+        {{ language.lang.termsOfDelivery }}
         <b-form-select
           v-model="declaration.termsOfDelivery"
           :options="TermsOfDelivery"
@@ -13,7 +13,7 @@
         ></b-form-select>
       </b-col>
       <b-col>
-        *{{language.lang.deliveryPlace}}
+        *{{ language.lang.deliveryPlace }}
         <b-form-input
           v-model="declaration.deliveryPlace"
           required
@@ -21,15 +21,15 @@
       </b-col>
     </b-row>
     <b-form-group>
-      {{language.lang.countryOfDispatch}}
+      {{ language.lang.countryOfDispatch }}
       <b-form-select
         v-model="declaration.countryOfDispatch"
         :options="countryList"
         required
       ></b-form-select>
     </b-form-group>
-    <b-form-group >
-      {{language.lang.nationalityOfTransportAtBorder}}(21)
+    <b-form-group>
+      {{ language.lang.nationalityOfTransportAtBorder }}(21)
       <b-form-select
         v-model="declaration.nationalityOfTransport"
         :options="countryList"
@@ -37,7 +37,7 @@
       ></b-form-select>
     </b-form-group>
     <b-form-group>
-      {{language.lang.modeOfTransportAtBorder}}(25)
+      {{ language.lang.modeOfTransportAtBorder }}(25)
       <b-form-select
         v-model="declaration.modeOfTransport"
         :options="ModeOfTransport"
@@ -45,7 +45,7 @@
       ></b-form-select>
     </b-form-group>
     <b-form-group>
-      {{language.lang.locationOfGoods}}(30)
+      {{ language.lang.locationOfGoods }}(30)
       <b-form-select
         v-model="declaration.locationOfGoods"
         :options="LocationOfGoods"
@@ -53,7 +53,7 @@
       ></b-form-select>
     </b-form-group>
     <b-form-group>
-      {{language.lang.supervisingCustomOffice}}
+      {{ language.lang.supervisingCustomOffice }}
       <b-form-select
         v-model="declaration.supervisingCustomOffice"
         :options="SupervisingCustomsOffice"
@@ -65,7 +65,7 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
-import allLanguages from './../utils/languageSwitch';
+import allLanguages from "./../utils/languageSwitch";
 
 export default {
   props: {
@@ -75,11 +75,11 @@ export default {
   data() {
     return {
       TermsOfDelivery: [],
-      countryList:[],
-      LocationOfGoods:[],
-      SupervisingCustomsOffice:[],
-      ModeOfTransport: [],
-    }
+      countryList: [],
+      LocationOfGoods: [],
+      SupervisingCustomsOffice: [],
+      ModeOfTransport: []
+    };
   },
   mounted() {
     this.getTermsOfDelivery();
@@ -175,7 +175,7 @@ export default {
           }
         })
         .catch(error => console.log(error));
-    },
+    }
   }
 };
 </script>

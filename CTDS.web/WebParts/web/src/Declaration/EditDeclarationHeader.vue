@@ -3,16 +3,15 @@
     <b-card-text>
       <b-row>
         <b-col class="border-rt">
-          <p>NO {{language.lang.import}}</p>
+          <p>NO {{ language.lang.import }}</p>
           <b-modal id="error-modal">
             <li v-for="(error, index) in errorList" :key="index">
               {{ error }}
             </li>
           </b-modal>
-         
         </b-col>
         <b-col class="border-rt">
-          {{language.lang.declaration}} ID: <br />
+          {{ language.lang.declaration }} ID: <br />
           <p>CD - {{ declaration.declarationId.toString().substring(0, 5) }}</p>
           LRN <br />
           <p>--</p>
@@ -20,19 +19,19 @@
           <p>--</p>
         </b-col>
         <b-col class="border-rt">
-          {{language.lang.totalNumberOfPackages}}<br />
+          {{ language.lang.totalNumberOfPackages }}<br />
           <p>--</p>
-          {{language.lang.totalNumberOfItems}} <br />
+          {{ language.lang.totalNumberOfItems }} <br />
           <p>--</p>
-          {{language.lang.totalGrossMass}}<br />
+          {{ language.lang.totalGrossMass }}<br />
           <p>--</p>
         </b-col>
         <b-col>
-          {{language.lang.declarationStatus}} <br />
+          {{ language.lang.declarationStatus }} <br />
           <p>--</p>
-          {{language.lang.customResponse}} <br />
+          {{ language.lang.customResponse }} <br />
           <p>--</p>
-          {{language.lang.taxationDate}}<br />
+          {{ language.lang.taxationDate }}<br />
           <p>--</p>
         </b-col>
         <b-col>
@@ -46,15 +45,21 @@
           <br />
           <br />
           <div style="float : right; cursor:pointer;">
-            <font-awesome-icon icon="bug" v-b-modal.error-modal v-show="isError" />
+            <font-awesome-icon
+              icon="bug"
+              v-b-modal.error-modal
+              v-show="isError"
+            />
           </div>
           <br />
           <br />
-          <b-alert :variant="alertVariant"
-                   :show="dismissCountDown"
-                   @dismissed="dismissCountDown = 0"
-                   @dismiss-count-down="countDownChanged"
-                   dismissible>
+          <b-alert
+            :variant="alertVariant"
+            :show="dismissCountDown"
+            @dismissed="dismissCountDown = 0"
+            @dismiss-count-down="countDownChanged"
+            dismissible
+          >
             {{ alertMessage }}
           </b-alert>
         </b-col>
@@ -69,7 +74,7 @@ export default {
   props: {
     declaration: Object,
     referenceData: Object,
-    language:Object,
+    language: Object
   },
   data() {
     return {

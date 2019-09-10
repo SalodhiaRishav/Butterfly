@@ -20,7 +20,7 @@ export default {
   computed: {
     labels: function() {
       return this.$store.getters.caseManagementLabels;
-    },
+    }
   },
   components: {
     appClient: Client,

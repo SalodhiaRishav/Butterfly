@@ -14,14 +14,10 @@
               class="col-sm-3 box"
               style="line-height:33px"
             >
-              <span
-                class="heading"
-              >{{caseCount}}</span>
+              <span class="heading">{{ caseCount }}</span>
               <br />
               <div>
-                <span
-                  class="counter"
-                >Cases</span>
+                <span class="counter">Cases</span>
               </div>
             </div>
             <div
@@ -29,20 +25,22 @@
               :title="declarationTitle"
               class="col-sm-3 box box-blue margin-left-30"
             >
-              <span
-                class="heading"
-              >{{declarationCount}}</span>
+              <span class="heading">{{ declarationCount }}</span>
               <br />
               <div>
-                <span
-                  class="count"
-                >Declaration</span>
+                <span class="count">Declaration</span>
               </div>
             </div>
           </div>
           <div class="row" style="margin-top:20px;">
             <div class="col-sm-9 box box-white">
-              <appBarGraph style="color:black" chartTitle="Declarations vs Status" xAxisHeading="Status" yAxisHeading="No Of Declarations" :chartData="chartData"></appBarGraph>
+              <appBarGraph
+                style="color:black"
+                chartTitle="Declarations vs Status"
+                xAxisHeading="Status"
+                yAxisHeading="No Of Declarations"
+                :chartData="chartData"
+              ></appBarGraph>
             </div>
             <!-- <div class="col-sm-5 box box-white margin-left-22">
               <h1 style="color:black">Graph 2</h1>
@@ -63,7 +61,7 @@ export default {
   components: {
     appSideBar: SideBar,
     appNavigationbar: Navigationbar,
-     appBarGraph:BarGraph
+    appBarGraph: BarGraph
   },
   data() {
     return {
@@ -71,24 +69,24 @@ export default {
       declarationCount: 0,
       declarationTitle: "",
       caseCount: 0,
-      onDash2:true,
-      chartData:[    
-                {
-                    "label": "Processing",
-                    "value": 0,
-                    "barColor":"blue"
-                },
-                {
-                    "label": "Cleared",
-                    "value": 0,
-                    "barColor":"green"
-                },
-                {
-                    "label": "Rejected",
-                    "value": 0,
-                    "barColor":"red"
-                },
-            ]
+      onDash2: true,
+      chartData: [
+        {
+          label: "Processing",
+          value: 0,
+          barColor: "blue"
+        },
+        {
+          label: "Cleared",
+          value: 0,
+          barColor: "green"
+        },
+        {
+          label: "Rejected",
+          value: 0,
+          barColor: "red"
+        }
+      ]
     };
   },
   created() {
@@ -114,20 +112,16 @@ export default {
           console.log(error);
         });
     },
-    getCasesInLastSevenDays()
-    {
-        const url = "/casesinsevendays";
-        httpClient
+    getCasesInLastSevenDays() {
+      const url = "/casesinsevendays";
+      httpClient
         .get(url)
         .then(response => {
-            if(response.data.success === true)
-            {
-                this.caseTitle = `${response.data.data} Cases Created in Last Seven Days`;
-            }
-            else
-            {
-                console.log(response.data.message);
-            }
+          if (response.data.success === true) {
+            this.caseTitle = `${response.data.data} Cases Created in Last Seven Days`;
+          } else {
+            console.log(response.data.message);
+          }
         })
         .catch(error => console.log(error));
     },
@@ -136,12 +130,9 @@ export default {
       httpClient
         .get(url)
         .then(response => {
-          if (response.data.success === true)
-          {
-             this.declarationTitle = `${response.data.data} Declarations Created in Last seven days `;
-          }
-          else
-          {
+          if (response.data.success === true) {
+            this.declarationTitle = `${response.data.data} Declarations Created in Last seven days `;
+          } else {
             console.log(response.data.message);
           }
         })
@@ -154,9 +145,9 @@ export default {
         .then(response => {
           if (response.data.success === true) {
             // console.log(this.chartData);
-            this.chartData[0].value=response.data.data.processing;
-            this.chartData[1].value=response.data.data.cleared;
-            this.chartData[2].value=response.data.data.rejected;
+            this.chartData[0].value = response.data.data.processing;
+            this.chartData[1].value = response.data.data.cleared;
+            this.chartData[2].value = response.data.data.rejected;
             console.log(this.chartData);
           } else {
             console.log(response.data.message);

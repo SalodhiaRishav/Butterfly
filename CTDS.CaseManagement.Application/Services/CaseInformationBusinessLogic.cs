@@ -64,7 +64,7 @@
             try
             {
                 List<CaseInformation> caseInformationList = this.CaseInformationRepository.Find(c => c.CaseId == caseId);
-                if (caseInformationList.Count != 0)
+                if (caseInformationList?.Count != 0)
                 {
                     CaseInformation caseInformation = caseInformationList.First();
                     this.CaseInformationRepository.Delete(caseInformation);

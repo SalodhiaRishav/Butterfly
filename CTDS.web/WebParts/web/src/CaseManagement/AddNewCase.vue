@@ -27,7 +27,7 @@ import Navbar from "./../commonComponent/Navigationbar";
 
 export default {
   components: {
-    appNavbar:Navbar,
+    appNavbar: Navbar,
     appCaseHeader: CaseHeader,
     appCaseManagementBody: CaseManagementBody
   }

@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  props:["labels"],
+  props: ["labels"],
   data() {
     return {
       notes: this.$store.getters.notes

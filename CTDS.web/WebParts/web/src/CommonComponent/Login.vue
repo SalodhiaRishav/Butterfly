@@ -1,41 +1,45 @@
 <template>
   <div class="wrapper">
-     <div id="formContent">
-    <h2 id="LoginHeading">Login</h2>
-    <div>
-      <img src="http://www.todaywalkins.com/Comp_images/NagarroSoftware.png" id="icon" alt="User Icon" />
-    </div>
-    <form @submit.prevent="loginUser">
+    <div id="formContent">
+      <h2 id="LoginHeading">Login</h2>
       <div>
-       <font-awesome-icon icon="envelope" />
-        <input
-          type="email"
-          v-model="email"
-          name="email"
-          placeholder="Email"
-          class="form-control"
+        <img
+          src="http://www.todaywalkins.com/Comp_images/NagarroSoftware.png"
+          id="icon"
+          alt="User Icon"
         />
+      </div>
+      <form @submit.prevent="loginUser">
+        <div>
+          <font-awesome-icon icon="envelope" />
+          <input
+            type="email"
+            v-model="email"
+            name="email"
+            placeholder="Email"
+            class="form-control"
+          />
         </div>
         <div v-show="submitted && !email" class="invalid-feedback">
           email is required
         </div>
         <div>
-         <font-awesome-icon icon="key" /> 
-        <input
-          type="password"
-          v-model="password"
-          name="password"
-          placeholder="Password"
-          class="form-control"
-        />
+          <font-awesome-icon icon="key" />
+          <input
+            type="password"
+            v-model="password"
+            name="password"
+            placeholder="Password"
+            class="form-control"
+          />
         </div>
         <div v-show="submitted && !password" class="invalid-feedback">
           Password is required
         </div>
-        <br>
+        <br />
         <button id="login">Login</button>
-    </form>
-  </div>
+      </form>
+    </div>
   </div>
 </template>
 

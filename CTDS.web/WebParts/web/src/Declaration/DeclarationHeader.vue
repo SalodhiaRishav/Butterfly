@@ -3,7 +3,7 @@
     <b-card-text>
       <b-row>
         <b-col class="border-rt">
-          <p>NO {{language.lang.import}}</p>
+          <p>NO {{ language.lang.import }}</p>
           <b-modal id="error-modal">
             <li v-for="(error, index) in errorList" :key="index">
               {{ error }}
@@ -20,7 +20,7 @@
           </b-alert>
         </b-col>
         <b-col class="border-rt">
-          {{language.lang.declaration}} ID: <br />
+          {{ language.lang.declaration }} ID: <br />
           <p>--</p>
           LRN <br />
           <p>--</p>
@@ -28,31 +28,35 @@
           <p>--</p>
         </b-col>
         <b-col class="border-rt">
-          {{language.lang.totalNumberOfPackages}}<br />
+          {{ language.lang.totalNumberOfPackages }}<br />
           <p>--</p>
-          {{language.lang.totalNumberOfItems}} <br />
+          {{ language.lang.totalNumberOfItems }} <br />
           <p>--</p>
-          {{language.lang.totalGrossMass}}<br />
+          {{ language.lang.totalGrossMass }}<br />
           <p>--</p>
         </b-col>
         <b-col>
-          {{language.lang.declarationStatus}} <br />
+          {{ language.lang.declarationStatus }} <br />
           <p>--</p>
-          {{language.lang.customResponse}} <br />
+          {{ language.lang.customResponse }} <br />
           <p>--</p>
-          {{language.lang.taxationDate}}<br />
+          {{ language.lang.taxationDate }}<br />
           <p>--</p>
         </b-col>
         <b-col>
           <div style="float : right; cursor:pointer;">
-          <font-awesome-icon icon="save" @click="onSave"/>
+            <font-awesome-icon icon="save" @click="onSave" />
           </div>
-          <br/>
-          <br/>
+          <br />
+          <br />
           <div style="float : right; cursor:pointer;">
-          <font-awesome-icon icon="bug" v-b-modal.error-modal v-show="isError"/>
+            <font-awesome-icon
+              icon="bug"
+              v-b-modal.error-modal
+              v-show="isError"
+            />
           </div>
-            <br/>
+          <br />
         </b-col>
       </b-row>
     </b-card-text>
@@ -61,13 +65,13 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
-import allLanguages from './../utils/languageSwitch';
+import allLanguages from "./../utils/languageSwitch";
 
 export default {
   props: {
     declaration: Object,
     referenceData: Object,
-    language:Object
+    language: Object
   },
   data() {
     return {
@@ -76,7 +80,7 @@ export default {
       alertVariant: "",
       alertMessage: "",
       isError: false,
-      errorList: [],
+      errorList: []
     };
   },
   methods: {
@@ -91,7 +95,7 @@ export default {
           if (response === "token refreshed") {
             this.onSave();
           }
-          console.log(response.data)
+          console.log(response.data);
           if (response.data.success === true) {
             this.isError = false;
             console.log("Success");
@@ -104,7 +108,7 @@ export default {
             this.isError = true;
           }
         })
-        .catch((error)=>{
+        .catch(error => {
           console.log(error);
         });
     }

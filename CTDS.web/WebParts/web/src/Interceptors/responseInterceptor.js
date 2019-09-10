@@ -3,7 +3,7 @@ import router from "../router/index";
 
 export default function responseInteceptorSetup() {
   httpClient.http.interceptors.response.use(
-    (response) => {
+    response => {
       if (isTokenExpired(response)) {
         return new Promise((resolve, reject) => {
           refreshToken()
@@ -20,7 +20,7 @@ export default function responseInteceptorSetup() {
         return response;
       }
     },
-    (error) => {
+    error => {
       errorHandler(error);
     }
   );
@@ -44,25 +44,25 @@ const errorHandler = error => {
 const refreshToken = () => {
   return new Promise((resolve, reject) => {
     const refreshTokenSerial = sessionStorage.getItem("refreshTokenId");
-        const resource="/refreshtoken";
-        let postData = {
-          refreshTokenSerialId: refreshTokenSerial
-        };
-        httpClient
-          .post(resource, postData)
-          .then(response => {
-            if (response.data.success === true) {
-              sessionStorage.setItem("accessToken",response.data.data.accessToken)
-              resolve({isTokenRefreshed: true});
-            } else {
-              reject(response.data.message);
-            }
-          })
-          .catch(error => {
-            reject(error);
-          });
+    const resource = "/refreshtoken";
+    let postData = {
+      refreshTokenSerialId: refreshTokenSerial
+    };
+    httpClient
+      .post(resource, postData)
+      .then(response => {
+        if (response.data.success === true) {
+          sessionStorage.setItem("accessToken", response.data.data.accessToken);
+          resolve({ isTokenRefreshed: true });
+        } else {
+          reject(response.data.message);
+        }
+      })
+      .catch(error => {
+        reject(error);
       });
-    }
+  });
+};
 
 const isTokenExpired = response => {
   if (response.data === "token expired") {
