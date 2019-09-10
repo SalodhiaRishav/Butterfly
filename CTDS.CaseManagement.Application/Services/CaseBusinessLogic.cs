@@ -41,7 +41,7 @@
             {
                 CaseDto addedCaseDto = new CaseDto();
                 Case newCase = new Case();
-                Case addedCase = this.CaseRepository.Add(newCase);
+                Case addedCase = CaseRepository.Add(newCase);
                 addedCaseDto.CaseId = addedCase.CaseId;
                 addedCaseDto.Id = addedCase.Id;
                 addedCaseDto.ModifiedOn = addedCase.ModifiedOn;
@@ -57,7 +57,6 @@
             {
                 throw exception;
             }
-
         }
 
         public CaseDto GetCaseById(Guid caseId)

@@ -1,7 +1,9 @@
 <template>
-<svg :width="svgWidth" :height="svgHeight"> 
-    <text :x="titlePositionX" :y="titlePositionY" :fill="titleColor" transform="translate(100,0)" font-size="24px">{{chartTitle}}</text>
-    <g transform = "translate(100,100)">
+<svg :width="svgWidth" :height="svgHeight">
+    <text :x="titlePositionX" :y="titlePositionY" :fill="titleColor" transform="translate(100,50)" font-size="24px">{{chartTitle}}</text>
+    <g class="chartbox" transform = "translate(100,200)">
+    </g>
+    <g class="labelbox" transform = "translate(150,150)">
     </g>
   </svg>
 </template>
@@ -11,11 +13,11 @@ export default {
   props:{
       svgHeight : {
         type: Number,
-        default: 500
+        default: 600
         },
         svgWidth : {
         type: Number,
-        default: 600
+        default: 700
         },
         chartTitle : {
         type: String,
@@ -54,15 +56,54 @@ export default {
             xAxisHeadingFontSize:20,
             titlePositionX:50,
             titlePositionY:50,
-            margin:200,
+            margin:300,
             barPadding:.3,
-            
+
 }
     },
     mounted() {
      this.createGraph();
     },
     methods: {
+        createLabelBox(chartData){
+            const labelBoxObject=[]
+            for(let index = 0;index<chartData.dataLabels.length;++index)
+            {
+                 const obj = {dataLabel:chartData.dataLabels[index],dataLabelColor:chartData.dataLabelColors[index]}
+                labelBoxObject.push(obj);
+            }
+            var dataLabels = d3.select(".labelbox").selectAll(".dataLabel")
+            .data(labelBoxObject)
+            .enter().append("g")
+            .attr("class", "dataLabel")
+            .attr("transform", (d,i) => `translate(${i*100},0)`);
+
+            dataLabels.selectAll(`.colorBox`)
+            .data(d => [d])
+            .enter()
+            .append("rect")
+            .attr("class", ".colorBox")
+            .attr("width",10)
+            .attr("height",10)
+            .attr("fill", d => {
+                return d.dataLabelColor;
+            })
+
+            dataLabels.selectAll(`.labelText`)
+            .data(d => [d])
+            .enter()
+            .append("text")
+            .attr("class", ".labelText")
+            .attr("dx","1em")
+            .attr("dy","1em")
+         .attr("fill","black")
+         .attr("font-size",15)
+         .text(d=>{
+           return d.dataLabel;
+         });
+            
+     
+        },
         createScales(){
          var xScale0 = d3.scaleBand().range([0, this.width]).padding(this.barPadding);
          var xScale1 = d3.scaleBand();
@@ -73,7 +114,7 @@ export default {
          return {xScale0:xScale0,xScale1:xScale1,yScale:yScale}
        },
        createXAxis(xScale0){
-       var xAxis = d3.axisBottom(xScale0).tickSizeOuter(0);//todo outerticksize
+       var xAxis = d3.axisBottom(xScale0).tickSizeOuter(0);//todo learn outerticksize
        d3.select("g")
        .append("g")
        .attr("class", "xAxis")
@@ -139,6 +180,7 @@ for(let i = 0 ;i<arr.length;++i)
 },
       createGraph()
       {
+          this.createLabelBox(this.chartData);
           const scales=this.createScales();
           this.createXAxis(scales.xScale0);
           this.createYAxis(scales.yScale);
