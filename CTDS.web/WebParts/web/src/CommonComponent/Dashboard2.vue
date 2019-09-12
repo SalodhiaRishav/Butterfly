@@ -58,7 +58,8 @@ import SideBar from "./SideBar";
 import Navigationbar from "./Navigationbar";
 import httpClient from "./../utils/httpRequestWrapper";
 import BarGraph from "./BarGraph";
-import PieChart from "./PieChart.js";
+  import PieChart from "./PieChart.js";
+  import GroupedBarGraph from "./GroupedBarGraph";
 
 
 export default {
@@ -102,14 +103,47 @@ export default {
             ]
     };
   },
-  created() {
+    created() {
+      this.getFilteredCaseCount();
     this.getDeclarationCount();
     this.getCasesInLastSevenDays();
     this.getDeclarationsInLastSevenDays();
     this.getStatusCount();
     this.getCaseCount();
   },
-  methods: {
+    methods: {
+      getFilteredCaseCount(){
+      const url = "/filtercasecount";
+      httpClient
+      .get(url)
+      .then(response => {
+        console.log("hola");
+        console.log(response);
+        console.log("hola");
+         if(response.data.success === true){
+          const inProgressHigh = response.data.data.inProcessHigh;
+          const inProgressMed =  response.data.data.inProcessMed;
+          const inProgressLow = response.data.data.inProcessLow;
+          const closedHigh = response.data.data.closeHigh;
+          const closedMedium = response.data.data.closeMed;
+          const closedLow = response.data.data.closeLow;
+          
+          const obj={
+               labels:["In Process","Closed"],
+               dataLabels:["High","Medium","Low"],
+               dataLabelColors:["Green","Blue","Red"],
+               data:[[inProgressHigh,inProgressMed,inProgressLow],[closedHigh,closedMedium,closedLow]]
+             };
+          this.groupedBarChartData=obj;
+          this.dataFetched=true;
+        } else{
+        console.log(response.data.message);
+       }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
     getDeclarationCount() {
       const url = "/declarationcount";
       httpClient
