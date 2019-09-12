@@ -1,27 +1,28 @@
 <template>
   <div>
-    <div class="font-mono">
-      <b-table
-        striped
-        hover
-        :fields="fields"
-        :items="declarations"
-        :current-page="currentPage"
-        :per-page="perPage"
-        @row-clicked="getDeclaration"
-      ></b-table>
-    </div>
-    <b-row>
-      <b-col md="6" class="my-1">
-        <b-pagination
-          v-model="currentPage"
-          :total-rows="totalRows"
+      <div class="font-mono">
+        <b-table
+          striped
+          hover
+          :fields="fields"
+          :items="declarations"
+          :current-page="currentPage"
           :per-page="perPage"
-          @change="getNewData"
-          class="my-0"
-        ></b-pagination>
-      </b-col>
-    </b-row>
+          @head-clicked="sortData"
+          @row-clicked="getDeclaration"
+        ></b-table>
+      </div>
+      <b-row>
+        <b-col md="6" class="my-1">
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="totalRows"
+            :per-page="perPage"
+            @change="getNewData"
+            class="my-0"
+          ></b-pagination>
+        </b-col>
+      </b-row>
   </div>
 </template>
 
@@ -30,66 +31,72 @@ import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   mounted() {
-    this.getAllDeclaration(1);
+    this.getAllDeclaration(1,this.sortOrder);
   },
   data() {
     return {
       declarations: [],
       currentPage: 1,
-      totalRows: 1,
-      perPage: 3,
+      totalRows:1,
+      perPage:3,
+      sortOrder:"DeclarationId",
       fields: [
         {
-          key: "ID",
-          sortable: true
+          key: "DeclarationId",
+          sortable: false
         },
         {
           key: "LRN",
-          sortable: true
+          sortable: false
         },
         {
           key: "MRN",
-          sortable: true
+          sortable: false
         },
         {
           key: "Country",
-          sortable: true
+          sortable: false
         },
         {
           key: "Procedure",
-          sortable: true
+          sortable: false
         },
         {
           key: "Type",
-          sortable: true
+          sortable: false
         },
         {
           key: "Status",
-          sortable: true
+          sortable: false
         },
         {
-          key: "customResponse",
-          sortable: true
+          key: "CustomResponse",
+          sortable: false
         },
         {
           key: "User",
-          sortable: true
+          sortable: false
         },
         {
-          key: "createdOn",
-          sortable: true
+          key: "CreatedOn",
+          sortable: false
         },
         {
-          key: "taxationDate",
-          sortable: true
+          key: "TaxationDate",
+          sortable: false
         }
       ]
     };
   },
   methods: {
-    getNewData(val) {
+    sortData(key,val2,val3){
+      this.sortOrder = key;
+      this.getAllDeclaration(1,this.sortOrder)
+    },
+    getNewData(val){
       this.currentPage = parseInt(val);
-      this.getAllDeclaration(val);
+      console.log("get new data "+this.sortOrder)
+      this.getAllDeclaration(val, this.sortOrder);
     },
     convertDate(date) {
       return new Date(date.match(/\d+/)[0] * 1).toString().substring(4, 16);
@@ -97,21 +104,22 @@ export default {
     getDeclaration: function(row) {
       this.$router.push(`/editdeclaration/${row.BaseID}`);
     },
-    getAllDeclaration: function(val) {
+    getAllDeclaration: function(val,orderBy) {
+      console.log(this.sortOrder+" "+this.currentPage);
       const url = "/getalldeclaration";
       const index = parseInt(val);
       httpClient
-        .get(url, index)
+        .get(url,index,orderBy)
         .then(response => {
           if (response.data === "token refreshed") {
-            this.getAllDeclaration(index);
+            this.getAllDeclaration(index, orderBy);
           }
           if (response.data.success === true) {
             let declaration = [];
             for (let i = 0; i < response.data.data.length; ++i) {
               let obj = {
                 BaseID: response.data.data[i].declarationId,
-                createdOn: this.convertDate(response.data.data[i].createdOn),
+                CreatedOn: this.convertDate(response.data.data[i].createdOn),
                 status: response.data.data[i].status,
                 LRN: " ",
                 MRN: " ",
@@ -122,7 +130,7 @@ export default {
                 CustomResponse: " ",
                 User: " ",
                 TaxationDate: " ",
-                ID:
+                DeclarationId:
                   "CD-" +
                   response.data.data[i].declarationId.toString().substring(0, 5)
               };

@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Dto\MasterDataDto.cs" />
     <Compile Include="EndPoints\GetMasterData.cs" />
+    <Compile Include="ExtensionMethods\OrderByExtension.cs" />
     <Compile Include="Interface\IBaseMapper.cs" />
     <Compile Include="Interface\IMasterDataMapper.cs" />
     <Compile Include="Interface\IMasterDataRepository.cs" />

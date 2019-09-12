@@ -6,6 +6,7 @@
     using System.Data.Entity.Migrations;
 
     using CTDS.Database.Context;
+    using CTDS.Common.ExtensionMethods;
     using CTDS.Declarations.Application.Mapper;
     using CTDS.Declarations.Contracts.DeclarationDTO;
     using CTDS.Declarations.Application.Repository.Interface;
@@ -59,7 +60,7 @@
                 throw;
             }
         }
-        public IEnumerable<DeclarationDto> GetAllDeclarations(int index)
+        public IEnumerable<DeclarationDto> GetAllDeclarations(int index, string sort)
         {
             IEnumerable<DeclarationDto> declarationDtoList;
             try
@@ -67,7 +68,8 @@
                 using(var context = new CTDSContext())
                 {
                     int maxRows = 3;
-                    var declarationList = context.Declaration.OrderBy(x => x.DeclarationId).Skip((index - 1)*maxRows).Take(maxRows).ToList();
+                    var query = context.Declaration;
+                    var declarationList = query.CustomOrderBy(sort).Skip((index - 1) * maxRows).Take(maxRows).ToList();
                     declarationDtoList = Mapper.DeclarationListToDtoList(declarationList);
                 }
                 return declarationDtoList;

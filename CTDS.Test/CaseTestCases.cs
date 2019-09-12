@@ -41,10 +41,10 @@
 
             GetFilteredCaseCount getFilteredCaseCount = new GetFilteredCaseCount();
 
-            Dictionary<string, int> temp = new Dictionary<string, int>();
-            temp = null;
+            //Dictionary<string, int> temp = new Dictionary<string, int>();
+            //temp = null;
 
-            caseBusinessLogic.Setup(c => c.GetFilteredCaseCount()).Returns(temp);
+            //caseBusinessLogic.Setup(c => c.GetFilteredCaseCount()).Returns(temp);
 
             var expectedResult = caseManagement.Get(getFilteredCaseCount);
 
