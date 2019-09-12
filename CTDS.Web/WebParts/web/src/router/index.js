@@ -9,11 +9,6 @@ import EditDeclaration from "./../declaration/EditDeclaration.vue";
 import Login from "./../commonComponent/Login.vue";
 import Unauthorize from "./../commonComponent/Unauthorize.vue";
 import Dashboard2 from "./../commonComponent/Dashboard2.vue";
-import CaseBarChart from "./../commonComponent/CaseBarChart.vue";
-import BarGraph from "./../commonComponent/BarGraph.vue";
-import BarChecker from "./../commonComponent/BarChecker.vue";
-import GroupedBarGraph from "./../commonComponent/GroupedBarGraph.vue";
-import GroupedBarGraphChecker from "./../commonComponent/GroupedBarGraphChecker.vue";
 
 Vue.use(Router);
 
@@ -134,35 +129,10 @@ const router = new Router({
       component: Unauthorize
     },
     {
-      path: "/dashboard", //temporary route
+      path: "/dash2",
       name: "dashboard2.0",
       component: Dashboard2
     },
-    {
-      path: "/barchart", //temporary route
-      name: "barchart",
-      component: CaseBarChart
-    },
-    {
-      path: "/bargraph", //temporary route
-      name: "BarGraph",
-      component: BarGraph
-    },
-    {
-      path: "/barchecker", //temporary route
-      name: "BarChecker",
-      component: BarChecker
-    },
-    {
-      path: "/groupbargraph", //temporary route
-      name: "Group Bar Graph",
-      component: GroupedBarGraph
-    },
-    {
-      path: "/groupedbargraphchecker", //temporary route
-      name: "Group Bar Graph Checker",
-      component: GroupedBarGraphChecker
-    }
   ],
   mode: "history"
 });

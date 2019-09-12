@@ -4,12 +4,12 @@
       :x="titlePositionX"
       :y="titlePositionY"
       :fill="titleColor"
-      transform="translate(100,0)"
+      transform="translate(100,-5)"
       font-size="24px"
     >
       {{ chartTitle }}
     </text>
-    <g v-if="flag" transform="translate(100,100)"></g>
+    <g v-if="flag" transform="translate(60,50)"></g>
   </svg>
 </template>
 
@@ -20,11 +20,11 @@ export default {
   props: {
     svgHeight: {
       type: Number,
-      default: 500
+      default: 450
     },
     svgWidth: {
       type: Number,
-      default: 600
+      default: 400
     },
     chartTitle: {
       type: String,
@@ -56,9 +56,9 @@ export default {
   },
   data() {
     return {
-      titlePositionY: 50,
-      titlePositionX: 50,
-      margin: 200,
+      titlePositionY: 25,
+      titlePositionX: 0,
+      margin: 100,
       xAxisHeadingFontSize: 16,
       xAxisHeadingFontColor: "Black",
       yAxisHeadingFontSize: 16,

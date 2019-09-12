@@ -4,13 +4,14 @@
       :x="titlePositionX"
       :y="titlePositionY"
       :fill="titleColor"
-      transform="translate(100,50)"
+      transform="translate(104,-2)"
       font-size="24px"
+      font-weight="bold"
     >
       {{ chartTitle }}
     </text>
-    <g class="chartbox" transform="translate(100,200)"></g>
-    <g class="labelbox" transform="translate(150,150)"></g>
+    <g class="chartbox" transform="translate(60,50)"></g>
+    <g class="labelbox" transform="translate(150,70)"></g>
   </svg>
 </template>
 <script>
@@ -19,11 +20,11 @@ export default {
   props: {
     svgHeight: {
       type: Number,
-      default: 600
+      default: 450
     },
     svgWidth: {
       type: Number,
-      default: 700
+      default: 400
     },
     chartTitle: {
       type: String,
@@ -57,12 +58,12 @@ export default {
   data: () => {
     return {
       yAxisHeadingFontColor: "Black",
-      yAxisHeadingFontSize: 20,
+      yAxisHeadingFontSize: 16,
       xAxisHeadingFontColor: "Black",
-      xAxisHeadingFontSize: 20,
-      titlePositionX: 50,
-      titlePositionY: 50,
-      margin: 300,
+      xAxisHeadingFontSize: 16,
+      titlePositionX: 0,
+      titlePositionY: 25,
+      margin: 100,
       barPadding: 0.3,
       yAxisScale:0
     };

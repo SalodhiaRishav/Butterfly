@@ -6,8 +6,8 @@
         <div class="col-sm-3">
           <appSideBar></appSideBar>
         </div>
-        <div class="col-sm-9" style="margin-top:30px;">
-          <div class="row">              
+        <div class="col-sm-9">
+          <div class="row" style="margin-top:10px">
             <div
               v-b-tooltip.hover
               :title="caseTitle"
@@ -40,13 +40,13 @@
               </div>
             </div>
           </div>
-          <div class="row" style="margin-top:20px;">
-            <div class="col-sm-9 box box-white">
-              <appBarGraph style="color:black" chartTitle="Declarations vs Status" xAxisHeading="Status" yAxisHeading="No Of Declarations" :chartData="chartData"></appBarGraph>
+          <div class="row" style="margin-top:10px;">
+            <div class="col-sm-5 box box-white margin-right-left-10 box-height-572" v-if="dataFetched">
+                  <appGroupedBarGraph chartTitle="Case Progress Chart" xAxisHeading="Priority & Status" yAxisHeading="No. of cases" :chartData="groupedBarChartData"></appGroupedBarGraph>   
+              </div>
+            <div class="col-sm-5 box box-white margin-right-left-10 box-height-572" v-if="declarationChartDataFetched">
+               <pie-chart :data="declarationChartData" :options="chartOptions"></pie-chart>
             </div>
-            <!-- <div class="col-sm-5 box box-white margin-left-22">
-              <h1 style="color:black">Graph 2</h1>
-            </div> -->
           </div>
         </div>
       </div>
@@ -58,15 +58,25 @@ import SideBar from "./SideBar";
 import Navigationbar from "./Navigationbar";
 import httpClient from "./../utils/httpRequestWrapper";
 import BarGraph from "./BarGraph";
+import PieChart from "./PieChart.js";
+
 
 export default {
+
   components: {
     appSideBar: SideBar,
     appNavigationbar: Navigationbar,
-     appBarGraph:BarGraph
+    appGroupedBarGraph:GroupedBarGraph,
+    appNavigationbar: Navigationbar,
+    appBarGraph: BarGraph,
+    PieChart
   },
   data() {
     return {
+       chartOptions: {},
+      declarationChartDataFetched:false,
+      declarationChartData: {},
+      dataFetched:false,
       caseCount: 0,
       declarationCount: 0,
       declarationTitle: "",
@@ -154,11 +164,36 @@ export default {
         .get(url)
         .then(response => {
           if (response.data.success === true) {
-            // console.log(this.chartData);
-            this.chartData[0].value=response.data.data.processing;
-            this.chartData[1].value=response.data.data.cleared;
-            this.chartData[2].value=response.data.data.rejected;
-            console.log(this.chartData);
+              const options= {
+                hoverBorderWidth: 20,
+                borderWidth: 10,
+                hoverBackgroundColor: "red",
+                title: {
+                    display: true,
+                    text: 'Declaration Status',
+                    fontSize:24,
+                },
+                responsive:true,
+                maintainAspectRatio: false
+             } 
+             
+             this.chartOptions=options;
+            let pieChartData=[response.data.data.cleared,response.data.data.rejected,response.data.data.processing];
+            console.log(pieChartData);
+             const declarationChartData= {
+        hoverBackgroundColor: "red",
+        hoverBorderWidth: 10,
+        labels: ["Cleared", "Rejected", "Processing"],
+        datasets: [
+          {
+            label: "Data One",
+            backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+            data: pieChartData
+          }
+        ]
+      }
+      this.declarationChartData=declarationChartData;
+            this.declarationChartDataFetched=true;
           } else {
             console.log(response.data.message);
           }
