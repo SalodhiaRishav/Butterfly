@@ -8,7 +8,6 @@
     using CTDS.CaseManagement.Contracts.Dto;
     using CTDS.CaseManagement.Contracts.Interfaces;
     using CTDS.Database.Models.CaseManagement;
-    
 
     public class CaseBusinessLogic : ICaseBusinessLogic
     {
@@ -120,9 +119,36 @@
             return CaseRepository.FindCaseCount();
         }
 
-        public Dictionary<string,int> GetFilteredCaseCount()
+        public GroupByCaseDTO GetFilteredCaseCount()
         {
-            return CaseRepository.FindFilteredCaseCount();
+            GroupByCaseDTO myDto = new GroupByCaseDTO();
+            var dictionary = CaseRepository.FindFilteredCaseCount();
+            if(dictionary.ContainsKey("InProgressHigh"))
+            {
+                myDto.InProcessHigh = dictionary["InProgressHigh"];
+            }
+            
+            if(dictionary.ContainsKey("InProgressMedium"))
+            {
+                myDto.InProcessMed = dictionary["InProgressMedium"];
+            }
+            if(dictionary.ContainsKey("InProgressLow"))
+                {
+                myDto.InProcessLow = dictionary["InProgressLow"];
+            }
+            if (dictionary.ContainsKey("ClosedHigh"))
+            {
+                myDto.CloseHigh = dictionary["ClosedHigh"];
+            }
+            if (dictionary.ContainsKey("ClosedMedium"))
+            {
+                myDto.CloseMed = dictionary["ClosedMedium"];
+            }
+            if (dictionary.ContainsKey("ClosedLow"))
+            {
+                myDto.CloseLow = dictionary["ClosedLow"];
+            }
+            return myDto;
         }
 
         public List<CaseDto> GetAllCases(int index)

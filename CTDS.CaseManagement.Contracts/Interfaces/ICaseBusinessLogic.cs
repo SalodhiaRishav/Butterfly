@@ -15,10 +15,8 @@
         List<CaseDto> GetAllCases(int index);
 
         CaseDto EditCase(Guid caseId, ClientDto clientDto, CaseInformationDto caseInformationDto, NotesDto notesDto, CaseStatusDto caseStatusDto, List<CaseReferenceDto> caseReferenceDtos);
-
         int GetCaseCount();
-
-        Dictionary<string,int> GetFilteredCaseCount();
+        GroupByCaseDTO GetFilteredCaseCount();
         int GetCountOfSevenDays();
     }
 }

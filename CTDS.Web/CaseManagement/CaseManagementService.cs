@@ -156,12 +156,12 @@
             }
         }
 
-        public OperationResponse<Dictionary<string, int>> Get(GetFilteredCaseCount request)
+        public OperationResponse<GroupByCaseDTO> Get(GetFilteredCaseCount request)
         {
-            OperationResponse<Dictionary<string, int>> response = new OperationResponse<Dictionary<string, int>>();
+            OperationResponse<GroupByCaseDTO> response = new OperationResponse<GroupByCaseDTO>();
             try
             {
-                Dictionary<string, int> data = CaseBusinessLogic.GetFilteredCaseCount();
+                var data = CaseBusinessLogic.GetFilteredCaseCount();
                 if(data == null)
                 {
                     response.OnSuccess(data, " No cases ");
@@ -170,6 +170,7 @@
                 {
                     response.OnSuccess(data, "Fetched successfully");
                 }
+
                 return response;
             }
             catch(Exception e)
