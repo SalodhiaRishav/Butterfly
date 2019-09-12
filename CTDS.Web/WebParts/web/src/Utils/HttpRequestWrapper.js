@@ -2,14 +2,15 @@ import axios from "axios";
 
 export default {
   http: axios,
-  get(url, param) {
-    if (arguments.length === 1) return axios.get(url);
-    else {
-      return axios.get(url, {
-        params: {
-          data: param
-        }
-      });
+  get(url,index, sortOrder) {
+    if(arguments.length === 1)
+      return axios.get(url);
+    else{
+        return axios.get(url, {
+          params: {
+            index : index,
+            orderBy: sortOrder
+        }})
     }
   },
   post(url, payload) {

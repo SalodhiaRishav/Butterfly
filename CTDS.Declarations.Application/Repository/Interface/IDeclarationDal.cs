@@ -9,7 +9,7 @@
     {
         Guid AddDeclaration(DeclarationDto declarationDto);
         DeclarationDto GetDeclarationById(Guid id);
-        IEnumerable<DeclarationDto> GetAllDeclarations(int index);
+        IEnumerable<DeclarationDto> GetAllDeclarations(int index, string sort);
         IEnumerable<DeclarationDto> GetAllDeclarations();
         bool EditDeclaration(DeclarationDto declarationDto);
         void AddReference(ReferenceDto reference);

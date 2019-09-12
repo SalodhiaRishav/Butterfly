@@ -27,7 +27,7 @@
             OperationResponse<IEnumerable<DeclarationDto>> response = new OperationResponse<IEnumerable<DeclarationDto>>();
             try
             {
-                var data = DeclarationBll.GetAllDeclaration(request.data);
+                var data = DeclarationBll.GetAllDeclaration(request.index, request.orderBy);
                 response.OnSuccess(data, "Declarations Fecthed Successfully");
                 return response;
             }

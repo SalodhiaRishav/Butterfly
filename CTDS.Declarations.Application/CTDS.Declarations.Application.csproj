@@ -67,6 +67,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CTDS.Common\CTDS.Common.csproj">
+      <Project>{0d87b9bc-3d6e-427c-8df6-83aa9310889e}</Project>
+      <Name>CTDS.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CTDS.Database\CTDS.Database.csproj">
       <Project>{d5a7ceeb-4022-4892-8595-b6a363bddfa7}</Project>
       <Name>CTDS.Database</Name>

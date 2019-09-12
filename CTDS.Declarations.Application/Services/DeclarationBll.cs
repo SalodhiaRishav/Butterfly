@@ -39,11 +39,11 @@
             }
         }
 
-        public IEnumerable<DeclarationDto> GetAllDeclaration(int index)
+        public IEnumerable<DeclarationDto> GetAllDeclaration(int index, string sort)
         {
             try
             {
-                return DeclarationDal.GetAllDeclarations(index);
+                return DeclarationDal.GetAllDeclarations(index, sort);
             }
             catch (Exception)
             {

@@ -5,6 +5,7 @@
     [Route("/getalldeclaration","GET")]
     public class GetAllDeclaration
     {
-        public int data { get; set; }
+        public int index { get; set; }
+        public string orderBy { get; set; }
     }
 }
