@@ -9,6 +9,11 @@
   width: 80%;
   height: 100%;
   background: #460c63;
+  left:-285px;
+}
+
+.sidebar.active{
+  left:0px;
 }
 
 .sidebar-ul li {
@@ -42,5 +47,23 @@
     content:' \203A';
     margin-right: 20px;
 }
+
+.sidebar .toggle-btn{
+  cursor: pointer;
+  position: absolute;
+  left:303px;
+  top:20px;
+}
+
+.toggle-btn span{
+  display: block;
+  width: 30px;
+  height: 5px;
+  background: #151719;
+  margin:3px 0px;
+}
+
+   
+
 
 
