@@ -56,6 +56,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import SideBar from "./SideBar";
 import Navigationbar from "./Navigationbar";
@@ -67,7 +68,7 @@ export default {
   components: {
     appSideBar: SideBar,
     appNavigationbar: Navigationbar,
-    appGroupedBarGraph:GroupedBarGraph
+    appGroupedBarGraph:GroupedBarGraph,
     appNavigationbar: Navigationbar,
     appBarGraph: BarGraph
   },
@@ -95,7 +96,7 @@ export default {
           value: 0,
           barColor: "red"
         }
-      ]
+      ],
       caseTitle: "",
       groupedBarChartData:null
     };
