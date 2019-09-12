@@ -1,3 +1,7 @@
 .bar {   
     fill-opacity:0.8;
 }
+
+svg{
+    color:black;
+}

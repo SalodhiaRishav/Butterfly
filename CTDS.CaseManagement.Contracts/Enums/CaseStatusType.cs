@@ -2,7 +2,6 @@
 {
     public enum CaseStatusType
     {
-        New,
         InProgress,
         Closed
     }

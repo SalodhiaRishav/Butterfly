@@ -36,7 +36,7 @@
             </div>
           </div>
           <div class="row" style="margin-top:20px;">
-            <div class="col-sm-9 box box-white">
+            <div class="col-sm-6 box box-white">
               <appBarGraph
                 style="color:black"
                 chartTitle="Declarations vs Status"
@@ -45,10 +45,8 @@
                 :chartData="chartData"
               ></appBarGraph>
             </div>
-            <div class="col-sm-5 box box-white margin-left-22" v-if="dataFetched">
-              <h1 style="color:black">
+            <div class="col-sm-6 box box-white margin-left-22" v-if="dataFetched">
                 <appGroupedBarGraph chartTitle="Case Progress Chart" xAxisHeading="Priority & Status" yAxisHeading="Percentage" :chartData="groupedBarChartData"></appGroupedBarGraph>   
-              </h1>
             </div>
           </div>
         </div>
@@ -115,7 +113,9 @@ export default {
       httpClient
       .get(url)
       .then(response => {
+        console.log("hola");
         console.log(response);
+        console.log("hola");
          if(response.data.success === true){
           const inProgressHigh = response.data.data.inProcessHigh;
           const inProgressMed =  response.data.data.inProcessMed;
@@ -187,7 +187,6 @@ export default {
         .get(url)
         .then(response => {
           if (response.data.success === true) {
-            // console.log(this.chartData);
             this.chartData[0].value = response.data.data.processing;
             this.chartData[1].value = response.data.data.cleared;
             this.chartData[2].value = response.data.data.rejected;

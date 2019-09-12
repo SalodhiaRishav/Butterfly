@@ -63,7 +63,8 @@ export default {
       titlePositionX: 50,
       titlePositionY: 50,
       margin: 300,
-      barPadding: 0.3
+      barPadding: 0.3,
+      yAxisScale:0
     };
   },
   mounted() {
@@ -123,14 +124,14 @@ export default {
       var yScale = d3.scaleLinear().range([this.height, 0]);
       xScale0.domain(this.chartData.labels);
       xScale1.domain(this.chartData.dataLabels).range([0, xScale0.bandwidth()]);
-      yScale.domain([0, 100]);
+      yScale.domain([0, this.yAxisScale]);
       return { xScale0: xScale0, xScale1: xScale1, yScale: yScale };
     },
     createXAxis(xScale0) {
       var xAxis = d3.axisBottom(xScale0).tickSizeOuter(0); //todo learn outerticksize
-      d3.select("g")
+      d3.select(".chartbox")
         .append("g")
-        .attr("class", "xAxis")
+        .attr("class", "groupBarGraphXAxis")
         .attr("transform", `translate(0,${this.height})`)
         .call(xAxis)
         .selectAll("text")
@@ -138,7 +139,7 @@ export default {
         .style("font-weight", "bold")
         .style("fill", "gray");
 
-      d3.select(".xAxis")
+      d3.select(".groupBarGraphXAxis")
         .append("text")
         .attr("y", this.height - 250)
         .attr("x", this.width / 2)
@@ -150,9 +151,9 @@ export default {
     createYAxis(yScale) {
       var yAxis = d3
         .axisLeft(yScale)
-        .ticks(10)
+        .ticks(this.yAxisScale)
         .tickSizeOuter(0); //todo outerticksize
-      d3.select("g")
+      d3.select(".chartbox")
         .append("g")
         .attr("class", "yAxis")
         .call(yAxis)
@@ -168,7 +169,7 @@ export default {
     },
     createBars(chartData, scales) {
       var label = d3
-        .select("g")
+        .select(".chartbox")
         .selectAll(".label")
         .data(chartData.labels)
         .enter()
@@ -198,6 +199,14 @@ export default {
       }
     },
     createGraph() {
+      let numbers=[];
+      for(let index = 0;index<this.chartData.data.length;++index)
+      {
+        const number=d3.max(this.chartData.data[index]);
+        numbers.push(number);
+      }
+      this.yAxisScale = d3.max(numbers)+2;
+      console.log(this.yAxisScale);
       this.createLabelBox(this.chartData);
       const scales = this.createScales();
       this.createXAxis(scales.xScale0);

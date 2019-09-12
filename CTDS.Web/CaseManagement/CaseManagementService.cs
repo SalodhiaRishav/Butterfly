@@ -14,7 +14,6 @@
     using ServiceStack.ServiceInterface;
     using Serilog;
 
-    [AuthFilter(RoleName = "User")]
     public class CaseManagementService : Service
     {
         private readonly ICaseBusinessLogic CaseBusinessLogic;
