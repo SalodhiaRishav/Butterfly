@@ -11,24 +11,27 @@
             <div
               v-b-tooltip.hover
               :title="caseTitle"
-              class="col-sm-3 box"
-              style="line-height:33px"
+              class="col-sm-3 box box-blue margin-left-30"
             >
               <span class="heading">{{ caseCount }}</span>
               <br />
               <div>
-                <span class="counter">Cases</span>
+                <span
+                  class="count"
+                >Cases</span>
               </div>
             </div>
             <div
               v-b-tooltip.hover
               :title="declarationTitle"
-              class="col-sm-3 box box-blue margin-left-30"
+              class="col-sm-3 box box-green margin-left-30"
             >
               <span class="heading">{{ declarationCount }}</span>
               <br />
               <div>
-                <span class="count">Declaration</span>
+                <span
+                  class="count"
+                >Declarations</span>
               </div>
             </div>
           </div>
@@ -42,29 +45,36 @@
                 :chartData="chartData"
               ></appBarGraph>
             </div>
-            <!-- <div class="col-sm-5 box box-white margin-left-22">
-              <h1 style="color:black">Graph 2</h1>
-            </div> -->
+            <div class="col-sm-5 box box-white margin-left-22" v-if="dataFetched">
+              <h1 style="color:black">
+                <appGroupedBarGraph chartTitle="Case Progress Chart" xAxisHeading="Priority & Status" yAxisHeading="Percentage" :chartData="groupedBarChartData"></appGroupedBarGraph>   
+              </h1>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import SideBar from "./SideBar";
 import Navigationbar from "./Navigationbar";
 import httpClient from "./../utils/httpRequestWrapper";
+import GroupedBarGraph from "./GroupedBarGraph";
 import BarGraph from "./BarGraph";
 
 export default {
   components: {
     appSideBar: SideBar,
     appNavigationbar: Navigationbar,
+    appGroupedBarGraph:GroupedBarGraph,
+    appNavigationbar: Navigationbar,
     appBarGraph: BarGraph
   },
   data() {
     return {
+      dataFetched:false,
       caseCount: 0,
       declarationCount: 0,
       declarationTitle: "",
@@ -86,7 +96,9 @@ export default {
           value: 0,
           barColor: "red"
         }
-      ]
+      ],
+      caseTitle: "",
+      groupedBarChartData:null
     };
   },
   created() {
@@ -95,8 +107,39 @@ export default {
     this.getDeclarationsInLastSevenDays();
     this.getStatusCount();
     this.getCaseCount();
+    this.getFilteredCaseCount();
   },
   methods: {
+    getFilteredCaseCount(){
+      const url = "/filtercasecount";
+      httpClient
+      .get(url)
+      .then(response => {
+        console.log(response);
+         if(response.data.success === true){
+          const inProgressHigh = response.data.data.inProcessHigh;
+          const inProgressMed =  response.data.data.inProcessMed;
+          const inProgressLow = response.data.data.inProcessLow;
+          const closedHigh = response.data.data.closeHigh;
+          const closedMedium = response.data.data.closeMed;
+          const closedLow = response.data.data.closeLow;
+          
+          const obj={
+               labels:["In Process","Closed"],
+               dataLabels:["High","Medium","Low"],
+               dataLabelColors:["Green","Blue","Red"],
+               data:[[inProgressHigh,inProgressMed,inProgressLow],[closedHigh,closedMedium,closedLow]]
+             };
+          this.groupedBarChartData=obj;
+          this.dataFetched=true;
+        } else{
+        console.log(response.data.message);
+       }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
     getDeclarationCount() {
       const url = "/declarationcount";
       httpClient

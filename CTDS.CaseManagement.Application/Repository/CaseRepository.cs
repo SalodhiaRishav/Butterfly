@@ -40,7 +40,7 @@
                     (cs, ci) => new { cs.Status, ci.Priority })
                     .GroupBy(cs => cs.Status).ToList();
 
-                Dictionary<string, int> filteredList = new Dictionary<string, int>();
+                var filteredList = new Dictionary<string, int>();
                 foreach (var item in a)
                 {
                     var processing = item.GroupBy(x => x.Priority).ToList();
