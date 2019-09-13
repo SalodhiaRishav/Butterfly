@@ -112,6 +112,7 @@ export default {
     getAllCases: function(val) {
       const url = "/casemanagement";
       const index = parseInt(val);
+      console.log("index:"+index);
       httpClient
         .get(url, index)
         .then(response => {

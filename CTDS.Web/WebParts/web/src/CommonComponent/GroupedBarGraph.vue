@@ -142,8 +142,8 @@ export default {
 
       d3.select(".groupBarGraphXAxis")
         .append("text")
-        .attr("y", this.height - 250)
-        .attr("x", this.width / 2)
+        .attr("y", this.height - 304)
+        .attr("x", (this.width / 2 )+50)
         .attr("text-anchor", "end")
         .text(this.xAxisHeading)
         .attr("fill", this.xAxisHeadingFontColor)
