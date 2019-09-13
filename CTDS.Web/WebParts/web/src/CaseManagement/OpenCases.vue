@@ -9,14 +9,15 @@
         :items="openCases"
         :current-page="currentPage"
         :per-page="perPage"
+        @head-clicked="sortData"
         @row-clicked="editCase"
       >
-        <span slot-scope="data" slot="status">
-          <appCaseStatusDropDown :defaultValue="data.item.caseStatus">
+        <span slot-scope="data" slot="Status">
+          <appCaseStatusDropDown :defaultValue="data.item.Status">
           </appCaseStatusDropDown>
         </span>
-        <span slot-scope="data" slot="priority">
-          <appCasePriorityDropDown :defaultValue="data.item.casePriority">
+        <span slot-scope="data" slot="Priority">
+          <appCasePriorityDropDown :defaultValue="data.item.Priority">
           </appCasePriorityDropDown>
         </span>
       </b-table>
@@ -46,7 +47,7 @@ export default {
     appCasePriorityDropDown: CasePriorityDropDown
   },
   mounted() {
-    this.getAllCases(1);
+    this.getAllCases(1, this.sortOrder);
   },
   data() {
     return {
@@ -54,44 +55,49 @@ export default {
       openCases: [],
       currentPage: 1,
       perPage: 3,
+      sortOrder:"CaseId",
       totalRows: 0,
       fields: [
         {
-          key: "caseId",
-          sortable: true
+          key: "CaseId",
+          sortable: false
         },
         {
-          key: "createdDate",
-          sortable: true
+          key: "CreatedDate",
+          sortable: false
         },
         {
-          key: "status",
-          sortable: true
+          key: "Status",
+          sortable: false
         },
         {
-          key: "description",
-          sortable: true
+          key: "Description",
+          sortable: false
         },
         {
-          key: "client",
-          sortable: true
+          key: "Client",
+          sortable: false
         },
         {
-          key: "priority",
-          sortable: true
+          key: "Priority",
+          sortable: false
         },
         {
-          key: "references",
-          sortable: true
+          key: "References",
+          sortable: false
         },
         {
-          key: "notes",
-          sortable: true
+          key: "Notes",
+          sortable: false
         }
       ]
     };
   },
   methods: {
+    sortData(key,val2,val3){
+      this.sortOrder = key;
+      this.getAllCases(1,this.sortOrder);
+    },
     getNewData(val) {
       this.currentPage = parseInt(val);
       this.getAllCases(val);
@@ -109,15 +115,15 @@ export default {
       const url = `/case/${caseToEdit.id}`;
       this.$router.push(url);
     },
-    getAllCases: function(val) {
+    getAllCases: function(val, orderBy) {
       const url = "/casemanagement";
       const index = parseInt(val);
-      console.log("index:"+index);
+      console.log("index:"+index, "orderBy: "+orderBy);
       httpClient
-        .get(url, index)
+        .get(url, index, orderBy)
         .then(response => {
           if (response.data === "token refreshed") {
-            this.getAllCases(index);
+            this.getAllCases(index, orderBy);
             return;
           }
           if (response.data.success === true) {
@@ -138,15 +144,15 @@ export default {
               }
 
               let obj = {
-                caseId: "KGH-19-" + this.allCases[i].caseId,
+                CaseId: "KGH-19-" + this.allCases[i].caseId,
                 id: this.allCases[i].id,
-                createdDate: this.convertDate(this.allCases[i].createdOn),
-                caseStatus: this.allCases[i].caseStatus.status,
-                description: this.allCases[i].caseInformation.description,
-                client: this.allCases[i].client.clientIdentifier,
-                notes: this.allCases[i].notes.notesByCpa,
-                casePriority: this.allCases[i].caseInformation.priority,
-                references: referencesString
+                CreatedDate: this.convertDate(this.allCases[i].createdOn),
+                Status: this.allCases[i].caseStatus.status,
+                Description: this.allCases[i].caseInformation.description,
+                Client: this.allCases[i].client.clientIdentifier,
+                Notes: this.allCases[i].notes.notesByCpa,
+                Priority: this.allCases[i].caseInformation.priority,
+                References: referencesString
               };
               openCase.push(obj);
             }

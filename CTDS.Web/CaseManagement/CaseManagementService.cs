@@ -187,7 +187,7 @@
             try
             {
 
-                List<CaseDto> caseDtos = CaseBusinessLogic.GetAllCases(request.index);
+                List<CaseDto> caseDtos = CaseBusinessLogic.GetAllCases(request.index, request.orderBy);
                 if(caseDtos==null)
                 {
                     operationResponse.OnError("No Case found", null);

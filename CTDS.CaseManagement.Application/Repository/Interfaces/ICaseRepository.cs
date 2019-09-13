@@ -7,7 +7,6 @@
     {
         int FindCaseCount();
         int FindCasesInLastSevenDays();
-        List<Case> GetCases(int index);
         Dictionary<string,int> FindFilteredCaseCount();
         
     }

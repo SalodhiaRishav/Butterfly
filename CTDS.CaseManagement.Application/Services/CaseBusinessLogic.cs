@@ -8,6 +8,7 @@
     using CTDS.CaseManagement.Contracts.Dto;
     using CTDS.CaseManagement.Contracts.Interfaces;
     using CTDS.Database.Models.CaseManagement;
+    using CTDS.Common.ExtensionMethods;
 
     public class CaseBusinessLogic : ICaseBusinessLogic
     {
@@ -151,12 +152,13 @@
             return myDto;
         }
 
-        public List<CaseDto> GetAllCases(int index)
+        public List<CaseDto> GetAllCases(int index, string orderBy)
         {
             List<CaseDto> caseDtos = new List<CaseDto>();
             try
             {
-                List<Case> cases = CaseRepository.GetCases(index);
+                int maxRows = 3;
+                List<Case> cases = CaseRepository.List;
                 if (cases.Count == 0)
                 {
                     return null;
@@ -175,7 +177,9 @@
                     caseDto.References = CaseReferenceBusinessLogic.GetCaseReferencesByCaseId(@case.Id);
                     caseDtos.Add(caseDto);
                 }
-                return caseDtos;
+                var query = caseDtos.AsQueryable();
+                var list = query.CustomOrderBy(orderBy).Skip((index - 1) * maxRows).Take(3).ToList();
+                return list;
 
             }
             catch (Exception exception)

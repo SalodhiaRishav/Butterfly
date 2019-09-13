@@ -12,7 +12,7 @@
         CaseDto GetCaseById(Guid caseId);
         void DeleteCaseById(Guid caseId);
         //List<CaseDto> GetAllCases();
-        List<CaseDto> GetAllCases(int index);
+        List<CaseDto> GetAllCases(int index, string orderBy);
 
         CaseDto EditCase(Guid caseId, ClientDto clientDto, CaseInformationDto caseInformationDto, NotesDto notesDto, CaseStatusDto caseStatusDto, List<CaseReferenceDto> caseReferenceDtos);
         int GetCaseCount();

@@ -59,8 +59,7 @@ import Navigationbar from "./Navigationbar";
 import httpClient from "./../utils/httpRequestWrapper";
 import GroupedBarGraph from "./GroupedBarGraph";
 import BarGraph from "./BarGraph";
-  import PieChart from "./PieChart.js";
-  import GroupedBarGraph from "./GroupedBarGraph";
+import PieChart from "./PieChart.js";
 
 
 export default {
@@ -75,7 +74,7 @@ export default {
   },
   data() {
     return {
-       chartOptions: {},
+      chartOptions: {},
       declarationChartDataFetched:false,
       declarationChartData: {},
       dataFetched:false,
@@ -83,6 +82,7 @@ export default {
       declarationCount: 0,
       declarationTitle: "",
       caseCount: 0,
+      caseTitle:"",
       onDash2:true,
       val:"",
       chartData:[    

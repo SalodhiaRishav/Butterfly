@@ -6,5 +6,6 @@
     public class GetAllCases
     {
         public int index { get; set; }
+        public string orderBy { get; set; }
     }
 }
