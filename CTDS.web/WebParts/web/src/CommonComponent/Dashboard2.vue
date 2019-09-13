@@ -57,6 +57,7 @@
 import SideBar from "./SideBar";
 import Navigationbar from "./Navigationbar";
 import httpClient from "./../utils/httpRequestWrapper";
+import GroupedBarGraph from "./GroupedBarGraph";
 import BarGraph from "./BarGraph";
 import PieChart from "./PieChart.js";
 
