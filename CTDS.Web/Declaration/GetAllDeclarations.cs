@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
 
-    using CTDS.Declarations.Application.Services;
     using CTDS.Declarations.Contracts.DeclarationDTO;
     using CTDS.Declarations.Contracts.EndPoints;
     using CTDS.Web.Authentication.Filters;
