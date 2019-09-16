@@ -100,7 +100,7 @@ export default {
     },
     getNewData(val) {
       this.currentPage = parseInt(val);
-      this.getAllCases(val);
+      this.getAllCases(this.currentPage,this.sortOrder);
     },
     convertDate(someDate) {
       return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
