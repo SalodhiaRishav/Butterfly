@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="background-color:#eee;">
-      <appNavigationbar :onDash2="onDash2"></appNavigationbar>
+      <appNavigationbar></appNavigationbar>
      <div class="row" style="margin-top:10px; margin-right:15px">
           <div
             v-b-tooltip.hover
@@ -113,7 +113,6 @@ export default {
       declarationInProcess:"",
       caseCount: 0,
       caseTitle: "",
-      onDash2: true,
       val: "",
       chartData: [
         {
@@ -148,9 +147,6 @@ export default {
       httpClient
         .get(url)
         .then(response => {
-          console.log("hola");
-          console.log(response);
-          console.log("hola");
           if (response.data.success === true) {
             const inProgressHigh = response.data.data.inProcessHigh;
             const inProgressMed = response.data.data.inProcessMed;
@@ -246,7 +242,6 @@ export default {
               response.data.data.rejected,
               response.data.data.processing
             ];
-            // console.log(pieChartData);
             const declarationChartData = {
               hoverBackgroundColor: "red",
               hoverBorderWidth: 10,

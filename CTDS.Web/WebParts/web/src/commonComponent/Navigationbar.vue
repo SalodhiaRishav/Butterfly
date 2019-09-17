@@ -1,14 +1,15 @@
 <template>
   <div>
-    <b-navbar class="nav-bg-color nav-overide" type="dark">
+    <b-navbar class="nav-bg-color nav-overide" toggleable="lg" type="dark">
+      <b-navbar-brand  href="#">CTDS</b-navbar-brand>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <router-link to="/home" active-class="active" tag="b-nav-item">{{
           language.lang.home
         }}</router-link>
         <b-nav-item-dropdown
           :text="language.lang.caseManagement"
-          v-show="!onDash2"
-          right
         >
           <router-link to="/case" active-class="active" tag="b-dropdown-item">{{
             language.lang.createNewCase
@@ -16,8 +17,6 @@
         </b-nav-item-dropdown>
         <b-nav-item-dropdown
           :text="language.lang.declaration"
-          v-show="!onDash2"
-          right
         >
           <router-link
             to="/declarationform"
@@ -27,21 +26,27 @@
           >
         </b-nav-item-dropdown>
       </b-navbar-nav>
-      <div class="row">
+     
+       <b-navbar-nav class="ml-auto">
+          <!-- <div class="row">
         <div class="col-sm-7">
-          <b-form-select
+         
+        </div>
+      </div> -->
+        <b-nav-form>
+           <b-form-select
             style="background-color: #6a54a6; color: #a89bcb;"
             @change="changeLanguage()"
             v-model="selected"
             :options="languages"
           ></b-form-select>
-        </div>
-        <div class="col-sm-5">
-          <button class="btn-style" style="padding-top:7px" v-on:click="logout">
-            {{ language.lang.logout }}
-          </button>
-        </div>
-      </div>
+        </b-nav-form>
+
+          <b-nav-item @click="logout" right>
+          {{ language.lang.logout }}
+          </b-nav-item>
+      </b-navbar-nav>
+      </b-collapse>
     </b-navbar>
   </div>
 </template>
@@ -52,9 +57,6 @@ import allLanguages from "./../utils/languageSwitch";
 import caseManagementLabels from "./../caseManagement/utils/caseManagementLabels";
 
 export default {
-  props: {
-    onDash2: Boolean
-  },
   computed: {
     language: function() {
       return { lang: allLanguages.lang[this.selected].form };
