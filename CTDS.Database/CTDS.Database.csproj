@@ -151,6 +151,10 @@
     <Compile Include="Migrations\201909050857226_addedstatus.Designer.cs">
       <DependentUpon>201909050857226_addedstatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909181046494_tempIDGenerationOff.cs" />
+    <Compile Include="Migrations\201909181046494_tempIDGenerationOff.Designer.cs">
+      <DependentUpon>201909181046494_tempIDGenerationOff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Authentication\Role.cs" />
     <Compile Include="Models\Authentication\User.cs" />
@@ -224,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909050857226_addedstatus.resx">
       <DependentUpon>201909050857226_addedstatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909181046494_tempIDGenerationOff.resx">
+      <DependentUpon>201909181046494_tempIDGenerationOff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
