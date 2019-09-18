@@ -9,6 +9,7 @@ import EditDeclaration from "./../declaration/EditDeclaration.vue";
 import Login from "./../commonComponent/Login.vue";
 import Unauthorize from "./../commonComponent/Unauthorize.vue";
 import Dashboard2 from "./../commonComponent/Dashboard2.vue";
+import TileChecker from "./../commonComponent/TileChecker.vue";
 
 Vue.use(Router);
 
@@ -132,6 +133,11 @@ const router = new Router({
       path: "/dash2",
       name: "dashboard2.0",
       component: Dashboard2
+    },
+    {
+      path: "/tilechecker",
+      name: "dashboard2.0",
+      component: TileChecker
     },
   ],
   mode: "history"

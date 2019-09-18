@@ -28,11 +28,6 @@
       </b-navbar-nav>
      
        <b-navbar-nav class="ml-auto">
-          <!-- <div class="row">
-        <div class="col-sm-7">
-         
-        </div>
-      </div> -->
         <b-nav-form>
            <b-form-select
             style="background-color: #6a54a6; color: #a89bcb;"
