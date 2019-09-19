@@ -10,6 +10,7 @@
                    </div>
                    <div class="col-9 chartDiv">
                     <div> <line-chart :width="100" :height="100" :data="chartData" :options="chartOptions"></line-chart></div>
+                    <div class="chartTitle">{{chartTitle}}</div>
                    </div>
                </div>
           </div>
@@ -86,6 +87,10 @@ export default {
        title:{
            type:String,
            default:"Title"
+       },
+       chartTitle:{
+           type:String,
+           default:"Chart Title"
        }
     }
 };

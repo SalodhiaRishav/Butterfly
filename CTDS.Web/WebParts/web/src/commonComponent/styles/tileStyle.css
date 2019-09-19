@@ -17,6 +17,10 @@
     background: linear-gradient(to right, rgb(224, 85, 74), rgb(245, 19, 2));
 }
 
+.box-darkblue{
+    background: linear-gradient(to right, rgb(57, 108, 168), rgb(3, 45, 94));
+}
+
 .box-white{
     background:white;
 }
@@ -34,5 +38,11 @@
 } 
 
 .chartDiv{
-    height:100px;
+    padding-top:40px;
+}
+
+.chartTitle{
+    font-size: 13px;
+    margin-top: 5px;
+    text-align: center;
 }

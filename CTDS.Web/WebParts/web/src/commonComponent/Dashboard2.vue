@@ -4,7 +4,7 @@
       <appNavigationbar></appNavigationbar>
      <div class="row tilesRow">
          <div class="col-sm-4 col-md-3 tileBox">
-        <appTile tooltipTitle="Total Declarations" :counter=declarationCount title="Declaration"  :chartData="caseTileChartData"></appTile>
+        <appTile boxColor="darkblue" tooltipTitle="Total Declarations" :counter=declarationCount title="Declaration"  :chartData="caseTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart boxColor="green" tooltipTitle="Declaration Cleared in last seven days" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
@@ -18,7 +18,7 @@
       </div>
       <div class="row tilesRow">
          <div class="col-sm-4 col-md-3 tileBox">
-        <appTile tooltipTitle="Total Declarations" :counter=declarationCount title="Declaration"  :chartData="caseTileChartData"></appTile>
+        <appTile boxColor="darkblue" tooltipTitle="Total Declarations" :counter=declarationCount title="Declaration"  :chartData="caseTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart boxColor="green" tooltipTitle="Declaration Cleared in last seven days" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
