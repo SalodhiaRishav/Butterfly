@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{89B99C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTDS.Common", "CTDS.Common\CTDS.Common.csproj", "{0D87B9BC-3D6E-427C-8DF6-83AA9310889E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseUtils", "DatabaseUtils\DatabaseUtils.csproj", "{0115E2C8-DA71-4C2A-A583-444E8AEE4981}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{0D87B9BC-3D6E-427C-8DF6-83AA9310889E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D87B9BC-3D6E-427C-8DF6-83AA9310889E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D87B9BC-3D6E-427C-8DF6-83AA9310889E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0115E2C8-DA71-4C2A-A583-444E8AEE4981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0115E2C8-DA71-4C2A-A583-444E8AEE4981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0115E2C8-DA71-4C2A-A583-444E8AEE4981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0115E2C8-DA71-4C2A-A583-444E8AEE4981}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

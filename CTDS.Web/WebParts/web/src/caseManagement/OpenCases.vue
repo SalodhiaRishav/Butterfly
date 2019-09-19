@@ -119,9 +119,11 @@ export default {
       const url = "/casemanagement";
       const index = parseInt(val);
       console.log("index:"+index, "orderBy: "+orderBy);
+
       httpClient
         .get(url, index, orderBy)
         .then(response => {
+          console.log(response);
           if (response.data === "token refreshed") {
             this.getAllCases(index, orderBy);
             return;

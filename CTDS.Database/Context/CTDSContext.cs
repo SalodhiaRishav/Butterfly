@@ -2,6 +2,7 @@
 namespace CTDS.Database.Context
 {
     using System.Data.Entity;
+    using System.Configuration;
 
     using CTDS.Database.Models.Declarations;
     using CTDS.Database.Configurations.Declaration;
@@ -13,7 +14,13 @@ namespace CTDS.Database.Context
 
     public class CTDSContext : DbContext
     {
+        //private static string connection =
+        //ConfigurationManager.ConnectionStrings["CTDSContext"].ConnectionString;
         public CTDSContext() : base("CTDSContext")
+        {
+
+        }
+        public CTDSContext(string connectionString) :base(connectionString)
         {
 
         }
