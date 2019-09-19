@@ -1,18 +1,21 @@
 <template>
         <div class="row">
+        <appTileWithGaugeChart tooltipTitle="Total Cleared Declarations" :counter=4 title="Declaration"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+<!-- <appTile tooltipTitle="Declarations" counter=4 title="Declarations" :chartOptions="chartOptions" :chartData="chartData"></appTile>
 <appTile tooltipTitle="Declarations" counter=4 title="Declarations" :chartOptions="chartOptions" :chartData="chartData"></appTile>
 <appTile tooltipTitle="Declarations" counter=4 title="Declarations" :chartOptions="chartOptions" :chartData="chartData"></appTile>
-<appTile tooltipTitle="Declarations" counter=4 title="Declarations" :chartOptions="chartOptions" :chartData="chartData"></appTile>
-<appTile tooltipTitle="Declarations" counter=4 title="Declarations" :chartOptions="chartOptions" :chartData="chartData"></appTile>
+<appTile tooltipTitle="Declarations" counter=4 title="Declarations" :chartOptions="chartOptions" :chartData="chartData"></appTile> -->
         </div>
 </template>
 
 <script>
 import Tile from "./Tile";
+import TileWithGaugeChart from "./TileWithGaugeChart"
 
 export default {
    components:{
        appTile:Tile,
+       appTileWithGaugeChart:TileWithGaugeChart
    },
   data: () => {
     return {

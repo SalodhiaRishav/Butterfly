@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import LineChart from "./LineChart.js";
+import LineChart from "./PieChart.js";
 
 export default {
     computed:{
@@ -28,41 +28,15 @@ export default {
     data: () => {
         return {
        chartOptions: {
-         maintainAspectRatio:false,
-        legend: {
-            display: false,
+            maintainAspectRatio:false,
+            legend: {
+                display: false,
+            },
+            circumference: 1 * Math.PI,
+            rotation: 1 * Math.PI,
+            cutoutPercentage: 55
         },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontColor: "rgba(0,0,0,0.5)",
-                    beginAtZero: true,
-                    maxTicksLimit: 3,
-                    padding: 0.5,
-                    display: false
-                },
-                gridLines: {
-                      scaleShowLabels: false,
-                    drawBorder: false,
-                     drawTicks: false,
-                    display: false
-                }
-             }],
-            xAxes: [{
-                gridLines: {
-                    drawBorder: false,
-                     drawTicks: false,
-                    display: false
-                },
-                ticks: {
-                    padding: 2,
-                    fontColor: "rgba(0,0,0,0.5)",
-                    maxTicksLimit: 7,
-                }
-            }]
-        },
-    }
-        };
+      };
     },
     components:{
         LineChart

@@ -2,65 +2,33 @@
   <div>
     <div style="background-color:#eee;">
       <appNavigationbar></appNavigationbar>
-     <div class="row" style="margin-top:10px; margin-right:15px">
-          <div
-            v-b-tooltip.hover
-            :title="caseTitle"
-            class="col-sm-4 col-md-2 box box-blue margin-left-39"
-            style="line-height:33px"
-          >
-            <span class="heading">{{caseCount}}</span>
-            <br />
-            <div>
-              <span class="counter">Cases</span>
-            </div>
-          </div>
+     <div class="row tilesRow">
+         <div class="col-sm-4 col-md-3 tileBox">
+        <appTile tooltipTitle="Total Declarations" :counter=declarationCount title="Declaration"  :chartData="caseTileChartData"></appTile>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="green" tooltipTitle="Declaration Cleared in last seven days" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="blue" tooltipTitle="Declaration InProcess in last seven days" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="red" tooltipTitle="Declaration Rejected in last seven days" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+       </div>
       </div>
-      <div class="row" style="margin-top:10px; margin-right:15px">
-          <div
-            v-b-tooltip.hover
-            :title="declarationTitle"
-            class="col-sm-4 col-md-2 box box-blue margin-left-39"
-          >
-            <span class="heading">{{declarationCount}}</span>
-            <br />
-            <div>
-              <span class="counter">Declaration</span>
-            </div>
-          </div>
-          <div
-            v-b-tooltip.hover
-            :title="declarationTitle"
-            class="col-sm-4 col-md-2 box box-blue margin-left-39"
-          >
-            <span class="heading">{{declarationInProcess}}</span>
-            <br />
-            <div>
-              <span class="counter">Declaration in Process</span>
-            </div>
-          </div>
-           <div
-            v-b-tooltip.hover
-            :title="declarationTitle"
-            class="col-sm-4 col-md-2 box box-blue margin-left-39"
-          >
-            <span class="heading">{{declarationCleared}}</span>
-            <br />
-            <div>
-              <span class="counter">Declaration Cleared</span>
-            </div>
-          </div>
-          <div
-            v-b-tooltip.hover
-            :title="declarationTitle"
-            class="col-sm-4 col-md-2 box box-blue margin-left-39"
-          >
-            <span class="heading">{{declarationRejected}}</span>
-            <br />
-            <div>
-              <span class="counter">Declaration Rejected</span>
-            </div>
-          </div>
+      <div class="row tilesRow">
+         <div class="col-sm-4 col-md-3 tileBox">
+        <appTile tooltipTitle="Total Declarations" :counter=declarationCount title="Declaration"  :chartData="caseTileChartData"></appTile>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="green" tooltipTitle="Declaration Cleared in last seven days" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="blue" tooltipTitle="Declaration InProcess in last seven days" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="red" tooltipTitle="Declaration Rejected in last seven days" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+       </div>
       </div>
         <div class="row" style="margin-top:10px; margin-right:15px">
           <div class="col-md-5 box box-white margin-left-39 box-height-572">
@@ -89,6 +57,10 @@ import httpClient from "./../utils/httpRequestWrapper";
 import GroupedBarGraph from "./GroupedBarGraph";
 import BarGraph from "./BarGraph";
 import PieChart from "./PieChart.js";
+import Tile from "./Tile";
+import TileWithoutChart from "./TileWithoutChart";
+import TileWithGaugeChart from "./TileWithGaugeChart";
+
 
 export default {
   components: {
@@ -97,10 +69,40 @@ export default {
     appGroupedBarGraph: GroupedBarGraph,
     appNavigationbar: Navigationbar,
     appBarGraph: BarGraph,
-    PieChart
+    PieChart,
+    appTile:Tile,
+    appTileWithoutChart:TileWithoutChart,
+    appTileWithGaugeChart:TileWithGaugeChart
   },
   data() {
     return {
+      declarationInProcessChartData:{
+           labels: ["Cleared", "Remaining", ],
+            datasets: [{
+                label: "My First dataset",
+                backgroundColor: ["white","#66000000"],
+                borderColor: '#fff',
+                borderWidth:0.7,
+                data: [5, 10],
+            }]
+      },
+       caseTileChartData: {
+         labels: ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'],
+        datasets: [{
+            borderColor: "#ffffff",
+            pointBorderColor: "#ffffff",
+            pointBackgroundColor: "#ffffff",
+            pointHoverBackgroundColor: "#66000000",
+            pointHoverBorderColor: "#0000ff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 0.5,
+            pointRadius: 4,
+            fill: false,
+            borderWidth: 1,
+            data: [100, 120, 150, 170, 180, 170, 300]
+        }]
+    },
       chartOptions: {},
       declarationChartDataFetched: false,
       declarationChartData: {},

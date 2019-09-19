@@ -1,18 +1,15 @@
-
-.margin-left-39{
-    margin-left:39px;
+.tileWithoutChartTitle{
+    font-family:'Source Sans Pro', sans-serif; 
+    font-size:22px; 
+    font-weight:500;
+    word-wrap:break-word;
+    
 }
-.margin-left-22{
-    margin-left:22px;
+.tileWithoutChartCounter{
+    font-family:'Source Sans Pro', sans-serif; 
+    font-size:50px; 
+    font-weight:900;
 }
-.margin-right-left-10{
-    margin-left:10px;
-    margin-right:10px;
-}
-.box-height-572{
-    height: 572px;
-}
-
 .box{
     background: white;
     color:white;  
@@ -32,11 +29,6 @@
     background:white;
 }
 
-.tileBox{
-    margin-top:15px;
-}
-
-.tilesRow{
-margin-left:10px;
-margin-right: 10px;
+.box-red{
+    background: linear-gradient(to right, rgb(224, 85, 74), rgb(245, 19, 2));
 }
