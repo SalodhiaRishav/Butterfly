@@ -27,9 +27,14 @@
         </div>
       </b-col>
       <b-col>
-        <div style="float : right; cursor:pointer;">
+        <div style="float : right; cursor:pointer;" v-hotkey="keymap">
           <font-awesome-icon icon="save" @click="editCase" />
         </div>
+        <div style="float : right; cursor:pointer;">
+           <router-link to="/home" active-class="active">
+             <font-awesome-icon icon="window-close" />
+           </router-link>
+         </div>
         <br />
         <br />
         <b-modal id="error-modal">
@@ -139,6 +144,11 @@ export default {
     },
     labels: function() {
       return this.$store.getters.caseManagementLabels;
+    },
+    keymap: function() {
+       return{
+         'ctrl+V': this.editCase
+       }
     }
   }
 };
