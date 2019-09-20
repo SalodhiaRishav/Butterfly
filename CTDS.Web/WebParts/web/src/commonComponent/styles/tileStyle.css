@@ -4,9 +4,8 @@
     padding: 12px 18px 12px 18px;
     border-radius: .375rem;
     border: none;
-    margin:15px 32px 15px 32px;
     box-shadow: 0 2px 3px 0 rgba(52,56,85,.25);
-    height:120px;
+    height:190px;
 }
 .box-green{
     background: linear-gradient(to right, rgb(102, 229, 181), rgb(41, 224, 105));
@@ -14,39 +13,36 @@
 .box-blue{
     background: linear-gradient(to right, rgb(52, 181, 229), rgb(46, 132, 224));
 }
+.box-red{
+    background: linear-gradient(to right, rgb(224, 85, 74), rgb(245, 19, 2));
+}
+
+.box-darkblue{
+    background: linear-gradient(to right, rgb(57, 108, 168), rgb(3, 45, 94));
+}
+
 .box-white{
     background:white;
 }
-.margin-left-39{
-    margin-left:39px;
-}
-.margin-left-22{
-    margin-left:22px;
-}
-.margin-right-left-10{
-    margin-left:10px;
-    margin-right:10px;
-}
-.box-height-572{
-    height: 572px;
-}
-.heading{
-    font-size:30px;
+
+.tileCounter{
     font-family:'Source Sans Pro', sans-serif; 
-    font-size:50px; 
+    font-size:21px; 
     font-weight:900;
 }
-.counter{
-    font-family:'Source Sans Pro', sans-serif; 
-    font-size:32px; 
-    font-weight:500;
-    word-wrap:break-word;
-}
 
-.title{
-    font-size: 10px;
+.tileTitle{
+    font-family:'Source Sans Pro', sans-serif; 
+    font-size:15px; 
+    font-weight:500;
 } 
 
 .chartDiv{
-    height:100px;
+    padding-top:40px;
+}
+
+.chartTitle{
+    font-size: 13px;
+    margin-top: 5px;
+    text-align: center;
 }

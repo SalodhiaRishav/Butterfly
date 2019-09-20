@@ -2,67 +2,35 @@
   <div>
     <div style="background-color:#eee;">
       <appNavigationbar></appNavigationbar>
-     <div class="row" style="margin-top:10px; margin-right:15px">
-          <div
-            v-b-tooltip.hover
-            :title="caseTitle"
-            class="col-sm-4 col-md-2 box box-blue margin-left-39"
-            style="line-height:33px"
-          >
-            <span class="heading">{{caseCount}}</span>
-            <br />
-            <div>
-              <span class="counter">Cases</span>
-            </div>
-          </div>
+     <div class="row tilesRow" v-if="caseStatusDataFetched">
+         <div class="col-sm-4 col-md-3 tileBox">
+        <appTile boxColor="darkblue" tooltipTitle="Total Cases" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="green" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="blue" tooltipTitle="Cases In Process" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="red" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
+       </div>
       </div>
-      <div class="row" style="margin-top:10px; margin-right:15px">
-          <div
-            v-b-tooltip.hover
-            :title="declarationTitle"
-            class="col-sm-4 col-md-2 box box-blue margin-left-39"
-          >
-            <span class="heading">{{declarationCount}}</span>
-            <br />
-            <div>
-              <span class="counter">Declaration</span>
-            </div>
-          </div>
-          <div
-            v-b-tooltip.hover
-            :title="declarationTitle"
-            class="col-sm-4 col-md-2 box box-blue margin-left-39"
-          >
-            <span class="heading">{{declarationInProcess}}</span>
-            <br />
-            <div>
-              <span class="counter">Declaration in Process</span>
-            </div>
-          </div>
-           <div
-            v-b-tooltip.hover
-            :title="declarationTitle"
-            class="col-sm-4 col-md-2 box box-blue margin-left-39"
-          >
-            <span class="heading">{{declarationCleared}}</span>
-            <br />
-            <div>
-              <span class="counter">Declaration Cleared</span>
-            </div>
-          </div>
-          <div
-            v-b-tooltip.hover
-            :title="declarationTitle"
-            class="col-sm-4 col-md-2 box box-blue margin-left-39"
-          >
-            <span class="heading">{{declarationRejected}}</span>
-            <br />
-            <div>
-              <span class="counter">Declaration Rejected</span>
-            </div>
-          </div>
+      <div class="row tilesRow" v-if="declarationStatusDataFetched">
+         <div class="col-sm-4 col-md-3 tileBox">
+        <appTile boxColor="darkblue" tooltipTitle="Total Declarations" :counter=totalDeclaration title="Declaration"  :chartData="caseTileChartData"></appTile>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="green" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="blue" tooltipTitle="Declarations InProcess" chartTitle="Declarations In Process / Total Declarations" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+       </div>
+       <div class="col-sm-4 col-md-3 tileBox">
+        <appTileWithGaugeChart boxColor="red" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
+       </div>
       </div>
-        <div class="row" style="margin-top:10px; margin-right:15px">
+        <!-- <div class="row" style="margin-top:10px; margin-right:15px">
           <div class="col-md-5 box box-white margin-left-39 box-height-572">
             <appGroupedBarGraph
               chartTitle="Case Progress Chart"
@@ -78,7 +46,7 @@
           >
             <pie-chart :data="declarationChartData" :options="chartOptions"></pie-chart>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 </template>
@@ -89,6 +57,10 @@ import httpClient from "./../utils/httpRequestWrapper";
 import GroupedBarGraph from "./GroupedBarGraph";
 import BarGraph from "./BarGraph";
 import PieChart from "./PieChart.js";
+import Tile from "./Tile";
+import TileWithoutChart from "./TileWithoutChart";
+import TileWithGaugeChart from "./TileWithGaugeChart";
+
 
 export default {
   components: {
@@ -97,20 +69,55 @@ export default {
     appGroupedBarGraph: GroupedBarGraph,
     appNavigationbar: Navigationbar,
     appBarGraph: BarGraph,
-    PieChart
+    PieChart,
+    appTile:Tile,
+    appTileWithoutChart:TileWithoutChart,
+    appTileWithGaugeChart:TileWithGaugeChart
   },
   data() {
     return {
+
+      caseStatusDataFetched:false,
+      newCases:"",
+      closedCases:"",
+      inProcessCases:"",
+      totalCases:"",
+      caseNewChartData:{},
+      caseInProcessChartData:{},
+      caseClosedChartData:{},
+
+      declarationStatusDataFetched:false,
+      totalDeclaration:"",
+      declarationCleared:"",
+      declarationRejected:"",
+      declarationInProcess:"",
+      declarationClearedChartData:{},
+      declarationRejectedChartData:{},
+      declarationInProcessChartData:{},
+       caseTileChartData: {
+         labels: ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'],
+        datasets: [{
+            borderColor: "#ffffff",
+            pointBorderColor: "#ffffff",
+            pointBackgroundColor: "#ffffff",
+            pointHoverBackgroundColor: "#66000000",
+            pointHoverBorderColor: "#0000ff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 0.5,
+            pointRadius: 4,
+            fill: false,
+            borderWidth: 1,
+            data: [100, 120, 150, 170, 180, 170, 300]
+        }]
+    },
       chartOptions: {},
       declarationChartDataFetched: false,
       declarationChartData: {},
       dataFetched: false,
       caseCount: 0,
       declarationCount: 0,
-      declarationTitle: "",
-      declarationCleared:"",
-      declarationRejected:"",
-      declarationInProcess:"",
+      
       caseCount: 0,
       caseTitle: "",
       val: "",
@@ -154,18 +161,57 @@ export default {
             const closedHigh = response.data.data.closeHigh;
             const closedMedium = response.data.data.closeMed;
             const closedLow = response.data.data.closeLow;
+            const caseInProcess=inProgressHigh+inProgressMed+inProgressLow;
+            const closedCases=closedHigh+closedMedium+closedLow;
+            const newCases=6;
+            const totalCases=caseInProcess+closedCases+newCases;
 
-            const obj = {
-              labels: ["In Process", "Closed"],
-              dataLabels: ["High", "Medium", "Low"],
-              dataLabelColors: ["Green", "Blue", "Red"],
-              data: [
-                [inProgressHigh, inProgressMed, inProgressLow],
-                [closedHigh, closedMedium, closedLow]
-              ]
+             const  caseInProcessChartData={
+            labels: ["InProcess", "Others", ],
+              datasets: [{
+                  backgroundColor: ["white","#66000000"],
+                  borderColor: '#fff',
+                  borderWidth:0.7,
+                  data: [caseInProcess,totalCases-caseInProcess ],
+              }]
             };
-            this.groupedBarChartData = obj;
-            this.dataFetched = true;
+            const  caseClosedChartData={
+            labels: ["Closed", "Others", ],
+              datasets: [{
+                  backgroundColor: ["white","#66000000"],
+                  borderColor: '#fff',
+                  borderWidth:0.7,
+                  data: [closedCases, totalCases-closedCases],
+              }]
+            };
+            const  caseNewChartData={
+            labels: ["New", "Others", ],
+              datasets: [{
+                  backgroundColor: ["white","#66000000"],
+                  borderColor: '#fff',
+                  borderWidth:0.7,
+                  data: [newCases, totalCases-newCases],
+              }]
+            }
+            this.caseNewChartData=caseNewChartData;
+            this.caseClosedChartData=caseClosedChartData;
+            this.caseInProcessChartData=caseInProcessChartData;
+            this.closedCases=closedCases;
+            this.newCases=newCases;
+            this.inProcessCases=caseInProcess;
+            this.totalCases=totalCases;
+            this.caseStatusDataFetched=true;
+            // const obj = {
+            //   labels: ["In Process", "Closed"],
+            //   dataLabels: ["High", "Medium", "Low"],
+            //   dataLabelColors: ["Green", "Blue", "Red"],
+            //   data: [
+            //     [inProgressHigh, inProgressMed, inProgressLow],
+            //     [closedHigh, closedMedium, closedLow]
+            //   ]
+            // };
+            // this.groupedBarChartData = obj;
+            // this.dataFetched = true;
           } else {
             console.log(response.data.message);
           }
@@ -221,41 +267,80 @@ export default {
         .get(url)
         .then(response => {
           if (response.data.success === true) {
-            const options = {
-              hoverBorderWidth: 20,
-              borderWidth: 10,
-              hoverBackgroundColor: "red",
-              title: {
-                display: true,
-                text: "Declaration vs Status",
-                fontSize: 24
-              },
-              responsive: true,
-              maintainAspectRatio: false
+            const declarationCleared = response.data.data.cleared;
+             const declarationRejected = response.data.data.rejected;
+             const declarationInProcess = response.data.data.processing;
+             const totalDeclaration=declarationCleared+declarationRejected+declarationInProcess;
+            const  declarationInProcessChartData={
+            labels: ["InProcess", "Others", ],
+              datasets: [{
+                  backgroundColor: ["white","#66000000"],
+                  borderColor: '#fff',
+                  borderWidth:0.7,
+                  data: [declarationInProcess,totalDeclaration-declarationInProcess ],
+              }]
             };
-            this.declarationCleared = response.data.data.cleared;
-            this.declarationRejected = response.data.data.rejected;
-            this.declarationInProcess = response.data.data.processing;
-            this.chartOptions = options;
-            let pieChartData = [
-              response.data.data.cleared,
-              response.data.data.rejected,
-              response.data.data.processing
-            ];
-            const declarationChartData = {
-              hoverBackgroundColor: "red",
-              hoverBorderWidth: 10,
-              labels: ["Cleared", "Rejected", "Processing"],
-              datasets: [
-                {
-                  label: "Data One",
-                  backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
-                  data: pieChartData
-                }
-              ]
+             const  declarationClearedChartData={
+            labels: ["Cleared", "Remaining", ],
+              datasets: [{
+                  backgroundColor: ["white","#66000000"],
+                  borderColor: '#fff',
+                  borderWidth:0.7,
+                  data: [declarationCleared, totalDeclaration-declarationCleared],
+              }]
             };
-            this.declarationChartData = declarationChartData;
-            this.declarationChartDataFetched = true;
+            const  declarationRejectedChartData={
+            labels: ["Rejected", "Remaining", ],
+              datasets: [{
+                  backgroundColor: ["white","#66000000"],
+                  borderColor: '#fff',
+                  borderWidth:0.7,
+                  data: [declarationRejected, totalDeclaration-declarationRejected],
+              }]
+            };
+            this.declarationClearedChartData=declarationClearedChartData;
+            this.declarationRejectedChartData=declarationRejectedChartData;
+            this.declarationInProcessChartData=declarationInProcessChartData;
+            this.declarationCleared=declarationCleared;
+            this.declarationRejected=declarationRejected;
+            this.declarationInProcess=declarationInProcess;
+            this.totalDeclaration=totalDeclaration;
+            this.declarationStatusDataFetched=true;
+            // const options = {
+            //   hoverBorderWidth: 20,
+            //   borderWidth: 10,
+            //   hoverBackgroundColor: "red",
+            //   title: {
+            //     display: true,
+            //     text: "Declaration vs Status",
+            //     fontSize: 24
+            //   },
+            //   responsive: true,
+            //   maintainAspectRatio: false
+            // };
+            // this.declarationCleared = response.data.data.cleared;
+            // this.declarationRejected = response.data.data.rejected;
+            // this.declarationInProcess = response.data.data.processing;
+            // this.chartOptions = options;
+            // let pieChartData = [
+            //   response.data.data.cleared,
+            //   response.data.data.rejected,
+            //   response.data.data.processing
+            // ];
+            // const declarationChartData = {
+            //   hoverBackgroundColor: "red",
+            //   hoverBorderWidth: 10,
+            //   labels: ["Cleared", "Rejected", "Processing"],
+            //   datasets: [
+            //     {
+            //       label: "Data One",
+            //       backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+            //       data: pieChartData
+            //     }
+            //   ]
+            // };
+            // this.declarationChartData = declarationChartData;
+            // this.declarationChartDataFetched = true;
           } else {
             console.log(response.data.message);
           }
