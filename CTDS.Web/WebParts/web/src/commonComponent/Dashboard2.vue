@@ -3,8 +3,8 @@
     <div style="background-color:#eee;">
       <appNavigationbar></appNavigationbar>
      <div class="row tilesRow" v-if="caseStatusDataFetched">
-         <div class="col-sm-4 col-md-3 tileBox">
-        <appTile boxColor="darkblue" tooltipTitle="Total Cases" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
+         <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
+        <appTile boxColor="darkblue" tooltipTitle="Total Cases" :counter=totalCases title="Cases Last Week"  :chartData="caseTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart boxColor="green" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
@@ -17,8 +17,8 @@
        </div>
       </div>
       <div class="row tilesRow" v-if="declarationStatusDataFetched">
-         <div class="col-sm-4 col-md-3 tileBox">
-        <appTile boxColor="darkblue" tooltipTitle="Total Declarations" :counter=totalDeclaration title="Declaration"  :chartData="caseTileChartData"></appTile>
+         <div class="col-sm-4 col-md-3 tileBox" v-if="declarationLineChartDataFetched">
+        <appTile boxColor="darkblue" tooltipTitle="Total Declarations" :counter=totalDeclaration title="Declarations Last Week"  :chartData="declarationTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart boxColor="green" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
@@ -77,6 +77,8 @@ export default {
   data() {
     return {
 
+      declarationLineChartDataFetched:false,
+      caseLineChartDataFetched:false,
       caseStatusDataFetched:false,
       newCases:"",
       closedCases:"",
@@ -85,6 +87,8 @@ export default {
       caseNewChartData:{},
       caseInProcessChartData:{},
       caseClosedChartData:{},
+      caseTileChartData: {},
+      declarationTileChartData: {},
 
       declarationStatusDataFetched:false,
       totalDeclaration:"",
@@ -94,23 +98,6 @@ export default {
       declarationClearedChartData:{},
       declarationRejectedChartData:{},
       declarationInProcessChartData:{},
-       caseTileChartData: {
-         labels: ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'],
-        datasets: [{
-            borderColor: "#ffffff",
-            pointBorderColor: "#ffffff",
-            pointBackgroundColor: "#ffffff",
-            pointHoverBackgroundColor: "#66000000",
-            pointHoverBorderColor: "#0000ff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 7,
-            pointHoverBorderWidth: 0.5,
-            pointRadius: 4,
-            fill: false,
-            borderWidth: 1,
-            data: [100, 120, 150, 170, 180, 170, 300]
-        }]
-    },
       chartOptions: {},
       declarationChartDataFetched: false,
       declarationChartData: {},
@@ -147,8 +134,126 @@ export default {
     this.getDeclarationsInLastSevenDays();
     this.getStatusCount();
     this.getCaseCount();
+    this.getPerDayCaseCountLastWeek();
+    this.getPerDayDeclarationCountLastWeek();
   },
   methods: {
+    getPerDayDeclarationCountLastWeek() {
+      const url = "/perdaydeclarationcount";
+      httpClient
+      .get(url)
+      .then(response => {
+        if(response.data.success === true) {
+          const declarationCountList = response.data.data;
+          var weekday = new Array(7);
+          weekday[0] = "Su";
+          weekday[1] = "Mo";
+          weekday[2] = "Tu";
+          weekday[3] = "We";
+          weekday[4] = "Th";
+          weekday[5] = "Fr";
+          weekday[6] = "Sa";
+          const d = new Date();
+          var today = d.getDay();
+          const myLabels = new Array();
+          for(var i=1 ; i<=7;i++)
+          {
+            if(today < 6)
+            {
+              today = today + 1;
+            }
+            else
+            {
+              today = 0;
+            }
+            myLabels.push(weekday[today]);
+          }
+          const declarationTileChartData = {
+          labels: myLabels,
+          datasets: [{
+            borderColor: "#ffffff",
+            pointBorderColor: "#ffffff",
+            pointBackgroundColor: "#ffffff",
+            pointHoverBackgroundColor: "#66000000",
+            pointHoverBorderColor: "#0000ff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 0.5,
+            pointRadius: 4,
+            fill: false,
+            borderWidth: 1,
+            data: declarationCountList
+            }]
+          };
+          this.declarationTileChartData = declarationTileChartData;
+          this.declarationLineChartDataFetched=true;
+        }
+        else {
+            console.log(response.data.message);
+          }
+        })
+      .catch(error => {
+          console.log(error);
+      });
+    },
+    getPerDayCaseCountLastWeek() {
+      const url = "/perdaycasecount";
+      httpClient
+      .get(url)
+      .then(response => {
+        if(response.data.success === true) {
+          const caseCountList = response.data.data;
+          var weekday = new Array(7);
+          weekday[0] = "Su";
+          weekday[1] = "Mo";
+          weekday[2] = "Tu";
+          weekday[3] = "We";
+          weekday[4] = "Th";
+          weekday[5] = "Fr";
+          weekday[6] = "Sa";
+          const d = new Date();
+          var today = d.getDay();
+          const myLabels = new Array();
+          for(var i=1 ; i<=7;i++)
+          {
+            if(today < 6)
+            {
+              today = today + 1;
+            }
+            else
+            {
+              today = 0;
+            }
+            myLabels.push(weekday[today]);
+          }
+          const caseTileChartData = {
+          labels: myLabels,
+          datasets: [{
+            borderColor: "#ffffff",
+            pointBorderColor: "#ffffff",
+            pointBackgroundColor: "#ffffff",
+            pointHoverBackgroundColor: "#66000000",
+            pointHoverBorderColor: "#0000ff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 0.5,
+            pointRadius: 4,
+            fill: false,
+            borderWidth: 1,
+            data: caseCountList
+            }]
+          };
+          this.caseTileChartData = caseTileChartData;
+          this.caseLineChartDataFetched=true;
+        }
+        else {
+            console.log(response.data.message);
+          }
+        })
+      .catch(error => {
+          console.log(error);
+      });
+    },
     getFilteredCaseCount() {
       const url = "/filtercasecount";
       httpClient
@@ -161,9 +266,12 @@ export default {
             const closedHigh = response.data.data.closeHigh;
             const closedMedium = response.data.data.closeMed;
             const closedLow = response.data.data.closeLow;
+            const newHigh = response.data.data.newHigh;
+            const newMed = response.data.data.newMed;
+            const newLow = response.data.data.newLow;
+            const newCases = newHigh+newMed+newLow;
             const caseInProcess=inProgressHigh+inProgressMed+inProgressLow;
             const closedCases=closedHigh+closedMedium+closedLow;
-            const newCases=6;
             const totalCases=caseInProcess+closedCases+newCases;
 
              const  caseInProcessChartData={

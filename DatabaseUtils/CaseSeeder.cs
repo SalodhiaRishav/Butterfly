@@ -67,7 +67,7 @@
         {
             CaseStatus caseStatus = new CaseStatus();
             caseStatus.CaseId = caseId;
-            int rnd = Random.Next(2);
+            int rnd = Random.Next(3);
             caseStatus.Status = (CaseStatusType)rnd;
             caseStatus.CreatedOn = CreateRandomDate(3);
             caseStatus.ModifiedOn = CreateRandomDate(3);

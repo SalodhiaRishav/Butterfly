@@ -16,6 +16,7 @@
         IEnumerable<ReferenceDto> GetReferenceData(Guid id);
         int GetCount();
         int GetCountForLastSevenDays();
+        List<int> FindPerDayDeclarationCount();
         bool SendToCustom(DeclarationDto declaration);
     }
 }

@@ -283,5 +283,21 @@
             }
         }
 
+        public OperationResponse<List<int>> GET(GetLastWeekPerDayCaseCount req)
+        {
+            OperationResponse<List<int>> response = new OperationResponse<List<int>>();
+            try
+            {
+                var data = CaseBusinessLogic.GetCasesPerDayLastWeek();
+                response.OnSuccess(data, "Success");
+                return response;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.Message + " " + e.StackTrace);
+                response.OnException("Req failed at server side");
+                return response;
+            }
+        }
     }
 }

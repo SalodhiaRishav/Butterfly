@@ -124,11 +124,22 @@
         {
             GroupByCaseDTO myDto = new GroupByCaseDTO();
             var dictionary = CaseRepository.FindFilteredCaseCount();
-            if(dictionary.ContainsKey("InProgressHigh"))
+            if (dictionary.ContainsKey("NewHigh"))
+            {
+                myDto.NewHigh = dictionary["NewHigh"];
+            }
+            if (dictionary.ContainsKey("NewMedium"))
+            {
+                myDto.NewMed = dictionary["NewMedium"];
+            }
+            if (dictionary.ContainsKey("NewLow"))
+            {
+                myDto.NewLow = dictionary["NewLow"];
+            }
+            if (dictionary.ContainsKey("InProgressHigh"))
             {
                 myDto.InProcessHigh = dictionary["InProgressHigh"];
             }
-            
             if(dictionary.ContainsKey("InProgressMedium"))
             {
                 myDto.InProcessMed = dictionary["InProgressMedium"];
@@ -222,6 +233,18 @@
             try
             {
                 return CaseRepository.FindCasesInLastSevenDays();
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<int> GetCasesPerDayLastWeek()
+        {
+            try
+            {
+                return CaseRepository.FindCasesPerDayLastWeek();
             }
             catch(Exception)
             {
