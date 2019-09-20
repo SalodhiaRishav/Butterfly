@@ -49,10 +49,10 @@
           </div>
           <br/>
           <div style="float : right; cursor:pointer;">
-           <router-link to="/home" active-class="active">
-             <font-awesome-icon icon="window-close" />
-           </router-link>
-         </div>
+            <router-link to="/home" active-class="active">
+              <font-awesome-icon icon="window-close" />
+            </router-link>
+          </div>
           <br />
           <br />
           <div style="float : right; cursor:pointer;">
@@ -119,11 +119,11 @@ export default {
         });
     }
   },
-  computed : {
-    keymap : function(){
+  computed: {
+    keymap: function() {
       return {
-        'ctrl+V' : this.onSave
-      }
+        "ctrl+V": this.onSave
+      };
     }
   }
 };

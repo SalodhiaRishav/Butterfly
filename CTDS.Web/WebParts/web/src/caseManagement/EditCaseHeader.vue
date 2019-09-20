@@ -32,10 +32,10 @@
         </div>
         <br/>
         <div style="float : right; cursor:pointer;">
-           <router-link to="/home" active-class="active">
-             <font-awesome-icon icon="window-close" />
-           </router-link>
-         </div>
+          <router-link to="/home" active-class="active">
+            <font-awesome-icon icon="window-close" />
+          </router-link>
+        </div>
         <br />
         <br />
         <b-modal id="error-modal">
@@ -147,9 +147,9 @@ export default {
       return this.$store.getters.caseManagementLabels;
     },
     keymap: function() {
-       return{
-         'ctrl+V': this.editCase
-       }
+      return {
+        "ctrl+V": this.editCase
+      };
     }
   }
 };

@@ -41,3 +41,25 @@
 margin-left:10px;
 margin-right: 10px;
 }
+
+.chartRow{
+    margin-left:10px;
+    margin-right: 10px;
+}
+
+.shadowBox{
+    background: white;
+    color:white;  
+    padding: 12px 18px 12px 18px;
+    /* border-radius: .375rem; */
+    border: none;
+    box-shadow: 0 2px 3px 0 rgba(52,56,85,.25);
+    height:100%;
+}
+
+.chartBox{
+    margin-top:15px;
+    margin-bottom: 15px;
+    height:465px;
+    padding: 15px 15px 15px 15px;
+}

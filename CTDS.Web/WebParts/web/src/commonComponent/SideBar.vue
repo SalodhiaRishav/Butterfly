@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sidebar" :class="{ 'active': toggleSideBar }">
+    <div class="sidebar" :class="{ active: toggleSideBar }">
       <div class="toggle-btn" v-on:click="changeSideBar">
         <span></span>
         <span></span>
@@ -13,15 +13,15 @@
         <li>
           Case Management <span class="sub-arrow"></span>
           <ul>
-             <router-link to="/case" active-class="active" tag="li"
-          >Create new case</router-link
-        >   
+            <router-link to="/case" active-class="active" tag="li"
+              >Create new case</router-link
+            >
           </ul>
         </li>
         <li>
           Declaration <span class="sub-arrow"></span>
           <ul>
-             <router-link to="/declarationform" active-class="active" tag="li"
+            <router-link to="/declarationform" active-class="active" tag="li"
               >Create new declaration</router-link
             >
           </ul>
@@ -33,18 +33,18 @@
 
 <script>
 export default {
- data: () => {
+  data: () => {
     return {
-     abcd:"hello",
-     toggleSideBar:true
+      abcd: "hello",
+      toggleSideBar: true
     };
   },
-  methods:{
-    changeSideBar(){
-      this.toggleSideBar=!this.toggleSideBar;
+  methods: {
+    changeSideBar() {
+      this.toggleSideBar = !this.toggleSideBar;
     }
   }
-}
+};
 </script>
 <style>
 @import url("./styles/sideBarStyle.css");

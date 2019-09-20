@@ -6,4 +6,3 @@ export default {
     this.renderChart(this.data, this.options);
   }
 };
-

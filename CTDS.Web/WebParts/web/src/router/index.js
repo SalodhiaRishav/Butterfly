@@ -138,7 +138,7 @@ const router = new Router({
       path: "/tilechecker",
       name: "dashboard2.0",
       component: TileChecker
-    },
+    }
   ],
   mode: "history"
 });

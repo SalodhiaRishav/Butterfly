@@ -30,23 +30,18 @@
         <appTileWithGaugeChart boxColor="red" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
        </div>
       </div>
-        <!-- <div class="row" style="margin-top:10px; margin-right:15px">
-          <div class="col-md-5 box box-white margin-left-39 box-height-572">
-            <appGroupedBarGraph
-              chartTitle="Case Progress Chart"
-              xAxisHeading="Priority & Status"
-              yAxisHeading="No. of cases"
-              :chartData="groupedBarChartData"
-              v-if="dataFetched"
-            ></appGroupedBarGraph>
+      
+      <div class="row chartRow">
+        <div class="col-md-6 chartBox">
+          <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
+              <appBarChart :width="100" :height="400" :data="caseGroupedBarChartData" :options="caseGroupedBarChartOptions"></appBarChart>
           </div>
-          <div
-            class="col-md-5 box box-white margin-left-39 box-height-572"
-            v-if="declarationChartDataFetched"
-          >
-            <pie-chart :data="declarationChartData" :options="chartOptions"></pie-chart>
+        </div>
+        <div class="col-md-6 chartBox">
+          <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
+             <pie-chart :width="100" :height="400" :data="declarationPieChartData" :options="declarationPieChartOptions"></pie-chart>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
 </template>
@@ -57,9 +52,12 @@ import httpClient from "./../utils/httpRequestWrapper";
 import GroupedBarGraph from "./GroupedBarGraph";
 import BarGraph from "./BarGraph";
 import PieChart from "./PieChart.js";
+import BarChart from "./BarChart.js";
 import Tile from "./Tile";
 import TileWithoutChart from "./TileWithoutChart";
 import TileWithGaugeChart from "./TileWithGaugeChart";
+import ChartView from "./ChartView";
+
 
 
 export default {
@@ -70,9 +68,11 @@ export default {
     appNavigationbar: Navigationbar,
     appBarGraph: BarGraph,
     PieChart,
+    appBarChart:BarChart,
     appTile:Tile,
     appTileWithoutChart:TileWithoutChart,
-    appTileWithGaugeChart:TileWithGaugeChart
+    appTileWithGaugeChart:TileWithGaugeChart,
+    appChartView:ChartView
   },
   data() {
     return {
@@ -98,9 +98,83 @@ export default {
       declarationClearedChartData:{},
       declarationRejectedChartData:{},
       declarationInProcessChartData:{},
-      chartOptions: {},
-      declarationChartDataFetched: false,
-      declarationChartData: {},
+
+      caseGroupedBarChartData:{
+              labels: [
+                "New",
+                "In Process",
+                "Closed",
+              ],
+              datasets: [
+                {
+                  label: "Low",
+                  backgroundColor: "#41b883",
+                  borderWidth: 1,
+                  data: [3, 5, 6]
+                },
+                {
+                  label: "Medium",
+                  backgroundColor: "#00d8ff",
+                  borderWidth: 1,
+                  data: [4, 7, 3]
+                },
+                {
+                  label: "High",
+                  backgroundColor: "#e46651",
+                  borderWidth: 1,
+                  data: [10,7,4]
+                },
+              ]
+         },
+
+
+      caseGroupedBarChartOptions:{
+         maintainAspectRatio: false,
+          legend: {
+            position: "top"
+          },
+          title: {
+            display: true,
+            text: "Chart.js Bar Chart"
+          },
+        
+          scales: {
+              xAxes: [{
+            gridLines: {
+                display:false
+            }
+        }],
+            yAxes: [{
+              gridLines: {
+                display:false
+            }  ,
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+        }
+      },
+
+       caseTileChartData: {
+         labels: ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'],
+        datasets: [{
+            borderColor: "#ffffff",
+            pointBorderColor: "#ffffff",
+            pointBackgroundColor: "#ffffff",
+            pointHoverBackgroundColor: "#66000000",
+            pointHoverBorderColor: "#0000ff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 0.5,
+            pointRadius: 4,
+            fill: false,
+            borderWidth: 1,
+            data: [100, 120, 150, 170, 180, 170, 300]
+        }]
+    },
+      declarationPiechartOptions: {},
+      declarationPieChartDataFetched: false,
+      declarationPieChartData: {},
       dataFetched: false,
       caseCount: 0,
       declarationCount: 0,
@@ -414,41 +488,38 @@ export default {
             this.declarationInProcess=declarationInProcess;
             this.totalDeclaration=totalDeclaration;
             this.declarationStatusDataFetched=true;
-            // const options = {
-            //   hoverBorderWidth: 20,
-            //   borderWidth: 10,
-            //   hoverBackgroundColor: "red",
-            //   title: {
-            //     display: true,
-            //     text: "Declaration vs Status",
-            //     fontSize: 24
-            //   },
-            //   responsive: true,
-            //   maintainAspectRatio: false
-            // };
-            // this.declarationCleared = response.data.data.cleared;
-            // this.declarationRejected = response.data.data.rejected;
-            // this.declarationInProcess = response.data.data.processing;
-            // this.chartOptions = options;
-            // let pieChartData = [
-            //   response.data.data.cleared,
-            //   response.data.data.rejected,
-            //   response.data.data.processing
-            // ];
-            // const declarationChartData = {
-            //   hoverBackgroundColor: "red",
-            //   hoverBorderWidth: 10,
-            //   labels: ["Cleared", "Rejected", "Processing"],
-            //   datasets: [
-            //     {
-            //       label: "Data One",
-            //       backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
-            //       data: pieChartData
-            //     }
-            //   ]
-            // };
-            // this.declarationChartData = declarationChartData;
-            // this.declarationChartDataFetched = true;
+            const options = {
+              hoverBorderWidth: 20,
+              borderWidth: 10,
+              hoverBackgroundColor: "red",
+              title: {
+                display: true,
+                text: "Declaration vs Status",
+                fontSize: 24
+              },
+              maintainAspectRatio: false
+            };
+        
+            this.declarationPieChartOptions = options;
+            let pieChartData = [
+              response.data.data.cleared,
+              response.data.data.rejected,
+              response.data.data.processing
+            ];
+            const declarationPieChartData = {
+              hoverBackgroundColor: "red",
+              hoverBorderWidth: 10,
+              labels: ["Cleared", "Rejected", "Processing"],
+              datasets: [
+                {
+                  label: "Data One",
+                  backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
+                  data: pieChartData
+                }
+              ]
+            };
+            this.declarationPieChartData = declarationPieChartData;
+            this.declarationPieChartDataFetched = true;
           } else {
             console.log(response.data.message);
           }

@@ -177,10 +177,10 @@ export default {
     priority: function() {
       return this.$store.getters.caseInformation.priority;
     },
-    keymap: function(){
+    keymap: function() {
       return {
-        'ctrl+V': this.addNewCase
-      }
+        "ctrl+V": this.addNewCase
+      };
     }
   }
 };
