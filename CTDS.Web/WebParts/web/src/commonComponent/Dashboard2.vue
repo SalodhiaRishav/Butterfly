@@ -4,7 +4,7 @@
       <appNavigationbar></appNavigationbar>
      <div class="row tilesRow" v-if="caseStatusDataFetched">
          <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
-        <appTile boxColor="darkblue" tooltipTitle="Total Cases" :counter=totalCases title="Cases Last Week"  :chartData="caseTileChartData"></appTile>
+        <appTile boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart boxColor="green" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
@@ -18,7 +18,7 @@
       </div>
       <div class="row tilesRow" v-if="declarationStatusDataFetched">
          <div class="col-sm-4 col-md-3 tileBox" v-if="declarationLineChartDataFetched">
-        <appTile boxColor="darkblue" tooltipTitle="Total Declarations" :counter=totalDeclaration title="Declarations Last Week"  :chartData="declarationTileChartData"></appTile>
+        <appTile boxColor="darkblue" tooltipTitle="Total Declarations" :counter=totalDeclaration chartTitle="Declarations Last Week" title="Total Declarations"  :chartData="declarationTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart boxColor="green" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
