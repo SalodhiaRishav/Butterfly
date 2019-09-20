@@ -109,6 +109,19 @@
                 throw;
             }
         }
+
+        public List<int> GetPerDayDeclarationCount()
+        {
+            try
+            {
+                return DeclarationDal.FindPerDayDeclarationCount();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public bool SendToCustom(DeclarationDto declaration)
         {
             try

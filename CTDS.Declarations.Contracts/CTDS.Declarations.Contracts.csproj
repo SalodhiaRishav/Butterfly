@@ -75,6 +75,7 @@
     <Compile Include="DeclarationDTO\StatusDto.cs" />
     <Compile Include="EndPoints\CountOfSevenDays.cs" />
     <Compile Include="EndPoints\GetDeclarationCount.cs" />
+    <Compile Include="EndPoints\GetPerDayDeclarationCountLastWeek.cs" />
     <Compile Include="EndPoints\GetStatusCount.cs" />
     <Compile Include="EndPoints\SendToCustom.cs" />
     <Compile Include="Interface\IDeclarationBll.cs" />

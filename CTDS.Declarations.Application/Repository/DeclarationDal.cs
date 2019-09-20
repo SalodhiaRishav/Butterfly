@@ -173,7 +173,7 @@
         public int GetCountForLastSevenDays()
         {
             int count = 0;
-            DateTime date = DateTime.Now.AddDays(-7);
+            DateTime date = DateTime.Now.AddDays(-6);
             try
             {
                 using(var context = new CTDSContext())
@@ -188,6 +188,30 @@
             }
 
         }
+
+        public List<int> FindPerDayDeclarationCount()
+        {
+            List<int> declarationCountList = new List<int>();
+
+            DateTime date = DateTime.Now.AddDays(-6);
+            try
+            {
+                using (var context = new CTDSContext())
+                {
+                    for (DateTime i = date.Date; i <= DateTime.Now.Date; i = i.AddDays(1).Date)
+                    {
+                        int count = context.Declaration.Where(c => c.CreatedOn == i).Count();
+                        declarationCountList.Add(count);
+                    }
+                    return declarationCountList;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool SendToCustom(DeclarationDto declarationDto)
         {
             bool result = false;

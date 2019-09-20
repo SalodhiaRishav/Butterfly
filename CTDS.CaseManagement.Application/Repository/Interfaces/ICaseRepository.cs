@@ -8,6 +8,8 @@
         int FindCaseCount();
         int FindCasesInLastSevenDays();
         Dictionary<string,int> FindFilteredCaseCount();
-        
+        List<int> FindCasesPerDayLastWeek();
+
+
     }
 }

@@ -61,7 +61,7 @@
         }
         public int FindCasesInLastSevenDays()
         {
-            DateTime date = DateTime.Now.AddDays(-7);
+            DateTime date = DateTime.Now.AddDays(-6);
             try
             {
                 return CTDSContext.Case.Where(c => c.CreatedOn >= date).Count();
@@ -69,6 +69,26 @@
             catch(Exception e)
             {
                 throw;
+            }
+        }
+
+        public List<int> FindCasesPerDayLastWeek()
+        {
+            List<int> caseCountList = new List<int>();
+
+            DateTime date = DateTime.Now.AddDays(-6);
+            try
+            {
+                for(DateTime i = date.Date; i <= DateTime.Now.Date; i = i.AddDays(1).Date)
+                {
+                    int count = CTDSContext.Case.Where(c => c.CreatedOn == i).Count();
+                    caseCountList.Add(count);
+                }
+                return caseCountList;
+            }
+            catch(Exception exception)
+            {
+                throw exception;
             }
         }
 

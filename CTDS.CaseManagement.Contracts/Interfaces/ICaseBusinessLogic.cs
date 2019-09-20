@@ -18,5 +18,6 @@
         int GetCaseCount();
         GroupByCaseDTO GetFilteredCaseCount();
         int GetCountOfSevenDays();
+        List<int> GetCasesPerDayLastWeek();
     }
 }
