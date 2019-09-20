@@ -35,13 +35,18 @@
           <p>--</p>
         </b-col>
         <b-col>
-          <div style="float : right; cursor:pointer;">
+          <div style="float : right; cursor:pointer;" v-hotkey="keymap">
             <font-awesome-icon icon="save" @click="onSave" />
           </div>
           <br />
           <div style="float : right; cursor:pointer;">
             <font-awesome-icon icon="paper-plane" @click="sendToCustom" />
           </div>
+          <div style="float : right; cursor:pointer;">
+           <router-link to="/home" active-class="active">
+             <font-awesome-icon icon="window-close" />
+           </router-link>
+         </div>
           <br />
           <br />
           <div style="float : right; cursor:pointer;">
@@ -135,6 +140,13 @@ export default {
           }
           console.log(response.data.data);
         });
+    }
+  },
+  computed : {
+    keymap : function() {
+      return{
+        'ctrl+V': this.onSave
+      }
     }
   }
 };
