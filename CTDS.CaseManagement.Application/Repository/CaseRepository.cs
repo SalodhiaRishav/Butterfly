@@ -7,6 +7,7 @@
     using CTDS.CaseManagement.Application.Repository.Interfaces;
     using CTDS.Database.Context;
     using CTDS.Database.Models.CaseManagement;
+    using CTDS.Common.ExtensionMethods;
 
     public class CaseRepository : BaseRepository<Case>, ICaseRepository
     {
@@ -89,6 +90,25 @@
             catch(Exception exception)
             {
                 throw exception;
+            }
+        }
+
+        public List<Case> GetAllFilteredCases(int index, string sort)
+        {
+            List<Case> cases;
+            try
+            {
+                using (var context = new CTDSContext())
+                {
+                    int maxRows = 3;
+                    var query = context.Case;
+                    cases = query.CustomOrderBy(sort).Skip((index - 1) * maxRows).Take(maxRows).ToList();
+                }
+                return cases;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 

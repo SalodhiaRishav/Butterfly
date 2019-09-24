@@ -169,7 +169,7 @@
             try
             {
                 int maxRows = 3;
-                List<Case> cases = CaseRepository.List;
+                List<Case> cases = CaseRepository.GetAllFilteredCases(index,orderBy);
                 if (cases.Count == 0)
                 {
                     return null;
@@ -188,9 +188,8 @@
                     caseDto.References = CaseReferenceBusinessLogic.GetCaseReferencesByCaseId(@case.Id);
                     caseDtos.Add(caseDto);
                 }
-                var query = caseDtos.AsQueryable();
-                var list = query.CustomOrderBy(orderBy).Skip((index - 1) * maxRows).Take(3).ToList();
-                return list;
+               
+                return caseDtos;
 
             }
             catch (Exception exception)
