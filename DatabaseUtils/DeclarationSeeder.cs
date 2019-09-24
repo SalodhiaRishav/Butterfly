@@ -77,12 +77,20 @@
                 declaration.Amount = rnd.ToString();
                 declaration.Currency = Random.Next(1, 4).ToString();
                 declaration.Rate = Random.Next().ToString();
+                declaration.CreatedOn = CreateRandomDate(1);
 
                 //declaration.
                 CTDSContext.Declaration.Add(declaration);
             }
             CTDSContext.SaveChanges();
 
+        }
+
+        private DateTime CreateRandomDate(int yearForRange)
+        {
+            int range = yearForRange * 7;
+            DateTime randomDate = DateTime.Today.AddDays(-Random.Next(range));
+            return randomDate;
         }
     }
 

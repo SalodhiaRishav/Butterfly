@@ -10,6 +10,9 @@ import Login from "./../commonComponent/Login.vue";
 import Unauthorize from "./../commonComponent/Unauthorize.vue";
 import Dashboard2 from "./../commonComponent/Dashboard2.vue";
 import TileChecker from "./../commonComponent/TileChecker.vue";
+import SearchCases from "./../caseManagement/SearchCases.vue";
+import SearchDeclarations from "./../declaration/SearchDeclarations.vue";
+
 
 Vue.use(Router);
 
@@ -97,6 +100,32 @@ const router = new Router({
       path: "/home",
       name: "Dashboard",
       component: Dashboard,
+      beforeEnter: (to, from, next) => {
+        const user = sessionStorage.getItem("accessToken");
+        if (user == null) {
+          next("/login");
+        } else {
+          next();
+        }
+      }
+    },
+    {
+      path: "/searchcases",
+      name: "Search Cases",
+      component: SearchCases,
+      beforeEnter: (to, from, next) => {
+        const user = sessionStorage.getItem("accessToken");
+        if (user == null) {
+          next("/login");
+        } else {
+          next();
+        }
+      }
+    },
+    {
+      path: "/searchdeclarations",
+      name: "Search Declarations",
+      component: SearchDeclarations,
       beforeEnter: (to, from, next) => {
         const user = sessionStorage.getItem("accessToken");
         if (user == null) {
