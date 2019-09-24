@@ -55,7 +55,7 @@ export default {
       openCases: [],
       currentPage: 1,
       perPage: 3,
-      sortOrder:"CaseId",
+      sortOrder: "CaseId",
       totalRows: 0,
       fields: [
         {
@@ -94,13 +94,13 @@ export default {
     };
   },
   methods: {
-    sortData(key,val2,val3){
+    sortData(key, val2, val3) {
       this.sortOrder = key;
-      this.getAllCases(1,this.sortOrder);
+      this.getAllCases(1, this.sortOrder);
     },
     getNewData(val) {
       this.currentPage = parseInt(val);
-      this.getAllCases(this.currentPage,this.sortOrder);
+      this.getAllCases(this.currentPage, this.sortOrder);
     },
     convertDate(someDate) {
       return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
@@ -118,7 +118,7 @@ export default {
     getAllCases: function(val, orderBy) {
       const url = "/casemanagement";
       const index = parseInt(val);
-      console.log("index:"+index, "orderBy: "+orderBy);
+      console.log("index:" + index, "orderBy: " + orderBy);
 
       httpClient
         .get(url, index, orderBy)

@@ -1,46 +1,45 @@
 <template>
   <div>
     <b-navbar class="nav-bg-color nav-overide" toggleable="lg" type="dark">
-      <b-navbar-brand  href="#">CTDS</b-navbar-brand>
+      <b-navbar-brand href="#">CTDS</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
-      <b-navbar-nav>
-        <router-link to="/home" active-class="active" tag="b-nav-item">{{
-          language.lang.home
-        }}</router-link>
-        <b-nav-item-dropdown
-          :text="language.lang.caseManagement"
-        >
-          <router-link to="/case" active-class="active" tag="b-dropdown-item">{{
-            language.lang.createNewCase
+        <b-navbar-nav>
+          <router-link to="/home" active-class="active" tag="b-nav-item">{{
+            language.lang.home
           }}</router-link>
-        </b-nav-item-dropdown>
-        <b-nav-item-dropdown
-          :text="language.lang.declaration"
-        >
-          <router-link
-            to="/declarationform"
-            active-class="active"
-            tag="b-dropdown-item"
-            >{{ language.lang.createNewDeclaration }}</router-link
-          >
-        </b-nav-item-dropdown>
-      </b-navbar-nav>
-     
-       <b-navbar-nav class="ml-auto">
-        <b-nav-form>
-           <b-form-select
-            style="background-color: #6a54a6; color: #a89bcb;"
-            @change="changeLanguage()"
-            v-model="selected"
-            :options="languages"
-          ></b-form-select>
-        </b-nav-form>
+          <b-nav-item-dropdown :text="language.lang.caseManagement">
+            <router-link
+              to="/case"
+              active-class="active"
+              tag="b-dropdown-item"
+              >{{ language.lang.createNewCase }}</router-link
+            >
+          </b-nav-item-dropdown>
+          <b-nav-item-dropdown :text="language.lang.declaration">
+            <router-link
+              to="/declarationform"
+              active-class="active"
+              tag="b-dropdown-item"
+              >{{ language.lang.createNewDeclaration }}</router-link
+            >
+          </b-nav-item-dropdown>
+        </b-navbar-nav>
+
+        <b-navbar-nav class="ml-auto">
+          <b-nav-form>
+            <b-form-select
+              style="background-color: #6a54a6; color: #a89bcb;"
+              @change="changeLanguage()"
+              v-model="selected"
+              :options="languages"
+            ></b-form-select>
+          </b-nav-form>
 
           <b-nav-item @click="logout" right>
-          {{ language.lang.logout }}
+            {{ language.lang.logout }}
           </b-nav-item>
-      </b-navbar-nav>
+        </b-navbar-nav>
       </b-collapse>
     </b-navbar>
   </div>

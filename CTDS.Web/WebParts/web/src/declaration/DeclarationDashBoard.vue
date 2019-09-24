@@ -1,28 +1,28 @@
 <template>
   <div>
-      <div class="font-mono">
-        <b-table
-          striped
-          hover
-          :fields="fields"
-          :items="declarations"
-          :current-page="currentPage"
+    <div class="font-mono">
+      <b-table
+        striped
+        hover
+        :fields="fields"
+        :items="declarations"
+        :current-page="currentPage"
+        :per-page="perPage"
+        @head-clicked="sortData"
+        @row-clicked="getDeclaration"
+      ></b-table>
+    </div>
+    <b-row>
+      <b-col md="6" class="my-1">
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="totalRows"
           :per-page="perPage"
-          @head-clicked="sortData"
-          @row-clicked="getDeclaration"
-        ></b-table>
-      </div>
-      <b-row>
-        <b-col md="6" class="my-1">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="totalRows"
-            :per-page="perPage"
-            @change="getNewData"
-            class="my-0"
-          ></b-pagination>
-        </b-col>
-      </b-row>
+          @change="getNewData"
+          class="my-0"
+        ></b-pagination>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -31,15 +31,15 @@ import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   mounted() {
-    this.getAllDeclaration(1,this.sortOrder);
+    this.getAllDeclaration(1, this.sortOrder);
   },
   data() {
     return {
       declarations: [],
       currentPage: 1,
-      totalRows:1,
-      perPage:3,
-      sortOrder:"DeclarationId",
+      totalRows: 1,
+      perPage: 3,
+      sortOrder: "DeclarationId",
       fields: [
         {
           key: "DeclarationId",
@@ -89,13 +89,13 @@ export default {
     };
   },
   methods: {
-    sortData(key,val2,val3){
+    sortData(key, val2, val3) {
       this.sortOrder = key;
-      this.getAllDeclaration(1,this.sortOrder)
+      this.getAllDeclaration(1, this.sortOrder);
     },
-    getNewData(val){
+    getNewData(val) {
       this.currentPage = parseInt(val);
-      console.log("get new data "+this.sortOrder)
+      console.log("get new data " + this.sortOrder);
       this.getAllDeclaration(val, this.sortOrder);
     },
     convertDate(date) {
@@ -104,12 +104,12 @@ export default {
     getDeclaration: function(row) {
       this.$router.push(`/editdeclaration/${row.BaseID}`);
     },
-    getAllDeclaration: function(val,orderBy) {
-      console.log(this.sortOrder+" "+this.currentPage);
+    getAllDeclaration: function(val, orderBy) {
+      console.log(this.sortOrder + " " + this.currentPage);
       const url = "/getalldeclaration";
       const index = parseInt(val);
       httpClient
-        .get(url,index,orderBy)
+        .get(url, index, orderBy)
         .then(response => {
           if (response.data === "token refreshed") {
             this.getAllDeclaration(index, orderBy);

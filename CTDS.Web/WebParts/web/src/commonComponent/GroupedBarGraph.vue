@@ -65,7 +65,7 @@ export default {
       titlePositionY: 25,
       margin: 100,
       barPadding: 0.3,
-      yAxisScale:0
+      yAxisScale: 0
     };
   },
   mounted() {
@@ -143,7 +143,7 @@ export default {
       d3.select(".groupBarGraphXAxis")
         .append("text")
         .attr("y", this.height - 304)
-        .attr("x", (this.width / 2 )+50)
+        .attr("x", this.width / 2 + 50)
         .attr("text-anchor", "end")
         .text(this.xAxisHeading)
         .attr("fill", this.xAxisHeadingFontColor)
@@ -200,13 +200,12 @@ export default {
       }
     },
     createGraph() {
-      let numbers=[];
-      for(let index = 0;index<this.chartData.data.length;++index)
-      {
-        const number=d3.max(this.chartData.data[index]);
+      let numbers = [];
+      for (let index = 0; index < this.chartData.data.length; ++index) {
+        const number = d3.max(this.chartData.data[index]);
         numbers.push(number);
       }
-      this.yAxisScale = d3.max(numbers)+2;
+      this.yAxisScale = d3.max(numbers) + 2;
       console.log(this.yAxisScale);
       this.createLabelBox(this.chartData);
       const scales = this.createScales();
