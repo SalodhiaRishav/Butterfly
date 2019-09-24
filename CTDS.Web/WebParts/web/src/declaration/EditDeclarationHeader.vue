@@ -42,6 +42,7 @@
           <div style="float : right; cursor:pointer;">
             <font-awesome-icon icon="paper-plane" @click="sendToCustom" />
           </div>
+          <br/>
           <div style="float : right; cursor:pointer;">
            <router-link to="/home" active-class="active">
              <font-awesome-icon icon="window-close" />

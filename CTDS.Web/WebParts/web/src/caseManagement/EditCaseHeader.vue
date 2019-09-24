@@ -30,6 +30,7 @@
         <div style="float : right; cursor:pointer;" v-hotkey="keymap">
           <font-awesome-icon icon="save" @click="editCase" />
         </div>
+        <br/>
         <div style="float : right; cursor:pointer;">
            <router-link to="/home" active-class="active">
              <font-awesome-icon icon="window-close" />
