@@ -30,14 +30,15 @@
         <appTileWithGaugeChart boxColor="red" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
        </div>
       </div>
-      
       <div class="row chartRow">
         <div class="col-md-6 chartBox">
+          <appToggler></appToggler>
           <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
               <appBarChart :width="100" :height="400" :data="caseGroupedBarChartData" :options="caseGroupedBarChartOptions"></appBarChart>
           </div>
         </div>
         <div class="col-md-6 chartBox">
+          <appToggler></appToggler>
           <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
              <pie-chart :width="100" :height="400" :data="declarationPieChartData" :options="declarationPieChartOptions"></pie-chart>
           </div>
@@ -57,6 +58,7 @@ import Tile from "./Tile";
 import TileWithoutChart from "./TileWithoutChart";
 import TileWithGaugeChart from "./TileWithGaugeChart";
 import ChartView from "./ChartView";
+import Toggler from "./Toggler"
 
 
 
@@ -72,7 +74,8 @@ export default {
     appTile:Tile,
     appTileWithoutChart:TileWithoutChart,
     appTileWithGaugeChart:TileWithGaugeChart,
-    appChartView:ChartView
+    appChartView:ChartView,
+    appToggler:Toggler
   },
   data() {
     return {
