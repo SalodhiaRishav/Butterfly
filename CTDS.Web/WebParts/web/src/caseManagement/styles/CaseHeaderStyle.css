@@ -21,3 +21,8 @@ margin-bottom: 14px;
 {
     background-color:#E6E6E6;
 }
+
+.iconButton{
+    cursor: pointer;
+    color:white;
+}

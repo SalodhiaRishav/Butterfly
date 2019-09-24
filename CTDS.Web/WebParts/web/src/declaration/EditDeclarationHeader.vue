@@ -35,22 +35,20 @@
           <p>--</p>
         </b-col>
         <b-col>
-          <div style="float : right; cursor:pointer;" v-hotkey="keymap">
+          <div class="floatRight iconButton" v-hotkey="keymap">
             <font-awesome-icon icon="save" @click="onSave" />
           </div>
           <br />
-          <div style="float : right; cursor:pointer;">
+          <div class="floatRight iconButton">
             <font-awesome-icon icon="paper-plane" @click="sendToCustom" />
           </div>
           <br/>
-          <div style="float : right; cursor:pointer;">
-            <router-link to="/home" active-class="active">
-              <font-awesome-icon icon="window-close" />
-            </router-link>
+          <div class="floatRight iconButton">
+              <font-awesome-icon icon="window-close" @click="cancelEdit" />
           </div>
           <br />
           <br />
-          <div style="float : right; cursor:pointer;">
+          <div class="floatRight iconButton">
             <font-awesome-icon
               icon="bug"
               v-b-modal.error-modal
@@ -94,6 +92,9 @@ export default {
     };
   },
   methods: {
+    cancelEdit(){
+      this.$router.push("/searchdeclarations");
+    },
     onSave() {
       const url = "/updatedeclaration";
       httpClient
