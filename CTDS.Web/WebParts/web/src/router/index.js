@@ -9,9 +9,12 @@ import EditDeclaration from "./../declaration/EditDeclaration.vue";
 import Login from "./../commonComponent/Login.vue";
 import Unauthorize from "./../commonComponent/Unauthorize.vue";
 import Dashboard2 from "./../commonComponent/Dashboard2.vue";
+import CustomSearch from "./../commonComponent/CustomSearch.vue";
 import TileChecker from "./../commonComponent/TileChecker.vue";
 import SearchCases from "./../caseManagement/SearchCases.vue";
 import SearchDeclarations from "./../declaration/SearchDeclarations.vue";
+import CustomMultiSelectDropDown from "./../commonComponent/CustomMultiSelectDropDown.vue";
+
 
 
 Vue.use(Router);
@@ -167,6 +170,16 @@ const router = new Router({
       path: "/tilechecker",
       name: "dashboard2.0",
       component: TileChecker
+    },
+    {
+      path: "/customsearch",
+      name: "CustomSearch",
+      component: CustomSearch
+    },
+    {
+      path: "/multiselect",
+      name: "CustomMultiSelectDropDown",
+      component: CustomMultiSelectDropDown
     }
   ],
   mode: "history"
