@@ -8,7 +8,7 @@ export default [
         show:false
     },
     {
-        type:"appCustomDropDown",
+        type:"appCustomMultiSelectDropDown",
         title:"status",
         value:[],
         valueType:Array,
@@ -16,7 +16,7 @@ export default [
         show:false
     },
     {
-        type:"appCustomDropDown",
+        type:"appCustomMultiSelectDropDown",
         title:"priority",
         value:[],
         valueType:Array,

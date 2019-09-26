@@ -22,6 +22,7 @@
 import CustomTextBox from "./CustomTextBox";
 import CustomDropDown from "./CustomDropDown";
 import SearchObjects from "./CustomSearchObject.js";
+import CustomMultiSelectDropDown from "./CustomMultiSelectDropDown";
 
 export default {
 
@@ -50,7 +51,6 @@ export default {
             }
         },
         showData(){
-            
             for(let ind=0;ind<SearchObjects.length;++ind)
             {
                 console.log(SearchObjects[ind].title+" "+SearchObjects[ind].value);
@@ -59,20 +59,12 @@ export default {
     },
     components:{
         appCustomTextBox:CustomTextBox,
-        appCustomDropDown:CustomDropDown
+        appCustomDropDown:CustomDropDown,
+        appCustomMultiSelectDropDown:CustomMultiSelectDropDown
     },
     data(){
         return {
-            value:"hello",
-            name:null,
-            status:null,
-            selectedSearchOptions:[],
             searchObjects:SearchObjects,
-            searchForm:{
-                name:"",
-                status:"",
-                priority:""
-            }
         }
     }
 }
