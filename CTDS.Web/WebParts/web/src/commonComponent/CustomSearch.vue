@@ -34,7 +34,7 @@ import CustomTextBox from "./CustomTextBox";
 import CustomDropDown from "./CustomDropDown";
 import SearchObjects from "./CustomSearchObject.js";
 import CustomMultiSelectDropDown from "./CustomMultiSelectDropDown";
-
+import httpClient from "./../utils/httpRequestWrapper"
 export default {
 
     methods:{
@@ -62,10 +62,20 @@ export default {
             }
         },
         showData(){
+            let filters=[];
             for(let ind=0;ind<SearchObjects.length;++ind)
             {
-                console.log(SearchObjects[ind].title+" "+SearchObjects[ind].value);
+                const searchObject={
+                    "property":SearchObjects[ind].title,
+                    "values":SearchObjects[ind].value
+                }
+                filters.push(searchObject);
             }
+            console.log(filters);
+            httpClient.post("/casewithquery",{"Queries":filters})
+            .then((response)=>{
+                console.log(response);
+            })
         }
     },
     components:{

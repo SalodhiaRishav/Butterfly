@@ -157,11 +157,11 @@
             for (int i = 0;i<queries.Count;++i)
             {
                 var propertyName = queries[i].Property;
-                if(String.IsNullOrEmpty(queries[i].Value))
+                if(queries[i].Values ==  null ||queries[i].Values.Count == 0)
                 {
                     continue;
                 }
-                var constantValues=queries[i].Value.Split(',').ToList();
+                var constantValues = queries[i].Values;
                 Expression orBody = Expression.Constant(false);
                 for(int j =0;j<constantValues.Count;++j)
                 {
