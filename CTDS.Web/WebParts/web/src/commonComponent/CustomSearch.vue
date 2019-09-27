@@ -16,7 +16,7 @@
                     </b-form-checkbox-group>
                 </b-dropdown-form>
                 </b-dropdown>
-                 <!-- <button @click="showData">ShowData</button>  -->
+                 <button @click="showData">ShowData</button> 
             </div>
             <div class="col-md-10 col-sm-6">
                 <div class="row customSearchComponentRow">

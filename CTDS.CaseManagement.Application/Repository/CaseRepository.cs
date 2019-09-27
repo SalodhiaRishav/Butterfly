@@ -151,29 +151,40 @@
         //TODO making generic using  private Expression<Func<TClass,bool>> QueryBuilder<TClass>(string query)
         private Expression<Func<CaseTableDto,bool>> QueryBuilder(List<QueryDto> queries)
         {
-            Expression finalBody = Expression.Constant(false);
+            Expression finalBody = Expression.Constant(true);
             var parameter = Expression.Parameter(typeof(CaseTableDto), "selectedCase");
 
             for (int i = 0;i<queries.Count;++i)
             {
                 var propertyName = queries[i].Property;
-                var constantValue = queries[i].Value;
-                var member = Expression.Property(parameter, propertyName);
-                var memberType = member.Type;
-                ConstantExpression constant = null;
-                if (memberType.IsEnum)
+                if(String.IsNullOrEmpty(queries[i].Value))
                 {
-                    var instance = Activator.CreateInstance(memberType);
-                    var enumType = Enum.Parse(instance.GetType(), constantValue);
-                    constant = Expression.Constant(enumType);
+                    continue;
                 }
-                else
+                var constantValues=queries[i].Value.Split(',').ToList();
+                Expression orBody = Expression.Constant(false);
+                for(int j =0;j<constantValues.Count;++j)
                 {
-                    constant = Expression.Constant(constantValue);
-                }
+                    var constantValue = constantValues[j];
+                    var member = Expression.Property(parameter, propertyName);
+                    var memberType = member.Type;
+                    ConstantExpression constant = null;
+                    if (memberType.IsEnum)
+                    {
+                        var instance = Activator.CreateInstance(memberType);
+                        var enumType = Enum.Parse(instance.GetType(), constantValue);
+                        constant = Expression.Constant(enumType);
+                    }
+                    else
+                    {
+                        constant = Expression.Constant(constantValue);
+                    }
 
-                var body = Expression.Equal(member, constant);
-                finalBody = Expression.OrElse(body, finalBody);
+                    var body = Expression.Equal(member, constant);
+                    orBody = Expression.OrElse(body, orBody);
+                }
+                   finalBody = Expression.AndAlso(orBody, finalBody);
+
             }
             
             var finalExpression= Expression.Lambda<Func<CaseTableDto, bool>>(finalBody, parameter);
