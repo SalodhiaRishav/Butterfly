@@ -250,5 +250,17 @@
                 throw;
             }
         }
+
+        public List<CaseTableDto> GetAllCasesWithQuery(List<QueryDto> queries)
+        {
+            try
+            {
+               return CaseRepository.GetAllCasesWithQuery(queries);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
