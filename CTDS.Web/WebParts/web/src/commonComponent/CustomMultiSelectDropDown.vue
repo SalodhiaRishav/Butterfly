@@ -33,7 +33,6 @@ export default {
         },
         dataSource:{
             type:String,
-            required:true
         },
     },
      data(){
@@ -51,7 +50,6 @@ export default {
         httpClient
         .get(source)
         .then(response => {
-            console.log(response);
           if (response.data === "token refreshed") {
             this.fetchDataToFillDropDown();
             return;

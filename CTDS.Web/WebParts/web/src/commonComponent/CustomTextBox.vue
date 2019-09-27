@@ -2,12 +2,11 @@
     <div>
          <div v-if="showTextBox" >
                 <b-form-group
-                  :label="label"
-                   :label-for="id"
                 >
                 <b-form-input
                     :id=id
                     :value="value"
+                    :placeholder="label"
                      @input="$emit('input', $event)"
                   ></b-form-input>
                 </b-form-group>

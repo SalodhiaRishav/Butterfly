@@ -12,6 +12,8 @@
         Dictionary<string,int> FindFilteredCaseCount();
         List<int> FindCasesPerDayLastWeek();
 
+        void GetAllCasesWithQuery();
+
 
     }
 }

@@ -112,5 +112,10 @@
             }
         }
 
+        public void GetAllCasesWithQuery(string query)
+        {
+
+        }
+
     }
 }

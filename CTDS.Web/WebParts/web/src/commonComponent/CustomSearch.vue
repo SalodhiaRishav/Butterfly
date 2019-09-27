@@ -1,17 +1,28 @@
 <template>
-    <div>
-        <div class="row">
-            <div class="col-4">
-    <b-form-group label="Filters">
-      <b-form-checkbox-group id="checkboxGroup" @input="onCheckBoxInput" v-model="selectedSearchOptions" name="searchOptions" stacked>
-        <b-form-checkbox v-for="searchObject in searchObjects"  :key="searchObject.title" :value="searchObject.title">{{searchObject.props.label}}</b-form-checkbox>
-      </b-form-checkbox-group>
-                <button @click="showData">ShowData</button> 
-    </b-form-group>
+    <div style="height:800px">
+        <div class="row customSearchHeadingRow">
+            Advance Search
+        </div>
+        <div class="row customSearchBody">
+            <div class="col-md-2 col-sm-6">
+               <b-dropdown id="filterDropDown" text="Filter" ref="dropdown" class="m-3">
+                <b-dropdown-form>
+                    <b-form-checkbox-group
+                    id="filterCheckboxGroup"
+                     @input="onCheckBoxInput"
+                    v-model="selectedSearchOptions"
+                    stacked>
+                        <b-form-checkbox v-for="searchObject in searchObjects"  :key="searchObject.title" :value="searchObject.title">{{searchObject.props.label}}</b-form-checkbox>
+                    </b-form-checkbox-group>
+                </b-dropdown-form>
+                </b-dropdown>
+                 <!-- <button @click="showData">ShowData</button>  -->
             </div>
-            <div class="col-8">
-                <div v-for="searchObject in searchObjects" :key="searchObject.title">
+            <div class="col-md-10 col-sm-6">
+                <div class="row customSearchComponentRow">
+                <div class="col-md-2 col-sm-4 col-xs-12" v-for="searchObject in searchObjects" :key="searchObject.title">
                  <component :is="searchObject.type" v-model="searchObject.value" v-bind="searchObject.props" v-if="searchObject.show"></component>
+                </div>
                 </div>
             </div>
         </div>
@@ -65,10 +76,14 @@ export default {
     data(){
         return {
             searchObjects:SearchObjects,
+            selectedSearchOptions:[]
         }
     }
 }
 </script>
 
+<style scoped>
+@import url("./styles/customSearchStyle.css");
+</style>
 
 
