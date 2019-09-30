@@ -1,5 +1,5 @@
 <template>
-    <div style="height:800px">
+    <div>
         <div class="row customSearchHeadingRow">
             Advance Search
         </div>
@@ -17,6 +17,7 @@
                 </b-dropdown-form>
                 </b-dropdown>
                  <button @click="showData">ShowData</button> 
+                  <button @click="clearFilters">Clear Filters</button> 
             </div>
             <div class="col-md-10 col-sm-6">
                 <div class="row customSearchComponentRow">
@@ -32,12 +33,36 @@
 <script>
 import CustomTextBox from "./CustomTextBox";
 import CustomDropDown from "./CustomDropDown";
-import SearchObjects from "./CustomSearchObject.js";
 import CustomMultiSelectDropDown from "./CustomMultiSelectDropDown";
 import httpClient from "./../utils/httpRequestWrapper"
 export default {
 
+    props:{
+        searchObjects:{
+            type:Array,
+            default:[]
+        },
+        searchResult:{
+            type:Array,
+            default:[]
+        }
+    },
     methods:{
+        clearFilters(){
+            for(let index=0;index<this.searchObjects.length;++index)
+            {
+               if(this.searchObjects[index].valueType == Array)
+                    {
+                        this.searchObjects[index].value=[];
+                    }
+                    else if(this.searchObjects[index].valueType == String)
+                    {
+                        this.searchObjects[index].value="";
+                    }
+                    this.searchObjects[index].show=false;
+                    this.showData();
+            }
+        },
         onCheckBoxInput(){
             let arr=[];
             for(let index = 0;index<this.searchObjects.length;++index)
@@ -63,18 +88,34 @@ export default {
         },
         showData(){
             let filters=[];
-            for(let ind=0;ind<SearchObjects.length;++ind)
+            for(let ind=0;ind<this.searchObjects.length;++ind)
             {
                 const searchObject={
-                    "property":SearchObjects[ind].title,
-                    "values":SearchObjects[ind].value
+                    "property":this.searchObjects[ind].title,
+                    "values":this.searchObjects[ind].value
                 }
                 filters.push(searchObject);
             }
             console.log(filters);
             httpClient.post("/casewithquery",{"Queries":filters})
             .then((response)=>{
-                console.log(response);
+                 if (response.data === "token refreshed") {
+                    this.showData();
+                    return;
+                }
+               if(response.data.success === true)
+               {
+                   this.$emit("onSearch",response.data.data);
+                   return;
+               }
+               else
+               {
+                   alert(response.data.message);
+                   return;
+               }
+            })
+            .catch((error)=>{
+                console.log(error);
             })
         }
     },
@@ -85,7 +126,6 @@ export default {
     },
     data(){
         return {
-            searchObjects:SearchObjects,
             selectedSearchOptions:[]
         }
     }
