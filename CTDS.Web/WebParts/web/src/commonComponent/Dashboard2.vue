@@ -4,7 +4,7 @@
       <appNavigationbar></appNavigationbar>
      <div class="row tilesRow" v-if="caseStatusDataFetched">
          <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
-        <appTile boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
+        <appTile @chartShowed="chartswitch=$event" boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart boxColor="green" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
@@ -31,8 +31,27 @@
        </div>
       </div>
       <div class="row chartRow">
-        <div class="col-md-6 chartBox">
-          <!-- <appToggler></appToggler> -->
+        <div class="col-md-12 chartBox shadowBox">
+          <div class="row chartRow">
+           <div class="col-md-4">
+            
+           </div>
+           <div class="col-md-4 toggler shadowBox">
+            <toggle-switch :options="myOptions">
+            </toggle-switch>
+           </div>
+           <div class="col-md-4 toggler shadowBox">
+             <appDateRangePicker></appDateRangePicker>
+           </div>
+          </div>
+          <div class="row chartRow">
+            <div class="col-md-12 table" v-if="chartswitch">
+              <appTile boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-6 chartBox">
+          <appToggler></appToggler>
           <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
               <appBarChart :width="100" :height="400" :data="caseGroupedBarChartData" :options="caseGroupedBarChartOptions"></appBarChart>
           </div>
@@ -41,7 +60,7 @@
           <!-- <appToggler></appToggler> -->
           <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
              <pie-chart :width="100" :height="400" :data="declarationPieChartData" :options="declarationPieChartOptions"></pie-chart>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -59,12 +78,14 @@ import Tile from "./Tile";
 import TileWithoutChart from "./TileWithoutChart";
 import TileWithGaugeChart from "./TileWithGaugeChart";
 import ChartView from "./ChartView";
-import Toggler from "./Toggler"
+import Toggler from "./Toggler";
+import MyDateRangePicker from "./MyDateRangePicker";
 
 
 
 export default {
   components: {
+    appDateRangePicker:MyDateRangePicker,
     appSideBar: SideBar,
     appNavigationbar: Navigationbar,
     appGroupedBarGraph: GroupedBarGraph,
@@ -81,6 +102,40 @@ export default {
   data() {
     return {
 
+      myOptions: {
+        layout: {
+          color: 'black',
+          backgroundColor: 'lightgray',
+          selectedColor: 'white',
+          selectedBackgroundColor: 'green',
+          borderColor: 'black',
+          fontFamily: 'Arial',
+          fontWeight: 'normal',
+          fontWeightSelected: 'bold',
+          squareCorners: false,
+          noBorder: false
+        },
+        // size: {
+        //   fontSize: 14,
+        //   height: 34,
+        //   padding: 7,
+        //   width: 100
+        // },
+        items: {
+          delay: .4,
+          preSelected: 'Chart',
+          disabled: false,
+          labels: [
+            {name: 'Chart', color: 'white', backgroundColor: 'red'}, 
+            {name: 'Table', color: 'white', backgroundColor: 'green'}
+          ]
+        }
+      },
+
+      minDate : "1-1-2019",
+      maxDate : "25-9-2019",
+      
+      chartswitch : false,
       declarationLineChartDataFetched:false,
       caseLineChartDataFetched:false,
       caseStatusDataFetched:false,
@@ -216,6 +271,7 @@ export default {
     this.getPerDayDeclarationCountLastWeek();
   },
   methods: {
+    
     getPerDayDeclarationCountLastWeek() {
       const url = "/perdaydeclarationcount";
       httpClient
