@@ -4,6 +4,7 @@
     :title="tooltipTitle"
     class="box"
     :class="boxColorClass"
+    @click="showChart"
   >
     <div class="row">
       <div class="col-3">
@@ -34,8 +35,14 @@ export default {
       return "box-" + this.boxColor;
     }
   },
+  methods : {
+    showChart() {
+      this.$emit('chartShowed',"true");
+    }
+  },
   data: () => {
     return {
+
       chartOptions: {
         maintainAspectRatio: false,
         legend: {
