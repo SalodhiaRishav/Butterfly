@@ -27,14 +27,12 @@
         </div>
       </b-col>
       <b-col>
-        <div style="float : right; cursor:pointer;" v-hotkey="keymap">
+        <div class="iconButton floatRight" v-hotkey="keymap">
           <font-awesome-icon icon="save" @click="editCase" />
         </div>
         <br/>
-        <div style="float : right; cursor:pointer;">
-          <router-link to="/home" active-class="active">
-            <font-awesome-icon icon="window-close" />
-          </router-link>
+        <div class="iconButton floatRight">
+            <font-awesome-icon icon="window-close" @click="cancelCaseEdit" />
         </div>
         <br />
         <br />
@@ -43,7 +41,7 @@
             {{ error }}
           </li>
         </b-modal>
-        <div style="float : right; cursor:pointer;">
+        <div class="iconButton floatRight">
           <font-awesome-icon
             icon="bug"
             v-b-modal.error-modal
@@ -82,6 +80,9 @@ export default {
     };
   },
   methods: {
+    cancelCaseEdit(){
+      this.$router.push("/searchcases");
+    },
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },

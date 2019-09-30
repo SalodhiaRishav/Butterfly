@@ -89,13 +89,16 @@
     <Compile Include="Dto\CaseInformationDto.cs" />
     <Compile Include="Dto\CaseReferenceDto.cs" />
     <Compile Include="Dto\CaseStatusDto.cs" />
+    <Compile Include="Dto\CaseTableDto.cs" />
     <Compile Include="Dto\ClientDto.cs" />
     <Compile Include="Dto\GroupByCaseDto.cs" />
     <Compile Include="Dto\NotesDto.cs" />
+    <Compile Include="Dto\QueryDto.cs" />
     <Compile Include="EndPoints\CreateCase.cs" />
     <Compile Include="EndPoints\DeleteCaseById.cs" />
     <Compile Include="EndPoints\EditCase.cs" />
     <Compile Include="EndPoints\GetAllCases.cs" />
+    <Compile Include="EndPoints\GetAllCasesWithQuery.cs" />
     <Compile Include="EndPoints\GetCaseById.cs" />
     <Compile Include="EndPoints\GetCaseCount.cs" />
     <Compile Include="EndPoints\GetCaseCountInLastSevenDays.cs" />

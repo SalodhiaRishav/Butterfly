@@ -113,6 +113,7 @@ export default {
         .then(response => {
           if (response.data === "token refreshed") {
             this.getAllDeclaration(index, orderBy);
+            return;
           }
           if (response.data.success === true) {
             let declaration = [];

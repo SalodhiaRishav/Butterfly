@@ -46,3 +46,11 @@
 .color-black{
   color:black;
 }
+.floatRight{
+  float : right;
+}
+
+.iconButton{
+  color:white;
+  cursor:pointer;
+}

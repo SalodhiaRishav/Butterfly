@@ -1,0 +1,26 @@
+export default [
+    {
+        type:"appCustomTextBox",
+        title:"name",
+        value:"",
+        valueType:String,
+        props:{id:"name",label:"Name"},
+        show:false
+    },
+    {
+        type:"appCustomMultiSelectDropDown",
+        title:"status",
+        value:[],
+        valueType:Array,
+        props:{id:"status",label:"Status",dataSource:"/statustypes"},
+        show:false
+    },
+    {
+        type:"appCustomMultiSelectDropDown",
+        title:"priority",
+        value:[],
+        valueType:Array,
+        props:{id:"priority",label:"Priority",dataSource:"/prioritytypes"},
+        show:false
+    }
+]

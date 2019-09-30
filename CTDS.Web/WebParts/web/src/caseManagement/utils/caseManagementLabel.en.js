@@ -21,5 +21,5 @@ export default{
     comment:"Comment",
     notes:"Notes",
     notesByCPA:"Notes By CPA",
-    caseStatus:"Case Status"
+    caseStatus:"Case Status",
 }

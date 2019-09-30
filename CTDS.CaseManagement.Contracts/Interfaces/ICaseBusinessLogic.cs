@@ -19,5 +19,7 @@
         GroupByCaseDTO GetFilteredCaseCount();
         int GetCountOfSevenDays();
         List<int> GetCasesPerDayLastWeek();
+
+        List<CaseTableDto> GetAllCasesWithQuery(List<QueryDto> queries);
     }
 }

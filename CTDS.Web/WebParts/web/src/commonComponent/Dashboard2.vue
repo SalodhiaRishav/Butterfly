@@ -32,19 +32,20 @@
       </div>
       <div class="row chartRow">
         <div class="col-md-6 chartBox">
-          <appToggler></appToggler>
+          <!-- <appToggler></appToggler> -->
           <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
               <appBarChart :width="100" :height="400" :data="caseGroupedBarChartData" :options="caseGroupedBarChartOptions"></appBarChart>
           </div>
         </div>
         <div class="col-md-6 chartBox">
-          <appToggler></appToggler>
+          <!-- <appToggler></appToggler> -->
           <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
              <pie-chart :width="100" :height="400" :data="declarationPieChartData" :options="declarationPieChartOptions"></pie-chart>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 <script>
 import SideBar from "./SideBar";

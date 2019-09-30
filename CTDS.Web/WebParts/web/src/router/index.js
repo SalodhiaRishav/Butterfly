@@ -9,7 +9,13 @@ import EditDeclaration from "./../declaration/EditDeclaration.vue";
 import Login from "./../commonComponent/Login.vue";
 import Unauthorize from "./../commonComponent/Unauthorize.vue";
 import Dashboard2 from "./../commonComponent/Dashboard2.vue";
+import CustomSearch from "./../commonComponent/CustomSearch.vue";
 import TileChecker from "./../commonComponent/TileChecker.vue";
+import SearchCases from "./../caseManagement/SearchCases.vue";
+import SearchDeclarations from "./../declaration/SearchDeclarations.vue";
+import CustomMultiSelectDropDown from "./../commonComponent/CustomMultiSelectDropDown.vue";
+
+
 
 Vue.use(Router);
 
@@ -107,6 +113,32 @@ const router = new Router({
       }
     },
     {
+      path: "/searchcases",
+      name: "Search Cases",
+      component: SearchCases,
+      beforeEnter: (to, from, next) => {
+        const user = sessionStorage.getItem("accessToken");
+        if (user == null) {
+          next("/login");
+        } else {
+          next();
+        }
+      }
+    },
+    {
+      path: "/searchdeclarations",
+      name: "Search Declarations",
+      component: SearchDeclarations,
+      beforeEnter: (to, from, next) => {
+        const user = sessionStorage.getItem("accessToken");
+        if (user == null) {
+          next("/login");
+        } else {
+          next();
+        }
+      }
+    },
+    {
       path: "/case/:id",
       name: "EditCase",
       component: EditCase,
@@ -138,6 +170,16 @@ const router = new Router({
       path: "/tilechecker",
       name: "dashboard2.0",
       component: TileChecker
+    },
+    {
+      path: "/customsearch",
+      name: "CustomSearch",
+      component: CustomSearch
+    },
+    {
+      path: "/multiselect",
+      name: "CustomMultiSelectDropDown",
+      component: CustomMultiSelectDropDown
     }
   ],
   mode: "history"

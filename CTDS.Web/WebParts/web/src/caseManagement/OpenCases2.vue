@@ -1,6 +1,6 @@
 <template>
   <div>
-    <appCustomSearch :searchObjects="casesAdvanceSearchObjects" @onSearch="onSearchResult"></appCustomSearch>
+    <appCustomSearch :searchObjects="casesAdvanceSearchObjects"></appCustomSearch>
     <div>
       <b-table
         striped
@@ -11,6 +11,14 @@
         :current-page="currentPage"
         :per-page="perPage"
       >
+        <!-- <span slot-scope="data" slot="Status">
+          <appCaseStatusDropDown :defaultValue="data.item.Status">
+          </appCaseStatusDropDown>
+        </span>
+        <span slot-scope="data" slot="Priority">
+          <appCasePriorityDropDown :defaultValue="data.item.Priority">
+          </appCasePriorityDropDown>
+        </span> -->
       </b-table>
     </div>
     <b-row>
@@ -23,6 +31,39 @@
         ></b-pagination>
       </b-col>
     </b-row>
+    <!-- <div style="font-family:monospace !important">
+      <b-table
+        striped
+        hover
+        fixed
+        :fields="fields"
+        :items="openCases"
+        :current-page="currentPage"
+        :per-page="perPage"
+        @head-clicked="sortData"
+        @row-clicked="editCase"
+      >
+        <span slot-scope="data" slot="Status">
+          <appCaseStatusDropDown :defaultValue="data.item.Status">
+          </appCaseStatusDropDown>
+        </span>
+        <span slot-scope="data" slot="Priority">
+          <appCasePriorityDropDown :defaultValue="data.item.Priority">
+          </appCasePriorityDropDown>
+        </span>
+      </b-table>
+    </div>
+    <b-row>
+      <b-col md="6" class="my-1">
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="totalRows"
+          :per-page="perPage"
+          @change="getNewData"
+          class="my-0"
+        ></b-pagination>
+      </b-col>
+    </b-row> -->
   </div>
 </template>
 
@@ -39,13 +80,17 @@ export default {
     appCasePriorityDropDown: CasePriorityDropDown,
     appCustomSearch:CustomSearch
   },
+  mounted() {
+    this.getAllCases(1, this.sortOrder);
+  },
   data() {
     return {
       casesAdvanceSearchObjects,
       allCases: [],
       openCases: [],
       currentPage: 1,
-      perPage: 5,
+      perPage: 3,
+      sortOrder: "CaseId",
       totalRows: 0,
       fields: [
         {
@@ -84,27 +129,6 @@ export default {
     };
   },
   methods: {
-      onSearchResult(value)
-      {
-          this.openCases=[];
-          for(let index =0 ; index<value.length;++index)
-          {
-              let obj = {
-                CaseId: "KGH-19-" + value[index].caseId,
-                id: value[index].id,
-                CreatedDate: this.convertDate(value[index].createdOn),
-                Status: value[index].status,
-                Description: value[index].description,
-                Client: value[index].client,
-                Notes: value[index].notes,
-                Priority: value[index].priority,
-              };
-              this.openCases.push(obj);
-          }
-          this.totalRows=this.openCases.length;
-          console.log(this.openCases);
-          
-      },
     sortData(key, val2, val3) {
       this.sortOrder = key;
       this.getAllCases(1, this.sortOrder);

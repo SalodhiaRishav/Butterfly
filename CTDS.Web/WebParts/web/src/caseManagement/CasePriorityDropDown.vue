@@ -1,12 +1,14 @@
 <template>
   <div>
     <b-form>
+      <div class="myCustomSelect">
       <b-form-select
         id="priorityInput"
         v-model="priorityForm.priority"
         :options="priorityTypes"
         required
       ></b-form-select>
+      </div>
     </b-form>
   </div>
 </template>
@@ -50,3 +52,7 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+@import url("./styles/casePriorityDropDownStyle.css");
+</style>

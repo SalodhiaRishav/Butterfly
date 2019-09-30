@@ -3,7 +3,7 @@
     public enum CaseStatusType
     {
         New,
-        InProgress,
+        InProcess,
         Closed
     }
 }

@@ -80,14 +80,14 @@
             notes.CaseId = caseId;
             int rnd = Random.Next();
             notes.NotesByCpa = "Notes" + rnd;
-            notes.CreatedOn = CreateRandomDate(3);
-            notes.ModifiedOn = CreateRandomDate(3);
+            notes.CreatedOn = CreateRandomDate(1);
+            notes.ModifiedOn = CreateRandomDate(1);
             return notes;
         }
 
         private DateTime CreateRandomDate(int yearForRange)
         {
-            int range = yearForRange * 365;          
+            int range = yearForRange * 7;          
             DateTime randomDate = DateTime.Today.AddDays(-Random.Next(range));
             return randomDate;
         }

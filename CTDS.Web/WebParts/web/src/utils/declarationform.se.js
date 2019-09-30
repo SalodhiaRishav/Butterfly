@@ -50,6 +50,8 @@ const form = {
   case: "Fall",
   caseManagement: "Ärendehantering",
   createNewCase: "Skapa nytt fall",
+  searchCases:"Sök fall",
+  searchDeclarations:"Sök deklaration",
   createNewDeclaration: "Skapa en ny deklaration",
   dashboard: "Instrumentbräda",
   openCases: "Öppna fall"

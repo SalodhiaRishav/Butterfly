@@ -1,19 +1,27 @@
 <template>
   <div>
     <b-navbar class="nav-bg-color nav-overide" toggleable="lg" type="dark">
-      <b-navbar-brand href="#">CTDS</b-navbar-brand>
+        <router-link
+              to="/dash2"
+              active-class="active"
+              tag="b-navbar-brand"
+              >CDTS
+              </router-link>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <router-link to="/home" active-class="active" tag="b-nav-item">{{
-            language.lang.home
-          }}</router-link>
           <b-nav-item-dropdown :text="language.lang.caseManagement">
             <router-link
               to="/case"
               active-class="active"
               tag="b-dropdown-item"
               >{{ language.lang.createNewCase }}</router-link
+            >
+             <router-link
+              to="/searchCases"
+              active-class="active"
+              tag="b-dropdown-item"
+              >{{ language.lang.searchCases }}</router-link
             >
           </b-nav-item-dropdown>
           <b-nav-item-dropdown :text="language.lang.declaration">
@@ -22,6 +30,12 @@
               active-class="active"
               tag="b-dropdown-item"
               >{{ language.lang.createNewDeclaration }}</router-link
+            >
+            <router-link
+              to="/searchDeclarations"
+              active-class="active"
+              tag="b-dropdown-item"
+              >{{ language.lang.searchDeclarations }}</router-link
             >
           </b-nav-item-dropdown>
         </b-navbar-nav>

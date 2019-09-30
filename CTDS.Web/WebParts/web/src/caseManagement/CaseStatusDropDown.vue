@@ -1,12 +1,14 @@
 <template>
   <div>
     <b-form>
+      <div class="myCustomSelect">
       <b-form-select
         id="statusInput"
         v-model="caseStatus.status"
         :options="statusTypes"
         required
       ></b-form-select>
+  </div>
     </b-form>
   </div>
 </template>

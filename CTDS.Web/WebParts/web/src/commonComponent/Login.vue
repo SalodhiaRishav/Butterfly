@@ -74,7 +74,7 @@ export default {
               "refreshTokenId",
               response.data.data.refreshTokenSerial
             );
-            this.$router.push("/home");
+            this.$router.push("/dash2");
           } else {
             alert(response.data.message);
           }

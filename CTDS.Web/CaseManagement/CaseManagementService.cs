@@ -299,5 +299,21 @@
                 return response;
             }
         }
+        public OperationResponse<List<CaseTableDto>> Post(GetAllCasesWithQuery req)
+        {
+            OperationResponse<List<CaseTableDto>> response = new OperationResponse<List<CaseTableDto>>();
+            try
+            {
+                List<CaseTableDto> caseTableDtos=CaseBusinessLogic.GetAllCasesWithQuery(req.Queries);
+                response.OnSuccess(caseTableDtos, "Success");
+                return response;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message + " " + e.StackTrace);
+                response.OnException("Req failed at server side");
+                return response;
+            }
+        }
     }
 }
