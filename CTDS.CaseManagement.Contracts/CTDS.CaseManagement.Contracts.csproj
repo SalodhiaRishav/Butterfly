@@ -93,6 +93,7 @@
     <Compile Include="Dto\ClientDto.cs" />
     <Compile Include="Dto\GroupByCaseDto.cs" />
     <Compile Include="Dto\NotesDto.cs" />
+    <Compile Include="Dto\OpenCasesDto.cs" />
     <Compile Include="Dto\QueryDto.cs" />
     <Compile Include="EndPoints\CreateCase.cs" />
     <Compile Include="EndPoints\DeleteCaseById.cs" />

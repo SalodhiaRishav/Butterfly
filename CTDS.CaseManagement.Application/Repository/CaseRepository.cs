@@ -116,12 +116,12 @@
             }
         }
 
-        public List<CaseTableDto> GetAllCasesWithQuery(List<QueryDto> queries)
+        public OpenCasesDto GetAllCasesWithQuery(List<QueryDto> queries,int pageNumber,int maxRowsPerPage)
         {
             try
             {
                 var expression = QueryBuilder(queries);
-                var caseTableDtos = (from mcase in CTDSContext.Case
+                var filteredCaseTableDtos = (from mcase in CTDSContext.Case
                                      join caseStatus in CTDSContext.CaseStatus on mcase.Id equals caseStatus.CaseId
                                      join caseInformation in CTDSContext.CaseInformation on mcase.Id equals caseInformation.CaseId
                                      join client in CTDSContext.Client on mcase.Id equals client.CaseId
@@ -139,8 +139,13 @@
                                      })
                             .Where(expression)
                             .ToList();
-                return caseTableDtos;
+                var perPageFilteredCaseTableDtos=filteredCaseTableDtos.Skip((pageNumber - 1) * maxRowsPerPage).Take(maxRowsPerPage).ToList();
+                OpenCasesDto openCasesDto = new OpenCasesDto() {
+                    TotalCount = filteredCaseTableDtos.Count,
+                    Cases=perPageFilteredCaseTableDtos
+                };
 
+                return openCasesDto;
             }
             catch (Exception e)
             {
@@ -153,38 +158,52 @@
         {
             Expression finalBody = Expression.Constant(true);
             var parameter = Expression.Parameter(typeof(CaseTableDto), "selectedCase");
-
-            for (int i = 0;i<queries.Count;++i)
+            if (queries != null)
             {
-                var propertyName = queries[i].Property;
-                if(queries[i].Values ==  null ||queries[i].Values.Count == 0)
+                for (int i = 0; i < queries.Count; ++i)
                 {
-                    continue;
-                }
-                var constantValues = queries[i].Values;
-                Expression orBody = Expression.Constant(false);
-                for(int j =0;j<constantValues.Count;++j)
-                {
-                    var constantValue = constantValues[j];
-                    var member = Expression.Property(parameter, propertyName);
-                    var memberType = member.Type;
-                    ConstantExpression constant = null;
-                    if (memberType.IsEnum)
+                    var propertyName = queries[i].Property;
+                    if (queries[i].Values == null || queries[i].Values.Count == 0)
                     {
-                        var instance = Activator.CreateInstance(memberType);
-                        var enumType = Enum.Parse(instance.GetType(), constantValue);
-                        constant = Expression.Constant(enumType);
-                    }
-                    else
-                    {
-                        constant = Expression.Constant(constantValue);
+                        continue;
                     }
 
-                    var body = Expression.Equal(member, constant);
-                    orBody = Expression.OrElse(body, orBody);
+                    var constantValues = queries[i].Values;
+                    Expression orBody = Expression.Constant(false);
+                    if (queries[i].ValueDataType == "StringMatch")
+                    {
+                        var constantValue = constantValues[0];
+                        var member = Expression.Property(parameter, propertyName);
+                        ConstantExpression constant = Expression.Constant(constantValue);
+                        var body = Expression.Equal(member, constant);
+                        orBody = Expression.OrElse(body, orBody);
+                    }
+                    else if (queries[i].ValueDataType == "EnumRange")
+                    {
+                        for (int j = 0; j < constantValues.Count; ++j)
+                        {
+                            var constantValue = constantValues[j];
+                            var member = Expression.Property(parameter, propertyName);
+                            var instance = Activator.CreateInstance(member.Type);
+                            var enumType = Enum.Parse(instance.GetType(), constantValue);
+                            ConstantExpression constant = Expression.Constant(enumType);
+                            var body = Expression.Equal(member, constant);
+                            orBody = Expression.OrElse(body, orBody);
+                        }
+                    }
+                    else if (queries[i].ValueDataType == "DateRange")
+                    {
+                        var fromDate = DateTime.ParseExact(constantValues[0], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        var toDate = DateTime.ParseExact(constantValues[1], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        var member = Expression.Property(parameter, propertyName);
+                        ConstantExpression fromDateConstant = Expression.Constant(fromDate);
+                        var fromDateBody = Expression.GreaterThanOrEqual(member, fromDateConstant);
+                        ConstantExpression toDateConstant = Expression.Constant(toDate);
+                        var toDateBody = Expression.LessThanOrEqual(member, toDateConstant);
+                        orBody = Expression.AndAlso(fromDateBody, toDateBody);
+                    }
+                    finalBody = Expression.AndAlso(orBody, finalBody);
                 }
-                   finalBody = Expression.AndAlso(orBody, finalBody);
-
             }
             
             var finalExpression= Expression.Lambda<Func<CaseTableDto, bool>>(finalBody, parameter);

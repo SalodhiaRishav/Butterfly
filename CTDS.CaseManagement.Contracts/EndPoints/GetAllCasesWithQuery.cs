@@ -9,5 +9,7 @@
     public class GetAllCasesWithQuery
     {
         public List<QueryDto> Queries { get; set; }
+        public int PageNumber { get; set; }
+        public int maxRowsPerPage { get; set; }
     }
 }
