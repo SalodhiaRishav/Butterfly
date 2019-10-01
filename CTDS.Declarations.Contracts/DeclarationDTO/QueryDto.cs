@@ -1,4 +1,4 @@
-﻿namespace CTDS.CaseManagement.Contracts.Dto
+﻿namespace CTDS.Declarations.Contracts.DeclarationDTO
 {
     using System.Collections.Generic;
 

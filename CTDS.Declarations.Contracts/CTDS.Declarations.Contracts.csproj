@@ -71,10 +71,13 @@
   <ItemGroup>
     <Compile Include="DeclarationDTO\DeclarationData.cs" />
     <Compile Include="DeclarationDTO\DeclarationDto.cs" />
+    <Compile Include="DeclarationDTO\FilterDeclarationsDto.cs" />
+    <Compile Include="DeclarationDTO\QueryDto.cs" />
     <Compile Include="DeclarationDTO\ReferenceDto.cs" />
     <Compile Include="DeclarationDTO\StatusDto.cs" />
     <Compile Include="EndPoints\CountOfSevenDays.cs" />
     <Compile Include="EndPoints\GetDeclarationCount.cs" />
+    <Compile Include="EndPoints\GetDeclarationsWithQuery.cs" />
     <Compile Include="EndPoints\GetPerDayDeclarationCountLastWeek.cs" />
     <Compile Include="EndPoints\GetStatusCount.cs" />
     <Compile Include="EndPoints\SendToCustom.cs" />

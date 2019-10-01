@@ -174,5 +174,17 @@
                 throw;
             }
         }
+
+        public FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage)
+        {
+            try
+            {
+                return DeclarationDal.GetAllDeclarationsWithQuery(queries,pageNumber,maxRowsPerPage);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

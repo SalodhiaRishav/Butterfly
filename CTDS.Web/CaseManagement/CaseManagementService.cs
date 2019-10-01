@@ -299,13 +299,13 @@
                 return response;
             }
         }
-        public OperationResponse<List<CaseTableDto>> Post(GetAllCasesWithQuery req)
+        public OperationResponse<OpenCasesDto> Post(GetAllCasesWithQuery req)
         {
-            OperationResponse<List<CaseTableDto>> response = new OperationResponse<List<CaseTableDto>>();
+            OperationResponse<OpenCasesDto> response = new OperationResponse<OpenCasesDto>();
             try
             {
-                List<CaseTableDto> caseTableDtos=CaseBusinessLogic.GetAllCasesWithQuery(req.Queries);
-                response.OnSuccess(caseTableDtos, "Success");
+                OpenCasesDto openCaseDto =CaseBusinessLogic.GetAllCasesWithQuery(req.Queries,req.PageNumber,req.maxRowsPerPage);
+                response.OnSuccess(openCaseDto, "Success");
                 return response;
             }
             catch (Exception e)

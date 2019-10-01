@@ -11,6 +11,8 @@
     using CTDS.Declarations.Contracts.DeclarationDTO;
     using CTDS.Declarations.Application.Repository.Interface;
     using CTDS.Declarations.Application.Mapper.Interface;
+    using System.Linq.Expressions;
+    using CTDS.Database.Models.Declarations;
 
     public class DeclarationDal : IDeclarationDal
     {
@@ -230,6 +232,88 @@
             {
                 throw;
             }
+        }
+
+        public FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage)
+        {
+            try
+            {
+                using (var context = new CTDSContext())
+                {
+                    FilterDeclarationsDto filterDeclarationsDto = new FilterDeclarationsDto();
+                    var expression = QueryBuilder(queries);
+                    var filteredDeclarations= context.Declaration
+                                .Where(expression)
+                                .ToList();
+                    filterDeclarationsDto.TotalCount = filteredDeclarations.Count;
+                    
+                    var perPageFilteredDeclarations = filteredDeclarations.Skip((pageNumber - 1) * maxRowsPerPage).Take(maxRowsPerPage).ToList();
+                    var perPageFilteredDeclarationDtos = Mapper.DeclarationListToDtoList(perPageFilteredDeclarations).ToList();
+                    filterDeclarationsDto.Declarations = perPageFilteredDeclarationDtos;
+                    return filterDeclarationsDto;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        //TODO making generic using  private Expression<Func<TClass,bool>> QueryBuilder<TClass>(string query)
+        private Expression<Func<Declaration, bool>> QueryBuilder(List<QueryDto> queries)
+        {
+            Expression finalBody = Expression.Constant(true);
+            var parameter = Expression.Parameter(typeof(Declaration), "selectedDeclaration");
+            if (queries != null)
+            {
+                for (int i = 0; i < queries.Count; ++i)
+                {
+                    var propertyName = queries[i].Property;
+                    if (queries[i].Values == null || queries[i].Values.Count == 0)
+                    {
+                        continue;
+                    }
+
+                    var constantValues = queries[i].Values;
+                    Expression orBody = Expression.Constant(false);
+                    if (queries[i].ValueDataType == "StringMatch")
+                    {
+                        var constantValue = constantValues[0];
+                        var member = Expression.Property(parameter, propertyName);
+                        ConstantExpression constant = Expression.Constant(constantValue);
+                        var body = Expression.Equal(member, constant);
+                        orBody = Expression.OrElse(body, orBody);
+                    }
+                    else if (queries[i].ValueDataType == "EnumRange")
+                    {
+                        for (int j = 0; j < constantValues.Count; ++j)
+                        {
+                            var constantValue = constantValues[j];
+                            var member = Expression.Property(parameter, propertyName);
+                            var instance = Activator.CreateInstance(member.Type);
+                            var enumType = Enum.Parse(instance.GetType(), constantValue);
+                            ConstantExpression constant = Expression.Constant(enumType);
+                            var body = Expression.Equal(member, constant);
+                            orBody = Expression.OrElse(body, orBody);
+                        }
+                    }
+                    else if (queries[i].ValueDataType == "DateRange")
+                    {
+                        var fromDate = DateTime.ParseExact(constantValues[0], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        var toDate = DateTime.ParseExact(constantValues[1], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        var member = Expression.Property(parameter, propertyName);
+                        ConstantExpression fromDateConstant = Expression.Constant(fromDate);
+                        var fromDateBody = Expression.GreaterThanOrEqual(member, fromDateConstant);
+                        ConstantExpression toDateConstant = Expression.Constant(toDate);
+                        var toDateBody = Expression.LessThanOrEqual(member, toDateConstant);
+                        orBody = Expression.AndAlso(fromDateBody, toDateBody);
+                    }
+                    finalBody = Expression.AndAlso(orBody, finalBody);
+                }
+            }
+
+            var finalExpression = Expression.Lambda<Func<Declaration, bool>>(finalBody, parameter);
+            return finalExpression;
         }
     }
 }

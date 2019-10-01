@@ -1,10 +1,11 @@
 export default [
     {
         type:"appCustomTextBox",
-        title:"name",
+        title:"client",
         value:"",
         valueType:String,
-        props:{id:"name",label:"Name"},
+        dataType:"StringMatch",
+        props:{id:"client",label:"Client"},
         show:false
     },
     {
@@ -12,6 +13,7 @@ export default [
         title:"status",
         value:[],
         valueType:Array,
+        dataType:"EnumRange",
         props:{id:"status",label:"Status",dataSource:"/statustypes"},
         show:false
     },
@@ -19,8 +21,19 @@ export default [
         type:"appCustomMultiSelectDropDown",
         title:"priority",
         value:[],
+        dataType:"EnumRange",
         valueType:Array,
         props:{id:"priority",label:"Priority",dataSource:"/prioritytypes"},
         show:false
-    }
+    },
+    {
+        type:"appCustomDateRangePicker",
+        title:"createdOn",
+        value: [],
+        valueType:Array,
+        dataType:"DateRange",
+        props:{id:"createdOn",label:"CreatedOn"},
+        show:false
+    },
+
 ]
