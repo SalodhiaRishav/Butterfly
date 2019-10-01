@@ -1,6 +1,7 @@
 <template>
   <div>
     <appCustomSearch :searchObjects="declarationAdvanceSearchObject" @applyFilter="onApplyFilter"></appCustomSearch>
+    <div class="totalFoundText">{{totalRows}} declarations found</div>
     <div class="font-mono">
       <b-table
         striped
@@ -176,3 +177,7 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+@import url("./Style/declarationDashboardStyle.css");
+</style>
