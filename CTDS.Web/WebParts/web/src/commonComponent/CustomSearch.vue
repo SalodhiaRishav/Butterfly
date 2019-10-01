@@ -12,15 +12,12 @@
                      @input="onCheckBoxInput"
                     v-model="selectedSearchOptions"
                     stacked>
-                        <b-form-checkbox  ref="filterCheckBox" v-for="searchObject in searchObjects"  :key="searchObject.title" :value="searchObject.title">{{searchObject.props.label}}</b-form-checkbox>
+                        <b-form-checkbox  ref="filterCheckBox" v-for="searchObject in searchObjects" v-model="searchObject.selected" :key="searchObject.title" :value="searchObject.title">{{searchObject.props.label}}</b-form-checkbox>
                     </b-form-checkbox-group>
                 </b-dropdown-form>
                 </b-dropdown>
                  <button @click="applyFilter">Apply Filters</button> 
                   <button @click="clearFilters">Clear Filters</button> 
-                 <div>
-                     Total Found : {{resultCount}}
-                 </div>
             </div>
             <div class="col-md-10 col-sm-6">
                 <div class="row customSearchComponentRow">

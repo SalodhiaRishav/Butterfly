@@ -18,5 +18,6 @@
         List<int> GetPerDayDeclarationCount();
         bool SendToCustom(DeclarationDto declarationDTO);
         StatusDto GetStatusCount();
+        FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage);
     }
 }

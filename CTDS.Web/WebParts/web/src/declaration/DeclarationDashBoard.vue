@@ -1,14 +1,14 @@
 <template>
   <div>
+    <appCustomSearch :searchObjects="declarationAdvanceSearchObject" @applyFilter="onApplyFilter"></appCustomSearch>
     <div class="font-mono">
       <b-table
         striped
         hover
         :fields="fields"
-        :items="declarations"
+        :items="myProvider"
         :current-page="currentPage"
-        :per-page="perPage"
-        @head-clicked="sortData"
+        :per-page="maxRowsPerPage"
         @row-clicked="getDeclaration"
       ></b-table>
     </div>
@@ -17,7 +17,7 @@
         <b-pagination
           v-model="currentPage"
           :total-rows="totalRows"
-          :per-page="perPage"
+          :per-page="maxRowsPerPage"
           @change="getNewData"
           class="my-0"
         ></b-pagination>
@@ -28,75 +28,97 @@
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
+import declarationTableField from "./Utils/declarationTableField.js";
+import declarationAdvanceSearchObject from "./Utils/declarationAdvanceSearchObject.js";
+import CustomSearch from "./../commonComponent/CustomSearch";
 
 export default {
+  components:{
+    appCustomSearch:CustomSearch
+  },
   mounted() {
-    this.getAllDeclaration(1, this.sortOrder);
+    // this.getAllDeclaration(1, this.sortOrder);
   },
   data() {
     return {
       declarations: [],
+      filters:null,
       currentPage: 1,
-      totalRows: 1,
-      perPage: 3,
+      totalRows: 0,
+      maxRowsPerPage: 5,
       sortOrder: "DeclarationId",
-      fields: [
-        {
-          key: "DeclarationId",
-          sortable: false
-        },
-        {
-          key: "LRN",
-          sortable: false
-        },
-        {
-          key: "MRN",
-          sortable: false
-        },
-        {
-          key: "Country",
-          sortable: false
-        },
-        {
-          key: "Procedure",
-          sortable: false
-        },
-        {
-          key: "Type",
-          sortable: false
-        },
-        {
-          key: "Status",
-          sortable: false
-        },
-        {
-          key: "CustomResponse",
-          sortable: false
-        },
-        {
-          key: "User",
-          sortable: false
-        },
-        {
-          key: "CreatedOn",
-          sortable: false
-        },
-        {
-          key: "TaxationDate",
-          sortable: false
-        }
-      ]
+      fields:declarationTableField,
+      declarationAdvanceSearchObject,
     };
   },
   methods: {
+     myProvider(ctx, callback) {
+          httpClient.post("/declarationswithquery",{"Queries":this.filters,"MaxRowsPerPage":this.maxRowsPerPage,"PageNumber":this.currentPage})
+            .then((response)=>{
+                 if (response.data === "token refreshed") {
+                    this.myProvider(ctx, callback);
+                    return;
+                }
+               if (response.data.success === true) {
+                 console.log(response);
+            let declaration = [];
+             const filteredDeclarations=response.data.data.declarations;
+            for (let i = 0; i < filteredDeclarations.length; ++i) {
+              let obj = {
+                BaseID: filteredDeclarations[i].declarationId,
+                CreatedOn: this.convertDate(filteredDeclarations[i].createdOn),
+                status: filteredDeclarations[i].status,
+                LRN: " ",
+                MRN: " ",
+                Country: filteredDeclarations[i].country,
+                Procedure: filteredDeclarations[i].procedure,
+                Type: filteredDeclarations[i].messageName,
+                Status: filteredDeclarations[i].status,
+                CustomResponse: " ",
+                User: " ",
+                TaxationDate: " ",
+                DeclarationId:
+                  "CD-" +
+                  filteredDeclarations[i].declarationId.toString().substring(0, 5)
+              };
+              declaration.push(obj);
+            }
+            this.declarations = declaration;
+             this.totalRows=response.data.data.totalCount;
+             callback(this.declarations);
+          } else {
+            alert(response.data.message);
+            callback([]);
+          }
+        })
+        .catch(error => {
+          alert(error);
+          callback([]);
+        });
+        // Must return null or undefined to signal b-table that callback is being used
+        return null
+     },
+    onApplyFilter(filters)
+    {
+     this.filters=filters;
+        if(this.currentPage===1)
+        {
+           this.currentPage=2;
+           setTimeout(function(){this.currentPage=1;}, 2000);
+        }
+        else
+        {
+          this.currentPage=1;
+        }
+    },
     sortData(key, val2, val3) {
       this.sortOrder = key;
       this.getAllDeclaration(1, this.sortOrder);
     },
     getNewData(val) {
       this.currentPage = parseInt(val);
-      console.log("get new data " + this.sortOrder);
-      this.getAllDeclaration(val, this.sortOrder);
+      // console.log("get new data " + this.sortOrder);
+      // this.getAllDeclaration(val, this.sortOrder);
     },
     convertDate(date) {
       return new Date(date.match(/\d+/)[0] * 1).toString().substring(4, 16);
@@ -117,35 +139,38 @@ export default {
           }
           if (response.data.success === true) {
             let declaration = [];
-            for (let i = 0; i < response.data.data.length; ++i) {
+             const filteredDeclarations=response.data.data.declarations;
+            for (let i = 0; i < filteredDeclarations.length; ++i) {
               let obj = {
-                BaseID: response.data.data[i].declarationId,
-                CreatedOn: this.convertDate(response.data.data[i].createdOn),
-                status: response.data.data[i].status,
+                BaseID: filteredDeclarations[i].declarationId,
+                CreatedOn: this.convertDate(filteredDeclarations[i].createdOn),
+                status: filteredDeclarations[i].status,
                 LRN: " ",
                 MRN: " ",
-                Country: response.data.data[i].country,
-                Procedure: response.data.data[i].procedure,
-                Type: response.data.data[i].messageName,
-                Status: response.data.data[i].status,
+                Country: filteredDeclarations[i].country,
+                Procedure: filteredDeclarations[i].procedure,
+                Type: filteredDeclarations[i].messageName,
+                Status: filteredDeclarations[i].status,
                 CustomResponse: " ",
                 User: " ",
                 TaxationDate: " ",
                 DeclarationId:
                   "CD-" +
-                  response.data.data[i].declarationId.toString().substring(0, 5)
+                  filteredDeclarations[i].declarationId.toString().substring(0, 5)
               };
               declaration.push(obj);
             }
             this.declarations = declaration;
-            if (this.declarations.length != 0)
-              this.totalRows = this.currentPage * this.perPage + 1;
+             this.totalRows=response.data.data.totalCount;
+             callback(this.declarations);
           } else {
             alert(response.data.message);
+            callback([]);
           }
         })
         .catch(error => {
           alert(error);
+          callback([]);
         });
     }
   }
