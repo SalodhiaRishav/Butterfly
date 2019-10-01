@@ -21,8 +21,8 @@
             </div>
             <div class="col-md-10 col-sm-6">
                 <div class="row customSearchComponentRow">
-                <div class="col-md-2 col-sm-4 col-xs-12" v-for="searchObject in searchObjects" :key="searchObject.title">
-                 <component :is="searchObject.type" v-model="searchObject.value" v-bind="searchObject.props" v-if="searchObject.show"></component>
+                <div class="col-md-2 col-sm-4 col-xs-12" v-for="filterElement in filterElements" :key="filterElement.title">
+                 <component :is="filterElement.type" v-model="filterElement.value" v-bind="filterElement.props"></component>
                 </div>
                 </div>
             </div>
@@ -52,59 +52,62 @@ export default {
      data(){
         return {
             selectedSearchOptions:[],
-            resultCount:0
+            resultCount:0,
+            filterElements:[]
         }
     },
     methods:{
         clearFilters(){
-            for(let index=0;index<this.searchObjects.length;++index)
-            {
-               if(this.searchObjects[index].valueType == Array)
-                    {
-                        this.searchObjects[index].value=[];
-                    }
-                    else if(this.searchObjects[index].valueType == String)
-                    {
-                        this.searchObjects[index].value="";
-                    }
-                    this.searchObjects[index].show=false;
-            }
-            
-                    this.applyFilter();
+            this.filterElements=[];
+            this.applyFilter();
         },
         onCheckBoxInput(){
-            let arr=[];
-            for(let index = 0;index<this.searchObjects.length;++index)
+
+            for(let index=0;index<this.filterElements.length;++index)
             {
-                let isFound=this.selectedSearchOptions.indexOf(this.searchObjects[index].title);
-                if(isFound !== -1)
+                let isFound=this.selectedSearchOptions.indexOf(this.filterElements[index].title);
+                if(isFound === -1)
                 {
-                    this.searchObjects[index].show=true;
+                   this.filterElements.splice(index,1);
+                }   
+            }
+
+            for(let index =0;index<this.selectedSearchOptions.length;++index)
+            {
+                let isElementFoundInFilterElements=false;
+                for(let j=0;j<this.filterElements.length;++j)
+                {
+                    if(this.filterElements[j].title === this.selectedSearchOptions[index])
+                    {
+                        isElementFoundInFilterElements=true;
+                        break;
+                    }
                 }
-                else
+
+                if(isElementFoundInFilterElements === false)
                 {
-                    if(this.searchObjects[index].valueType == Array)
+                    for(let j=0;j<this.searchObjects.length;++j)
                     {
-                        this.searchObjects[index].value=[];
+                        if(this.searchObjects[j].title === this.selectedSearchOptions[index])
+                        {
+                            this.filterElements.push(this.searchObjects[j]);
+                            break;
+                        }
                     }
-                    else if(this.searchObjects[index].valueType == String)
-                    {
-                        this.searchObjects[index].value="";
-                    }
-                    this.searchObjects[index].show=false;
                 }
             }
+            
         },
         applyFilter(){
             let filters=[];
-            for(let ind=0;ind<this.searchObjects.length;++ind)
+            for(let ind=0;ind<this.filterElements.length;++ind)
             {
-                const searchObject={
-                    "property":this.searchObjects[ind].title,
-                    "values":this.searchObjects[ind].value,
-                    "ValueDataType":this.searchObjects[ind].dataType
+                const filter={
+                    "property":this.filterElements[ind].title,
+                    "values":this.filterElements[ind].value,
+                    "ValueDataType":this.filterElements[ind].dataType
                 }
-                filters.push(searchObject);
+                filters.push(filter);
             }
             this.$emit("applyFilter",filters);
         }
