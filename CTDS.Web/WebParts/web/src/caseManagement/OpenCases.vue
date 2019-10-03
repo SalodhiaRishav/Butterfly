@@ -1,7 +1,7 @@
 <template>
   <div>
      <appCustomSearch :searchObjects="casesAdvanceSearchObjects" @applyFilter="onApplyFilter"></appCustomSearch>
-    <div class="totalFoundText">{{totalRows}} declarations found</div>
+    <div class="totalFoundText">{{totalRows}} Cases found</div>
     <div>
       <b-table
         striped
@@ -34,14 +34,14 @@ import httpClient from "./../utils/httpRequestWrapper";
 import caseTableFields from "./utils/caseTableFields.js"
 import CaseStatusDropDown from "./CaseStatusDropDown.vue";
 import CasePriorityDropDown from "./CasePriorityDropDown.vue";
-import CustomSearch2 from "./../commonComponent/CustomSearch2";
+import CustomSearch from "./../commonComponent/CustomSearch";
 import casesAdvanceSearchObjects from "./utils/casesAdvanceSearchObjects.js";
 
 export default {
   components: {
     appCaseStatusDropDown: CaseStatusDropDown,
     appCasePriorityDropDown: CasePriorityDropDown,
-    appCustomSearch:CustomSearch2
+    appCustomSearch:CustomSearch
   },
   data() {
     return {

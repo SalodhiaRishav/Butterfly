@@ -9,7 +9,7 @@ import EditDeclaration from "./../declaration/EditDeclaration.vue";
 import Login from "./../commonComponent/Login.vue";
 import Unauthorize from "./../commonComponent/Unauthorize.vue";
 import Dashboard2 from "./../commonComponent/Dashboard2.vue";
-import CustomSearch2 from "./../commonComponent/CustomSearch2.vue";
+import CustomSearch from "./../commonComponent/CustomSearch.vue";
 import TileChecker from "./../commonComponent/TileChecker.vue";
 import SearchCases from "./../caseManagement/SearchCases.vue";
 import SearchDeclarations from "./../declaration/SearchDeclarations.vue";
@@ -176,7 +176,7 @@ const router = new Router({
     {
       path: "/customsearch",
       name: "CustomSearch",
-      component: CustomSearch2
+      component: CustomSearch
     },
     {
       path: "/multiselect",
