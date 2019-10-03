@@ -1,12 +1,20 @@
 <template>
     <div id="customAdvanceSearchElement">
-        <div class="row customSearchHeadingRow">
-            Advance Search
-        </div>
-        <div class="row customSearchBody">
+         <b-button id="show-btn" @click="$bvModal.show('bv-modal-example')">Show Advance Search</b-button>
+         <b-modal size="xl" id="bv-modal-example">
+              <template v-slot:modal-title>
+               <div class="row customSearchHeadingRow">
+                    Advance Search
+               </div>
+              </template>
+          <template v-slot:default>
+              <div class="row customSearchBody">
             <div class="col-md-3 col-sm-6">
                 <div class="filterDropDown">
-                    <b-dropdown text="Filter" ref="dropdown" class="m-3">
+                    <div class="label">
+                        Filters
+                    </div>
+                    <b-dropdown text="Filter" ref="dropdown">
                     <b-dropdown-form>
                         <b-form-checkbox-group
                         id="filterCheckBoxGroup"
@@ -25,15 +33,18 @@
                     <component :is="filterElement.type" v-model="filterElement.value" v-bind="filterElement.props"></component>
                     </div>
                 </div>
-                <div class="row buttonsRow">
-                         <button class="btn btn-primary filterButton" @click="applyFilter">Apply</button> 
-                        <button class="btn btn-danger filterButton" @click="clearFilters">Clear</button> 
-                        <button class="btn btn-normal filterButton" @click="clearFilters">Close</button> 
-
-                </div>
             </div>
+              </div>
+        </template>
+         <template v-slot:modal-footer="{hide }">
+                <div class="row buttonsRow">
+                        <button class="btn btn-primary filterButton" @click="applyFilter">Apply</button> 
+                        <button class="btn btn-danger filterButton" @click="clearFilters">Clear</button> 
+                        <button class="btn btn-normal filterButton" @click="hide('Close')">Close</button> 
+                </div>
+       </template>
+         </b-modal>
         </div>
-    </div>
 </template>
 
 <script>
@@ -126,7 +137,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("./styles/customSearchStyle.css");
+@import url("./styles/customSearch2Style.css");
 </style>
 
 

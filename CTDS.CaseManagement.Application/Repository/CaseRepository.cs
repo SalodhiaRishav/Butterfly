@@ -178,30 +178,7 @@
                         var body = Expression.Equal(member, constant);
                         orBody = Expression.OrElse(body, orBody);
                     }
-                    else if (queries[i].ValueDataType == "EnumRange")
-                    {
-                        for (int j = 0; j < constantValues.Count; ++j)
-                        {
-                            var constantValue = constantValues[j];
-                            var member = Expression.Property(parameter, propertyName);
-                            var instance = Activator.CreateInstance(member.Type);
-                            var enumType = Enum.Parse(instance.GetType(), constantValue);
-                            ConstantExpression constant = Expression.Constant(enumType);
-                            var body = Expression.Equal(member, constant);
-                            orBody = Expression.OrElse(body, orBody);
-                        }
-                    }
-                    else if (queries[i].ValueDataType == "DateRange")
-                    {
-                        var fromDate = DateTime.ParseExact(constantValues[0], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                        var toDate = DateTime.ParseExact(constantValues[1], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-                        var member = Expression.Property(parameter, propertyName);
-                        ConstantExpression fromDateConstant = Expression.Constant(fromDate);
-                        var fromDateBody = Expression.GreaterThanOrEqual(member, fromDateConstant);
-                        ConstantExpression toDateConstant = Expression.Constant(toDate);
-                        var toDateBody = Expression.LessThanOrEqual(member, toDateConstant);
-                        orBody = Expression.AndAlso(fromDateBody, toDateBody);
-                    }
+                    else orBody = RangeQuery(queries, parameter, i, propertyName, constantValues, orBody);
                     finalBody = Expression.AndAlso(orBody, finalBody);
                 }
             }
@@ -210,5 +187,34 @@
             return finalExpression;
         }
 
+        private Expression RangeQuery(List<QueryDto> queries, ParameterExpression parameter, int i, string propertyName, List<string> constantValues, Expression orBody)
+        {
+            if (queries[i].ValueDataType == "EnumRange")
+            {
+                for (int j = 0; j < constantValues.Count; ++j)
+                {
+                    var constantValue = constantValues[j];
+                    var member = Expression.Property(parameter, propertyName);
+                    var instance = Activator.CreateInstance(member.Type);
+                    var enumType = Enum.Parse(instance.GetType(), constantValue);
+                    ConstantExpression constant = Expression.Constant(enumType);
+                    var body = Expression.Equal(member, constant);
+                    orBody = Expression.OrElse(body, orBody);
+                }
+            }
+            else if (queries[i].ValueDataType == "DateRange")
+            {
+                var fromDate = DateTime.ParseExact(constantValues[0], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                var toDate = DateTime.ParseExact(constantValues[1], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                var member = Expression.Property(parameter, propertyName);
+                ConstantExpression fromDateConstant = Expression.Constant(fromDate);
+                var fromDateBody = Expression.GreaterThanOrEqual(member, fromDateConstant);
+                ConstantExpression toDateConstant = Expression.Constant(toDate);
+                var toDateBody = Expression.LessThanOrEqual(member, toDateConstant);
+                orBody = Expression.AndAlso(fromDateBody, toDateBody);
+            }
+
+            return orBody;
+        }
     }
 }

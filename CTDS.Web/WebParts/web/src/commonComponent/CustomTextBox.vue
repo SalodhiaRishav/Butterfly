@@ -3,6 +3,7 @@
          <div v-if="showTextBox" >
                 <b-form-group
                 >
+                <div class="label">{{label}}</div>
                 <b-form-input
                     :id=id
                     :value="value"

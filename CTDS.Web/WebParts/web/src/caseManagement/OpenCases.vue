@@ -1,6 +1,6 @@
 <template>
   <div>
-    <appCustomSearch :searchObjects="casesAdvanceSearchObjects" @applyFilter="onApplyFilter"></appCustomSearch>
+     <appCustomSearch :searchObjects="casesAdvanceSearchObjects" @applyFilter="onApplyFilter"></appCustomSearch>
     <div class="totalFoundText">{{totalRows}} declarations found</div>
     <div>
       <b-table
@@ -34,14 +34,14 @@ import httpClient from "./../utils/httpRequestWrapper";
 import caseTableFields from "./utils/caseTableFields.js"
 import CaseStatusDropDown from "./CaseStatusDropDown.vue";
 import CasePriorityDropDown from "./CasePriorityDropDown.vue";
-import CustomSearch from "./../commonComponent/CustomSearch";
+import CustomSearch2 from "./../commonComponent/CustomSearch2";
 import casesAdvanceSearchObjects from "./utils/casesAdvanceSearchObjects.js";
 
 export default {
   components: {
     appCaseStatusDropDown: CaseStatusDropDown,
     appCasePriorityDropDown: CasePriorityDropDown,
-    appCustomSearch:CustomSearch
+    appCustomSearch:CustomSearch2
   },
   data() {
     return {
@@ -55,6 +55,9 @@ export default {
     };
   },
   methods: {
+    showModal() {
+        this.$refs['my-modal'].show()
+      },
     myProvider(ctx, callback) {
           httpClient.post("/casewithquery",{"Queries":this.filters,"MaxRowsPerPage":this.maxRowsPerPage,"PageNumber":this.pageNumber})
             .then((response)=>{

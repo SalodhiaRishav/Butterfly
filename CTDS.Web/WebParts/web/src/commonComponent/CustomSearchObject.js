@@ -8,6 +8,35 @@ export default [
         show:false
     },
     {
+        type:"appCustomTextBox",
+        title:"name1",
+        value:"",
+        valueType:String,
+        props:{id:"name1",label:"Name"},
+        show:false
+    },{
+        type:"appCustomTextBox",
+        title:"name2",
+        value:"",
+        valueType:String,
+        props:{id:"name2",label:"Name"},
+        show:false
+    },{
+        type:"appCustomTextBox",
+        title:"name3",
+        value:"",
+        valueType:String,
+        props:{id:"name3",label:"Name"},
+        show:false
+    },{
+        type:"appCustomTextBox",
+        title:"name4",
+        value:"",
+        valueType:String,
+        props:{id:"name4",label:"Name"},
+        show:false
+    },
+    {
         type:"appCustomMultiSelectDropDown",
         title:"status",
         value:[],
@@ -21,6 +50,14 @@ export default [
         value:[],
         valueType:Array,
         props:{id:"priority",label:"Priority",dataSource:"/prioritytypes"},
+        show:false
+    },
+    {
+        type:"appCustomTextBox",
+        title:"name5",
+        value:"",
+        valueType:String,
+        props:{id:"name5",label:"Name"},
         show:false
     }
 ]

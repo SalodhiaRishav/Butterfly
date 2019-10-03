@@ -5,6 +5,7 @@
                 :label="label"
                 :label-for="id"
               >
+              <div class="label">{{label}}</div>
                 <b-form-select
                   :id="id"
                    :value="value"
