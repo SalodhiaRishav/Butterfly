@@ -18,14 +18,14 @@
                     </div>
                     <b-dropdown text="Filter" ref="dropdown">
                     <b-dropdown-form>
-                        <b-form-checkbox-group
+                         <b-form-checkbox-group
                         id="filterCheckBoxGroup"
                         @input="onCheckBoxInput"
                         v-model="selectedSearchOptions"
                         name="mySearchOptions"
                         stacked>
                             <b-form-checkbox  ref="filterCheckBox" v-for="searchObject in searchObjects" :key="searchObject.title" :value="searchObject.title">{{searchObject.props.label}}</b-form-checkbox>
-                        </b-form-checkbox-group>
+                        </b-form-checkbox-group>  
                     </b-dropdown-form>
                     </b-dropdown>
                 </div>
@@ -58,15 +58,13 @@ import CustomMultiSelectDropDown from "./CustomMultiSelectDropDown";
 import CustomDateRangePicker from "./CustomDateRangePicker";
 import CustomChip from "./CustomChip.vue"
 
-// import CustomSearchObject from "./CustomSearchObject.js";
-
 export default {
       components:{
         appCustomTextBox:CustomTextBox,
         appCustomDropDown:CustomDropDown,
         appCustomMultiSelectDropDown:CustomMultiSelectDropDown,
         appCustomDateRangePicker:CustomDateRangePicker,
-        appCustomChip:CustomChip
+        appCustomChip:CustomChip,
     },
     props:{
         searchObjects:{
@@ -79,13 +77,15 @@ export default {
             selectedSearchOptions:[],
             resultCount:0,
             filterElements:[],
-            // searchObjects:CustomSearchObject
         }
     },
     methods:{
         removeFilter(filterName){
+             const idx=this.selectedSearchOptions.indexOf(filterName);
+                this.selectedSearchOptions.splice(idx,1);
             for(let index=0;index<this.filterElements.length;++index)
             {
+                
                 if(this.filterElements[index].title === filterName)
                 {
                     this.filterElements.splice(index,1);
@@ -105,7 +105,7 @@ export default {
             }
         },
         clearFilters(){
-            console.log(this.$refs["filterCheckBox"]);
+            this.selectedSearchOptions=[];
             this.filterElements=[];
             this.applyFilter();
         },
