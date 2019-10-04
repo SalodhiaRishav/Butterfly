@@ -216,5 +216,35 @@
 
             return orBody;
         }
+        public List<CaseTableDto> GetAllCasesByStatus(CaseStatusType status, DateTime startDate, DateTime endDate)
+        {
+            List<CaseTableDto> cases = new List<CaseTableDto>();
+            try
+            {
+                   cases = (from mcase in CTDSContext.Case
+                                         join caseStatus in CTDSContext.CaseStatus on mcase.Id equals caseStatus.CaseId
+                                         join caseInformation in CTDSContext.CaseInformation on mcase.Id equals caseInformation.CaseId
+                                         join client in CTDSContext.Client on mcase.Id equals client.CaseId
+                                         join notes in CTDSContext.Notes on mcase.Id equals notes.CaseId
+                                         select new CaseTableDto
+                                         {
+                                             Id = mcase.Id,
+                                             CaseId = mcase.CaseId,
+                                             Status = caseStatus.Status,
+                                             Priority = caseInformation.Priority,
+                                             CreatedOn = mcase.CreatedOn,
+                                             Description = caseInformation.Description,
+                                             Client = client.ClientIdentifier,
+                                             Notes = notes.NotesByCpa
+                                         })
+                            .Where(c => c.Status == status && startDate <= c.CreatedOn && c.CreatedOn <= endDate)
+                            .ToList();
+                return cases;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

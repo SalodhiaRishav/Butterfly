@@ -9,6 +9,7 @@
     using CTDS.CaseManagement.Contracts.Interfaces;
     using CTDS.Database.Models.CaseManagement;
     using CTDS.Common.ExtensionMethods;
+    using CTDS.CaseManagement.Contracts.Enums;
 
     public class CaseBusinessLogic : ICaseBusinessLogic
     {
@@ -262,5 +263,24 @@
                 throw e;
             }
         }
+
+        public List<CaseTableDto> GetCaseByStatus(CaseStatusType status, DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                List<CaseTableDto> cases = CaseRepository.GetAllCasesByStatus(status, startDate, endDate);
+                if (cases.Count == 0)
+                {
+                    return null;
+                }
+
+                return cases;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
     }
 }

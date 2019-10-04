@@ -4,10 +4,10 @@
     {
         static void Main(string[] args)
         {
-            //CaseSeeder caseSeeder = new CaseSeeder();
-            //caseSeeder.CreateCases(100);
+            CaseSeeder caseSeeder = new CaseSeeder();
+            caseSeeder.CreateCases(1000);
             DeclarationSeeder declarationSeeder = new DeclarationSeeder();
-            declarationSeeder.CreateDeclarations(50);
+            declarationSeeder.CreateDeclarations(1000);
             System.Console.WriteLine("Data created successfully...");
 
         }

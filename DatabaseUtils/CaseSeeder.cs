@@ -87,7 +87,7 @@
 
         private DateTime CreateRandomDate(int yearForRange)
         {
-            int range = yearForRange * 7;          
+            int range = yearForRange * 60;          
             DateTime randomDate = DateTime.Today.AddDays(-Random.Next(range));
             return randomDate;
         }

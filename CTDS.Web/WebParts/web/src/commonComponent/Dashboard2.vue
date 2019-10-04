@@ -4,68 +4,86 @@
       <appNavigationbar></appNavigationbar>
      <div class="row tilesRow" v-if="caseStatusDataFetched">
          <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
-        <appTile @chartShowed="chartswitch=$event" boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
+        <appTile @chartShowed="chartswitch=$event" :style="randomColor()" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart boxColor="green" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart :style="randomColor()" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart boxColor="blue" tooltipTitle="Cases In Process" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart  :style="randomColor()"  tooltipTitle="Cases In Process" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart boxColor="red" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart  :style="randomColor()" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
        </div>
       </div>
       <div class="row tilesRow" v-if="declarationStatusDataFetched">
          <div class="col-sm-4 col-md-3 tileBox" v-if="declarationLineChartDataFetched">
-        <appTile boxColor="darkblue" tooltipTitle="Total Declarations" :counter=totalDeclaration chartTitle="Declarations Last Week" title="Total Declarations"  :chartData="declarationTileChartData"></appTile>
+        <appTile :style="randomColor()" tooltipTitle="Total Declarations" :counter=totalDeclaration chartTitle="Declarations Last Week" title="Total Declarations"  :chartData="declarationTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart boxColor="green" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart :style="randomColor()" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart boxColor="blue" tooltipTitle="Declarations InProcess" chartTitle="Declarations In Process / Total Declarations" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart :style="randomColor()" tooltipTitle="Declarations InProcess" chartTitle="Declarations In Process / Total Declarations" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart boxColor="red" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart :style="randomColor()" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
        </div>
       </div>
-      <div class="row chartRow">
-        <div class="col-md-12 chartBox shadowBox">
-          <div class="row chartRow">
-           <div class="col-md-4">
-            
-           </div>
-           <div class="col-md-4 toggler shadowBox">
+      <div class="row tilesRow">
+        <div class="col-md-12 tileBox shadowBox">
+           <!-- <div class="col-md-4 toggler shadowBox">
             <toggle-switch :options="myOptions">
             </toggle-switch>
+           </div> -->
+           <div>
+             <font-awesome-icon icon="calendar" />
+             <appDateRangePicker v-model="range" @input="getCasesByStatus"></appDateRangePicker>
            </div>
-           <div class="col-md-4 toggler shadowBox">
-             <appDateRangePicker></appDateRangePicker>
-           </div>
-          </div>
-          <div class="row chartRow">
-            <div class="col-md-12 table" v-if="chartswitch">
+            <!-- <div class="col-md-12 table" v-if="chartswitch">
               <appTile boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
-            </div>
+            </div> -->
+            <div>
+              <div>
+                <b-table
+                  striped
+                  hover
+                  fixed
+                  :fields="fields"
+                  :items="filterCases"
+                  :current-page="currentPage"
+                  :per-page="perPage"
+                >
+                </b-table>
+              </div>
+              <b-row>
+                <b-col md="6" class="my-1">
+                  <b-pagination
+                    v-model="currentPage"
+                    :total-rows="totalRows"
+                    :per-page="perPage"
+                    class="my-0">
+                  </b-pagination>
+                </b-col>
+              </b-row>
           </div>
         </div>
-        <!-- <div class="col-md-6 chartBox">
+       </div>
+      </div>
+    </div>
+     <!-- <div class="col-md-6 chartBox">
           <appToggler></appToggler>
           <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
               <appBarChart :width="100" :height="400" :data="caseGroupedBarChartData" :options="caseGroupedBarChartOptions"></appBarChart>
           </div>
         </div>
         <div class="col-md-6 chartBox">
-          <appToggler></appToggler> 
-        <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
+            <appToggler></appToggler> 
+          <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
              <pie-chart :width="100" :height="400" :data="declarationPieChartData" :options="declarationPieChartOptions"></pie-chart>
-          </div> 
-       </div>  -->
-      </div>
-    </div>
-  </div>
+          </div> -->
 </template>
+
 <script>
 import SideBar from "./SideBar";
 import Navigationbar from "./Navigationbar";
@@ -101,7 +119,47 @@ export default {
   },
   data() {
     return {
+      startPicker : true,
+      filterCases: [],
+      currentPage: 1,
+      perPage: 5,
+      totalRows: 0,
+      fields: [
+        {
+          key: "CaseId",
+          sortable: false
+        },
+        {
+          key: "CreatedDate",
+          sortable: false
+        },
+        {
+          key: "Status",
+          sortable: false
+        },
+        {
+          key: "Description",
+          sortable: false
+        },
+        {
+          key: "Client",
+          sortable: false
+        },
+        {
+          key: "Priority",
+          sortable: false
+        },
+        {
+          key: "References",
+          sortable: false
+        },
+        {
+          key: "Notes",
+          sortable: false
+        }
+      ],
 
+      range: [this.$moment().subtract(29, 'days'), this.$moment()],
       myOptions: {
         layout: {
           color: 'black',
@@ -115,12 +173,6 @@ export default {
           squareCorners: false,
           noBorder: false
         },
-        // size: {
-        //   fontSize: 14,
-        //   height: 34,
-        //   padding: 7,
-        //   width: 100
-        // },
         items: {
           delay: .4,
           preSelected: 'Chart',
@@ -257,7 +309,9 @@ export default {
           value: 0,
           barColor: "red"
         }
-      ]
+      ],
+      safeColors : ['00','33','66','99','cc','ff'],
+
     };
   },
   created() {
@@ -269,10 +323,82 @@ export default {
     this.getCaseCount();
     this.getPerDayCaseCountLastWeek();
     this.getPerDayDeclarationCountLastWeek();
+    this.getCasesByStatus();
+  },
+  watch: {
+    range: {
+      handler (newvalue, oldvalue) {
+        console.log('range', newvalue, oldvalue);
+      },
+      deep: true
+    }
   },
   methods: {
-    
-    getPerDayDeclarationCountLastWeek() {
+    randomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      console.log('color is : ',color);
+      const styleObject={background:color};
+      return styleObject;
+    },
+    getCasesByStatus(){
+      this.filterCases = null;
+      const status = "Closed";
+      const url = "/casebystatus";
+      let postObject = null;
+      if(this.startPicker == true)
+      {
+         postObject={ CaseStatus : status,
+                   StartDate : this.$moment().subtract(29, 'days'),
+                   EndDate : this.$moment()
+                   };
+      }
+      else{
+        postObject={ CaseStatus : status,
+                   StartDate : this.range[0],
+                   EndDate : this.range[1]
+                   };
+      }
+      this.startPicker = false;
+      httpClient
+      .post(url, postObject)
+      .then(res => {
+         if (res.data === "token refreshed") {
+            this.getCasesByStatus();
+            return;
+          }
+         if (res.data.success === true) {
+            let filterCase = [];
+            this.allCases = res.data.data;
+             for (let i = 0; i < this.allCases.length; ++i){
+              let obj = {
+                  CaseId: "KGH-19-" + this.allCases[i].caseId,
+                  CreatedDate: this.convertDate(this.allCases[i].createdOn),
+                  Status: this.allCases[i].status,
+                  Description: this.allCases[i].description,
+                  Client: this.allCases[i].client,
+                  Notes: this.allCases[i].notes,
+                  Priority: this.allCases[i].priority,
+                  References: null
+                };
+                filterCase.push(obj);
+             }
+             this.filterCases = filterCase;
+              if (this.filterCases.length != 0)
+              this.totalRows = this.currentPage * this.perPage + 1;
+          }
+         })
+      .catch(error => {
+          console.log(error);
+        });
+    },
+    convertDate(someDate) {
+      return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
+    },
+    getPerDayDeclarationCountLastWeek(){
       const url = "/perdaydeclarationcount";
       httpClient
       .get(url)

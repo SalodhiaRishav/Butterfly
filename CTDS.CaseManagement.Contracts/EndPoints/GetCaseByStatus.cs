@@ -1,10 +1,14 @@
 ﻿namespace CTDS.CaseManagement.Contracts.EndPoints
 {
+    using CTDS.CaseManagement.Contracts.Enums;
     using ServiceStack.ServiceHost;
+    using System;
 
-    [Route("/casemanagement/{caseStatus}", "GET")]
+    [Route("/casebystatus", "POST")]
     public class GetCaseByStatus
     {
-        public string CaseStatus { get; set; }
+        public CaseStatusType CaseStatus { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }
