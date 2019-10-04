@@ -315,5 +315,32 @@
                 return response;
             }
         }
+
+        public OperationResponse<List<CaseTableDto>> Post(GetCaseByStatus request)
+        {
+            OperationResponse<List<CaseTableDto>> operationResponse = new OperationResponse<List<CaseTableDto>>();
+            try
+            {
+                List<CaseTableDto> caseDtos = CaseBusinessLogic.GetCaseByStatus(request.CaseStatus, request.StartDate, request.EndDate);
+                if (caseDtos != null)
+                {
+                    operationResponse.OnSuccess(caseDtos, "Fetched successfully");
+                    return operationResponse;
+                }
+                else
+                {
+                    operationResponse.OnError("No case found!!!", null);
+                    return operationResponse;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                operationResponse.OnException(e.Message);
+                return operationResponse;
+            }
+        }
+
     }
 }

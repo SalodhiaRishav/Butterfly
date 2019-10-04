@@ -51,10 +51,10 @@ export default {
     LineChart
   },
   props: {
-    boxColor: {
-      type: String,
-      default: "blue"
-    },
+    // boxColor: {
+    //   type: String,
+    //   default: "blue"
+    // },
     chartData: {
       type: Object
     },
