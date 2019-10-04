@@ -2,8 +2,10 @@ export default [
     {
         type:"appCustomTextBox",
         title:"client",
+        checkBoxValue:"client",
         value:"",
         valueType:String,
+        selected:true,
         dataType:"StringMatch",
         props:{id:"client",label:"Client"},
         show:false
@@ -13,6 +15,7 @@ export default [
         title:"status",
         value:[],
         valueType:Array,
+        selected:true,
         dataType:"EnumRange",
         props:{id:"status",label:"Status",dataSource:"/statustypes"},
         show:false
@@ -23,6 +26,7 @@ export default [
         value:[],
         dataType:"EnumRange",
         valueType:Array,
+        selected:true,
         props:{id:"priority",label:"Priority",dataSource:"/prioritytypes"},
         show:false
     },
@@ -32,6 +36,7 @@ export default [
         value: [],
         valueType:Array,
         dataType:"DateRange",
+        selected:true,
         props:{id:"createdOn",label:"CreatedOn"},
         show:false
     },

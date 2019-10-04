@@ -1,6 +1,7 @@
 <template>
     <div>
-    <b-dropdown :id=id :text="label" ref="dropdown" class="m-2" v-if="showDropDown">
+    <div class="label">{{label}}</div>
+    <b-dropdown :id=id :text="label" ref="dropdown" v-if="showDropDown">
       <b-dropdown-form>
         <b-form-checkbox-group
          :value="value"

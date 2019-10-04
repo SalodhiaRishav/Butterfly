@@ -1,7 +1,7 @@
 <template>
   <div>
-    <appCustomSearch :searchObjects="casesAdvanceSearchObjects" @applyFilter="onApplyFilter"></appCustomSearch>
-    <div class="totalFoundText">{{totalRows}} declarations found</div>
+     <appCustomSearch :searchObjects="casesAdvanceSearchObjects" @applyFilter="onApplyFilter"></appCustomSearch>
+    <div class="totalFoundText">{{totalRows}} Cases found</div>
     <div>
       <b-table
         striped
@@ -55,6 +55,9 @@ export default {
     };
   },
   methods: {
+    showModal() {
+        this.$refs['my-modal'].show()
+      },
     myProvider(ctx, callback) {
           httpClient.post("/casewithquery",{"Queries":this.filters,"MaxRowsPerPage":this.maxRowsPerPage,"PageNumber":this.pageNumber})
             .then((response)=>{

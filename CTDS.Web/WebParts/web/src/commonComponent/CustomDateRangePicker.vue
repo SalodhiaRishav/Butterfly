@@ -1,6 +1,8 @@
 <template>
 <div>
-    {{label}}
+  <div class="label">
+      {{label}}
+  </div>
     <date-range-picker
          :value="value"
                    @input="$emit('input', $event)"
