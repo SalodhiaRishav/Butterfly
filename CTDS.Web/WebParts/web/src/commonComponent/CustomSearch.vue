@@ -1,7 +1,7 @@
 <template>
     <div id="customAdvanceSearchElement">
          <b-button id="show-btn" @click="$bvModal.show('bv-modal-example')">Advance Search</b-button>
-         <appCustomChip v-for="filterElement in filterElements" :key="filterElement.title" :text="filterElement.title" @click="removeFilter(filterElement.title)"></appCustomChip>
+         <appCustomChip v-for="filterElement in filterElements" v-b-tooltip.hover :title="filterElement.value" :key="filterElement.title" :text="filterElement.title" @click="removeFilter(filterElement.title)"></appCustomChip>
         
          <b-modal size="xl" id="bv-modal-example">
               <template v-slot:modal-title>
