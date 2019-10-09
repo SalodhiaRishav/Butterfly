@@ -321,7 +321,6 @@
             OperationResponse<List<CaseTableDto>> operationResponse = new OperationResponse<List<CaseTableDto>>();
             try
             {
-                DateTime tempDate= request.StartDate.ToUniversalTime();
                 List<CaseTableDto> caseDtos = CaseBusinessLogic.GetCaseByStatus(request.CaseStatus, request.StartDate, request.EndDate);
                 if (caseDtos != null)
                 {
