@@ -15,19 +15,14 @@
 
     public class CaseRepository : BaseRepository<Case>, ICaseRepository
     {
-
-        private readonly CTDSContext CTDSContext;
-
-        public CaseRepository()
-        {
-            CTDSContext = new CTDSContext();
-        }
-
         public int FindCaseCount()
         {
             try
             {
-                return CTDSContext.Case.Count();
+                using (var context = new CTDSContext())
+                {
+                    return context.Case.Count();
+                }
             }
             catch (Exception exception)
             {
@@ -39,25 +34,28 @@
         {
             try
             {
-                var a = CTDSContext.CaseStatus.AsQueryable()
-                    .Join(CTDSContext.CaseInformation.AsQueryable(),
+                using (var context = new CTDSContext())
+                {
+                    var a = context.CaseStatus.AsQueryable()
+                    .Join(context.CaseInformation.AsQueryable(),
                     cs => cs.CaseId, ci => ci.CaseId,
                     (cs, ci) => new { cs.Status, ci.Priority })
                     .GroupBy(cs => cs.Status).ToList();
 
-                var filteredList = new Dictionary<string, int>();
-                foreach (var item in a)
-                {
-                    var processing = item.GroupBy(x => x.Priority).ToList();
-                    foreach(var priority in processing)
+                    var filteredList = new Dictionary<string, int>();
+                    foreach (var item in a)
                     {
-                        string status = item.Key.ToString();
-                        string key = status + priority.Key.ToString();
-                        
-                        filteredList.Add(key, priority.Count());
+                        var processing = item.GroupBy(x => x.Priority).ToList();
+                        foreach (var priority in processing)
+                        {
+                            string status = item.Key.ToString();
+                            string key = status + priority.Key.ToString();
+
+                            filteredList.Add(key, priority.Count());
+                        }
                     }
+                    return filteredList;
                 }
-                return filteredList;
             }
             catch (Exception exception)
             {
@@ -69,9 +67,12 @@
             DateTime date = DateTime.Now.AddDays(-6);
             try
             {
-                return CTDSContext.Case.Where(c => c.CreatedOn >= date).Count();
+                using (var context = new CTDSContext())
+                {
+                    return context.Case.Where(c => c.CreatedOn >= date).Count();
+                }
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 throw;
             }
@@ -84,12 +85,15 @@
             DateTime date = DateTime.Now.AddDays(-6);
             try
             {
-                for(DateTime i = date.Date; i <= DateTime.Now.Date; i = i.AddDays(1).Date)
+                using (var context = new CTDSContext())
                 {
-                    int count = CTDSContext.Case.Where(c => c.CreatedOn == i).Count();
-                    caseCountList.Add(count);
+                    for (DateTime i = date.Date; i <= DateTime.Now.Date; i = i.AddDays(1).Date)
+                    {
+                        int count = context.Case.Where(c => c.CreatedOn == i).Count();
+                        caseCountList.Add(count);
+                    }
+                    return caseCountList;
                 }
-                return caseCountList;
             }
             catch(Exception exception)
             {
@@ -120,32 +124,37 @@
         {
             try
             {
-                var expression = QueryBuilder(queries);
-                var filteredCaseTableDtos = (from mcase in CTDSContext.Case
-                                     join caseStatus in CTDSContext.CaseStatus on mcase.Id equals caseStatus.CaseId
-                                     join caseInformation in CTDSContext.CaseInformation on mcase.Id equals caseInformation.CaseId
-                                     join client in CTDSContext.Client on mcase.Id equals client.CaseId
-                                     join notes in CTDSContext.Notes on mcase.Id equals notes.CaseId
-                                     select new CaseTableDto
-                                     {
-                                         Id = mcase.Id,
-                                         CaseId = mcase.CaseId,
-                                         Status = caseStatus.Status,
-                                         Priority = caseInformation.Priority,
-                                         CreatedOn = mcase.CreatedOn,
-                                         Description = caseInformation.Description,
-                                         Client = client.ClientIdentifier,
-                                         Notes = notes.NotesByCpa
-                                     })
-                            .Where(expression)
-                            .ToList();
-                var perPageFilteredCaseTableDtos=filteredCaseTableDtos.Skip((pageNumber - 1) * maxRowsPerPage).Take(maxRowsPerPage).ToList();
-                OpenCasesDto openCasesDto = new OpenCasesDto() {
-                    TotalCount = filteredCaseTableDtos.Count,
-                    Cases=perPageFilteredCaseTableDtos
-                };
+                using (var context = new CTDSContext())
+                {
+                    var expression = QueryBuilder(queries);
+                    var filteredCaseTableDtos = (from mcase in context.Case
+                                                 join caseStatus in context.CaseStatus on mcase.Id equals caseStatus.CaseId
+                                                 join caseInformation in context.CaseInformation on mcase.Id equals caseInformation.CaseId
+                                                 join client in context.Client on mcase.Id equals client.CaseId
+                                                 join notes in context.Notes on mcase.Id equals notes.CaseId
+                                                 select new CaseTableDto
+                                                 {
+                                                     Id = mcase.Id,
+                                                     CaseId = mcase.CaseId,
+                                                     Status = caseStatus.Status,
+                                                     Priority = caseInformation.Priority,
+                                                     CreatedOn = mcase.CreatedOn,
+                                                     Description = caseInformation.Description,
+                                                     Client = client.ClientIdentifier,
+                                                     Notes = notes.NotesByCpa
+                                                 })
+                                .Where(expression)
+                                .ToList();
+                    var perPageFilteredCaseTableDtos = filteredCaseTableDtos.Skip((pageNumber - 1) * maxRowsPerPage).Take(maxRowsPerPage).ToList();
+                    OpenCasesDto openCasesDto = new OpenCasesDto()
+                    {
+                        TotalCount = filteredCaseTableDtos.Count,
+                        Cases = perPageFilteredCaseTableDtos
+                    };
 
-                return openCasesDto;
+                    return openCasesDto;
+                }
+              
             }
             catch (Exception e)
             {
@@ -189,6 +198,7 @@
 
         private Expression RangeQuery(List<QueryDto> queries, ParameterExpression parameter, int i, string propertyName, List<string> constantValues, Expression orBody)
         {
+
             if (queries[i].ValueDataType == "EnumRange")
             {
                 for (int j = 0; j < constantValues.Count; ++j)
@@ -218,16 +228,39 @@
         }
         public List<CaseTableDto> GetAllCasesByStatus(CaseStatusType? status, DateTime startDate, DateTime endDate)
         {
+
             List<CaseTableDto> cases = new List<CaseTableDto>();
             try
             {
-                if(status == null)
+                using (var context = new CTDSContext())
                 {
-                    cases = (from mcase in CTDSContext.Case
-                             join caseStatus in CTDSContext.CaseStatus on mcase.Id equals caseStatus.CaseId
-                             join caseInformation in CTDSContext.CaseInformation on mcase.Id equals caseInformation.CaseId
-                             join client in CTDSContext.Client on mcase.Id equals client.CaseId
-                             join notes in CTDSContext.Notes on mcase.Id equals notes.CaseId
+                    if (status == null)
+                    {
+                        cases = (from mcase in context.Case
+                                 join caseStatus in context.CaseStatus on mcase.Id equals caseStatus.CaseId
+                                 join caseInformation in context.CaseInformation on mcase.Id equals caseInformation.CaseId
+                                 join client in context.Client on mcase.Id equals client.CaseId
+                                 join notes in context.Notes on mcase.Id equals notes.CaseId
+                                 select new CaseTableDto
+                                 {
+                                     Id = mcase.Id,
+                                     CaseId = mcase.CaseId,
+                                     Status = caseStatus.Status,
+                                     Priority = caseInformation.Priority,
+                                     CreatedOn = mcase.CreatedOn,
+                                     Description = caseInformation.Description,
+                                     Client = client.ClientIdentifier,
+                                     Notes = notes.NotesByCpa
+                                 })
+                                .Where(c => startDate <= c.CreatedOn && c.CreatedOn <= endDate)
+                                .ToList();
+                        return cases;
+                    }
+                    cases = (from mcase in context.Case
+                             join caseStatus in context.CaseStatus on mcase.Id equals caseStatus.CaseId
+                             join caseInformation in context.CaseInformation on mcase.Id equals caseInformation.CaseId
+                             join client in context.Client on mcase.Id equals client.CaseId
+                             join notes in context.Notes on mcase.Id equals notes.CaseId
                              select new CaseTableDto
                              {
                                  Id = mcase.Id,
@@ -239,29 +272,10 @@
                                  Client = client.ClientIdentifier,
                                  Notes = notes.NotesByCpa
                              })
-                            .Where(c =>startDate <= c.CreatedOn && c.CreatedOn <= endDate)
-                            .ToList();
+                             .Where(c => c.Status == status && startDate <= c.CreatedOn && c.CreatedOn <= endDate)
+                             .ToList();
                     return cases;
                 }
-                   cases = (from mcase in CTDSContext.Case
-                                         join caseStatus in CTDSContext.CaseStatus on mcase.Id equals caseStatus.CaseId
-                                         join caseInformation in CTDSContext.CaseInformation on mcase.Id equals caseInformation.CaseId
-                                         join client in CTDSContext.Client on mcase.Id equals client.CaseId
-                                         join notes in CTDSContext.Notes on mcase.Id equals notes.CaseId
-                                         select new CaseTableDto
-                                         {
-                                             Id = mcase.Id,
-                                             CaseId = mcase.CaseId,
-                                             Status = caseStatus.Status,
-                                             Priority = caseInformation.Priority,
-                                             CreatedOn = mcase.CreatedOn,
-                                             Description = caseInformation.Description,
-                                             Client = client.ClientIdentifier,
-                                             Notes = notes.NotesByCpa
-                                         })
-                            .Where(c => c.Status == status && startDate <= c.CreatedOn && c.CreatedOn <= endDate)
-                            .ToList();
-                return cases;
             }
             catch (Exception)
             {

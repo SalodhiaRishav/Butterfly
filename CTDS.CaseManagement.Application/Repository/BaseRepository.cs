@@ -13,16 +13,20 @@
 
     public class BaseRepository<T> : IRepository<T> where T : BaseModel
     {
-        private readonly CTDSContext CTDSContext;
 
-        private readonly DbSet<T> DbSet;
-
-        public BaseRepository()
+     
+        public List<T> List
         {
-            CTDSContext = new CTDSContext();
-            DbSet = CTDSContext.Set<T>();
+            get
+            {
+                using (var context = new CTDSContext())
+                {
+                    var DbSet = context.Set<T>();
+                    return DbSet.ToList();
+                }
+               
+            }
         }
-        public List<T> List { get => DbSet.ToList(); }
 
         public T Add(T entity)
         {
@@ -30,9 +34,14 @@
             entity.CreatedOn = DateTime.Now;
             try
             {
-                DbSet.Add(entity);
-                CTDSContext.SaveChanges();
-                return entity;
+                using (var context = new CTDSContext())
+                {
+                    var DbSet = context.Set<T>();
+                    DbSet.Add(entity);
+                    context.SaveChanges();
+                    return entity;
+                }
+                   
             }
             catch (Exception exception)
             {
@@ -49,8 +58,13 @@
             }
             try
             {
-                DbSet.AddRange(entityList);
-                CTDSContext.SaveChanges();
+                using (var context = new CTDSContext())
+                {
+                    var DbSet = context.Set<T>();
+                    DbSet.AddRange(entityList);
+                    context.SaveChanges();
+                }
+                   
             }
             catch(Exception exception)
             {
@@ -62,8 +76,13 @@
         {
             try
             {
-                DbSet.Remove(entity);
-                CTDSContext.SaveChanges();
+                using (var context = new CTDSContext())
+                {
+                    var DbSet = context.Set<T>();
+                    DbSet.Remove(entity);
+                    context.SaveChanges();
+                }
+               
             }
             catch (Exception exception)
             {
@@ -75,8 +94,13 @@
         {
             try
             {
-                DbSet.RemoveRange(entityList);
-                CTDSContext.SaveChanges();
+                using (var context = new CTDSContext())
+                {
+                    var DbSet = context.Set<T>();
+                    DbSet.RemoveRange(entityList);
+                    context.SaveChanges();
+                }
+                
             }
             catch (Exception exception)
             {
@@ -88,7 +112,11 @@
         {
             try
             {
-                return DbSet.Where(predicate).ToList();
+                using (var context = new CTDSContext())
+                {
+                    var DbSet = context.Set<T>();
+                    return DbSet.Where(predicate).ToList();
+                }
             }
             catch (Exception exception)
             {
@@ -100,7 +128,11 @@
         {
             try
             {
-                return DbSet.Find(id);
+                using (var context = new CTDSContext())
+                {
+                    var DbSet = context.Set<T>();
+                    return DbSet.Find(id);
+                }
             }
             catch (Exception exception)
             {
@@ -112,14 +144,18 @@
         {
             try
             {
-                entity.ModifiedOn = DateTime.Now;
-                if(entity.CreatedOn ==  DateTime.MinValue)
+                using (var context = new CTDSContext())
                 {
-                    entity.CreatedOn = DateTime.Now;
+                    var DbSet = context.Set<T>();
+                    entity.ModifiedOn = DateTime.Now;
+                    if (entity.CreatedOn == DateTime.MinValue)
+                    {
+                        entity.CreatedOn = DateTime.Now;
+                    }
+                    DbSet.AddOrUpdate(entity);
+                    context.SaveChanges();
+                    return entity;
                 }
-                DbSet.AddOrUpdate(entity);
-                CTDSContext.SaveChanges();
-                return entity;
             }
             catch (Exception exception)
             {
