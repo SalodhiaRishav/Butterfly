@@ -4,7 +4,7 @@
       <appNavigationbar></appNavigationbar>
      <div class="row tilesRow" v-if="caseStatusDataFetched">
          <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
-        <appTile @chartShowed="chartswitch=$event" :style="randomColor()" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
+        <appTile @tileClicked="getCasesWithAnyStatus()" @chartShowed="chartswitch=$event" :style="randomColor()" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart @tileClicked="getCasesByNew()" :style="randomColor()" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
@@ -306,7 +306,7 @@ export default {
           barColor: "red"
         }
       ],
-      fixedStatus : "Closed"
+      fixedStatus : null
     };
   },
   created() {
@@ -329,6 +329,10 @@ export default {
       }
       const styleObject={background:color};
       return styleObject;
+    },
+    getCasesWithAnyStatus(){
+       this.fixedStatus=null;
+      this.getCasesByStatus();
     },
     getCasesByNew() {
       this.fixedStatus="New";
@@ -528,6 +532,7 @@ export default {
             const newLow = response.data.data.newLow;
             const newCases = newHigh+newMed+newLow;
             const caseInProcess=inProgressHigh+inProgressMed+inProgressLow;
+            
             const closedCases=closedHigh+closedMedium+closedLow;
             const totalCases=caseInProcess+closedCases+newCases;
 

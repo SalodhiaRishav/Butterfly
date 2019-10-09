@@ -4,7 +4,7 @@
     :title="tooltipTitle"
     class="box"
     :class="boxColorClass"
-    @click="showChart"
+    @click="tileClicked"
   >
     <div class="row">
       <div class="col-3">
@@ -36,9 +36,10 @@ export default {
     }
   },
   methods : {
-    showChart() {
-      this.$emit('chartShowed',"true");
-    }
+   tileClicked(){
+     this.$emit('tileClicked',"true");
+     return;
+   }
   },
   data: () => {
     return {

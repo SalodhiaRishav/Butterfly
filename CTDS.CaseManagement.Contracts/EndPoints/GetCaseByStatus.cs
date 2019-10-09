@@ -7,7 +7,7 @@
     [Route("/casebystatus", "POST")]
     public class GetCaseByStatus
     {
-        public CaseStatusType CaseStatus { get; set; }
+        public CaseStatusType? CaseStatus { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
     }

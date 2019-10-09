@@ -137,17 +137,17 @@
             {
                 myDto.NewLow = dictionary["NewLow"];
             }
-            if (dictionary.ContainsKey("InProgressHigh"))
+            if (dictionary.ContainsKey("InProcessHigh"))
             {
-                myDto.InProcessHigh = dictionary["InProgressHigh"];
+                myDto.InProcessHigh = dictionary["InProcessHigh"];
             }
-            if(dictionary.ContainsKey("InProgressMedium"))
+            if(dictionary.ContainsKey("InProcessMedium"))
             {
-                myDto.InProcessMed = dictionary["InProgressMedium"];
+                myDto.InProcessMed = dictionary["InProcessMedium"];
             }
-            if(dictionary.ContainsKey("InProgressLow"))
+            if(dictionary.ContainsKey("InProcesssLow"))
                 {
-                myDto.InProcessLow = dictionary["InProgressLow"];
+                myDto.InProcessLow = dictionary["InProcessLow"];
             }
             if (dictionary.ContainsKey("ClosedHigh"))
             {
@@ -264,7 +264,7 @@
             }
         }
 
-        public List<CaseTableDto> GetCaseByStatus(CaseStatusType status, DateTime startDate, DateTime endDate)
+        public List<CaseTableDto> GetCaseByStatus(CaseStatusType? status, DateTime startDate, DateTime endDate)
         {
             try
             {
