@@ -70,7 +70,35 @@
             {
                 using (var context = new CTDSContext())
                 {
-                    //declarations = context.Declaration.
+                    if(status != null)
+                    {
+                        declarations = (from declaration in context.Declaration
+                                        select new DeclarationTableDto
+                                        {
+                                            DeclarationId = declaration.DeclarationId,
+                                            Status = declaration.Status,
+                                            CreatedOn = declaration.CreatedOn,
+                                            MessageName = declaration.MessageName
+                                        })
+
+                                   .Where(c => c.Status == status && startDate <= c.CreatedOn && c.CreatedOn <= endDate)
+                           .ToList();
+                    }
+                    else
+                    {
+                        declarations = (from declaration in context.Declaration
+                                        select new DeclarationTableDto
+                                        {
+                                            DeclarationId = declaration.DeclarationId,
+                                            Status = declaration.Status,
+                                            CreatedOn = declaration.CreatedOn,
+                                            MessageName = declaration.MessageName
+                                        })
+
+                                   .Where(c => startDate <= c.CreatedOn && c.CreatedOn <= endDate)
+                           .ToList();
+                    }
+                   
                 }
                 return declarations;
             }

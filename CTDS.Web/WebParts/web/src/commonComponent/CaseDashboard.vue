@@ -1,10 +1,9 @@
 <template>
   <div>
     <div style="background-color:#eee;">
-      <appNavigationbar></appNavigationbar>
      <div class="row tilesRow" v-if="caseStatusDataFetched">
          <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
-        <appTile @tileClicked="getCasesWithAnyStatus()" @chartShowed="chartswitch=$event" :style="randomColor()" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
+        <appTile @chartShowed="chartswitch=$event" :style="randomColor()" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart @tileClicked="getCasesByNew()" :style="randomColor()" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
@@ -14,20 +13,6 @@
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart @tileClicked="getCasesByClosed()" :style="randomColor()" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
-       </div>
-      </div>
-      <div class="row tilesRow" v-if="declarationStatusDataFetched">
-         <div class="col-sm-4 col-md-3 tileBox" v-if="declarationLineChartDataFetched">
-        <appTile :style="randomColor()" tooltipTitle="Total Declarations" :counter=totalDeclaration chartTitle="Declarations Last Week" title="Total Declarations"  :chartData="declarationTileChartData"></appTile>
-       </div>
-       <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getProcessingDeclarations()" :style="randomColor()" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
-       </div>
-       <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getClosedDeclarations()" :style="randomColor()" tooltipTitle="Declarations InProcess" chartTitle="Declarations In Process / Total Declarations" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
-       </div>
-       <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getRejectedDeclarations()" :style="randomColor()" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
        </div>
       </div>
       <div class="row tilesRow">
@@ -306,7 +291,7 @@ export default {
           barColor: "red"
         }
       ],
-      fixedStatus : null
+      fixedCaseStatus : "Closed"
     };
   },
   created() {
@@ -338,10 +323,6 @@ export default {
     },
     getRejectedDeclarations() {
 
-    },
-    getCasesWithAnyStatus(){
-       this.fixedStatus=null;
-      this.getCasesByStatus();
     },
     getCasesByNew() {
       this.fixedCaseStatus="New";
@@ -541,7 +522,6 @@ export default {
             const newLow = response.data.data.newLow;
             const newCases = newHigh+newMed+newLow;
             const caseInProcess=inProgressHigh+inProgressMed+inProgressLow;
-            
             const closedCases=closedHigh+closedMedium+closedLow;
             const totalCases=caseInProcess+closedCases+newCases;
 
