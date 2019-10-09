@@ -7,6 +7,7 @@
 
     public interface IDeclarationBll
     {
+        List<DeclarationTableDto> GetDeclarationByStatus(String status, DateTime startDate, DateTime endDate);
         Guid AddDeclaration(DeclarationDto declarationDto);
         DeclarationDto GetDeclarationById(Guid id);
         IEnumerable<DeclarationDto> GetAllDeclaration(int index, string sort);

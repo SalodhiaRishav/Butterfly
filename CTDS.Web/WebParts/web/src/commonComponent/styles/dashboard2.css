@@ -67,3 +67,8 @@ margin-right: 10px;
 .btn-default.btn-off.active{
     background-color: rgb(75, 73, 218);
 }
+
+.dateRangePicker
+{
+    display: inline;
+}

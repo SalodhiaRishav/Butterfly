@@ -27,6 +27,24 @@
             }
         }
 
+        public List<DeclarationTableDto> GetDeclarationByStatus(String status, DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                List<DeclarationTableDto> declarations = DeclarationDal.GetAllDeclarationByStatus(status, startDate, endDate);
+                if (declarations.Count == 0)
+                {
+                    return null;
+                }
+
+                return declarations;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
         public DeclarationDto GetDeclarationById(Guid id)
         {
             try

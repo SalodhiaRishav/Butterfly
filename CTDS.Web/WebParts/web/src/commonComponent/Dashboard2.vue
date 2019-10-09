@@ -7,13 +7,13 @@
         <appTile @chartShowed="chartswitch=$event" :style="randomColor()" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart :style="randomColor()" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getCasesByNew()" :style="randomColor()" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart  :style="randomColor()"  tooltipTitle="Cases In Process" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getCasesByProcess()" :style="randomColor()"  tooltipTitle="Cases In Process" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart  :style="randomColor()" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getCasesByClosed()" :style="randomColor()" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
        </div>
       </div>
       <div class="row tilesRow" v-if="declarationStatusDataFetched">
@@ -36,10 +36,10 @@
             <toggle-switch :options="myOptions">
             </toggle-switch>
            </div> -->
-           <div>
+           <span>
              <font-awesome-icon icon="calendar" />
-             <appDateRangePicker v-model="range" @input="getCasesByStatus"></appDateRangePicker>
-           </div>
+           </span>
+             <appDateRangePicker class="dateRangePicker" v-model="range" @input="getCasesByStatus(false)"></appDateRangePicker>
             <!-- <div class="col-md-12 table" v-if="chartswitch">
               <appTile boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
             </div> -->
@@ -119,7 +119,6 @@ export default {
   },
   data() {
     return {
-      startPicker : true,
       filterCases: [],
       currentPage: 1,
       perPage: 5,
@@ -183,9 +182,6 @@ export default {
           ]
         }
       },
-
-      minDate : "1-1-2019",
-      maxDate : "25-9-2019",
       
       chartswitch : false,
       declarationLineChartDataFetched:false,
@@ -310,8 +306,7 @@ export default {
           barColor: "red"
         }
       ],
-      safeColors : ['00','33','66','99','cc','ff'],
-
+      fixedStatus : "Closed"
     };
   },
   created() {
@@ -325,14 +320,6 @@ export default {
     this.getPerDayDeclarationCountLastWeek();
     this.getCasesByStatus();
   },
-  watch: {
-    range: {
-      handler (newvalue, oldvalue) {
-        console.log('range', newvalue, oldvalue);
-      },
-      deep: true
-    }
-  },
   methods: {
     randomColor() {
       var letters = '0123456789ABCDEF';
@@ -340,20 +327,31 @@ export default {
       for (var i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
       }
-      console.log('color is : ',color);
       const styleObject={background:color};
       return styleObject;
     },
-    getCasesByStatus(){
+    getCasesByNew() {
+      this.fixedStatus="New";
+      this.getCasesByStatus();
+    },
+    getCasesByProcess() {
+      this.fixedStatus="InProcess";
+      this.getCasesByStatus();
+    },
+    getCasesByClosed() {
+      this.fixedStatus="Closed";      
+      this.getCasesByStatus();
+    },
+    getCasesByStatus(start = true){
+      const status=this.fixedStatus;
       this.filterCases = null;
-      const status = "Closed";
       const url = "/casebystatus";
       let postObject = null;
-      if(this.startPicker == true)
+      if(start === true)
       {
          postObject={ CaseStatus : status,
-                   StartDate : this.$moment().subtract(29, 'days'),
-                   EndDate : this.$moment()
+                   StartDate : this.range[0],
+                   EndDate : this.range[1]
                    };
       }
       else{
@@ -362,7 +360,6 @@ export default {
                    EndDate : this.range[1]
                    };
       }
-      this.startPicker = false;
       httpClient
       .post(url, postObject)
       .then(res => {

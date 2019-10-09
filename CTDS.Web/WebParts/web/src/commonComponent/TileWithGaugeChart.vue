@@ -4,6 +4,7 @@
     :title="tooltipTitle"
     class="box"
     :class="boxColorClass"
+    @click="tileClicked"
   >
     <div class="row">
       <div class="col-3">
@@ -32,6 +33,11 @@ export default {
   computed: {
     boxColorClass: function() {
       return "box-" + this.boxColor;
+    }
+  },
+   methods : {
+    tileClicked() {
+      this.$emit('tileClicked',"true");
     }
   },
   data: () => {
