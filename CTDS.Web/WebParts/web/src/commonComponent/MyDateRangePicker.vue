@@ -1,6 +1,6 @@
 <template>
 <div>
-    <date-range-picker :value="value" @input="$emit('input',$event)" :options="options" />
+    <date-range-picker :value="value" @input="onDateRangeSelected" :options="options" />
 </div>
     
 </template>
@@ -15,8 +15,10 @@ export default {
   data () {
     return {
         options: {
-            startDate : this.$moment().subtract(29, 'days'),
-            endDate : this.$moment(),
+            startDate : this.value[0],
+            endDate : this.value[1],
+            maxDate : this.$moment(),
+            minDate : this.$moment().subtract(10, 'year').startOf('year'),
             ranges: {
             'Today': [this.$moment(), this.$moment()],
             'Yesterday': [this.$moment().subtract(1, 'days'), this.$moment().subtract(1, 'days')],
@@ -28,5 +30,10 @@ export default {
         }
     }
   },
+  methods: {
+      onDateRangeSelected (range) {
+          this.$emit('input', range);
+      }
+  }
 };
 </script>

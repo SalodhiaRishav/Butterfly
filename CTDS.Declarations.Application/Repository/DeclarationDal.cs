@@ -62,6 +62,24 @@
                 throw;
             }
         }
+
+        public List<DeclarationTableDto> GetAllDeclarationByStatus(String status, DateTime startDate, DateTime endDate)
+        {
+            List<DeclarationTableDto> declarations = new List<DeclarationTableDto>();
+            try
+            {
+                using (var context = new CTDSContext())
+                {
+                    //declarations = context.Declaration.
+                }
+                return declarations;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public IEnumerable<DeclarationDto> GetAllDeclarations(int index, string sort)
         {
             IEnumerable<DeclarationDto> declarationDtoList;
@@ -162,9 +180,9 @@
             try
             {
                 using(var context = new CTDSContext())
-               {
+                {
                     count = context.Declaration.Count(); 
-               }
+                }
                 return count;
             }
             catch (Exception)

@@ -205,6 +205,7 @@
     <Compile Include="Declaration\GetAllDeclarations.cs" />
     <Compile Include="Declaration\GetAllDeclarationsWithQuery.cs" />
     <Compile Include="Declaration\GetDeclarationByGuid.cs" />
+    <Compile Include="Declaration\GetDeclarationByStatusService.cs" />
     <Compile Include="Declaration\GetDeclarationCountService.cs" />
     <Compile Include="Declaration\GetStatusCountService.cs" />
     <Compile Include="Declaration\PerDayDeclarationCountService.cs" />
