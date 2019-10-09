@@ -7,7 +7,7 @@
     using CTDS.Database.Models.CaseManagement;
     public interface ICaseRepository:IRepository<Case>
     {
-        List<CaseTableDto> GetAllCasesByStatus(CaseStatusType status, DateTime startDate, DateTime endDate);
+        List<CaseTableDto> GetAllCasesByStatus(CaseStatusType? status, DateTime startDate, DateTime endDate);
         int FindCaseCount();
         int FindCasesInLastSevenDays();
 
