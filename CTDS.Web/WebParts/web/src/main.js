@@ -13,6 +13,8 @@ import VueHotkey from 'v-hotkey'
 import DateRangePicker from "@gravitano/vue-date-range-picker";
 import ToggleSwitch from 'vuejs-toggle-switch'
 import moment from 'moment';
+import { SpinnerPlugin } from 'bootstrap-vue'
+Vue.use(SpinnerPlugin)
 Vue.use(ToggleSwitch)
 
 // import moment from 'moment';

@@ -1,6 +1,7 @@
 ﻿namespace DatabaseUtils
 {
     using System;
+    using System.Collections.Generic;
     using System.Configuration;
     using System.Linq;
 
@@ -78,6 +79,8 @@
                 declaration.Currency = Random.Next(1, 4).ToString();
                 declaration.Rate = Random.Next().ToString();
                 declaration.CreatedOn = CreateRandomDate(1);
+                List<string> statusTypes =new List<string>() { "Processing", "Rejected", "Cleared" };
+                declaration.Status = statusTypes[Random.Next(statusTypes.Count())];
 
                 //declaration.
                 CTDSContext.Declaration.Add(declaration);
