@@ -78,9 +78,10 @@ export default {
                 CustomResponse: " ",
                 User: " ",
                 TaxationDate: " ",
-                DeclarationId:
-                  "CD-" +
-                  filteredDeclarations[i].declarationId.toString().substring(0, 5)
+                DeclarationId: "KGH-19-" + filteredDeclarations[i].decId
+                // DeclarationId:
+                //   "CD-" +
+                //   filteredDeclarations[i].declarationId.toString().substring(0, 5)
               };
               declaration.push(obj);
             }

@@ -7,11 +7,11 @@
     @click="tileClicked"
   >
     <div class="row">
-      <div class="col-3">
+      <div class="col-5">
         <div class="tileCounter">{{ counter }}</div>
         <div class="tileTitle">{{ title }}</div>
       </div>
-      <div class="col-9 chartDiv">
+      <div class="col-7 chartDiv">
         <div>
           <line-chart
             :width="100"

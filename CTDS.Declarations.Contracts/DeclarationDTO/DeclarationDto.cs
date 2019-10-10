@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     public class DeclarationDto
     {
+        public int DecId { get; set; }
         public Guid DeclarationId { get; set; }
         public String Country { get; set; } = "NO";
         public String Status { get; set; } = "Processing";

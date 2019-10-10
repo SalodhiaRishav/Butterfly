@@ -1,18 +1,19 @@
 <template>
   <div>
-    <div style="background-color:#eee;">
+    <div >
      <div class="row tilesRow" v-if="caseStatusDataFetched">
-         <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
-        <appTile @tileClicked="getCasesWithAnyStatus()" :style="randomColor()" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
+       <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
+        <!-- <appTile @tileClicked="getCasesWithAnyStatus()" class="colorGreen" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile> -->
+        <appTileWithGaugeChart @tileClicked="getCasesWithAnyStatus()" class="colorGreen" tooltipTitle="Total Cases" :counter=totalCases title="Total Cases" chartTitle="Total Cases" :chartData="caseTotalChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getCasesByNew()" :style="randomColor()" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getCasesByNew()" class="colorBrown" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getCasesByProcess()" :style="randomColor()"  tooltipTitle="Cases In Process" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getCasesByProcess()" class="colorCyan"  tooltipTitle="In Process Cases" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getCasesByClosed()" :style="randomColor()" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getCasesByClosed()" class="colorCrimson" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
        </div>
       </div>
       <div class="row tilesRow">
@@ -43,6 +44,7 @@
                   :items="filterCases"
                   :current-page="currentPage"
                   :per-page="perPage"
+                  @row-clicked="editCase"
                 >
                 </b-table>
               </div>
@@ -142,6 +144,7 @@ export default {
       closedCases:"",
       inProcessCases:"",
       totalCases:"",
+      caseTotalChartData:{},
       caseNewChartData:{},
       caseInProcessChartData:{},
       caseClosedChartData:{},
@@ -178,14 +181,23 @@ export default {
     this.getCasesByStatus();
   },
   methods: {
-    randomColor() {
-      var letters = '0123456789ABCDEF';
-      var color = '#';
-      for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      const styleObject={background:color};
-      return styleObject;
+     editCase: function(row) {
+      const urlResource=`/casemanagement/${row.Id}`;
+      httpClient.get(urlResource)
+      .then((response)=>{
+        if (response.data.success === true) {
+          this.$store.dispatch("setCase", response.data.data);
+          const url = `/case/${row.Id}`;
+          this.$router.push(url);
+        }
+        else
+        {
+          console.log(response.data.data);
+        }
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
     },
      getCasesWithAnyStatus(){
       this.fixedCaseStatus=null;
@@ -234,6 +246,7 @@ export default {
              for (let i = 0; i < allCases.length; ++i){
               let obj = {
                   CaseId: "KGH-19-" + allCases[i].caseId,
+                   Id: allCases[i].id,
                   CreatedDate: this.convertDate(allCases[i].createdOn),
                   Status: allCases[i].status,
                   Description: allCases[i].description,
@@ -360,7 +373,17 @@ export default {
                   borderWidth:0.7,
                   data: [newCases, totalCases-newCases],
               }]
-            }
+            };
+            const caseTotalChartData={
+               labels: ["Total"],
+              datasets: [{
+                  backgroundColor: ["white","#66000000"],
+                  borderColor: '#fff',
+                  borderWidth:0.7,
+                  data: [totalCases],
+              }]
+            };
+            this.caseTotalChartData=caseTotalChartData;
             this.caseNewChartData=caseNewChartData;
             this.caseClosedChartData=caseClosedChartData;
             this.caseInProcessChartData=caseInProcessChartData;
@@ -421,4 +444,5 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,900&display=swap");
 @import url("./styles/dashboard2.css");
+@import url("./styles/tileDash2Style.css");
 </style>

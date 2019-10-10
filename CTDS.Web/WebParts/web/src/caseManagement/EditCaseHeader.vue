@@ -81,7 +81,8 @@ export default {
   },
   methods: {
     cancelCaseEdit(){
-      this.$router.push("/searchcases");
+      // this.$router.push("/searchcases");
+      this.$router.go(-1);
     },
     countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;

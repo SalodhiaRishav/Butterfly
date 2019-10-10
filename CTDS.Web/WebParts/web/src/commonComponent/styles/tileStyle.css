@@ -1,5 +1,5 @@
 .box{
-    background: white;
+    /* background: white; */
     color:white;  
     padding: 12px 18px 12px 18px;
     border-radius: .375rem;
@@ -38,7 +38,7 @@
 } 
 
 .chartDiv{
-    padding-top:33px;
+    padding-top:10px;
 }
 
 .chartTitle{

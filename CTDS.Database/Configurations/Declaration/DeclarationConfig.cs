@@ -19,6 +19,7 @@
             this.HasMany<ReferenceTable>(d => d.References)
                 .WithRequired()
                 .HasForeignKey<Guid>(r => r.DeclarationId);
+            this.Property(d => d.DecId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
         }
 
