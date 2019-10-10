@@ -20,5 +20,7 @@
         List<int> FindPerDayDeclarationCount();
         bool SendToCustom(DeclarationDto declaration);
         FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage);
+        List<DeclarationChartDataDto> GetDeclarationChartData(string status, DateTime startDate, DateTime endDate);
+
     }
 }

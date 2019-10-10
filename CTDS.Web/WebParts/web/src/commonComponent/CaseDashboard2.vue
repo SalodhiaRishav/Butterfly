@@ -2,18 +2,17 @@
   <div>
     <div >
      <div class="row tilesRow" v-if="caseStatusDataFetched">
-       <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
-        <!-- <appTile @tileClicked="getCasesWithAnyStatus()" class="colorGreen" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile> -->
-        <appTileWithGaugeChart @tileClicked="getCasesWithAnyStatus()" class="colorGreen" tooltipTitle="Total Cases" :counter=totalCases title="Total Cases" chartTitle="Total Cases" :chartData="caseTotalChartData"></appTileWithGaugeChart>
+         <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
+            <appTileWithGaugeChart @tileClicked="onTileClick(null)()" class="colorGreen" tooltipTitle="Total Cases" :counter=totalCases title="Total Cases" chartTitle="Total Cases" :chartData="caseTotalChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getCasesByNew()" class="colorBrown" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="onTileClick('New')" class="colorBrown" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getCasesByProcess()" class="colorCyan"  tooltipTitle="In Process Cases" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="onTileClick('InProcess')" class="colorCyan"  tooltipTitle="Cases In Process" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getCasesByClosed()" class="colorCrimson" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="onTileClick('Closed')" class="colorCrimson" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
        </div>
       </div>
       <div class="row tilesRow">
@@ -30,12 +29,14 @@
               <th><font-awesome-icon icon="calendar"/></th>
               </tr>
           </table>
-
+             <button @click="shouldShowChart=true">ShowChart</button>
+              <button @click="shouldShowChart=false">ShowTable</button>
+           
             <!-- <div class="col-md-12 table" v-if="chartswitch">
               <appTile boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
             </div> -->
-            <div>
-              <div>
+            <div v-if="!shouldShowChart">
+              <div >
                 <b-table class="font-size-80"
                   striped
                   hover
@@ -59,9 +60,15 @@
                 </b-col>
               </b-row>
           </div>
+           <div class="dashboardChartDiv" v-if="shouldShowChart">
+            <appCaseDashboardLineChart :status="fixedCaseStatus" :startDate="range[0]" :endDate="range[1]"></appCaseDashboardLineChart>
+          </div>
         </div>
        </div>
       </div>
+     
+
+     
     </div>
      <!-- <div class="col-md-6 chartBox">
           <appToggler></appToggler>
@@ -89,11 +96,13 @@ import ChartView from "./ChartView";
 import Toggler from "./Toggler";
 import MyDateRangePicker from "./MyDateRangePicker";
 import CaseTableFields from "./../caseManagement/utils/caseTableFields";
+import CaseDashboardLineChart from  "./CaseDashboardLineChart";
 
 
 
 export default {
   components: {
+    appCaseDashboardLineChart:CaseDashboardLineChart,
     appDateRangePicker:MyDateRangePicker,
     appGroupedBarGraph: GroupedBarGraph,
     appBarGraph: BarGraph,
@@ -138,6 +147,7 @@ export default {
       },
       
       chartswitch : false,
+      shouldShowChart:false,
       caseLineChartDataFetched:false,
       caseStatusDataFetched:false,
       newCases:"",
@@ -181,6 +191,18 @@ export default {
     this.getCasesByStatus();
   },
   methods: {
+    showChart(){
+      this.shouldShowChart=true;
+    },
+    randomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      const styleObject={background:color};
+      return styleObject;
+    },
      editCase: function(row) {
       const urlResource=`/casemanagement/${row.Id}`;
       httpClient.get(urlResource)
@@ -198,6 +220,18 @@ export default {
       .catch((error)=>{
         console.log(error);
       })
+    },
+    onTileClick(status){
+      this.fixedCaseStatus=status;
+      if(this.shouldShowChart === false)
+      {
+        this.getCasesByStatus();
+      }
+      else
+      {
+        this.shouldShowChart=false;
+        this.shouldShowChart=true;
+      }
     },
      getCasesWithAnyStatus(){
       this.fixedCaseStatus=null;

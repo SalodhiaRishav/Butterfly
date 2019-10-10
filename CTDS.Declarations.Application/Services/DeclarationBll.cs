@@ -45,6 +45,12 @@
             }
         }
 
+        public List<DeclarationChartDataDto> GetDeclarationChartData(string status, DateTime startDate, DateTime endDate)
+        {
+            return DeclarationDal.GetDeclarationChartData(status, startDate, endDate);
+        }
+
+
         public DeclarationDto GetDeclarationById(Guid id)
         {
             try

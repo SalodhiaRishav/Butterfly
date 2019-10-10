@@ -4,18 +4,17 @@
   <div>
     <div style="background-color:#eee;">
       <div class="row tilesRow" v-if="declarationStatusDataFetched">
-       <div class="col-sm-4 col-md-3 tileBox" v-if="declarationLineChartDataFetched">
-        <!-- <appTile @tileClicked="getDeclarationsWithAnyStatus()" class="colorGreen" tooltipTitle="Total Declarations" :counter=totalDeclaration chartTitle="Declarations Last Week" title="Total Declarations"  :chartData="declarationTileChartData"></appTile> -->
-        <appTileWithGaugeChart @tileClicked="getDeclarationsWithAnyStatus()" class="colorGreen" tooltipTitle="Total Declarations" chartTitle="Total Declarations" :counter=totalDeclaration title="Total Declarations"  :chartData="declarationTotalChartData"></appTileWithGaugeChart>
+         <div class="col-sm-4 col-md-3 tileBox" v-if="declarationLineChartDataFetched">
+           <appTileWithGaugeChart @tileClicked="onTileClick(null)" class="colorGreen" tooltipTitle="Total Declarations" chartTitle="Total Declarations" :counter=totalDeclaration title="Total Declarations"  :chartData="declarationTotalChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getClearedDeclarations()" class="colorBrown" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="onTileClick('Cleared')" class="colorBrown" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getProcessingDeclarations()" class="colorCyan" tooltipTitle="Declarations Processing" chartTitle="Declarations Processing / Total Declarations" :counter=declarationInProcess title="Declaration Processing"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="onTileClick('Processing')" class="colorCyan" tooltipTitle="Declarations InProcess" chartTitle="Declarations In Process / Total Declarations" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getRejectedDeclarations()" class="colorCrimson" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="onTileClick('Rejected')" class="colorCrimson" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
        </div>
       </div>
       <div class="row tilesRow">
@@ -32,10 +31,13 @@
               </tr>
           </table>
            
+           
+            <button @click="shouldShowChart=true">ShowChart</button>
+              <button @click="shouldShowChart=false">ShowTable</button>
             <!-- <div class="col-md-12 table" v-if="chartswitch">
               <appTile boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
             </div> -->
-            <div>
+            <div v-if="!shouldShowChart">
               <div>
                 <b-table class="font-size-80"
                   striped
@@ -59,6 +61,9 @@
                   </b-pagination>
                 </b-col>
               </b-row>
+          </div>
+            <div class="dashboardChartDiv" v-if="shouldShowChart">
+            <appDeclarationDashboardLineChart :status="fixedDeclarationStatus" :startDate="range[0]" :endDate="range[1]"></appDeclarationDashboardLineChart>
           </div>
         </div>
        </div>
@@ -89,11 +94,13 @@ import TileWithGaugeChart from "./TileWithGaugeChart";
 import ChartView from "./ChartView";
 import Toggler from "./Toggler";
 import MyDateRangePicker from "./MyDateRangePicker";
+import DeclarationDashboardLineChart from "./DeclarationDashboardLineChart"
 
 
 
 export default {
   components: {
+    appDeclarationDashboardLineChart:DeclarationDashboardLineChart,
     appDateRangePicker:MyDateRangePicker,
     appGroupedBarGraph: GroupedBarGraph,
     appBarGraph: BarGraph,
@@ -107,6 +114,7 @@ export default {
   },
   data() {
     return {
+      shouldShowChart:false,
       filterDeclarations: [],
       currentPage: 1,
       perPage: 5,
@@ -206,6 +214,25 @@ export default {
     this.getDeclarationsByStatus();
   },
   methods: {
+    onTileClick(status)
+    {
+       this.fixedDeclarationStatus=status;
+       if(this.shouldShowChart === false)
+       {
+        this.getDeclarationsByStatus();
+       }
+       this.shouldShowChart=false;
+       this.shouldShowChart=true;
+    },
+    randomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      const styleObject={background:color};
+      return styleObject;
+    },
     getDeclaration: function(row) {
       this.$router.push(`/editdeclaration/${row.DeclarationId}`);
     },

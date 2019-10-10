@@ -80,6 +80,14 @@ margin-right: 10px;
     color: black;
 }
 
+.dashboardChartDiv{
+    margin-top: 3px;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: white;
+}
+
+
 .font-size-80{
     font-size: 80%;
 }

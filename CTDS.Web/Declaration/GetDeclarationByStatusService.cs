@@ -41,5 +41,31 @@
             }
         }
 
+        public OperationResponse<List<DeclarationChartDataDto>> Post(GetDeclarationDashboardChartData req)
+        {
+            OperationResponse<List<DeclarationChartDataDto>> response = new OperationResponse<List<DeclarationChartDataDto>>();
+            try
+            {
+                var res = DeclarationBll.GetDeclarationChartData(req.DeclarationStatus, req.StartDate, req.EndDate);
+                if (res != null)
+                {
+                    response.OnSuccess(res, "Declaration successfully fetched");
+                    return response;
+                }
+                else
+                {
+                    response.OnError("No Declarations found!!!", null);
+                    return response;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message + " " + e.StackTrace);
+                response.OnException(e.Message);
+                return response;
+            }
+        }
+
+
     }
 }

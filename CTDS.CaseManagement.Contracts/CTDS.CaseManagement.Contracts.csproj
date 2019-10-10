@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\BaseDto.cs" />
+    <Compile Include="Dto\CaseChartDataDto.cs" />
     <Compile Include="Dto\CaseDto.cs" />
     <Compile Include="Dto\CaseInformationDto.cs" />
     <Compile Include="Dto\CaseReferenceDto.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="EndPoints\GetAllCasesWithQuery.cs" />
     <Compile Include="EndPoints\GetCaseById.cs" />
     <Compile Include="EndPoints\GetCaseByStatus.cs" />
+    <Compile Include="EndPoints\GetCaseChartData.cs" />
     <Compile Include="EndPoints\GetCaseCount.cs" />
     <Compile Include="EndPoints\GetCaseCountInLastSevenDays.cs" />
     <Compile Include="EndPoints\GetFilteredCaseCount.cs" />
