@@ -282,5 +282,10 @@
             }
         }
 
+        public List<CaseChartDataDto> GetCaseChartData(CaseStatusType? status, DateTime startDate, DateTime endDate)
+        {
+            return CaseRepository.GetCaseChartData(status, startDate, endDate);
+        }
+
     }
 }

@@ -21,5 +21,7 @@
         int GetCountOfSevenDays();
         List<int> GetCasesPerDayLastWeek();
         OpenCasesDto GetAllCasesWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage);
+
+        List<CaseChartDataDto> GetCaseChartData(CaseStatusType? status, DateTime startDate, DateTime endDate);
     }
 }

@@ -20,5 +20,6 @@
         bool SendToCustom(DeclarationDto declarationDTO);
         StatusDto GetStatusCount();
         FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage);
+        List<DeclarationChartDataDto> GetDeclarationChartData(string status, DateTime startDate, DateTime endDate);
     }
 }

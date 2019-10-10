@@ -343,5 +343,22 @@
             }
         }
 
+        public OperationResponse<List<CaseChartDataDto>> Post(GetCaseChartData request)
+        {
+            OperationResponse<List<CaseChartDataDto>> operationResponse = new OperationResponse<List<CaseChartDataDto>>();
+            try
+            {
+                List<CaseChartDataDto> caseDtos = CaseBusinessLogic.GetCaseChartData(request.CaseStatus, request.StartDate, request.EndDate);
+                operationResponse.OnSuccess(caseDtos, "Fetched successfully");
+                return operationResponse;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                operationResponse.OnException(e.Message);
+                return operationResponse;
+            }
+        }
+
     }
 }

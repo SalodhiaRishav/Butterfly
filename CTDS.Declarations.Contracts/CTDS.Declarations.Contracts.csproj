@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeclarationDTO\DeclarationChartDataDto.cs" />
     <Compile Include="DeclarationDTO\DeclarationData.cs" />
     <Compile Include="DeclarationDTO\DeclarationDto.cs" />
     <Compile Include="DeclarationDTO\DeclarationTableDto.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="EndPoints\CountOfSevenDays.cs" />
     <Compile Include="EndPoints\GetDeclarationByStatus.cs" />
     <Compile Include="EndPoints\GetDeclarationCount.cs" />
+    <Compile Include="EndPoints\GetDeclarationDashboardChartData.cs" />
     <Compile Include="EndPoints\GetDeclarationsWithQuery.cs" />
     <Compile Include="EndPoints\GetPerDayDeclarationCountLastWeek.cs" />
     <Compile Include="EndPoints\GetStatusCount.cs" />

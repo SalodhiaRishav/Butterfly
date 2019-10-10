@@ -282,5 +282,21 @@
                 throw;
             }
         }
+
+        public List<CaseChartDataDto> GetCaseChartData(CaseStatusType? status, DateTime startDate, DateTime endDate)
+        {
+            var cases= GetAllCasesByStatus(status, startDate, endDate);
+            var groupedByDateCases = cases.GroupBy(c => c.CreatedOn.Date).ToList();
+            var caseChartDataDtos = new List<CaseChartDataDto>();
+            foreach (var @case in groupedByDateCases)
+            {
+                CaseChartDataDto caseChartDataDto = new CaseChartDataDto() { Count = @case.Count(), Date = @case.Key };
+                caseChartDataDtos.Add(caseChartDataDto);
+            }
+
+            var result = caseChartDataDtos.OrderBy(data => data.Date).ToList();
+            return result;
+        }
+
     }
 }

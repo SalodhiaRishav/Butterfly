@@ -13,7 +13,6 @@ import CustomSearch from "./../commonComponent/CustomSearch.vue";
 import TileChecker from "./../commonComponent/TileChecker.vue";
 import SearchCases from "./../caseManagement/SearchCases.vue";
 import SearchDeclarations from "./../declaration/SearchDeclarations.vue";
-import CustomMultiSelectDropDown from "./../commonComponent/CustomMultiSelectDropDown.vue";
 
 
 
@@ -178,11 +177,6 @@ const router = new Router({
       name: "CustomSearch",
       component: CustomSearch
     },
-    {
-      path: "/multiselect",
-      name: "CustomMultiSelectDropDown",
-      component: CustomMultiSelectDropDown
-    }
   ],
   mode: "history"
 });

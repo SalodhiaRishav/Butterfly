@@ -110,6 +110,21 @@
             }
         }
 
+        public List<DeclarationChartDataDto> GetDeclarationChartData(string status, DateTime startDate, DateTime endDate)
+        {
+            var declarations = GetAllDeclarationByStatus(status, startDate, endDate);
+            var groupedByDateDeclarations = declarations.GroupBy(c => c.CreatedOn.Date).ToList();
+            var declarationChartDataDtos = new List<DeclarationChartDataDto>();
+            foreach (var declaration in groupedByDateDeclarations)
+            {
+                var caseChartDataDto = new DeclarationChartDataDto() { Count = declaration.Count(), Date = declaration.Key };
+                declarationChartDataDtos.Add(caseChartDataDto);
+            }
+
+            var result = declarationChartDataDtos.OrderBy(data => data.Date).ToList();
+            return result;
+        }
+
         public IEnumerable<DeclarationDto> GetAllDeclarations(int index, string sort)
         {
             IEnumerable<DeclarationDto> declarationDtoList;
