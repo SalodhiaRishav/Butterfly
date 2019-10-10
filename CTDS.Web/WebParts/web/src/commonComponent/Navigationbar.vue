@@ -1,15 +1,17 @@
 <template>
   <div>
     <b-navbar class="nav-bg-color nav-overide" toggleable="lg" type="dark">
+        <b-navbar-nav>
+        <b-nav-item>
         <router-link
               to="/dash2"
               active-class="active"
               tag="b-navbar-brand"
-              >CDTS
-              </router-link>
+              >CTDS
+            </router-link>
+        </b-nav-item>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
           <b-nav-item-dropdown :text="language.lang.caseManagement">
             <router-link
               to="/case"
@@ -88,7 +90,7 @@ export default {
       languages: [
         { value: "en", text: "english" },
         { value: "se", text: "swedish" }
-      ]
+      ],
     };
   },
   methods: {
