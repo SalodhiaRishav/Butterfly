@@ -1,4 +1,6 @@
 <template>
+
+
   <div>
     <div style="background-color:#eee;">
       <div class="row tilesRow" v-if="declarationStatusDataFetched">
@@ -21,10 +23,14 @@
             <toggle-switch :options="myOptions">
             </toggle-switch>
            </div> -->
-           <span>
-             <font-awesome-icon icon="calendar" />
-           </span>
-             <appDateRangePicker class="dateRangePicker" v-model="range" @input="getDeclarationsByStatus(false)"></appDateRangePicker>
+           <table style="float:right; backgroundColor:white;">
+            <tr >
+              <th><appDateRangePicker class="dateRangePicker" v-model="range" @input="getCasesByStatus(false)"></appDateRangePicker>
+            </th >
+              <th><font-awesome-icon icon="calendar"/></th>
+              </tr>
+          </table>
+           
             <!-- <div class="col-md-12 table" v-if="chartswitch">
               <appTile boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
             </div> -->
