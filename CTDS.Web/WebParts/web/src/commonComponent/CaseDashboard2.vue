@@ -30,7 +30,7 @@
             </div> -->
             <div>
               <div>
-                <b-table style="fontSize:80%;"
+                <b-table class="font-size-80"
                   striped
                   hover
                   fixed
@@ -42,8 +42,8 @@
                 </b-table>
               </div>
               <b-row>
-                <b-col md="6" class="my-1">
-                  <b-pagination style="fontSize:80%;"
+                <b-col md="6" class="my-1 font-size-80">
+                  <b-pagination
                     v-model="currentPage"
                     :total-rows="totalRows"
                     :per-page="perPage"
