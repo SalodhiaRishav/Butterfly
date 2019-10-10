@@ -72,3 +72,11 @@ margin-right: 10px;
 {
     display: inline;
 }
+
+.pd-rt{
+    padding-right:31px !important;
+}
+
+.dashboardHeading{
+    color: black;
+}

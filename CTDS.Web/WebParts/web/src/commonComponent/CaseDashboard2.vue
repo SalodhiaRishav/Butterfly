@@ -3,7 +3,7 @@
     <div style="background-color:#eee;">
      <div class="row tilesRow" v-if="caseStatusDataFetched">
          <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
-        <appTile @chartShowed="chartswitch=$event" :style="randomColor()" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
+        <appTile @tileClicked="getCasesWithAnyStatus()" :style="randomColor()" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart @tileClicked="getCasesByNew()" :style="randomColor()" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
@@ -34,7 +34,7 @@
                   striped
                   hover
                   fixed
-                  :fields="fields"
+                  :fields="caseTableFields"
                   :items="filterCases"
                   :current-page="currentPage"
                   :per-page="perPage"
@@ -70,8 +70,6 @@
 </template>
 
 <script>
-import SideBar from "./SideBar";
-import Navigationbar from "./Navigationbar";
 import httpClient from "./../utils/httpRequestWrapper";
 import GroupedBarGraph from "./GroupedBarGraph";
 import BarGraph from "./BarGraph";
@@ -83,16 +81,14 @@ import TileWithGaugeChart from "./TileWithGaugeChart";
 import ChartView from "./ChartView";
 import Toggler from "./Toggler";
 import MyDateRangePicker from "./MyDateRangePicker";
+import CaseTableFields from "./../caseManagement/utils/caseTableFields";
 
 
 
 export default {
   components: {
     appDateRangePicker:MyDateRangePicker,
-    appSideBar: SideBar,
-    appNavigationbar: Navigationbar,
     appGroupedBarGraph: GroupedBarGraph,
-    appNavigationbar: Navigationbar,
     appBarGraph: BarGraph,
     PieChart,
     appBarChart:BarChart,
@@ -108,41 +104,7 @@ export default {
       currentPage: 1,
       perPage: 5,
       totalRows: 0,
-      fields: [
-        {
-          key: "CaseId",
-          sortable: false
-        },
-        {
-          key: "CreatedDate",
-          sortable: false
-        },
-        {
-          key: "Status",
-          sortable: false
-        },
-        {
-          key: "Description",
-          sortable: false
-        },
-        {
-          key: "Client",
-          sortable: false
-        },
-        {
-          key: "Priority",
-          sortable: false
-        },
-        {
-          key: "References",
-          sortable: false
-        },
-        {
-          key: "Notes",
-          sortable: false
-        }
-      ],
-
+      caseTableFields:CaseTableFields,
       range: [this.$moment().subtract(29, 'days'), this.$moment()],
       myOptions: {
         layout: {
@@ -169,7 +131,6 @@ export default {
       },
       
       chartswitch : false,
-      declarationLineChartDataFetched:false,
       caseLineChartDataFetched:false,
       caseStatusDataFetched:false,
       newCases:"",
@@ -180,73 +141,6 @@ export default {
       caseInProcessChartData:{},
       caseClosedChartData:{},
       caseTileChartData: {},
-      declarationTileChartData: {},
-
-      declarationStatusDataFetched:false,
-      totalDeclaration:"",
-      declarationCleared:"",
-      declarationRejected:"",
-      declarationInProcess:"",
-      declarationClearedChartData:{},
-      declarationRejectedChartData:{},
-      declarationInProcessChartData:{},
-
-      caseGroupedBarChartData:{
-              labels: [
-                "New",
-                "In Process",
-                "Closed",
-              ],
-              datasets: [
-                {
-                  label: "Low",
-                  backgroundColor: "#41b883",
-                  borderWidth: 1,
-                  data: [3, 5, 6]
-                },
-                {
-                  label: "Medium",
-                  backgroundColor: "#00d8ff",
-                  borderWidth: 1,
-                  data: [4, 7, 3]
-                },
-                {
-                  label: "High",
-                  backgroundColor: "#e46651",
-                  borderWidth: 1,
-                  data: [10,7,4]
-                },
-              ]
-         },
-
-
-      caseGroupedBarChartOptions:{
-         maintainAspectRatio: false,
-          legend: {
-            position: "top"
-          },
-          title: {
-            display: true,
-            text: "Chart.js Bar Chart"
-          },
-        
-          scales: {
-              xAxes: [{
-            gridLines: {
-                display:false
-            }
-        }],
-            yAxes: [{
-              gridLines: {
-                display:false
-            }  ,
-              ticks: {
-                beginAtZero: true
-              }
-            }]
-        }
-      },
-
        caseTileChartData: {
          labels: ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su'],
         datasets: [{
@@ -264,45 +158,18 @@ export default {
             data: [100, 120, 150, 170, 180, 170, 300]
         }]
     },
-      declarationPiechartOptions: {},
-      declarationPieChartDataFetched: false,
-      declarationPieChartData: {},
       dataFetched: false,
-      caseCount: 0,
-      declarationCount: 0,
-      
       caseCount: 0,
       caseTitle: "",
       val: "",
-      chartData: [
-        {
-          label: "Processing",
-          value: 0,
-          barColor: "blue"
-        },
-        {
-          label: "Cleared",
-          value: 0,
-          barColor: "green"
-        },
-        {
-          label: "Rejected",
-          value: 0,
-          barColor: "red"
-        }
-      ],
-      fixedCaseStatus : "Closed"
+      fixedCaseStatus : null
     };
   },
   created() {
     this.getFilteredCaseCount();
-    this.getDeclarationCount();
     this.getCasesInLastSevenDays();
-    this.getDeclarationsInLastSevenDays();
-    this.getStatusCount();
     this.getCaseCount();
     this.getPerDayCaseCountLastWeek();
-    this.getPerDayDeclarationCountLastWeek();
     this.getCasesByStatus();
   },
   methods: {
@@ -315,14 +182,9 @@ export default {
       const styleObject={background:color};
       return styleObject;
     },
-    getProcessingDeclarations() {
-
-    },
-    getClosedDeclarations() {
-
-    },
-    getRejectedDeclarations() {
-
+     getCasesWithAnyStatus(){
+      this.fixedCaseStatus=null;
+      this.getCasesByStatus();
     },
     getCasesByNew() {
       this.fixedCaseStatus="New";
@@ -363,16 +225,16 @@ export default {
           }
          if (res.data.success === true) {
             let filterCase = [];
-            this.allCases = res.data.data;
-             for (let i = 0; i < this.allCases.length; ++i){
+            const allCases = res.data.data;
+             for (let i = 0; i < allCases.length; ++i){
               let obj = {
-                  CaseId: "KGH-19-" + this.allCases[i].caseId,
-                  CreatedDate: this.convertDate(this.allCases[i].createdOn),
-                  Status: this.allCases[i].status,
-                  Description: this.allCases[i].description,
-                  Client: this.allCases[i].client,
-                  Notes: this.allCases[i].notes,
-                  Priority: this.allCases[i].priority,
+                  CaseId: "KGH-19-" + allCases[i].caseId,
+                  CreatedDate: this.convertDate(allCases[i].createdOn),
+                  Status: allCases[i].status,
+                  Description: allCases[i].description,
+                  Client: allCases[i].client,
+                  Notes: allCases[i].notes,
+                  Priority: allCases[i].priority,
                   References: null
                 };
                 filterCase.push(obj);
@@ -388,64 +250,6 @@ export default {
     },
     convertDate(someDate) {
       return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
-    },
-    getPerDayDeclarationCountLastWeek(){
-      const url = "/perdaydeclarationcount";
-      httpClient
-      .get(url)
-      .then(response => {
-        if(response.data.success === true) {
-          const declarationCountList = response.data.data;
-          var weekday = new Array(7);
-          weekday[0] = "Su";
-          weekday[1] = "Mo";
-          weekday[2] = "Tu";
-          weekday[3] = "We";
-          weekday[4] = "Th";
-          weekday[5] = "Fr";
-          weekday[6] = "Sa";
-          const d = new Date();
-          var today = d.getDay();
-          const myLabels = new Array();
-          for(var i=1 ; i<=7;i++)
-          {
-            if(today < 6)
-            {
-              today = today + 1;
-            }
-            else
-            {
-              today = 0;
-            }
-            myLabels.push(weekday[today]);
-          }
-          const declarationTileChartData = {
-          labels: myLabels,
-          datasets: [{
-            borderColor: "#ffffff",
-            pointBorderColor: "#ffffff",
-            pointBackgroundColor: "#ffffff",
-            pointHoverBackgroundColor: "#66000000",
-            pointHoverBorderColor: "#0000ff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 7,
-            pointHoverBorderWidth: 0.5,
-            pointRadius: 4,
-            fill: false,
-            borderWidth: 1,
-            data: declarationCountList
-            }]
-          };
-          this.declarationTileChartData = declarationTileChartData;
-          this.declarationLineChartDataFetched=true;
-        }
-        else {
-            console.log(response.data.message);
-          }
-        })
-      .catch(error => {
-          console.log(error);
-      });
     },
     getPerDayCaseCountLastWeek() {
       const url = "/perdaycasecount";
@@ -579,21 +383,6 @@ export default {
           console.log(error);
         });
     },
-    getDeclarationCount() {
-      const url = "/declarationcount";
-      httpClient
-        .get(url)
-        .then(response => {
-          if (response.data.success === true) {
-            this.declarationCount = response.data.data;
-          } else {
-            console.log(response.data.message);
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
     getCasesInLastSevenDays() {
       const url = "/casesinsevendays";
       httpClient
@@ -601,102 +390,6 @@ export default {
         .then(response => {
           if (response.data.success === true) {
             this.caseTitle = `${response.data.data} Cases Created in Last Seven Days`;
-          } else {
-            console.log(response.data.message);
-          }
-        })
-        .catch(error => console.log(error));
-    },
-    getDeclarationsInLastSevenDays() {
-      const url = "/declarationsinsevendays";
-      httpClient
-        .get(url)
-        .then(response => {
-          if (response.data.success === true) {
-            this.declarationTitle = `${response.data.data} Declarations Created in Last seven days `;
-          } else {
-            console.log(response.data.message);
-          }
-        })
-        .catch(error => console.log(error));
-    },
-    getStatusCount() {
-      const url = "/getdeclarationstatuscount";
-      httpClient
-        .get(url)
-        .then(response => {
-          if (response.data.success === true) {
-            const declarationCleared = response.data.data.cleared;
-             const declarationRejected = response.data.data.rejected;
-             const declarationInProcess = response.data.data.processing;
-             const totalDeclaration=declarationCleared+declarationRejected+declarationInProcess;
-            const  declarationInProcessChartData={
-            labels: ["InProcess", "Others", ],
-              datasets: [{
-                  backgroundColor: ["white","#66000000"],
-                  borderColor: '#fff',
-                  borderWidth:0.7,
-                  data: [declarationInProcess,totalDeclaration-declarationInProcess ],
-              }]
-            };
-             const  declarationClearedChartData={
-            labels: ["Cleared", "Remaining", ],
-              datasets: [{
-                  backgroundColor: ["white","#66000000"],
-                  borderColor: '#fff',
-                  borderWidth:0.7,
-                  data: [declarationCleared, totalDeclaration-declarationCleared],
-              }]
-            };
-            const  declarationRejectedChartData={
-            labels: ["Rejected", "Remaining", ],
-              datasets: [{
-                  backgroundColor: ["white","#66000000"],
-                  borderColor: '#fff',
-                  borderWidth:0.7,
-                  data: [declarationRejected, totalDeclaration-declarationRejected],
-              }]
-            };
-            this.declarationClearedChartData=declarationClearedChartData;
-            this.declarationRejectedChartData=declarationRejectedChartData;
-            this.declarationInProcessChartData=declarationInProcessChartData;
-            this.declarationCleared=declarationCleared;
-            this.declarationRejected=declarationRejected;
-            this.declarationInProcess=declarationInProcess;
-            this.totalDeclaration=totalDeclaration;
-            this.declarationStatusDataFetched=true;
-            const options = {
-              hoverBorderWidth: 20,
-              borderWidth: 10,
-              hoverBackgroundColor: "red",
-              title: {
-                display: true,
-                text: "Declaration vs Status",
-                fontSize: 24
-              },
-              maintainAspectRatio: false
-            };
-        
-            this.declarationPieChartOptions = options;
-            let pieChartData = [
-              response.data.data.cleared,
-              response.data.data.rejected,
-              response.data.data.processing
-            ];
-            const declarationPieChartData = {
-              hoverBackgroundColor: "red",
-              hoverBorderWidth: 10,
-              labels: ["Cleared", "Rejected", "Processing"],
-              datasets: [
-                {
-                  label: "Data One",
-                  backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
-                  data: pieChartData
-                }
-              ]
-            };
-            this.declarationPieChartData = declarationPieChartData;
-            this.declarationPieChartDataFetched = true;
           } else {
             console.log(response.data.message);
           }
@@ -719,6 +412,7 @@ export default {
   }
 };
 </script>
+
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,900&display=swap");
 @import url("./styles/dashboard2.css");
