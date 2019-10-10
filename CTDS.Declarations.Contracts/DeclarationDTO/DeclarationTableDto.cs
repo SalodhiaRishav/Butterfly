@@ -4,6 +4,7 @@
 
     public class DeclarationTableDto
     {
+        public int DecId { get; set; }
         public Guid DeclarationId { get; set; }
         public String Status { get; set; } = "Processing";
         public String Procedure { get; set; } = "Import";

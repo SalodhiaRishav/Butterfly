@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     public class Declaration
     {
+        public int DecId { get; set; }
         public Guid DeclarationId { get; set; }
         public String ConsigneeName { get; set; }
         public String ConsigneeOrganisationNumber { get; set; }

@@ -10,7 +10,7 @@
         <appTileWithGaugeChart @tileClicked="getCasesByNew()" class="colorBrown" tooltipTitle="New Cases" :counter=newCases title="New Cases" chartTitle="New Cases / Total Cases" :chartData="caseNewChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getCasesByProcess()" class="colorCyan"  tooltipTitle="Cases In Process" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getCasesByProcess()" class="colorCyan"  tooltipTitle="In Process Cases" :counter=inProcessCases chartTitle="InProcess Cases / Total Cases" title="Cases In Process"  :chartData="caseInProcessChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart @tileClicked="getCasesByClosed()" class="colorCrimson" tooltipTitle="Closed Cases" :counter=closedCases chartTitle="Closed Cases / Total Cases" title="Closed Cases"  :chartData="caseClosedChartData"></appTileWithGaugeChart>
@@ -44,6 +44,7 @@
                   :items="filterCases"
                   :current-page="currentPage"
                   :per-page="perPage"
+                  @row-clicked="editCase"
                 >
                 </b-table>
               </div>
@@ -180,6 +181,24 @@ export default {
     this.getCasesByStatus();
   },
   methods: {
+     editCase: function(row) {
+      const urlResource=`/casemanagement/${row.Id}`;
+      httpClient.get(urlResource)
+      .then((response)=>{
+        if (response.data.success === true) {
+          this.$store.dispatch("setCase", response.data.data);
+          const url = `/case/${row.Id}`;
+          this.$router.push(url);
+        }
+        else
+        {
+          console.log(response.data.data);
+        }
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+    },
      getCasesWithAnyStatus(){
       this.fixedCaseStatus=null;
       this.getCasesByStatus();
@@ -227,6 +246,7 @@ export default {
              for (let i = 0; i < allCases.length; ++i){
               let obj = {
                   CaseId: "KGH-19-" + allCases[i].caseId,
+                   Id: allCases[i].id,
                   CreatedDate: this.convertDate(allCases[i].createdOn),
                   Status: allCases[i].status,
                   Description: allCases[i].description,

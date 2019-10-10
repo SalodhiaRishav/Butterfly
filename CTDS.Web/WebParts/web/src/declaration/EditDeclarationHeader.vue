@@ -93,7 +93,8 @@ export default {
   },
   methods: {
     cancelEdit(){
-      this.$router.push("/searchdeclarations");
+      // this.$router.push("/searchdeclarations");
+      this.$router.go(-1);
     },
     onSave() {
       const url = "/updatedeclaration";

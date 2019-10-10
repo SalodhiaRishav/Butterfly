@@ -12,7 +12,7 @@
         <appTileWithGaugeChart @tileClicked="getClearedDeclarations()" class="colorBrown" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getProcessingDeclarations()" class="colorCyan" tooltipTitle="Declarations Processing" chartTitle="Declarations Processing / Total Declarations" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getProcessingDeclarations()" class="colorCyan" tooltipTitle="Declarations Processing" chartTitle="Declarations Processing / Total Declarations" :counter=declarationInProcess title="Declaration Processing"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
         <appTileWithGaugeChart @tileClicked="getRejectedDeclarations()" class="colorCrimson" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
@@ -45,6 +45,7 @@
                   :items="filterDeclarations"
                   :current-page="currentPage"
                   :per-page="perPage"
+                  @row-clicked="getDeclaration"
                 >
                 </b-table>
               </div>
@@ -205,14 +206,8 @@ export default {
     this.getDeclarationsByStatus();
   },
   methods: {
-    randomColor() {
-      var letters = '0123456789ABCDEF';
-      var color = '#';
-      for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      const styleObject={background:color};
-      return styleObject;
+    getDeclaration: function(row) {
+      this.$router.push(`/editdeclaration/${row.DeclarationId}`);
     },
     getProcessingDeclarations() {
         this.fixedDeclarationStatus="Processing";
@@ -260,7 +255,7 @@ export default {
             const allCases = res.data.data;
              for (let i = 0; i < allCases.length; ++i){
               let obj = {
-                  DeclarationId: "KGH-19-" + allCases[i].declarationId,
+                  DeclarationId: "KGH-19-" + allCases[i].decId,
                   CreatedDate: this.convertDate(allCases[i].createdOn),
                   Status: allCases[i].status,
                   Country: allCases[i].country,

@@ -75,6 +75,7 @@
                         declarations = (from declaration in context.Declaration
                                         select new DeclarationTableDto
                                         {
+                                            DecId = declaration.DecId,
                                             DeclarationId = declaration.DeclarationId,
                                             Status = declaration.Status,
                                             CreatedOn = declaration.CreatedOn,
@@ -89,6 +90,7 @@
                         declarations = (from declaration in context.Declaration
                                         select new DeclarationTableDto
                                         {
+                                            DecId = declaration.DecId,
                                             DeclarationId = declaration.DeclarationId,
                                             Status = declaration.Status,
                                             CreatedOn = declaration.CreatedOn,
