@@ -4,17 +4,18 @@
   <div>
     <div style="background-color:#eee;">
       <div class="row tilesRow" v-if="declarationStatusDataFetched">
-         <div class="col-sm-4 col-md-3 tileBox" v-if="declarationLineChartDataFetched">
-        <appTile @tileClicked="getDeclarationsWithAnyStatus()" :style="randomColor()" tooltipTitle="Total Declarations" :counter=totalDeclaration chartTitle="Declarations Last Week" title="Total Declarations"  :chartData="declarationTileChartData"></appTile>
+       <div class="col-sm-4 col-md-3 tileBox" v-if="declarationLineChartDataFetched">
+        <!-- <appTile @tileClicked="getDeclarationsWithAnyStatus()" class="colorGreen" tooltipTitle="Total Declarations" :counter=totalDeclaration chartTitle="Declarations Last Week" title="Total Declarations"  :chartData="declarationTileChartData"></appTile> -->
+        <appTileWithGaugeChart @tileClicked="getDeclarationsWithAnyStatus()" class="colorGreen" tooltipTitle="Total Declarations" chartTitle="Total Declarations" :counter=totalDeclaration title="Total Declarations"  :chartData="declarationTotalChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getClearedDeclarations()" :style="randomColor()" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getClearedDeclarations()" class="colorBrown" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getProcessingDeclarations()" :style="randomColor()" tooltipTitle="Declarations InProcess" chartTitle="Declarations In Process / Total Declarations" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getProcessingDeclarations()" class="colorCyan" tooltipTitle="Declarations Processing" chartTitle="Declarations Processing / Total Declarations" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
        </div>
        <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="getRejectedDeclarations()" :style="randomColor()" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
+        <appTileWithGaugeChart @tileClicked="getRejectedDeclarations()" class="colorCrimson" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
        </div>
       </div>
       <div class="row tilesRow">
@@ -166,6 +167,7 @@ export default {
       declarationCleared:"",
       declarationRejected:"",
       declarationInProcess:"",
+      declarationTotalChartData:{},
       declarationClearedChartData:{},
       declarationRejectedChartData:{},
       declarationInProcessChartData:{},
@@ -401,6 +403,16 @@ export default {
                   data: [declarationRejected, totalDeclaration-declarationRejected],
               }]
             };
+            const declarationTotalChartData={
+              labels: ["Total"],
+              datasets: [{
+                  backgroundColor: ["white","#66000000"],
+                  borderColor: '#fff',
+                  borderWidth:0.7,
+                  data: [totalDeclaration],
+              }]
+            };
+            this.declarationTotalChartData=declarationTotalChartData;
             this.declarationClearedChartData=declarationClearedChartData;
             this.declarationRejectedChartData=declarationRejectedChartData;
             this.declarationInProcessChartData=declarationInProcessChartData;
@@ -454,4 +466,5 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,900&display=swap");
 @import url("./styles/dashboard2.css");
+@import url("./styles/tileDash2Style.css");
 </style>
