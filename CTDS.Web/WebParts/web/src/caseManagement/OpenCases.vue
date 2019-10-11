@@ -12,6 +12,7 @@
         :current-page="pageNumber"
         :per-page="maxRowsPerPage"
         @row-clicked="editCase"
+        class="font-size-80"
       >
       </b-table>
     </div>

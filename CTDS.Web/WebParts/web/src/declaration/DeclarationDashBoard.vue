@@ -2,7 +2,7 @@
   <div>
     <appCustomSearch :searchObjects="declarationAdvanceSearchObject" @applyFilter="onApplyFilter"></appCustomSearch>
     <div class="totalFoundText">{{totalRows}} declarations found</div>
-    <div class="font-mono">
+    <div>
       <b-table
         striped
         hover
@@ -11,6 +11,7 @@
         :current-page="currentPage"
         :per-page="maxRowsPerPage"
         @row-clicked="getDeclaration"
+        class="font-size-80"
       ></b-table>
     </div>
     <b-row>

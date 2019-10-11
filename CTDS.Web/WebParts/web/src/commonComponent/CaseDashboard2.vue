@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div >
+    <div class="background-gray">
      <div class="row tilesRow" v-if="caseStatusDataFetched">
          <div class="col-sm-4 col-md-3 tileBox" v-if="caseLineChartDataFetched">
             <appTileWithGaugeChart @tileClicked="onTileClick(null)()" class="colorGreen" tooltipTitle="Total Cases" :counter=totalCases title="Total Cases" chartTitle="Total Cases" :chartData="caseTotalChartData"></appTileWithGaugeChart>

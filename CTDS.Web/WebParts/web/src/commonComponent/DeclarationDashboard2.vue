@@ -2,7 +2,7 @@
 
 
   <div>
-    <div style="background-color:#eee;">
+    <div class="background-gray">
       <div class="row tilesRow" v-if="declarationStatusDataFetched">
          <div class="col-sm-4 col-md-3 tileBox" v-if="declarationLineChartDataFetched">
            <appTileWithGaugeChart @tileClicked="onTileClick(null)" class="colorGreen" tooltipTitle="Total Declarations" chartTitle="Total Declarations" :counter=totalDeclaration title="Total Declarations"  :chartData="declarationTotalChartData"></appTileWithGaugeChart>
@@ -23,6 +23,10 @@
             <toggle-switch :options="myOptions">
             </toggle-switch>
            </div> -->
+           <div>
+              <button @click="shouldShowChart=true">ShowChart</button>
+              <button @click="shouldShowChart=false">ShowTable</button>
+           </div>
            <table style="float:right; backgroundColor:white;">
             <tr >
               <th><appDateRangePicker class="dateRangePicker" v-model="range" @input="getCasesByStatus(false)"></appDateRangePicker>
@@ -32,8 +36,7 @@
           </table>
            
            
-            <button @click="shouldShowChart=true">ShowChart</button>
-              <button @click="shouldShowChart=false">ShowTable</button>
+           
             <!-- <div class="col-md-12 table" v-if="chartswitch">
               <appTile boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
             </div> -->
