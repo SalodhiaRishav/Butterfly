@@ -91,6 +91,13 @@ export default {
       errorList: []
     };
   },
+  computed: {
+    keymap: function() {
+      return {
+        "ctrl+V": this.onSave
+      };
+    }
+  },
   methods: {
     cancelEdit(){
       // this.$router.push("/searchdeclarations");
@@ -143,13 +150,6 @@ export default {
           }
           console.log(response.data.data);
         });
-    }
-  },
-  computed: {
-    keymap: function() {
-      return {
-        "ctrl+V": this.onSave
-      };
     }
   }
 };

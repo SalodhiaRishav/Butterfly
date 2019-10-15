@@ -87,6 +87,13 @@ export default {
       errorList: []
     };
   },
+  computed: {
+    keymap: function() {
+      return {
+        "ctrl+V": this.onSave
+      };
+    }
+  },
   methods: {
     cancelAddDeclaration(){
       this.$router.push("/searchdeclarations");
@@ -118,13 +125,6 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    }
-  },
-  computed: {
-    keymap: function() {
-      return {
-        "ctrl+V": this.onSave
-      };
     }
   }
 };
