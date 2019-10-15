@@ -87,9 +87,6 @@ export default {
     EditDeclarationHeader,
     Navbar
   },
-  mounted() {
-    this.getDeclarationById();
-  },
   data() {
     return {
       declaration: {
@@ -141,6 +138,10 @@ export default {
     };
   },
 
+  
+  mounted() {
+    this.getDeclarationById();
+  },
   methods: {
     getDeclarationById() {
       var guid = this.$route.params.id;

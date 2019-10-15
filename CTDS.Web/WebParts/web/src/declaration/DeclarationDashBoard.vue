@@ -38,9 +38,7 @@ export default {
   components:{
     appCustomSearch:CustomSearch
   },
-  mounted() {
-    // this.getAllDeclaration(1, this.sortOrder);
-  },
+  
   data() {
     return {
       declarations: [],
@@ -52,6 +50,9 @@ export default {
       fields:declarationTableField,
       declarationAdvanceSearchObject,
     };
+  },
+  mounted() {
+    // this.getAllDeclaration(1, this.sortOrder);
   },
   methods: {
      myProvider(ctx, callback) {

@@ -46,6 +46,11 @@ export default {
       lan: allLanguages.lang.en.englishForm
     };
   },
+  mounted() {
+    this.getDeclarationType1();
+    this.getDeclarationType2();
+    this.getMessageNames();
+  },
   // watch:{
   //   language: {
   //     handler(val){
@@ -59,11 +64,6 @@ export default {
   //     },
   //     deep:true,
   //   },
-  mounted() {
-    this.getDeclarationType1();
-    this.getDeclarationType2();
-    this.getMessageNames();
-  },
   methods: {
     getMessageNames() {
       const url = "/getdropdownitems/MessageName";
