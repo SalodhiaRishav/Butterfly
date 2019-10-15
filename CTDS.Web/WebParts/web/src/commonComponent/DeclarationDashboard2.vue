@@ -2,80 +2,124 @@
   <div>
     <div class="background-gray">
       <div class="row tilesRow" v-if="declarationStatusDataFetched">
-         <div class="col-sm-4 col-md-3 tileBox" v-if="declarationLineChartDataFetched">
-           <appTileWithGaugeChart @tileClicked="onTileClick(null)" class="colorGreen" tooltipTitle="Total Declarations" chartTitle="Total Declarations" :counter=totalDeclaration title="Total Declarations"  :chartData="declarationTotalChartData"></appTileWithGaugeChart>
-       </div>
-       <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="onTileClick('Cleared')" class="colorBrown" tooltipTitle="Declarations Cleared" chartTitle="Declarations Cleared / Total Declarations" :counter=declarationCleared title="Declaration Cleared"  :chartData="declarationClearedChartData"></appTileWithGaugeChart>
-       </div>
-       <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="onTileClick('Processing')" class="colorCyan" tooltipTitle="Declarations InProcess" chartTitle="Declarations In Process / Total Declarations" :counter=declarationInProcess title="Declaration In Process"  :chartData="declarationInProcessChartData"></appTileWithGaugeChart>
-       </div>
-       <div class="col-sm-4 col-md-3 tileBox">
-        <appTileWithGaugeChart @tileClicked="onTileClick('Rejected')" class="colorCrimson" tooltipTitle="Declarations Rejected" chartTitle="Declarations Rejected / Total Declarations" :counter=declarationRejected title="Declaration Rejected"  :chartData="declarationRejectedChartData"></appTileWithGaugeChart>
-       </div>
+        <div
+          class="col-sm-4 col-md-3 tileBox"
+        >
+          <appTileWithGaugeChart
+            @tileClicked="onTileClick(null)"
+            class="colorGreen"
+            tooltipTitle="Total Declarations"
+            chartTitle="Total Declarations"
+            :counter="totalDeclaration"
+            title="Total Declarations"
+            :chartData="declarationTotalChartData"
+          ></appTileWithGaugeChart>
+        </div>
+        <div class="col-sm-4 col-md-3 tileBox">
+          <appTileWithGaugeChart
+            @tileClicked="onTileClick('Cleared')"
+            class="colorBrown"
+            tooltipTitle="Declarations Cleared"
+            chartTitle="Declarations Cleared / Total Declarations"
+            :counter="declarationCleared"
+            title="Declaration Cleared"
+            :chartData="declarationClearedChartData"
+          ></appTileWithGaugeChart>
+        </div>
+        <div class="col-sm-4 col-md-3 tileBox">
+          <appTileWithGaugeChart
+            @tileClicked="onTileClick('Processing')"
+            class="colorCyan"
+            tooltipTitle="Declarations InProcess"
+            chartTitle="Declarations In Process / Total Declarations"
+            :counter="declarationInProcess"
+            title="Declaration In Process"
+            :chartData="declarationInProcessChartData"
+          ></appTileWithGaugeChart>
+        </div>
+        <div class="col-sm-4 col-md-3 tileBox">
+          <appTileWithGaugeChart
+            @tileClicked="onTileClick('Rejected')"
+            class="colorCrimson"
+            tooltipTitle="Declarations Rejected"
+            chartTitle="Declarations Rejected / Total Declarations"
+            :counter="declarationRejected"
+            title="Declaration Rejected"
+            :chartData="declarationRejectedChartData"
+          ></appTileWithGaugeChart>
+        </div>
       </div>
       <div class="row tilesRow">
         <div class="col-md-12 tileBox shadowBox">
-           
-           <table style="float:right; backgroundColor:white;">
-            <tr >
-              <th><appDateRangePicker class="dateRangePicker" v-model="range" @input="getDeclarationsByStatus(false)"></appDateRangePicker>
-            </th >
-              <th><font-awesome-icon icon="calendar"/></th>
-              </tr>
+          <table class="dashboardTable">
+            <tr>
+              <th>
+                <appDateRangePicker
+                  class="dateRangePicker"
+                  v-model="range"
+                  @input="getDeclarationsByStatus()"
+                ></appDateRangePicker>
+              </th>
+              <th><font-awesome-icon icon="calendar" /></th>
+            </tr>
           </table>
-              <button @click="shouldShowChart=true">ShowChart</button>
-              <button @click="shouldShowChart=false">ShowTable</button>
-            <div v-if="!shouldShowChart">
-              <div>
-                <b-table class="font-size-80"
-                  striped
-                  hover
-                  fixed
-                  :fields="fields"
-                  :items="filterDeclarations"
-                  :current-page="currentPage"
+          <button @click="shouldShowChart = true">ShowChart</button>
+          <button @click="shouldShowChart = false">ShowTable</button>
+          <div v-if="!shouldShowChart">
+            <div>
+              <b-table
+                class="font-size-80"
+                striped
+                hover
+                fixed
+                :fields="fields"
+                :items="filterDeclarations"
+                :current-page="currentPage"
+                :per-page="perPage"
+                @row-clicked="getDeclaration"
+              >
+              </b-table>
+            </div>
+            <b-row>
+              <b-col md="6" class="my-1 font-size-80">
+                <b-pagination
+                  v-model="currentPage"
+                  :total-rows="totalRows"
                   :per-page="perPage"
-                  @row-clicked="getDeclaration"
+                  class="my-0"
                 >
-                </b-table>
-              </div>
-              <b-row>
-                <b-col md="6" class="my-1 font-size-80" >
-                  <b-pagination
-                    v-model="currentPage"
-                    :total-rows="totalRows"
-                    :per-page="perPage"
-                    class="my-0">
-                  </b-pagination>
-                </b-col>
-              </b-row>
+                </b-pagination>
+              </b-col>
+            </b-row>
           </div>
-            <div class="dashboardChartDiv" v-if="shouldShowChart">
-            <appDeclarationDashboardLineChart :status="fixedDeclarationStatus" :startDate="range[0]" :endDate="range[1]"></appDeclarationDashboardLineChart>
+          <div class="dashboardChartDiv" v-if="shouldShowChart">
+            <appDeclarationDashboardLineChart
+              :status="fixedDeclarationStatus"
+              :startDate="range[0]"
+              :endDate="range[1]"
+            ></appDeclarationDashboardLineChart>
           </div>
         </div>
-       </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
 import TileWithGaugeChart from "./TileWithGaugeChart";
 import MyDateRangePicker from "./MyDateRangePicker";
-import DeclarationDashboardLineChart from "./DeclarationDashboardLineChart"
+import DeclarationDashboardLineChart from "./DeclarationDashboardLineChart";
 
 export default {
   components: {
-    appDeclarationDashboardLineChart:DeclarationDashboardLineChart,
-    appDateRangePicker:MyDateRangePicker,
-    appTileWithGaugeChart:TileWithGaugeChart,
+    appDeclarationDashboardLineChart: DeclarationDashboardLineChart,
+    appDateRangePicker: MyDateRangePicker,
+    appTileWithGaugeChart: TileWithGaugeChart
   },
   data() {
     return {
-      shouldShowChart:false,
+      shouldShowChart: false,
       filterDeclarations: [],
       currentPage: 1,
       perPage: 5,
@@ -102,231 +146,78 @@ export default {
           sortable: false
         }
       ],
-
-      range: [this.$moment().subtract(29, 'days'), this.$moment()],
-      myOptions: {
-        layout: {
-          color: 'black',
-          backgroundColor: 'lightgray',
-          selectedColor: 'white',
-          selectedBackgroundColor: 'green',
-          borderColor: 'black',
-          fontFamily: 'Arial',
-          fontWeight: 'normal',
-          fontWeightSelected: 'bold',
-          squareCorners: false,
-          noBorder: false
-        },
-        items: {
-          delay: .4,
-          preSelected: 'Chart',
-          disabled: false,
-          labels: [
-            {name: 'Chart', color: 'white', backgroundColor: 'red'}, 
-            {name: 'Table', color: 'white', backgroundColor: 'green'}
-          ]
-        }
-      },
-      
-      chartswitch : false,
-      declarationLineChartDataFetched:false,
-      declarationTileChartData: {},
-
-      declarationStatusDataFetched:false,
-      totalDeclaration:"",
-      declarationCleared:"",
-      declarationRejected:"",
-      declarationInProcess:"",
-      declarationTotalChartData:{},
-      declarationClearedChartData:{},
-      declarationRejectedChartData:{},
-      declarationInProcessChartData:{},
-      declarationPiechartOptions: {},
-      declarationPieChartDataFetched: false,
+      range: [this.$moment().subtract(29, "days"), this.$moment()],
+      declarationStatusDataFetched: false,
+      totalDeclaration: "",
+      declarationCleared: "",
+      declarationRejected: "",
+      declarationInProcess: "",
+      declarationTotalChartData: {},
+      declarationClearedChartData: {},
+      declarationRejectedChartData: {},
+      declarationInProcessChartData: {},
       declarationPieChartData: {},
-      dataFetched: false,
       declarationCount: 0,
-      val: "",
-      chartData: [
-        {
-          label: "Processing",
-          value: 0,
-          barColor: "blue"
-        },
-        {
-          label: "Cleared",
-          value: 0,
-          barColor: "green"
-        },
-        {
-          label: "Rejected",
-          value: 0,
-          barColor: "red"
-        }
-      ],
-      fixedDeclarationStatus : null
+      fixedDeclarationStatus: null
     };
   },
   created() {
-    this.getDeclarationCount();
-    this.getDeclarationsInLastSevenDays();
     this.getStatusCount();
-    this.getPerDayDeclarationCountLastWeek();
     this.getDeclarationsByStatus();
   },
   methods: {
-    onTileClick(status)
-    {
-       this.fixedDeclarationStatus=status;
-       if(this.shouldShowChart === false)
-       {
+    onTileClick(status) {
+      this.fixedDeclarationStatus = status;
+      if (this.shouldShowChart === false) {
         this.getDeclarationsByStatus();
-       }
-       else
-       {
-          this.shouldShowChart=false;
-           this.shouldShowChart=true;
-       }
-      
+      } else {
+        this.shouldShowChart = false;
+        this.shouldShowChart = true;
+      }
     },
     getDeclaration: function(row) {
       this.$router.push(`/editdeclaration/${row.DeclarationId}`);
     },
-    getDeclarationsByStatus(start = true){
-      const status=this.fixedDeclarationStatus;
+    getDeclarationsByStatus() {
+      const status = this.fixedDeclarationStatus;
       this.filterDeclarations = null;
       const url = "/declarationbystatus";
-      let postObject = null;
-      if(start === true)
-      {
-         postObject={ DeclarationStatus : status,
-                   StartDate : this.range[0],
-                   EndDate : this.range[1]
-                   };
-      }
-      else{
-        postObject={ DeclarationStatus : status,
-                   StartDate : this.range[0],
-                   EndDate : this.range[1]
-                   };
-      }
+      let postObject = {
+          DeclarationStatus: status,
+          StartDate: this.range[0],
+          EndDate: this.range[1]
+      } 
       httpClient
-      .post(url, postObject)
-      .then(res => {
-         if (res.data === "token refreshed") {
+        .post(url, postObject)
+        .then(res => {
+          if (res.data === "token refreshed") {
             this.getDeclarationsByStatus();
             return;
           }
-         if (res.data.success === true) {
+          if (res.data.success === true) {
             let filterDeclaration = [];
             const allCases = res.data.data;
-             for (let i = 0; i < allCases.length; ++i){
+            for (let i = 0; i < allCases.length; ++i) {
               let obj = {
-                  DeclarationId: "KGH-19-" + allCases[i].decId,
-                  CreatedDate: this.convertDate(allCases[i].createdOn),
-                  Status: allCases[i].status,
-                  Country: allCases[i].country,
-                  Procedure: allCases[i].procedure 
-                };
-                filterDeclaration.push(obj);
-             }
-             this.filterDeclarations = filterDeclaration;
-              if (this.filterDeclarations.length != 0)
+                DeclarationId: "KGH-19-" + allCases[i].decId,
+                CreatedDate: this.convertDate(allCases[i].createdOn),
+                Status: allCases[i].status,
+                Country: allCases[i].country,
+                Procedure: allCases[i].procedure
+              };
+              filterDeclaration.push(obj);
+            }
+            this.filterDeclarations = filterDeclaration;
+            if (this.filterDeclarations.length != 0)
               this.totalRows = this.currentPage * this.perPage + 1;
-          }
-         })
-      .catch(error => {
-          console.log(error);
-        });
-    },
-    convertDate(someDate) {
-      return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
-    },
-    getPerDayDeclarationCountLastWeek(){
-      const url = "/perdaydeclarationcount";
-      httpClient
-      .get(url)
-      .then(response => {
-        if(response.data.success === true) {
-          const declarationCountList = response.data.data;
-          var weekday = new Array(7);
-          weekday[0] = "Su";
-          weekday[1] = "Mo";
-          weekday[2] = "Tu";
-          weekday[3] = "We";
-          weekday[4] = "Th";
-          weekday[5] = "Fr";
-          weekday[6] = "Sa";
-          const d = new Date();
-          var today = d.getDay();
-          const myLabels = new Array();
-          for(var i=1 ; i<=7;i++)
-          {
-            if(today < 6)
-            {
-              today = today + 1;
-            }
-            else
-            {
-              today = 0;
-            }
-            myLabels.push(weekday[today]);
-          }
-          const declarationTileChartData = {
-          labels: myLabels,
-          datasets: [{
-            borderColor: "#ffffff",
-            pointBorderColor: "#ffffff",
-            pointBackgroundColor: "#ffffff",
-            pointHoverBackgroundColor: "#66000000",
-            pointHoverBorderColor: "#0000ff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 7,
-            pointHoverBorderWidth: 0.5,
-            pointRadius: 4,
-            fill: false,
-            borderWidth: 1,
-            data: declarationCountList
-            }]
-          };
-          this.declarationTileChartData = declarationTileChartData;
-          this.declarationLineChartDataFetched=true;
-        }
-        else {
-            console.log(response.data.message);
-          }
-        })
-      .catch(error => {
-          console.log(error);
-      });
-    },
-    getDeclarationCount() {
-      const url = "/declarationcount";
-      httpClient
-        .get(url)
-        .then(response => {
-          if (response.data.success === true) {
-            this.declarationCount = response.data.data;
-          } else {
-            console.log(response.data.message);
           }
         })
         .catch(error => {
           console.log(error);
         });
     },
-    getDeclarationsInLastSevenDays() {
-      const url = "/declarationsinsevendays";
-      httpClient
-        .get(url)
-        .then(response => {
-          if (response.data.success === true) {
-            this.declarationTitle = `${response.data.data} Declarations Created in Last seven days `;
-          } else {
-            console.log(response.data.message);
-          }
-        })
-        .catch(error => console.log(error));
+    convertDate(someDate) {
+      return new Date(someDate.match(/\d+/)[0] * 1).toString().substring(0, 16);
     },
     getStatusCount() {
       const url = "/getdeclarationstatuscount";
@@ -335,86 +226,72 @@ export default {
         .then(response => {
           if (response.data.success === true) {
             const declarationCleared = response.data.data.cleared;
-             const declarationRejected = response.data.data.rejected;
-             const declarationInProcess = response.data.data.processing;
-             const totalDeclaration=declarationCleared+declarationRejected+declarationInProcess;
-            const  declarationInProcessChartData={
-            labels: ["InProcess", "Others", ],
-              datasets: [{
-                  backgroundColor: ["white","#66000000"],
-                  borderColor: '#fff',
-                  borderWidth:0.7,
-                  data: [declarationInProcess,totalDeclaration-declarationInProcess ],
-              }]
-            };
-             const  declarationClearedChartData={
-            labels: ["Cleared", "Remaining", ],
-              datasets: [{
-                  backgroundColor: ["white","#66000000"],
-                  borderColor: '#fff',
-                  borderWidth:0.7,
-                  data: [declarationCleared, totalDeclaration-declarationCleared],
-              }]
-            };
-            const  declarationRejectedChartData={
-            labels: ["Rejected", "Remaining", ],
-              datasets: [{
-                  backgroundColor: ["white","#66000000"],
-                  borderColor: '#fff',
-                  borderWidth:0.7,
-                  data: [declarationRejected, totalDeclaration-declarationRejected],
-              }]
-            };
-            const declarationTotalChartData={
-              labels: ["Total"],
-              datasets: [{
-                  backgroundColor: ["white","#66000000"],
-                  borderColor: '#fff',
-                  borderWidth:0.7,
-                  data: [totalDeclaration],
-              }]
-            };
-            this.declarationTotalChartData=declarationTotalChartData;
-            this.declarationClearedChartData=declarationClearedChartData;
-            this.declarationRejectedChartData=declarationRejectedChartData;
-            this.declarationInProcessChartData=declarationInProcessChartData;
-            this.declarationCleared=declarationCleared;
-            this.declarationRejected=declarationRejected;
-            this.declarationInProcess=declarationInProcess;
-            this.totalDeclaration=totalDeclaration;
-            this.declarationStatusDataFetched=true;
-            const options = {
-              hoverBorderWidth: 20,
-              borderWidth: 10,
-              hoverBackgroundColor: "red",
-              title: {
-                display: true,
-                text: "Declaration vs Status",
-                fontSize: 24
-              },
-              maintainAspectRatio: false
-            };
-        
-            this.declarationPieChartOptions = options;
-            let pieChartData = [
-              response.data.data.cleared,
-              response.data.data.rejected,
-              response.data.data.processing
-            ];
-            const declarationPieChartData = {
-              hoverBackgroundColor: "red",
-              hoverBorderWidth: 10,
-              labels: ["Cleared", "Rejected", "Processing"],
+            const declarationRejected = response.data.data.rejected;
+            const declarationInProcess = response.data.data.processing;
+            const totalDeclaration =
+              declarationCleared + declarationRejected + declarationInProcess;
+            const declarationInProcessChartData = {
+              labels: ["InProcess", "Others"],
               datasets: [
                 {
-                  label: "Data One",
-                  backgroundColor: ["#41B883", "#E46651", "#00D8FF"],
-                  data: pieChartData
+                  backgroundColor: ["white", "#66000000"],
+                  borderColor: "#fff",
+                  borderWidth: 0.7,
+                  data: [
+                    declarationInProcess,
+                    totalDeclaration - declarationInProcess
+                  ]
                 }
               ]
             };
-            this.declarationPieChartData = declarationPieChartData;
-            this.declarationPieChartDataFetched = true;
+            const declarationClearedChartData = {
+              labels: ["Cleared", "Remaining"],
+              datasets: [
+                {
+                  backgroundColor: ["white", "#66000000"],
+                  borderColor: "#fff",
+                  borderWidth: 0.7,
+                  data: [
+                    declarationCleared,
+                    totalDeclaration - declarationCleared
+                  ]
+                }
+              ]
+            };
+            const declarationRejectedChartData = {
+              labels: ["Rejected", "Remaining"],
+              datasets: [
+                {
+                  backgroundColor: ["white", "#66000000"],
+                  borderColor: "#fff",
+                  borderWidth: 0.7,
+                  data: [
+                    declarationRejected,
+                    totalDeclaration - declarationRejected
+                  ]
+                }
+              ]
+            };
+            const declarationTotalChartData = {
+              labels: ["Total"],
+              datasets: [
+                {
+                  backgroundColor: ["white", "#66000000"],
+                  borderColor: "#fff",
+                  borderWidth: 0.7,
+                  data: [totalDeclaration]
+                }
+              ]
+            };
+            this.declarationTotalChartData = declarationTotalChartData;
+            this.declarationClearedChartData = declarationClearedChartData;
+            this.declarationRejectedChartData = declarationRejectedChartData;
+            this.declarationInProcessChartData = declarationInProcessChartData;
+            this.declarationCleared = declarationCleared;
+            this.declarationRejected = declarationRejected;
+            this.declarationInProcess = declarationInProcess;
+            this.totalDeclaration = totalDeclaration;
+            this.declarationStatusDataFetched = true;
           } else {
             console.log(response.data.message);
           }

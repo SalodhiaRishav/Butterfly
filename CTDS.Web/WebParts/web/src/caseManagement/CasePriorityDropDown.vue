@@ -2,12 +2,12 @@
   <div>
     <b-form>
       <div class="myCustomSelect">
-      <b-form-select
-        id="priorityInput"
-        v-model="priorityForm.priority"
-        :options="priorityTypes"
-        required
-      ></b-form-select>
+        <b-form-select
+          id="priorityInput"
+          v-model="priorityForm.priority"
+          :options="priorityTypes"
+          required
+        ></b-form-select>
       </div>
     </b-form>
   </div>

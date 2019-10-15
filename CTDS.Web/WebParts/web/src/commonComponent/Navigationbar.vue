@@ -10,8 +10,10 @@
               >CTDS
             </router-link>
         </b-nav-item>
+        </b-navbar-nav>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
           <b-nav-item-dropdown :text="language.lang.caseManagement">
             <router-link
               to="/case"

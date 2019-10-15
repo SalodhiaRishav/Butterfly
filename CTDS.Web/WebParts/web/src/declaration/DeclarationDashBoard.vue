@@ -1,7 +1,10 @@
 <template>
   <div>
-    <appCustomSearch :searchObjects="declarationAdvanceSearchObject" @applyFilter="onApplyFilter"></appCustomSearch>
-    <div class="totalFoundText">{{totalRows}} declarations found</div>
+    <appCustomSearch
+      :searchObjects="declarationAdvanceSearchObject"
+      @applyFilter="onApplyFilter"
+    ></appCustomSearch>
+    <div class="totalFoundText">{{ totalRows }} declarations found</div>
     <div>
       <b-table
         striped
@@ -35,37 +38,39 @@ import declarationAdvanceSearchObject from "./Utils/declarationAdvanceSearchObje
 import CustomSearch from "./../commonComponent/CustomSearch";
 
 export default {
-  components:{
-    appCustomSearch:CustomSearch
+  components: {
+    appCustomSearch: CustomSearch
   },
-  
+
   data() {
     return {
       declarations: [],
-      filters:null,
+      filters: null,
       currentPage: 1,
       totalRows: 0,
       maxRowsPerPage: 5,
       sortOrder: "DeclarationId",
-      fields:declarationTableField,
-      declarationAdvanceSearchObject,
+      fields: declarationTableField,
+      declarationAdvanceSearchObject
     };
   },
-  mounted() {
-    // this.getAllDeclaration(1, this.sortOrder);
-  },
   methods: {
-     myProvider(ctx, callback) {
-          httpClient.post("/declarationswithquery",{"Queries":this.filters,"MaxRowsPerPage":this.maxRowsPerPage,"PageNumber":this.currentPage})
-            .then((response)=>{
-                 if (response.data === "token refreshed") {
-                    this.myProvider(ctx, callback);
-                    return;
-                }
-               if (response.data.success === true) {
-                 console.log(response);
+    myProvider(ctx, callback) {
+      httpClient
+        .post("/declarationswithquery", {
+          Queries: this.filters,
+          MaxRowsPerPage: this.maxRowsPerPage,
+          PageNumber: this.currentPage
+        })
+        .then(response => {
+          if (response.data === "token refreshed") {
+            this.myProvider(ctx, callback);
+            return;
+          }
+          if (response.data.success === true) {
+            console.log(response);
             let declaration = [];
-             const filteredDeclarations=response.data.data.declarations;
+            const filteredDeclarations = response.data.data.declarations;
             for (let i = 0; i < filteredDeclarations.length; ++i) {
               let obj = {
                 BaseID: filteredDeclarations[i].declarationId,
@@ -88,8 +93,8 @@ export default {
               declaration.push(obj);
             }
             this.declarations = declaration;
-             this.totalRows=response.data.data.totalCount;
-             callback(this.declarations);
+            this.totalRows = response.data.data.totalCount;
+            callback(this.declarations);
           } else {
             alert(response.data.message);
             callback([]);
@@ -99,21 +104,19 @@ export default {
           alert(error);
           callback([]);
         });
-        // Must return null or undefined to signal b-table that callback is being used
-        return null
-     },
-    onApplyFilter(filters)
-    {
-     this.filters=filters;
-        if(this.currentPage===1)
-        {
-           this.currentPage=2;
-           setTimeout(function(){this.currentPage=1;}, 2000);
-        }
-        else
-        {
-          this.currentPage=1;
-        }
+      // Must return null or undefined to signal b-table that callback is being used
+      return null;
+    },
+    onApplyFilter(filters) {
+      this.filters = filters;
+      if (this.currentPage === 1) {
+        this.currentPage = 2;
+        setTimeout(function() {
+          this.currentPage = 1;
+        }, 2000);
+      } else {
+        this.currentPage = 1;
+      }
     },
     sortData(key, val2, val3) {
       this.sortOrder = key;
@@ -143,7 +146,7 @@ export default {
           }
           if (response.data.success === true) {
             let declaration = [];
-             const filteredDeclarations=response.data.data.declarations;
+            const filteredDeclarations = response.data.data.declarations;
             for (let i = 0; i < filteredDeclarations.length; ++i) {
               let obj = {
                 BaseID: filteredDeclarations[i].declarationId,
@@ -160,13 +163,15 @@ export default {
                 TaxationDate: " ",
                 DeclarationId:
                   "CD-" +
-                  filteredDeclarations[i].declarationId.toString().substring(0, 5)
+                  filteredDeclarations[i].declarationId
+                    .toString()
+                    .substring(0, 5)
               };
               declaration.push(obj);
             }
             this.declarations = declaration;
-             this.totalRows=response.data.data.totalCount;
-             callback(this.declarations);
+            this.totalRows = response.data.data.totalCount;
+            callback(this.declarations);
           } else {
             alert(response.data.message);
             callback([]);

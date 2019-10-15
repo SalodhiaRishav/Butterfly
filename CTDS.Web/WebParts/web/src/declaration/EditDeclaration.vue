@@ -138,7 +138,6 @@ export default {
     };
   },
 
-  
   mounted() {
     this.getDeclarationById();
   },

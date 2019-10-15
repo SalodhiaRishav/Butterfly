@@ -30,10 +30,10 @@
         <div class="iconButton floatRight" v-hotkey="keymap">
           <font-awesome-icon icon="save" @click="addNewCase()" />
         </div>
-        <br/>
-         <div class="iconButton floatRight">
-             <font-awesome-icon icon="window-close" @click="cancelAddNewCase"/>
-         </div>
+        <br />
+        <div class="iconButton floatRight">
+          <font-awesome-icon icon="window-close" @click="cancelAddNewCase" />
+        </div>
         <br />
         <br />
         <b-modal id="error-modal">
@@ -92,7 +92,7 @@ export default {
     this.resetCaseData();
   },
   methods: {
-    cancelAddNewCase(){
+    cancelAddNewCase() {
       this.$router.push("/searchcases");
     },
     resetCaseData() {

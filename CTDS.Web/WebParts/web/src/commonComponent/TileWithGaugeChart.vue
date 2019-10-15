@@ -1,7 +1,5 @@
 <template>
   <div
-    v-b-tooltip.hover
-    :title="tooltipTitle"
     class="box"
     :class="boxColorClass"
     @click="tileClicked"
@@ -67,16 +65,11 @@ export default {
       }
     };
   },
-  computed: {
-    boxColorClass: function() {
-      return "box-" + this.boxColor;
-    }
-  },
-   methods : {
+  methods: {
     tileClicked() {
-      this.$emit('tileClicked',"true");
+      this.$emit("tileClicked", "true");
     }
-  },
+  }
 };
 </script>
 

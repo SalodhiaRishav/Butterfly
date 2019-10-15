@@ -51,8 +51,8 @@ const form = {
   caseManagement: "Case Management",
   createNewCase: "Create New Case",
   createNewDeclaration: "Create New Declaration",
-  searchCases:"Search Cases",
-  searchDeclarations:"Search Declarations",
+  searchCases: "Search Cases",
+  searchDeclarations: "Search Declarations",
   dashboard: "Dashboard",
   openCases: "Open Cases"
 };

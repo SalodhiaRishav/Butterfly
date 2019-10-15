@@ -11,9 +11,9 @@
           <h1 class="searchCasesHeading">Search Cases</h1>
         </b-card-header>
       </div>
-        <b-card-body class="componentCard">
-             <appOpenCases></appOpenCases>
-        </b-card-body>
+      <b-card-body class="componentCard">
+        <appOpenCases></appOpenCases>
+      </b-card-body>
     </b-card>
   </div>
 </template>

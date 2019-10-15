@@ -1,55 +1,57 @@
 <template>
-    <div>
-    <div class="label">{{label}}</div>
-    <b-dropdown :id=id :text="label" ref="dropdown" v-if="showDropDown">
+  <div>
+    <div class="label">{{ label }}</div>
+    <b-dropdown :id="id" :text="label" ref="dropdown" v-if="showDropDown">
       <b-dropdown-form>
         <b-form-checkbox-group
-         :value="value"
-         @input="$emit('input', $event)"
-         stacked>
-            <b-form-checkbox v-for="checkBoxOption in checkBoxOptions"  :key="checkBoxOption" :value="checkBoxOption">{{checkBoxOption}}</b-form-checkbox>
+          :value="value"
+          @input="$emit('input', $event)"
+          stacked
+        >
+          <b-form-checkbox
+            v-for="checkBoxOption in checkBoxOptions"
+            :key="checkBoxOption"
+            :value="checkBoxOption"
+            >{{ checkBoxOption }}</b-form-checkbox
+          >
         </b-form-checkbox-group>
       </b-dropdown-form>
     </b-dropdown>
-    </div>
+  </div>
 </template>
 
 <script>
-import httpClient from "./../utils/httpRequestWrapper"
+import httpClient from "./../utils/httpRequestWrapper";
 export default {
-   props:{
-        id:{
-            type:String,
-            required:true
-        },
-        label:{
-            type:String,
-            default:"DropDownTitle"
-        },
-        value:{
-            default:null
-        },
-        dataSource:{
-            type:String,
-        },
+  props: {
+    id: {
+      type: String,
+      required: true
     },
-    data(){
-        return{
-            showDropDown:false,
-            checkBoxOptions:[],
-        }
+    label: {
+      type: String,
+      default: "DropDownTitle"
     },
-    mounted(){
-         this.fetchDataToFillDropDown(this.dataSource);
+    value: {
+      default: null
     },
-   
-     methods: {
-      onClick() {
-        this.$refs.dropdown.hide(true)
-      },
-       fetchDataToFillDropDown(source)
-        {
-        httpClient
+    dataSource: {
+      type: String
+    }
+  },
+  data() {
+    return {
+      showDropDown: false,
+      checkBoxOptions: []
+    };
+  },
+  mounted() {
+    this.fetchDataToFillDropDown(this.dataSource);
+  },
+
+  methods: {
+    fetchDataToFillDropDown(source) {
+      httpClient
         .get(source)
         .then(response => {
           if (response.data === "token refreshed") {
@@ -68,11 +70,9 @@ export default {
         .catch(error => {
           alert(error);
         });
-        }
-    },
-}
+    }
+  }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,16 +1,14 @@
 <template>
   <div>
-    <div style="background-color:#eee;">
+    <div class="grayColorBackground">
       <appNavigationbar></appNavigationbar>
-       <b-card no-body>
+      <b-card no-body>
         <b-tabs pills>
-          <b-tab title="Cases" @click="cases()">
-          </b-tab>
-          <b-tab title="Declarations" @click="declarations()">
-          </b-tab>
+          <b-tab title="Cases" @click="showCases()"> </b-tab>
+          <b-tab title="Declarations" @click="showDeclarations()"> </b-tab>
         </b-tabs>
-         <component :is="selectedComponent"></component>
-       </b-card>
+        <component :is="selectedComponent"></component>
+      </b-card>
     </div>
   </div>
 </template>
@@ -22,18 +20,18 @@ import Navigationbar from "./Navigationbar";
 
 export default {
   components: {
-    appNavigationbar: Navigationbar,
+    appNavigationbar: Navigationbar
   },
   data() {
     return {
-      selectedComponent : CaseDashboard
+      selectedComponent: CaseDashboard
     };
   },
   methods: {
-    cases() {
+    showCases() {
       this.selectedComponent = CaseDashboard;
     },
-    declarations() {
+    showDeclarations() {
       this.selectedComponent = DeclarationDashboard;
     }
   }

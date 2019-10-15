@@ -12,7 +12,7 @@
         </b-card-header>
       </div>
       <b-card-body class="componentCard">
-             <appDeclarationDashBoard></appDeclarationDashBoard>
+        <appDeclarationDashBoard></appDeclarationDashBoard>
       </b-card-body>
     </b-card>
   </div>
