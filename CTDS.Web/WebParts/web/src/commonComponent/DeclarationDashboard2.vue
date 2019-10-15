@@ -1,6 +1,4 @@
 <template>
-
-
   <div>
     <div class="background-gray">
       <div class="row tilesRow" v-if="declarationStatusDataFetched">
@@ -19,27 +17,16 @@
       </div>
       <div class="row tilesRow">
         <div class="col-md-12 tileBox shadowBox">
-           <!-- <div class="col-md-4 toggler shadowBox">
-            <toggle-switch :options="myOptions">
-            </toggle-switch>
-           </div> -->
-           <div>
-              <button @click="shouldShowChart=true">ShowChart</button>
-              <button @click="shouldShowChart=false">ShowTable</button>
-           </div>
+           
            <table style="float:right; backgroundColor:white;">
             <tr >
-              <th><appDateRangePicker class="dateRangePicker" v-model="range" @input="getCasesByStatus(false)"></appDateRangePicker>
+              <th><appDateRangePicker class="dateRangePicker" v-model="range" @input="getDeclarationsByStatus(false)"></appDateRangePicker>
             </th >
               <th><font-awesome-icon icon="calendar"/></th>
               </tr>
           </table>
-           
-           
-           
-            <!-- <div class="col-md-12 table" v-if="chartswitch">
-              <appTile boxColor="darkblue" tooltipTitle="Total Cases" chartTitle="Cases Last Week" :counter=totalCases title="Total Cases"  :chartData="caseTileChartData"></appTile>
-            </div> -->
+              <button @click="shouldShowChart=true">ShowChart</button>
+              <button @click="shouldShowChart=false">ShowTable</button>
             <div v-if="!shouldShowChart">
               <div>
                 <b-table class="font-size-80"
@@ -72,48 +59,19 @@
        </div>
       </div>
     </div>
-     <!-- <div class="col-md-6 chartBox">
-          <appToggler></appToggler>
-          <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
-              <appBarChart :width="100" :height="400" :data="caseGroupedBarChartData" :options="caseGroupedBarChartOptions"></appBarChart>
-          </div>
-        </div>
-        <div class="col-md-6 chartBox">
-            <appToggler></appToggler> 
-          <div class="shadowBox box-white" v-if="declarationPieChartDataFetched">
-             <pie-chart :width="100" :height="400" :data="declarationPieChartData" :options="declarationPieChartOptions"></pie-chart>
-          </div> -->
 </template>
 
 <script>
 import httpClient from "./../utils/httpRequestWrapper";
-import GroupedBarGraph from "./GroupedBarGraph";
-import BarGraph from "./BarGraph";
-import PieChart from "./PieChart.js";
-import BarChart from "./BarChart.js";
-import Tile from "./Tile";
-import TileWithoutChart from "./TileWithoutChart";
 import TileWithGaugeChart from "./TileWithGaugeChart";
-import ChartView from "./ChartView";
-import Toggler from "./Toggler";
 import MyDateRangePicker from "./MyDateRangePicker";
 import DeclarationDashboardLineChart from "./DeclarationDashboardLineChart"
-
-
 
 export default {
   components: {
     appDeclarationDashboardLineChart:DeclarationDashboardLineChart,
     appDateRangePicker:MyDateRangePicker,
-    appGroupedBarGraph: GroupedBarGraph,
-    appBarGraph: BarGraph,
-    PieChart,
-    appBarChart:BarChart,
-    appTile:Tile,
-    appTileWithoutChart:TileWithoutChart,
     appTileWithGaugeChart:TileWithGaugeChart,
-    appChartView:ChartView,
-    appToggler:Toggler
   },
   data() {
     return {
@@ -224,36 +182,15 @@ export default {
        {
         this.getDeclarationsByStatus();
        }
-       this.shouldShowChart=false;
-       this.shouldShowChart=true;
-    },
-    randomColor() {
-      var letters = '0123456789ABCDEF';
-      var color = '#';
-      for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      const styleObject={background:color};
-      return styleObject;
+       else
+       {
+          this.shouldShowChart=false;
+           this.shouldShowChart=true;
+       }
+      
     },
     getDeclaration: function(row) {
       this.$router.push(`/editdeclaration/${row.DeclarationId}`);
-    },
-    getProcessingDeclarations() {
-        this.fixedDeclarationStatus="Processing";
-        this.getDeclarationsByStatus();
-    },
-    getClearedDeclarations() {
-        this.fixedDeclarationStatus="Cleared";
-        this.getDeclarationsByStatus();
-    },
-    getRejectedDeclarations() {
-        this.fixedDeclarationStatus="Rejected";
-        this.getDeclarationsByStatus();
-    },
-    getDeclarationsWithAnyStatus(){
-       this.fixedDeclarationStatus=null;
-       this.getDeclarationsByStatus();
     },
     getDeclarationsByStatus(start = true){
       const status=this.fixedDeclarationStatus;

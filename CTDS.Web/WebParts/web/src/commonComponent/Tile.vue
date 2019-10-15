@@ -29,16 +29,33 @@
 import LineChart from "./LineChart.js";
 
 export default {
-  // computed: {
-  //   boxColorClass: function() {
-  //     return "box-" + this.boxColor;
-  //   }
-  // },
-  methods : {
-   tileClicked(){
-     this.$emit('tileClicked',"true");
-     return;
-   }
+   components: {
+    LineChart
+  },
+  props: {
+    boxColor: {
+      type: String,
+      default: "blue"
+    },
+    chartData: {
+      type: Object
+    },
+    tooltipTitle: {
+      type: String,
+      default: "Tooltip title"
+    },
+    counter: {
+      type: Number,
+      default: 0
+    },
+    title: {
+      type: String,
+      default: "Title"
+    },
+    chartTitle: {
+      type: String,
+      default: "Chart Title"
+    }
   },
   data: () => {
     return {
@@ -84,34 +101,12 @@ export default {
       }
     };
   },
-  components: {
-    LineChart
+   methods : {
+   tileClicked(){
+     this.$emit('tileClicked',"true");
+     return;
+   }
   },
-  props: {
-    boxColor: {
-      type: String,
-      default: "blue"
-    },
-    chartData: {
-      type: Object
-    },
-    tooltipTitle: {
-      type: String,
-      default: "Tooltip title"
-    },
-    counter: {
-      type: Number,
-      default: 0
-    },
-    title: {
-      type: String,
-      default: "Title"
-    },
-    chartTitle: {
-      type: String,
-      default: "Chart Title"
-    }
-  }
 };
 </script>
 

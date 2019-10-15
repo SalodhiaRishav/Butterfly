@@ -21,7 +21,29 @@
 <script>
 import httpClient from "./../utils/httpRequestWrapper"
 export default {
-    
+    props:{
+        id:{
+            type:String,
+            required:true
+        },
+        label:{
+            type:String,
+            required:true
+        },
+        dataSource:{
+            type:String,
+            required:true
+        },
+        value:{
+          default:null
+        }
+    },
+    data(){
+        return{
+            showDropDown:true,
+            dropDownOptions:[],
+        }
+    },
     mounted(){
          this.fetchDataToFillDropDown(this.dataSource);
     },
@@ -49,28 +71,7 @@ export default {
         });
         }
     },
-    data(){
-        return{
-            showDropDown:true,
-            dropDownOptions:[],
-        }
-    },
-    props:{
-        id:{
-            type:String,
-            required:true
-        },
-        label:{
-            type:String,
-            required:true
-        },
-        dataSource:{
-            type:String,
-            required:true
-        },
-        value:{
-          default:null
-        }
-    },
+    
+    
 }
 </script>

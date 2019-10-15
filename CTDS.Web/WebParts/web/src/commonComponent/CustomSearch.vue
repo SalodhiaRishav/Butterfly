@@ -160,8 +160,6 @@ export default {
             this.$emit("applyFilter",filters);
         }
     },
-  
-   
 }
 </script>
 
