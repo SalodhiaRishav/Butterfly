@@ -17,10 +17,7 @@
 <script>
 import httpClient from "./../utils/httpRequestWrapper"
 export default {
-    mounted(){
-         this.fetchDataToFillDropDown(this.dataSource);
-    },
-    props:{
+   props:{
         id:{
             type:String,
             required:true
@@ -36,12 +33,16 @@ export default {
             type:String,
         },
     },
-     data(){
+    data(){
         return{
             showDropDown:false,
             checkBoxOptions:[],
         }
     },
+    mounted(){
+         this.fetchDataToFillDropDown(this.dataSource);
+    },
+   
      methods: {
       onClick() {
         this.$refs.dropdown.hide(true)

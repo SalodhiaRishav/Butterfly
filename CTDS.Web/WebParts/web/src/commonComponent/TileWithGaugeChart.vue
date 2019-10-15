@@ -13,12 +13,12 @@
       </div>
       <div class="col-7 chartDiv">
         <div>
-          <line-chart
+          <pie-chart
             :width="100"
             :height="100"
             :data="chartData"
             :options="chartOptions"
-          ></line-chart>
+          ></pie-chart>
         </div>
         <div class="chartTitle">{{ chartTitle }}</div>
       </div>
@@ -27,40 +27,13 @@
 </template>
 
 <script>
-import LineChart from "./PieChart.js";
+import PieChart from "./PieChart.js";
 
 export default {
-  computed: {
-    boxColorClass: function() {
-      return "box-" + this.boxColor;
-    }
-  },
-   methods : {
-    tileClicked() {
-      this.$emit('tileClicked',"true");
-    }
-  },
-  data: () => {
-    return {
-      chartOptions: {
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        },
-        circumference: 1 * Math.PI,
-        rotation: 1 * Math.PI,
-        cutoutPercentage: 55
-      }
-    };
-  },
   components: {
-    LineChart
+    PieChart
   },
   props: {
-    // boxColor: {
-    //   type: String,
-    //   default: "blue"
-    // },
     chartData: {
       type: Object
     },
@@ -80,7 +53,30 @@ export default {
       type: String,
       default: "Chart Title"
     }
-  }
+  },
+  data: () => {
+    return {
+      chartOptions: {
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        circumference: 1 * Math.PI,
+        rotation: 1 * Math.PI,
+        cutoutPercentage: 55
+      }
+    };
+  },
+  computed: {
+    boxColorClass: function() {
+      return "box-" + this.boxColor;
+    }
+  },
+   methods : {
+    tileClicked() {
+      this.$emit('tileClicked',"true");
+    }
+  },
 };
 </script>
 

@@ -10,7 +10,6 @@
           ></line-chart>
         </div>
         </div>
-
 </template>
 
 <script>
@@ -35,9 +34,7 @@ export default {
                 required:true
             }
         },
-        mounted(){
-            this.getCaseChartData();
-        },
+        
    data() {
     return {
      dataFetched:false,
@@ -84,6 +81,9 @@ export default {
      }
     };
   },
+  mounted(){
+            this.getCaseChartData();
+        },
   watch: {
     status: function (newvalue,oldvalue) {
         this.dataFetched=false;

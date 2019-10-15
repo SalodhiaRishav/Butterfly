@@ -18,14 +18,10 @@
 <script>
 import CaseDashboard from "./CaseDashboard2";
 import DeclarationDashboard from "./DeclarationDashboard2";
-import SideBar from "./SideBar";
 import Navigationbar from "./Navigationbar";
-
-
 
 export default {
   components: {
-    appSideBar: SideBar,
     appNavigationbar: Navigationbar,
   },
   data() {

@@ -60,7 +60,6 @@ export default {
             }
         },
         scales: {
-            
             xAxes: [{
             gridLines: {
                 display: false
