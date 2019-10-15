@@ -88,6 +88,22 @@ export default {
       errorList: []
     };
   },
+   computed: {
+    labels: function() {
+      return this.$store.getters.caseManagementLabels;
+    },
+    status: function() {
+      return this.$store.getters.caseStatus.status;
+    },
+    priority: function() {
+      return this.$store.getters.caseInformation.priority;
+    },
+    keymap: function() {
+      return {
+        "ctrl+V": this.addNewCase
+      };
+    }
+  },
   created() {
     this.resetCaseData();
   },
@@ -168,22 +184,7 @@ export default {
         });
     }
   },
-  computed: {
-    labels: function() {
-      return this.$store.getters.caseManagementLabels;
-    },
-    status: function() {
-      return this.$store.getters.caseStatus.status;
-    },
-    priority: function() {
-      return this.$store.getters.caseInformation.priority;
-    },
-    keymap: function() {
-      return {
-        "ctrl+V": this.addNewCase
-      };
-    }
-  }
+ 
 };
 </script>
 
