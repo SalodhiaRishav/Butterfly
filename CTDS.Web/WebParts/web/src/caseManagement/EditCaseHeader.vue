@@ -30,9 +30,9 @@
         <div class="iconButton floatRight" v-hotkey="keymap">
           <font-awesome-icon icon="save" @click="editCase" />
         </div>
-        <br/>
+        <br />
         <div class="iconButton floatRight">
-            <font-awesome-icon icon="window-close" @click="cancelCaseEdit" />
+          <font-awesome-icon icon="window-close" @click="cancelCaseEdit" />
         </div>
         <br />
         <br />
@@ -80,7 +80,7 @@ export default {
     };
   },
   methods: {
-    cancelCaseEdit(){
+    cancelCaseEdit() {
       // this.$router.push("/searchcases");
       this.$router.go(-1);
     },

@@ -51,19 +51,6 @@ export default {
     this.getDeclarationType2();
     this.getMessageNames();
   },
-  // watch:{
-  //   language: {
-  //     handler(val){
-  //       if(val.lang === "se"){
-  //           this.lan = allLanguages.lang.se.swedishForm;
-  //       }
-  //       else{
-  //         this.lan = allLanguages.lang.en.englishForm;
-  //       }
-  //       console.log(val.lang);
-  //     },
-  //     deep:true,
-  //   },
   methods: {
     getMessageNames() {
       const url = "/getdropdownitems/MessageName";

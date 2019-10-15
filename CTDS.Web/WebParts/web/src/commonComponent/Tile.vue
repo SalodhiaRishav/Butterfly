@@ -1,10 +1,5 @@
 <template>
-  <div
-    v-b-tooltip.hover
-    :title="tooltipTitle"
-    class="box"
-    @click="tileClicked"
-  >
+  <div v-b-tooltip.hover :title="tooltipTitle" class="box" @click="tileClicked">
     <div class="row">
       <div class="col-5">
         <div class="tileCounter">{{ counter }}</div>
@@ -29,7 +24,7 @@
 import LineChart from "./LineChart.js";
 
 export default {
-   components: {
+  components: {
     LineChart
   },
   props: {
@@ -59,7 +54,6 @@ export default {
   },
   data: () => {
     return {
-
       chartOptions: {
         maintainAspectRatio: false,
         legend: {
@@ -101,12 +95,12 @@ export default {
       }
     };
   },
-   methods : {
-   tileClicked(){
-     this.$emit('tileClicked',"true");
-     return;
-   }
-  },
+  methods: {
+    tileClicked() {
+      this.$emit("tileClicked", "true");
+      return;
+    }
+  }
 };
 </script>
 

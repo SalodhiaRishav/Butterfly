@@ -42,9 +42,9 @@
           <div class="floatRight iconButton">
             <font-awesome-icon icon="paper-plane" @click="sendToCustom" />
           </div>
-          <br/>
+          <br />
           <div class="floatRight iconButton">
-              <font-awesome-icon icon="window-close" @click="cancelEdit" />
+            <font-awesome-icon icon="window-close" @click="cancelEdit" />
           </div>
           <br />
           <br />
@@ -99,7 +99,7 @@ export default {
     }
   },
   methods: {
-    cancelEdit(){
+    cancelEdit() {
       // this.$router.push("/searchdeclarations");
       this.$router.go(-1);
     },

@@ -127,7 +127,7 @@ const router = new Router({
       path: "/unauthorize",
       name: "unauthorize",
       component: Unauthorize
-    },
+    }
   ],
   mode: "history"
 });
