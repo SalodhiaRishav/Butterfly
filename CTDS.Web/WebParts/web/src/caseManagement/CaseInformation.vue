@@ -62,15 +62,15 @@ import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: ["labels"],
-  mounted() {
-    this.getPriorityTypes();
-  },
   data() {
     return {
       priorities: [],
       priorityFetched: false,
       caseInformation: this.$store.getters.caseInformation
     };
+  },
+  mounted() {
+    this.getPriorityTypes();
   },
   methods: {
     getPriorityTypes: function() {

@@ -18,15 +18,15 @@ import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: ["defaultValue"],
-  mounted() {
-    this.getCasePriorityTypes();
-  },
-  data() {
+   data() {
     return {
       priorityTypes: [],
       priorityTypesFetched: false,
       priorityForm: { priority: this.defaultValue }
     };
+  },
+  mounted() {
+    this.getCasePriorityTypes();
   },
   methods: {
     getCasePriorityTypes: function() {

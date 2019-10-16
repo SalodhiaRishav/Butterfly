@@ -40,9 +40,6 @@ import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: ["labels"],
-  mounted() {
-    this.getCaseStatusTypes();
-  },
   data() {
     return {
       statusTypes: [],
@@ -50,6 +47,10 @@ export default {
       caseStatus: this.$store.getters.caseStatus
     };
   },
+  mounted() {
+    this.getCaseStatusTypes();
+  },
+  
   methods: {
     getCaseStatusTypes: function() {
       const resource = "/statustypes";

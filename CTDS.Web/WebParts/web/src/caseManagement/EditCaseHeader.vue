@@ -79,6 +79,28 @@ export default {
       errorList: []
     };
   },
+   computed: {
+    caseId: function() {
+      return this.$store.getters.case.caseId;
+    },
+    status: function() {
+      return this.$store.getters.caseStatus.status;
+    },
+    priority: function() {
+      return this.$store.getters.caseInformation.priority;
+    },
+    createdDate: function() {
+      return this.convertDate(this.$store.getters.case.createdOn);
+    },
+    labels: function() {
+      return this.$store.getters.caseManagementLabels;
+    },
+    keymap: function() {
+      return {
+        "ctrl+V": this.editCase
+      };
+    }
+  },
   methods: {
     cancelCaseEdit() {
       // this.$router.push("/searchcases");
@@ -130,28 +152,6 @@ export default {
           this.alertVariant = "danger";
           this.showDismissibleAlert = true;
         });
-    }
-  },
-  computed: {
-    caseId: function() {
-      return this.$store.getters.case.caseId;
-    },
-    status: function() {
-      return this.$store.getters.caseStatus.status;
-    },
-    priority: function() {
-      return this.$store.getters.caseInformation.priority;
-    },
-    createdDate: function() {
-      return this.convertDate(this.$store.getters.case.createdOn);
-    },
-    labels: function() {
-      return this.$store.getters.caseManagementLabels;
-    },
-    keymap: function() {
-      return {
-        "ctrl+V": this.editCase
-      };
     }
   }
 };
