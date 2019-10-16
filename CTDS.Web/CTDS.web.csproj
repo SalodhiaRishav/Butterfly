@@ -288,6 +288,10 @@
       <Project>{0d87b9bc-3d6e-427c-8df6-83aa9310889e}</Project>
       <Name>CTDS.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CTDS.Database\CTDS.Database.csproj">
+      <Project>{d5a7ceeb-4022-4892-8595-b6a363bddfa7}</Project>
+      <Name>CTDS.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CTDS.Security.Application\CTDS.Security.Application.csproj">
       <Project>{93b88ebd-a978-4030-a2a4-55952eb21935}</Project>
       <Name>CTDS.Security.Application</Name>

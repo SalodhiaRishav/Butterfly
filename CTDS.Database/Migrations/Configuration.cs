@@ -8,7 +8,7 @@ namespace CTDS.Database.Migrations
     using CTDS.Database.Models.Authentication;
     using System;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CTDS.Database.Context.CTDSContext>
+    public sealed class Configuration : DbMigrationsConfiguration<CTDS.Database.Context.CTDSContext>
     {
         public Configuration()
         {
