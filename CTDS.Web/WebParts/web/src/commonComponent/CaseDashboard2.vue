@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="background-gray">
-      <div class="row tilesRow" v-if="caseStatusDataFetched">
-        <div class="col-sm-4 col-md-3 tileBox">
-          <appTileWithGaugeChart
+      <div class="row tilesRow" v-if="caseStatusDataFetched" >
+        <div class="col-sm-4 col-md-3 tileBox" >
+          <appTileWithGaugeChart    v-bind:class="{ tileShadow : nullActive }"
             @tileClicked="onTileClick(null)"
             class="colorGreen"
             :counter="totalCases"
@@ -13,7 +13,7 @@
           ></appTileWithGaugeChart>
         </div>
         <div class="col-sm-4 col-md-3 tileBox">
-          <appTileWithGaugeChart
+          <appTileWithGaugeChart  v-bind:class="{ tileShadow : newActive }"
             @tileClicked="onTileClick('New')"
             class="colorBrown"
             :counter="newCases"
@@ -23,7 +23,7 @@
           ></appTileWithGaugeChart>
         </div>
         <div class="col-sm-4 col-md-3 tileBox">
-          <appTileWithGaugeChart
+          <appTileWithGaugeChart  v-bind:class="{ tileShadow : inProcessActive }"
             @tileClicked="onTileClick('InProcess')"
             class="colorCyan"
             :counter="inProcessCases"
@@ -33,7 +33,7 @@
           ></appTileWithGaugeChart>
         </div>
         <div class="col-sm-4 col-md-3 tileBox">
-          <appTileWithGaugeChart
+          <appTileWithGaugeChart   v-bind:class="{ tileShadow : closedActive }"
             @tileClicked="onTileClick('Closed')"
             class="colorCrimson"
             :counter="closedCases"
@@ -114,6 +114,10 @@ export default {
   },
   data() {
     return {
+      nullActive:true,
+      newActive: false,
+      inProcessActive:false,
+      closedActive: false,
       filterCases: [],
       currentPage: 1,
       perPage: 5,
@@ -158,6 +162,37 @@ export default {
         });
     },
     onTileClick(status) {
+      
+      if(status == 'New'){
+        
+        this.nullActive=false;
+        this.newActive=true;
+        this.inProcessActive=false;
+        this.closedActive=false;
+        
+      }
+      else if(status == 'InProcess'){
+        
+        this.nullActive=false;
+        this.newActive=false;
+        this.inProcessActive=true;
+        this.closedActive=false;
+      }
+      else if(status == 'Closed'){
+        
+        this.nullActive=false;
+        this.newActive=false;
+        this.inProcessActive=false;
+        this.closedActive=true;
+    
+      }
+      else{
+        this.nullActive=true;
+        this.newActive=false;
+        this.inProcessActive=false;
+        this.closedActive=false;
+      }
+      
       this.fixedCaseStatus = status;
       if (this.shouldShowChart === false) {
         this.getCasesByStatus();

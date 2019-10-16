@@ -5,7 +5,7 @@
         <div
           class="col-sm-4 col-md-3 tileBox"
         >
-          <appTileWithGaugeChart
+          <appTileWithGaugeChart   v-bind:class="{ tileShadow : nullActive }"
             @tileClicked="onTileClick(null)"
             class="colorGreen"
             tooltipTitle="Total Declarations"
@@ -16,7 +16,7 @@
           ></appTileWithGaugeChart>
         </div>
         <div class="col-sm-4 col-md-3 tileBox">
-          <appTileWithGaugeChart
+          <appTileWithGaugeChart   v-bind:class="{ tileShadow : clearedActive }"
             @tileClicked="onTileClick('Cleared')"
             class="colorBrown"
             tooltipTitle="Declarations Cleared"
@@ -27,7 +27,7 @@
           ></appTileWithGaugeChart>
         </div>
         <div class="col-sm-4 col-md-3 tileBox">
-          <appTileWithGaugeChart
+          <appTileWithGaugeChart   v-bind:class="{ tileShadow : processingActive }"
             @tileClicked="onTileClick('Processing')"
             class="colorCyan"
             tooltipTitle="Declarations InProcess"
@@ -38,7 +38,7 @@
           ></appTileWithGaugeChart>
         </div>
         <div class="col-sm-4 col-md-3 tileBox">
-          <appTileWithGaugeChart
+          <appTileWithGaugeChart   v-bind:class="{ tileShadow : rejectedActive }"
             @tileClicked="onTileClick('Rejected')"
             class="colorCrimson"
             tooltipTitle="Declarations Rejected"
@@ -119,6 +119,10 @@ export default {
   },
   data() {
     return {
+      nullActive:true,
+      clearedActive: false,
+      processingActive:false,
+      rejectedActive: false,
       shouldShowChart: false,
       filterDeclarations: [],
       currentPage: 1,
@@ -167,6 +171,37 @@ export default {
   },
   methods: {
     onTileClick(status) {
+
+      if(status == 'Cleared'){
+        
+        this.nullActive=false;
+        this.clearedActive=true;
+        this.processingActive=false;
+        this.rejectedActive=false;
+        
+      }
+      else if(status == 'Processing'){
+        
+        this.nullActive=false;
+        this.clearedActive=false;
+        this.processingActive=true;
+        this.rejectedActive=false;
+      }
+      else if(status == 'Rejected'){
+        
+        this.nullActive=false;
+        this.clearedActive=false;
+        this.processingActive=false;
+        this.rejectedActive=true;
+    
+      }
+      else{
+        this.nullActive=true;
+        this.clearedActive=false;
+        this.processingActive=false;
+        this.rejectedActive=false;
+      }
+      
       this.fixedDeclarationStatus = status;
       if (this.shouldShowChart === false) {
         this.getDeclarationsByStatus();
