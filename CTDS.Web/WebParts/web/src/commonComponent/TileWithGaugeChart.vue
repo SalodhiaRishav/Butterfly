@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="box"
-    :class="boxColorClass"
-    @click="tileClicked"
-  >
+  <div class="box" @click="tileClicked" >
     <div class="row">
       <div class="col-5">
         <div class="tileCounter">{{ counter }}</div>
@@ -61,7 +57,8 @@ export default {
         },
         circumference: 1 * Math.PI,
         rotation: 1 * Math.PI,
-        cutoutPercentage: 55
+        cutoutPercentage: 55,
+        
       }
     };
   },
