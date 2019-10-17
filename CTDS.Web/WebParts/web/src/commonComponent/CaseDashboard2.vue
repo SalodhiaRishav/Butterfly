@@ -59,6 +59,8 @@
           </table>
           <button @click="shouldShowChart = true">ShowChart</button>
           <button @click="shouldShowChart = false">ShowTable</button>
+             <spinner v-if="showSpinner"></spinner>
+        <div v-if="!showSpinner" >
           <div v-if="!shouldShowChart">
             <div>
               <b-table
@@ -86,12 +88,14 @@
               </b-col>
             </b-row>
           </div>
+       
           <div class="dashboardChartDiv" v-if="shouldShowChart">
             <appCaseDashboardLineChart
               :status="fixedCaseStatus"
               :startDate="range[0]"
               :endDate="range[1]"
             ></appCaseDashboardLineChart>
+          </div>
           </div>
         </div>
       </div>
@@ -105,15 +109,18 @@ import TileWithGaugeChart from "./TileWithGaugeChart";
 import MyDateRangePicker from "./MyDateRangePicker";
 import CaseTableFields from "./../caseManagement/utils/caseTableFields";
 import CaseDashboardLineChart from "./CaseDashboardLineChart";
+import Spinner from "./Spinner";
 
 export default {
   components: {
     appCaseDashboardLineChart: CaseDashboardLineChart,
     appDateRangePicker: MyDateRangePicker,
-    appTileWithGaugeChart: TileWithGaugeChart
+    appTileWithGaugeChart: TileWithGaugeChart,
+    spinner: Spinner
   },
   data() {
     return {
+      showSpinner:false,
       nullActive:true,
       newActive: false,
       inProcessActive:false,
@@ -162,7 +169,8 @@ export default {
         });
     },
     onTileClick(status) {
-      
+      this.showSpinner = true;
+
       if(status == 'New'){
         
         this.nullActive=false;
@@ -235,6 +243,13 @@ export default {
             }
             this.filterCases = filterCase;
             this.totalRows=filterCase.length;
+            
+            
+            // const self=this;
+            setTimeout(()=>{
+                  this.showSpinner=false;
+            },2000)
+            
           }
           else
           {
