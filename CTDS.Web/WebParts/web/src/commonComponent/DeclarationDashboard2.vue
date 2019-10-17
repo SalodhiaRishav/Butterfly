@@ -65,6 +65,9 @@
           </table>
           <button @click="shouldShowChart = true">ShowChart</button>
           <button @click="shouldShowChart = false">ShowTable</button>
+           <spinner v-if="showSpinner"></spinner>
+
+          <div v-if="!showSpinner" > 
           <div v-if="!shouldShowChart">
             <div>
               <b-table
@@ -99,6 +102,7 @@
               :endDate="range[1]"
             ></appDeclarationDashboardLineChart>
           </div>
+          </div>
         </div>
       </div>
     </div>
@@ -110,15 +114,18 @@ import httpClient from "./../utils/httpRequestWrapper";
 import TileWithGaugeChart from "./TileWithGaugeChart";
 import MyDateRangePicker from "./MyDateRangePicker";
 import DeclarationDashboardLineChart from "./DeclarationDashboardLineChart";
+import Spinner from "./Spinner";
 
 export default {
   components: {
     appDeclarationDashboardLineChart: DeclarationDashboardLineChart,
     appDateRangePicker: MyDateRangePicker,
-    appTileWithGaugeChart: TileWithGaugeChart
+    appTileWithGaugeChart: TileWithGaugeChart,
+    spinner: Spinner
   },
   data() {
     return {
+      showSpinner:false,
       nullActive:true,
       clearedActive: false,
       processingActive:false,
@@ -171,7 +178,7 @@ export default {
   },
   methods: {
     onTileClick(status) {
-
+      this.showSpinner = true;
       if(status == 'Cleared'){
         
         this.nullActive=false;
@@ -246,6 +253,11 @@ export default {
             if (this.filterDeclarations.length != 0)
               this.totalRows = this.currentPage * this.perPage + 1;
           }
+
+          setTimeout(()=>{
+                  this.showSpinner=false;
+            },2000)
+            
         })
         .catch(error => {
           console.log(error);
