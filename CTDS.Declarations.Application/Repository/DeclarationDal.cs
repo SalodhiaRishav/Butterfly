@@ -297,7 +297,7 @@
             }
         }
 
-        public FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage)
+        public FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage,string sortBy,bool sortDesc)
         {
             try
             {
@@ -309,8 +309,17 @@
                                 .Where(expression)
                                 .ToList();
                     filterDeclarationsDto.TotalCount = filteredDeclarations.Count;
-                    
-                    var perPageFilteredDeclarations = filteredDeclarations.Skip((pageNumber - 1) * maxRowsPerPage).Take(maxRowsPerPage).ToList();
+                    var sortedList = new List<Declaration>();
+
+                    if (sortDesc)
+                    {
+                        sortedList = filteredDeclarations.OrderByDescending(a => a.GetType().GetProperty(sortBy).GetValue(a, null)).ToList();
+                    }
+                    else
+                    {
+                        sortedList = filteredDeclarations.OrderBy(a => a.GetType().GetProperty(sortBy).GetValue(a, null)).ToList();
+                    }
+                    var perPageFilteredDeclarations = sortedList.Skip((pageNumber - 1) * maxRowsPerPage).Take(maxRowsPerPage).ToList();
                     var perPageFilteredDeclarationDtos = Mapper.DeclarationListToDtoList(perPageFilteredDeclarations).ToList();
                     filterDeclarationsDto.Declarations = perPageFilteredDeclarationDtos;
                     return filterDeclarationsDto;

@@ -199,11 +199,11 @@
             }
         }
 
-        public FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage)
+        public FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage,string sortBy,bool sortDesc)
         {
             try
             {
-                return DeclarationDal.GetAllDeclarationsWithQuery(queries,pageNumber,maxRowsPerPage);
+                return DeclarationDal.GetAllDeclarationsWithQuery(queries,pageNumber,maxRowsPerPage,sortBy,sortDesc);
             }
             catch
             {

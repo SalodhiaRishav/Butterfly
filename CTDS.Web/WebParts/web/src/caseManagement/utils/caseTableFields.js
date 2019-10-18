@@ -1,15 +1,15 @@
 export default  [
     {
       key: "CaseId",
-      sortable: false
+      sortable: true
     },
     {
-      key: "CreatedDate",
-      sortable: false
+      key: "CreatedOn",
+      sortable: true
     },
     {
       key: "Status",
-      sortable: false
+      sortable: true
     },
     {
       key: "Description",
@@ -21,7 +21,7 @@ export default  [
     },
     {
       key: "Priority",
-      sortable: false
+      sortable: true
     },
     {
       key: "References",

@@ -19,7 +19,7 @@
         int GetCountForLastSevenDays();
         List<int> FindPerDayDeclarationCount();
         bool SendToCustom(DeclarationDto declaration);
-        FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage);
+        FilterDeclarationsDto GetAllDeclarationsWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage,string sortBy,bool sortDesc);
         List<DeclarationChartDataDto> GetDeclarationChartData(string status, DateTime startDate, DateTime endDate);
 
     }

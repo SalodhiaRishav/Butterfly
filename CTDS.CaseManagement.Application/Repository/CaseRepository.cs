@@ -120,7 +120,7 @@
             }
         }
 
-        public OpenCasesDto GetAllCasesWithQuery(List<QueryDto> queries,int pageNumber,int maxRowsPerPage)
+        public OpenCasesDto GetAllCasesWithQuery(List<QueryDto> queries,int pageNumber,int maxRowsPerPage,string sortBy,bool sortDesc)
         {
             try
             {
@@ -145,7 +145,18 @@
                                                  })
                                 .Where(expression)
                                 .ToList();
-                    var perPageFilteredCaseTableDtos = filteredCaseTableDtos.Skip((pageNumber - 1) * maxRowsPerPage).Take(maxRowsPerPage).ToList();
+                    var sortedList = new List<CaseTableDto>();
+                    
+                    if(sortDesc)
+                    {
+                        sortedList = filteredCaseTableDtos.OrderByDescending(a => a.GetType().GetProperty(sortBy).GetValue(a, null)).ToList();
+                    }
+                    else
+                    {
+                        sortedList = filteredCaseTableDtos.OrderBy(a => a.GetType().GetProperty(sortBy).GetValue(a, null)).ToList();
+                    }
+
+                    var perPageFilteredCaseTableDtos = sortedList.Skip((pageNumber - 1) * maxRowsPerPage).Take(maxRowsPerPage).ToList();
                     OpenCasesDto openCasesDto = new OpenCasesDto()
                     {
                         TotalCount = filteredCaseTableDtos.Count,

@@ -11,8 +11,11 @@
         hover
         :fields="fields"
         :items="myProvider"
+         :no-sort-reset="true"
+        :no-local-sorting="true"
         :current-page="currentPage"
         :per-page="maxRowsPerPage"
+        @sort-changed="onSortChange"
         @row-clicked="getDeclaration"
         class="font-size-80"
       ></b-table>
@@ -44,23 +47,31 @@ export default {
 
   data() {
     return {
+      sortBy:"DecId",
+      sortDesc:false,
       declarations: [],
       filters: null,
       currentPage: 1,
       totalRows: 0,
       maxRowsPerPage: 5,
-      sortOrder: "DeclarationId",
       fields: declarationTableField,
       declarationAdvanceSearchObject
     };
   },
   methods: {
+    onSortChange(tableContext){
+      this.currentPage=1;
+    this.sortBy=tableContext.sortBy;
+    this.sortDesc=tableContext.sortDesc;
+    },
     myProvider(ctx, callback) {
       httpClient
         .post("/declarationswithquery", {
           Queries: this.filters,
           MaxRowsPerPage: this.maxRowsPerPage,
-          PageNumber: this.currentPage
+          PageNumber: this.currentPage,
+           SortBy:this.sortBy,
+          SortDesc:this.sortDesc
         })
         .then(response => {
           if (response.data === "token refreshed") {
@@ -68,7 +79,6 @@ export default {
             return;
           }
           if (response.data.success === true) {
-            console.log(response);
             let declaration = [];
             const filteredDeclarations = response.data.data.declarations;
             for (let i = 0; i < filteredDeclarations.length; ++i) {
@@ -85,11 +95,8 @@ export default {
                 CustomResponse: " ",
                 User: " ",
                 TaxationDate: " ",
-                DeclarationId: "KGH-19-" + filteredDeclarations[i].decId
-                // DeclarationId:
-                //   "CD-" +
-                //   filteredDeclarations[i].declarationId.toString().substring(0, 5)
-              };
+                DecId: "KGH-19-" + filteredDeclarations[i].decId
+                };
               declaration.push(obj);
             }
             this.declarations = declaration;
@@ -104,7 +111,6 @@ export default {
           alert(error);
           callback([]);
         });
-      // Must return null or undefined to signal b-table that callback is being used
       return null;
     },
     onApplyFilter(filters) {
@@ -118,70 +124,13 @@ export default {
         this.currentPage = 1;
       }
     },
-    sortData(key, val2, val3) {
-      this.sortOrder = key;
-      this.getAllDeclaration(1, this.sortOrder);
-    },
-    getNewData(val) {
-      this.currentPage = parseInt(val);
-      // console.log("get new data " + this.sortOrder);
-      // this.getAllDeclaration(val, this.sortOrder);
-    },
+  
     convertDate(date) {
       return new Date(date.match(/\d+/)[0] * 1).toString().substring(4, 16);
     },
     getDeclaration: function(row) {
       this.$router.push(`/editdeclaration/${row.BaseID}`);
     },
-    getAllDeclaration: function(val, orderBy) {
-      console.log(this.sortOrder + " " + this.currentPage);
-      const url = "/getalldeclaration";
-      const index = parseInt(val);
-      httpClient
-        .get(url, index, orderBy)
-        .then(response => {
-          if (response.data === "token refreshed") {
-            this.getAllDeclaration(index, orderBy);
-            return;
-          }
-          if (response.data.success === true) {
-            let declaration = [];
-            const filteredDeclarations = response.data.data.declarations;
-            for (let i = 0; i < filteredDeclarations.length; ++i) {
-              let obj = {
-                BaseID: filteredDeclarations[i].declarationId,
-                CreatedOn: this.convertDate(filteredDeclarations[i].createdOn),
-                status: filteredDeclarations[i].status,
-                LRN: " ",
-                MRN: " ",
-                Country: filteredDeclarations[i].country,
-                Procedure: filteredDeclarations[i].procedure,
-                Type: filteredDeclarations[i].messageName,
-                Status: filteredDeclarations[i].status,
-                CustomResponse: " ",
-                User: " ",
-                TaxationDate: " ",
-                DeclarationId:
-                  "CD-" +
-                  filteredDeclarations[i].declarationId
-                    .toString()
-                    .substring(0, 5)
-              };
-              declaration.push(obj);
-            }
-            this.declarations = declaration;
-            this.totalRows = response.data.data.totalCount;
-            callback(this.declarations);
-          } else {
-            alert(response.data.message);
-            callback([]);
-          }
-        })
-        .catch(error => {
-          alert(error);
-          callback([]);
-        });
-    }
   }
 };
 </script>
