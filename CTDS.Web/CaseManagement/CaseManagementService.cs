@@ -304,7 +304,7 @@
             OperationResponse<OpenCasesDto> response = new OperationResponse<OpenCasesDto>();
             try
             {
-                OpenCasesDto openCaseDto =CaseBusinessLogic.GetAllCasesWithQuery(req.Queries,req.PageNumber,req.maxRowsPerPage);
+                OpenCasesDto openCaseDto =CaseBusinessLogic.GetAllCasesWithQuery(req.Queries,req.PageNumber,req.maxRowsPerPage,req.SortBy,req.SortDesc);
                 response.OnSuccess(openCaseDto, "Success");
                 return response;
             }

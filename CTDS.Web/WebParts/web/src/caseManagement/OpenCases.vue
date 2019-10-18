@@ -11,9 +11,12 @@
         hover
         fixed
         :fields="fields"
+         :no-sort-reset="true"
         :items="myProvider"
+        :no-local-sorting="true"
         :current-page="pageNumber"
         :per-page="maxRowsPerPage"
+        @sort-changed="onSortChange"
         @row-clicked="editCase"
         class="font-size-80"
       >
@@ -49,6 +52,8 @@ export default {
   },
   data() {
     return {
+      sortBy:"CaseId",
+      sortDesc:false,
       casesAdvanceSearchObjects,
       filters: null,
       openCases: [],
@@ -59,16 +64,24 @@ export default {
     };
   },
   methods: {
+    onSortChange(tableContext){
+      this.pageNumber=1;
+    this.sortBy=tableContext.sortBy;
+    this.sortDesc=tableContext.sortDesc;
+    },
     showModal() {
       this.$refs["my-modal"].show();
     },
     myProvider(ctx, callback) {
-      httpClient
-        .post("/casewithquery", {
-          Queries: this.filters,
+      const postObject={
+        Queries: this.filters,
           MaxRowsPerPage: this.maxRowsPerPage,
-          PageNumber: this.pageNumber
-        })
+          PageNumber: this.pageNumber,
+          SortBy:this.sortBy,
+          SortDesc:this.sortDesc
+      };
+      httpClient
+        .post("/casewithquery",postObject)
         .then(response => {
           if (response.data === "token refreshed") {
             this.onApplyFilter(filters);
@@ -82,7 +95,7 @@ export default {
               let obj = {
                 CaseId: "KGH-19-" + filteredCases[index].caseId,
                 Id: filteredCases[index].id,
-                CreatedDate: this.convertDate(filteredCases[index].createdOn),
+                CreatedOn: this.convertDate(filteredCases[index].createdOn),
                 Status: filteredCases[index].status,
                 Description: filteredCases[index].description,
                 Client: filteredCases[index].client,
@@ -116,9 +129,8 @@ export default {
         this.pageNumber = 1;
       }
     },
-    sortData(key, val2, val3) {
-      this.sortOrder = key;
-      this.getAllCases(1, this.sortOrder);
+    sortData(key) {
+      console.log(key);
     },
     getNewData(val) {
       this.pageNumber = parseInt(val);

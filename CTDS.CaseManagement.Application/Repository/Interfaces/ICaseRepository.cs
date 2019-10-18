@@ -16,7 +16,7 @@
         Dictionary<string,int> FindFilteredCaseCount();
         List<int> FindCasesPerDayLastWeek();
 
-        OpenCasesDto GetAllCasesWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage);
+        OpenCasesDto GetAllCasesWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage, string sortBy, bool sortDesc);
 
 
     }

@@ -26,7 +26,7 @@
             OperationResponse<FilterDeclarationsDto> response = new OperationResponse<FilterDeclarationsDto>();
             try
             {
-                var data = DeclarationBll.GetAllDeclarationsWithQuery(request.Queries,request.PageNumber,request.MaxRowsPerPage);
+                var data = DeclarationBll.GetAllDeclarationsWithQuery(request.Queries,request.PageNumber,request.MaxRowsPerPage,request.SortBy,request.SortDesc);
                 response.OnSuccess(data, "Declarations Fecthed Successfully");
                 return response;
             }

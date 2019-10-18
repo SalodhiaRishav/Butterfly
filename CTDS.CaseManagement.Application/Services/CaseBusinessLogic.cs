@@ -252,11 +252,11 @@
             }
         }
 
-        public OpenCasesDto GetAllCasesWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage)
+        public OpenCasesDto GetAllCasesWithQuery(List<QueryDto> queries, int pageNumber, int maxRowsPerPage, string sortBy, bool sortDesc)
         {
             try
             {
-               return CaseRepository.GetAllCasesWithQuery(queries,pageNumber,maxRowsPerPage);
+               return CaseRepository.GetAllCasesWithQuery(queries,pageNumber,maxRowsPerPage,sortBy,sortDesc);
             }
             catch(Exception e)
             {

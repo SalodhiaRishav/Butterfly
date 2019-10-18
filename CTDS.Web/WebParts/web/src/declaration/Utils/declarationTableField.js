@@ -1,7 +1,8 @@
 export default [
     {
-      key: "DeclarationId",
-      sortable: false
+      key: "DecId",
+      label:"DeclarationId",
+      sortable: true
     },
     {
       key: "LRN",
@@ -25,7 +26,7 @@ export default [
     },
     {
       key: "Status",
-      sortable: false
+      sortable: true
     },
     {
       key: "CustomResponse",
@@ -37,7 +38,7 @@ export default [
     },
     {
       key: "CreatedOn",
-      sortable: false
+      sortable: true
     },
     {
       key: "TaxationDate",
