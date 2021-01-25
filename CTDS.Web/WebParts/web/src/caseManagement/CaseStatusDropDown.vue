@@ -18,15 +18,15 @@ import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: ["defaultValue"],
-  mounted() {
-    this.getCaseStatusTypes();
-  },
   data() {
     return {
       statusTypes: [],
       statusTypesFetched: false,
       caseStatus: { status: this.defaultValue }
     };
+  },
+  mounted() {
+    this.getCaseStatusTypes();
   },
   methods: {
     getCaseStatusTypes: function() {

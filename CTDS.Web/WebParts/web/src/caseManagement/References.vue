@@ -57,23 +57,6 @@ import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: ["labels"],
-  computed: {
-    headIdentityLabel: function() {
-      return `HEAD_identity`;
-    },
-    headCommentLabel: function() {
-      return `HEAD_comment`;
-    },
-    headTypeLabel: function() {
-      return `HEAD_type`;
-    },
-    fields: function() {
-      return ["type", "identity", "comment", "#"];
-    }
-  },
-  mounted() {
-    this.getCaseReferenceTypes();
-  },
   data() {
     return {
       referenceTypes: [],
@@ -86,6 +69,23 @@ export default {
         comment: ""
       }
     };
+  },
+    mounted() {
+    this.getCaseReferenceTypes();
+  },
+    computed: {
+    headIdentityLabel: function() {
+      return `HEAD_identity`;
+    },
+    headCommentLabel: function() {
+      return `HEAD_comment`;
+    },
+    headTypeLabel: function() {
+      return `HEAD_type`;
+    },
+    fields: function() {
+      return ["type", "identity", "comment", "#"];
+    }
   },
   methods: {
     getCaseReferenceTypes: function() {

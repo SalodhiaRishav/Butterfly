@@ -17,17 +17,17 @@ import CaseStatus from "./CaseStatus.vue";
 import CaseInformation from "./CaseInformation.vue";
 import Notes from "./Notes.vue";
 export default {
-  computed: {
-    labels: function() {
-      return this.$store.getters.caseManagementLabels;
-    }
-  },
   components: {
     appClient: Client,
     appCaseInformation: CaseInformation,
     appNotes: Notes,
     appCaseStatus: CaseStatus,
     appReferences: References
+  },
+    computed: {
+    labels: function() {
+      return this.$store.getters.caseManagementLabels;
+    }
   }
 };
 </script>

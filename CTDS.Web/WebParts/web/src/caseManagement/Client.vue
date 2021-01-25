@@ -121,17 +121,17 @@ import httpClient from "./../utils/httpRequestWrapper";
 
 export default {
   props: ["labels"],
-  mounted() {
-    this.getIdentiferTypes();
-    this.getCountries();
-  },
-  data() {
+    data() {
     return {
       countries: [],
       identifierFetched: false,
       identifierTypes: [],
       clientDetails: this.$store.getters.clientDetails
     };
+  },
+  mounted() {
+    this.getIdentiferTypes();
+    this.getCountries();
   },
   methods: {
     getCountries: function() {
